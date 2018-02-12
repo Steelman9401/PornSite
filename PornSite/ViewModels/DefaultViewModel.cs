@@ -13,13 +13,13 @@ namespace PornSite.ViewModels
 {
     public class DefaultViewModel : MasterPageViewModel
     {
-        public List<VideoDTO> Videos { get; set; }
-        public List<VideoDTO> VideosByCat { get; set; }
+        public IEnumerable<VideoDTO> Videos { get; set; }
+        public IEnumerable<VideoDTO> VideosByCat { get; set; }
 
 		public DefaultViewModel()
 		{
             PornRepository rep = new PornRepository();
-            //VideosByCat = rep.GetVideosByCategory(185);
+           // VideosByCat = rep.GetVideosByCategory(185);
             Videos = rep.GetAllVideos();
 		}
     }

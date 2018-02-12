@@ -9,7 +9,7 @@ namespace PornSite.Repositories
 {
     public class PornRepository
     {
-        public List<VideoDTO> GetAllVideos()
+        public IEnumerable<VideoDTO> GetAllVideos()
         {
             using (var db = new myDb())
             {
@@ -22,7 +22,7 @@ namespace PornSite.Repositories
                 }).OrderByDescending(a => a.Id).ToList();
             }
         }
-        public List<VideoDTO> GetVideosByCategory(int catId)
+        public IEnumerable<VideoDTO> GetVideosByCategory(int catId)
         {
             using (var db = new myDb())
             {
