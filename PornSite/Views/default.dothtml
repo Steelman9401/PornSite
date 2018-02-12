@@ -3,7 +3,7 @@
 <dot:Content ContentPlaceHolderID="MainContent">
 
 	<h1>{{value: Title}}</h1>
-    <p>LOL</p>
+    <p>LOLe</p>
     <dot:Repeater DataSource="{value: VideosByCat}">
         <ItemTemplate>
             <p>{{value: Title}}</p>
