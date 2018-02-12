@@ -4,6 +4,7 @@
 
     <dot:Repeater DataSource="{value: Videos}">
         <ItemTemplate>
+            aaa
             <p>{{value: Title}}</p>
             <img src="{value: Img}" />
         </ItemTemplate>
