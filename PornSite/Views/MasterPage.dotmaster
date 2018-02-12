@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <title>PornSite</title>
-    <dot:RequiredResource Name="bootstrap" />
+    <%--<dot:RequiredResource Name="bootstrap" />--%>
 </head>
 <body>
     <header style="text-align:center">MasterPage</header>
