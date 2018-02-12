@@ -1,0 +1,13 @@
+﻿@viewModel PornSite.ViewModels.DefaultViewModel, PornSite
+@masterPage Views/MasterPage.dotmaster
+<dot:Content ContentPlaceHolderID="MainContent">
+
+	<h1>{{value: Title}}</h1>
+    <p>LOL</p>
+    <dot:Repeater DataSource="{value: VideosByCat}">
+        <ItemTemplate>
+            <p>{{value: Title}}</p>
+            <img src="{value: Img}" />
+        </ItemTemplate>
+    </dot:Repeater>
+</dot:Content>
