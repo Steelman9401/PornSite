@@ -15,13 +15,12 @@ namespace PornSite.ViewModels
     {
         public List<VideoDTO> Videos { get; set; }
         public List<VideoDTO> VideosByCat { get; set; }
-        public string Title { get; set;}
 
 		public DefaultViewModel()
 		{
-			Title = "Hello from DotVVM!";
             PornRepository rep = new PornRepository();
-            VideosByCat = rep.GetVideosByCategory(97);
+            //VideosByCat = rep.GetVideosByCategory(185);
+            Videos = rep.GetAllVideos();
 		}
     }
 }

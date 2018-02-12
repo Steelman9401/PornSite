@@ -2,8 +2,7 @@
 @masterPage Views/MasterPage.dotmaster
 <dot:Content ContentPlaceHolderID="MainContent">
 
-	<h1>{{value: Title}}</h1>
-    <dot:Repeater DataSource="{value: VideosByCat}">
+    <dot:Repeater DataSource="{value: Videos}">
         <ItemTemplate>
             <p>{{value: Title}}</p>
             <img src="{value: Img}" />

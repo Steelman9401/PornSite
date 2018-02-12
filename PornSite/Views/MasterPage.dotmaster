@@ -8,7 +8,7 @@
     <dot:RequiredResource Name="bootstrap" />
 </head>
 <body>
-    <header style="text-align:center">Testovaci strnka</header>
+    <header style="text-align:center">MasterPage</header>
  	
 
 	<dot:ContentPlaceHolder ID="MainContent" />

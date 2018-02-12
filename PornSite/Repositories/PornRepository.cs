@@ -19,7 +19,7 @@ namespace PornSite.Repositories
                     Img = x.Img,
                     Title = x.Title,
                     Url = x.Url
-                }).ToList();
+                }).OrderByDescending(a => a.Id).ToList();
             }
         }
         public List<VideoDTO> GetVideosByCategory(int catId)
@@ -27,7 +27,7 @@ namespace PornSite.Repositories
             using (var db = new myDb())
             {
                 return db.Videos
-                     .Where(p => p.Categories.Select(x => x.Id).FirstOrDefault() == catId)
+                     .Where(p => p.Categories.Select(x => x.Id).ToList().Contains(catId))
                      .Select(x => new VideoDTO()
                      {
                          Id = x.Id,
