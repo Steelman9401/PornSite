@@ -125,6 +125,7 @@
     <Compile Include="Data\Category.cs" />
     <Compile Include="Data\myDb.cs" />
     <Compile Include="Data\Video.cs" />
+    <Compile Include="DTO\CategoryDTO.cs" />
     <Compile Include="DTO\VideoDTO.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

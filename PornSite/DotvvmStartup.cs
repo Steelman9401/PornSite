@@ -17,7 +17,7 @@ namespace PornSite
         private void ConfigureRoutes(DotvvmConfiguration config, string applicationPath)
         {
             config.RouteTable.Add("Default", "", "Views/default.dothtml");
-            config.RouteTable.Add("video", "video/{Url}", "Views/video.dothtml");
+            config.RouteTable.Add("video", "video/{Id}", "Views/video.dothtml");
             config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));       
         }
 

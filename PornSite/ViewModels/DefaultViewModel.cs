@@ -18,9 +18,15 @@ namespace PornSite.ViewModels
 
 		public DefaultViewModel()
 		{
-            PornRepository rep = new PornRepository();
-           // VideosByCat = rep.GetVideosByCategory(185);
-            Videos = rep.GetAllVideos();
+            
 		}
+        public override Task PreRender()
+        {
+            PornRepository rep = new PornRepository();
+            // VideosByCat = rep.GetVideosByCategory(185);
+            Videos = rep.GetAllVideos();
+            return base.PreRender();
+        }
+
     }
 }
