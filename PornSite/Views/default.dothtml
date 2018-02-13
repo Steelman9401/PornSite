@@ -6,7 +6,7 @@
         <ItemTemplate>
             <p>{{value: Title}}</p>
             <img src="{value: Img}" />
-            aa
+            aaa
         </ItemTemplate>
     </dot:Repeater>
 </dot:Content>
