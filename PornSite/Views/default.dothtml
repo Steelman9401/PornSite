@@ -4,10 +4,10 @@
 
     <dot:Repeater DataSource="{value: Videos}">
         <ItemTemplate>
-            <p>{{value: Title}}</p>
-            <dot:RouteLink RouteName="video" Param-Id="{value: Id}" Text="odkaz" />
-            <img src="{value: Img}" />
-            aaa
-        </ItemTemplate>
+            <dot:RouteLink RouteName="video" Param-Id="{value: Id}" Text="odkaz">
+                <h2>{{value: Title}}</h2>
+                </dot:RouteLink>
+                <dot:RouteLink RouteName="video" Param-Id="{value: Id}" Text="odkaz"><img src="{value: Img}" /></dot:RouteLink>
+</ItemTemplate>
     </dot:Repeater>
 </dot:Content>

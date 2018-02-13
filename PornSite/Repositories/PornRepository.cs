@@ -32,8 +32,7 @@ namespace PornSite.Repositories
                      {
                          Id = x.Id,
                          Img = x.Img,
-                         Title = x.Title,
-                         Url = x.Url
+                         Title = x.Title                        
                      }).OrderByDescending(a => a.Id).ToList();
             }
         }
@@ -50,6 +49,7 @@ namespace PornSite.Repositories
                         Img = p.Img,
                         Title = p.Title,
                         Url = p.Url,
+                        Description = p.Description,
                         Categories = p.Categories
                         .Select(o => new CategoryDTO
                         {
