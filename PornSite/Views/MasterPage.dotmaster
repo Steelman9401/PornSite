@@ -13,5 +13,7 @@
 
 	<dot:SpaContentPlaceHolder ID="MainContent" />
 
+    <footer style="text-align:center; margin-top:20px; font-weight:bold;">{{value: Year}} Ⓒ</footer>
+
 </body>
 </html>

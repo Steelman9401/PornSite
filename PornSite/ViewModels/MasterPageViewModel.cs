@@ -8,5 +8,6 @@ namespace PornSite.ViewModels
 {
     public class MasterPageViewModel : DotvvmViewModelBase
     {
+        public int Year { get; set; } = DateTime.Now.Year;
     }
 }
