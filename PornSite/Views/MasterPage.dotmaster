@@ -11,7 +11,7 @@
     <header style="text-align:center">MasterPage</header>
  	
 
-	<dot:ContentPlaceHolder ID="MainContent" />
+	<dot:SpaContentPlaceHolder ID="MainContent" />
 
 </body>
 </html>

@@ -2,6 +2,7 @@
 @masterPage Views/MasterPage.dotmaster
 <dot:Content ContentPlaceHolderID="MainContent">
 
+    <dot:RouteLink RouteName="video" Param-Url="test" Text="odkaz" />
     <dot:Repeater DataSource="{value: Videos}">
         <ItemTemplate>
             <p>{{value: Title}}</p>

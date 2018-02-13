@@ -1,0 +1,8 @@
+﻿@viewModel PornSite.ViewModels.VideoViewModel, PornSite
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+
+</dot:Content>
+
