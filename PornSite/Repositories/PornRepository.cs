@@ -39,6 +39,7 @@ namespace PornSite.Repositories
 
         public VideoDTO GetVideoById(int Id)
         {
+            
             using (var db = new myDb())
             {
                 Video video = db.Videos
@@ -59,6 +60,7 @@ namespace PornSite.Repositories
                 videoDTO.Url = video.Url;
                 videoDTO.Views = video.Views;
                 return videoDTO;
+            }
                 //return db.Videos
                 //    .Where(x => x.Id == Id)
                 //    .Select(p => new VideoDTO
@@ -78,4 +80,3 @@ namespace PornSite.Repositories
             }
         }
     }
-}
