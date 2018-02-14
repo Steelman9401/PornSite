@@ -17,33 +17,36 @@ namespace PornSite.ViewModels
         public GridViewDataSet<VideoDTO> Videos { get; set; }       
         public IEnumerable<VideoDTO> VideosByCat { get; set; }
         public PornRepository rep { get; set; } = new PornRepository();
+        public bool LoadDataCheck { get; set; } = true;
         public DefaultViewModel()
 		{
             
 		}
         public override Task PreRender()
         {
-            if (!Context.IsPostBack)
-            {
-                // VideosByCat = rep.GetVideosByCategory(185);
-                //rep.GetAllVideos(Videos);
-            }
             return base.PreRender();
         }
 
         public override Task Init()
-        {
-            Videos = GridViewDataSet.Create(gridViewDataSetLoadDelegate: rep.GetAllVideos, pageSize: 4);
+        {   if (LoadDataCheck)
+            {
+                Videos = GridViewDataSet.Create(gridViewDataSetLoadDelegate: rep.GetAllVideos, pageSize: 4);
+            }
+            else
+            {
+                LoadDataCheck = true;
+            }
             return base.Init();
         }
 
         public void DeleteAll()
         {
-            //Videos = new GridViewDataSet<VideoDTO>();
+            Videos = null;
+            LoadDataCheck = false;
         }
         public void LoadVideos()
         {
-            //rep.GetAllVideos(Videos);
+            Videos = GridViewDataSet.Create(gridViewDataSetLoadDelegate: rep.GetAllVideos, pageSize: 4);
         }
 
     }
