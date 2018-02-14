@@ -15,17 +15,28 @@ namespace PornSite.ViewModels
     {
         public IEnumerable<VideoDTO> Videos { get; set; }
         public IEnumerable<VideoDTO> VideosByCat { get; set; }
-
-		public DefaultViewModel()
+        public PornRepository rep { get; set; } = new PornRepository();
+        public DefaultViewModel()
 		{
             
 		}
         public override Task PreRender()
         {
-            PornRepository rep = new PornRepository();
-            // VideosByCat = rep.GetVideosByCategory(185);
-            Videos = rep.GetAllVideos();
+            if (!Context.IsPostBack)
+            {
+                // VideosByCat = rep.GetVideosByCategory(185);
+                Videos = rep.GetAllVideos();
+            }
             return base.PreRender();
+        }
+
+        public void DeleteAll()
+        {
+            Videos = null;
+        }
+        public void LoadVideos()
+        {
+            Videos = rep.GetAllVideos();
         }
 
     }

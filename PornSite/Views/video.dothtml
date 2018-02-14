@@ -11,6 +11,7 @@
             <span>{{value: Name}}, </span>
          </ItemTemplate>
         </dot:Repeater>
+    <h3>Shlednuti: {{value: Video.Views}}</h3>
 
 </dot:Content>
 

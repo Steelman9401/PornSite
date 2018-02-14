@@ -6,8 +6,10 @@
         <ItemTemplate>
             <dot:RouteLink RouteName="video" Param-Id="{value: Id}">
                 <h2>{{value: Title}}</h2>
-                </dot:RouteLink>
-                <dot:RouteLink RouteName="video" Param-Id="{value: Id}"><img src="{value: Img}" /></dot:RouteLink>
-</ItemTemplate>
+            </dot:RouteLink>
+            <dot:RouteLink RouteName="video" Param-Id="{value: Id}"><img src="{value: Img}" /></dot:RouteLink>
+        </ItemTemplate>
     </dot:Repeater>
+    <dot:Button ButtonTagName="button" Click="{command: DeleteAll()}">Delete</dot:Button>
+    <dot:Button ButtonTagName="button" Click="{command: LoadVideos()}">Load</dot:Button>
 </dot:Content>
