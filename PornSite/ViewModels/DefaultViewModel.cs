@@ -8,12 +8,13 @@ using DotVVM.Framework.ViewModel;
 using DotVVM.Framework.Hosting;
 using PornSite.DTO;
 using PornSite.Repositories;
+using DotVVM.Framework.Controls;
 
 namespace PornSite.ViewModels
 {
     public class DefaultViewModel : MasterPageViewModel
     {
-        public IEnumerable<VideoDTO> Videos { get; set; }
+        public GridViewDataSet<VideoDTO> Videos { get; set; }       
         public IEnumerable<VideoDTO> VideosByCat { get; set; }
         public PornRepository rep { get; set; } = new PornRepository();
         public DefaultViewModel()
@@ -25,18 +26,24 @@ namespace PornSite.ViewModels
             if (!Context.IsPostBack)
             {
                 // VideosByCat = rep.GetVideosByCategory(185);
-                Videos = rep.GetAllVideos();
+                //rep.GetAllVideos(Videos);
             }
             return base.PreRender();
         }
 
+        public override Task Init()
+        {
+            Videos = GridViewDataSet.Create(gridViewDataSetLoadDelegate: rep.GetAllVideos, pageSize: 4);
+            return base.Init();
+        }
+
         public void DeleteAll()
         {
-            Videos = null;
+            //Videos = new GridViewDataSet<VideoDTO>();
         }
         public void LoadVideos()
         {
-            Videos = rep.GetAllVideos();
+            //rep.GetAllVideos(Videos);
         }
 
     }

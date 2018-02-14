@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <title>PornSite</title>
-    <%--<dot:RequiredResource Name="bootstrap" />--%>
+    <dot:RequiredResource Name="bootstrap" />
 </head>
 <body style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
     <header style="text-align:center">MasterPage</header>

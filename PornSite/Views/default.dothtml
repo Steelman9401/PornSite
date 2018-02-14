@@ -10,6 +10,7 @@
             <dot:RouteLink RouteName="video" Param-Id="{value: Id}"><img src="{value: Img}" /></dot:RouteLink>
         </ItemTemplate>
     </dot:Repeater>
+    <dot:DataPager DataSet="{value: Videos}" class="pagination" />
     <dot:Button ButtonTagName="button" Click="{command: DeleteAll()}">Delete</dot:Button>
     <dot:Button ButtonTagName="button" Click="{command: LoadVideos()}">Load</dot:Button>
 </dot:Content>

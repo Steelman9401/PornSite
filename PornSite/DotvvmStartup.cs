@@ -29,19 +29,19 @@ namespace PornSite
         private void ConfigureResources(DotvvmConfiguration config, string applicationPath)
         {
             // register custom resources and adjust paths to the built-in resources
-            //config.Resources.Register("bootstrap-css", new StylesheetResource
-            //{
-            //    Location = new UrlResourceLocation("~/Content/bootstrap.min.css")
-            //});
-            //config.Resources.Register("bootstrap-theme", new StylesheetResource
-            //{
-            //    Location = new UrlResourceLocation("~/Content/bootstrap-theme.min.css")
-            //});
-            //config.Resources.Register("bootstrap", new ScriptResource
-            //{
-            //    Location = new UrlResourceLocation("~/Scripts/bootstrap.min.js"),
-            //    Dependencies = new[] { "bootstrap-css", "jquery" }
-            //});
+            config.Resources.Register("bootstrap-css", new StylesheetResource
+            {
+                Location = new UrlResourceLocation("~/Content/bootstrap.min.css")
+            });
+            config.Resources.Register("bootstrap-theme", new StylesheetResource
+            {
+                Location = new UrlResourceLocation("~/Content/bootstrap-theme.min.css")
+            });
+            config.Resources.Register("bootstrap", new ScriptResource
+            {
+                Location = new UrlResourceLocation("~/Scripts/bootstrap.min.js"),
+                Dependencies = new[] { "bootstrap-css", "jquery" }
+            });
             config.Resources.Register("jquery", new ScriptResource
             {
                 Location = new UrlResourceLocation("~/Scripts/jquery-1.9.1.min.js")

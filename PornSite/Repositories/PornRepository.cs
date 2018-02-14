@@ -1,4 +1,5 @@
-﻿using PornSite.Data;
+﻿using DotVVM.Framework.Controls;
+using PornSite.Data;
 using PornSite.DTO;
 using System;
 using System.Collections.Generic;
@@ -9,17 +10,18 @@ namespace PornSite.Repositories
 {
     public class PornRepository
     {
-        public IEnumerable<VideoDTO> GetAllVideos()
-        {
+        public GridViewDataSetLoadedData<VideoDTO> GetAllVideos(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions)
+        {           
             using (var db = new myDb())
             {
-                return db.Videos.Select(x => new VideoDTO
+                var query = db.Videos.Select(x => new VideoDTO
                 {
                     Id = x.Id,
                     Img = x.Img,
                     Title = x.Title,
                     Url = x.Url
-                }).OrderByDescending(a => a.Id).ToList();
+                }).OrderByDescending(p => p.Id);
+                return query.GetDataFromQueryable(gridViewDataSetLoadOptions);
             }
         }
         public IEnumerable<VideoDTO> GetVideosByCategory(int catId)
@@ -32,7 +34,7 @@ namespace PornSite.Repositories
                      {
                          Id = x.Id,
                          Img = x.Img,
-                         Title = x.Title                        
+                         Title = x.Title
                      }).OrderByDescending(a => a.Id).ToList();
             }
         }
