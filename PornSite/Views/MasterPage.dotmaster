@@ -11,7 +11,7 @@
     <header style="text-align:center">MasterPage</header>
  	
 
-	<dot:SpaContentPlaceHolder ID="MainContent" />
+	<dot:ContentPlaceHolder ID="MainContent" />
 
     <footer style="text-align:center; margin-top:20px; font-weight:bold;">{{value: Year}} Ⓒ</footer>
 
