@@ -19,12 +19,28 @@ namespace PornSite.Repositories
                     Id = x.Id,
                     Img = x.Img,
                     Title = x.Title,
-                    Url = x.Url
-                }).OrderByDescending(p => p.Id);
+                    Url = x.Url,
+                    Views = x.Views
+                }).OrderByDescending(p=>p.Id).AsQueryable();
                 return query.GetDataFromQueryable(gridViewDataSetLoadOptions);
             }
         }
-        public IEnumerable<VideoDTO> GetVideosByCategory(int catId)
+        public GridViewDataSetLoadedData<VideoDTO> GetAllVideosByViews(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions)
+        {
+            using (var db = new myDb())
+            {
+                var query = db.Videos.Select(x => new VideoDTO
+                {
+                    Id = x.Id,
+                    Img = x.Img,
+                    Title = x.Title,
+                    Url = x.Url,
+                    Views = x.Views
+                }).OrderByDescending(p => p.Views).AsQueryable();
+                return query.GetDataFromQueryable(gridViewDataSetLoadOptions);
+            }
+        }
+            public IEnumerable<VideoDTO> GetVideosByCategory(int catId)
         {
             using (var db = new myDb())
             {

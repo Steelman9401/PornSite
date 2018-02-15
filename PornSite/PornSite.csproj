@@ -135,6 +135,7 @@
     <Compile Include="ViewModels\DefaultViewModel.cs" />
     <Compile Include="ViewModels\MasterPageViewModel.cs" />
     <Compile Include="ViewModels\VideoViewModel.cs" />
+    <Compile Include="ViewModels\ViewsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -166,6 +167,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\MasterPage.dotmaster" />
     <Content Include="Views\video.dothtml" />
+    <Content Include="Views\views.dothtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

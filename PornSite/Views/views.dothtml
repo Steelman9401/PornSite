@@ -1,9 +1,9 @@
-﻿@viewModel PornSite.ViewModels.DefaultViewModel, PornSite
+﻿@viewModel PornSite.ViewModels.ViewsViewModel, PornSite
 @masterPage Views/MasterPage.dotmaster
-<dot:Content ContentPlaceHolderID="MainContent">
 
-    <dot:RouteLink RouteName="Default"><strong>Nejnovejsi </strong></dot:RouteLink>
-    <dot:RouteLink RouteName="views"> Nejsledovanejsi</dot:RouteLink>
+<dot:Content ContentPlaceHolderID="MainContent">
+    <dot:RouteLink RouteName="Default">Nejnovejsi </dot:RouteLink>
+    <dot:RouteLink RouteName="views"><strong> Nejsledovanejsi</strong></dot:RouteLink>
     <dot:Repeater DataSource="{value: Videos}">
         <ItemTemplate>
             <dot:RouteLink RouteName="video" Param-Id="{value: Id}">
@@ -14,4 +14,6 @@
         </ItemTemplate>
     </dot:Repeater>
     <dot:DataPager DataSet="{value: Videos}" class="pagination" />
+
 </dot:Content>
+
