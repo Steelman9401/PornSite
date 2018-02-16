@@ -13,6 +13,6 @@
             <p>{{value: Views}}</p>
         </ItemTemplate>
     </dot:Repeater>
-    <dot:DataPager DataSet="{value: Videos}" class="pagination" />
+    <dot:DataPager  DataSet="{value: Videos}" class="" />
     
 </dot:Content>

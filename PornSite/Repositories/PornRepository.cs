@@ -96,5 +96,21 @@ namespace PornSite.Repositories
                 //        })
                 //    }).FirstOrDefault();
             }
+        public IEnumerable<VideoDTO> GetSuggestedVideos(List<int> Categories)
+        {
+            int a = Categories[0];
+            int b = Categories[1];
+            using (var db = new myDb())
+            {
+                return db.Videos.Where(x => x.Categories.Select(p => p.Id).Contains(a) || x.Categories.Select(p => p.Id).Contains(b))
+                      .Select(p => new VideoDTO
+                      {
+                          Id = p.Id,
+                          Title = p.Title,
+                          Img = p.Img
+                      }).ToList();
+                
+            }
+        }
         }
     }

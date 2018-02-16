@@ -1,0 +1,16 @@
+﻿body {
+    background-color: #f1f1f1;
+}
+.loading {
+    background: url(../Content/loading.gif);
+    background-position: center;
+    background-size: 200px 200px;
+    height: 200px;
+    width: 200px;
+    position: fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
