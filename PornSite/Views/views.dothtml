@@ -9,11 +9,16 @@
             <dot:RouteLink RouteName="video" Param-Id="{value: Id}">
                 <h2>{{value: Title}}</h2>
             </dot:RouteLink>
-            <dot:RouteLink RouteName="video" Param-Id="{value: Id}"><img src="{value: Img}" /></dot:RouteLink>
+            <dot:RouteLink RouteName="video" Param-Id="{value: Id}">
+                <video onmouseover="playVideo(this)" onmouseout="stopVideo(this)" width="250" height="200" poster="{value: Img}" loop>
+                    <source src="{value: Preview}" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+            </dot:RouteLink>
             <p>{{value: Views}}</p>
         </ItemTemplate>
     </dot:Repeater>
-    <dot:DataPager DataSet="{value: Videos}" class="pagination" />
-   
+    <dot:DataPager DataSet="{value: Videos}" class="" />
+
 </dot:Content>
 

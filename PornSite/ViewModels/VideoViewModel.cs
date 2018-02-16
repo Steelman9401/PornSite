@@ -14,13 +14,11 @@ namespace PornSite.ViewModels
         public VideoDTO Video { get; set; }
         public int Id { get; set; }
         public IEnumerable<VideoDTO> SuggestedVideos { get; set; }
-        public string VideoSrc { get; set; } = "https://embed.redtube.com/?id="; //lepsi bude toto davat rovnou do databaze => snazsi podpora vice zdroju a fixne bug s vracenim po loadingu
         public int LoadSwitch { get; set; } = 0;
         public override Task PreRender()
         {
             PornRepository rep = new PornRepository();
             Video = rep.GetVideoById(Convert.ToInt32(Context.Parameters["Id"]));
-            VideoSrc = VideoSrc + Video.Url;
             LoadSwitch = 1;
             return base.PreRender();
         }
@@ -34,7 +32,7 @@ namespace PornSite.ViewModels
         {
             List<int> Categories = Video.Categories.Select(x => x.Id).ToList();
             LoadSwitch = 1;
-            System.Threading.Thread.Sleep(3000);
+            //System.Threading.Thread.Sleep(3000);
             PornRepository rep = new PornRepository();
             SuggestedVideos = rep.GetSuggestedVideos(Categories);
         }

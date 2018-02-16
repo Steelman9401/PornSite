@@ -4,7 +4,7 @@
 <dot:Content ContentPlaceHolderID="MainContent">
 
     <h2>{{value: Video.Title}}</h2>
-    <iframe src="{value: VideoSrc}" frameborder="0" width="560" height="315" scrolling="no" allowfullscreen></iframe>
+    <iframe src="{value: Video.Url}" frameborder="0" width="560" height="315" scrolling="no" allowfullscreen></iframe>
     <p>{{value: Video.Description}}</p>
     <dot:Repeater DataSource="{value: Video.Categories}">
         <ItemTemplate>

@@ -18,7 +18,7 @@ namespace PornSite.ViewModels
         public override Task Init()
         {
            
-            Videos = GridViewDataSet.Create(gridViewDataSetLoadDelegate: rep.GetAllVideosByViews, pageSize: 4);
+            Videos = GridViewDataSet.Create(gridViewDataSetLoadDelegate: rep.GetAllVideosByViews, pageSize: 32);
             return base.Init();
         }
     }

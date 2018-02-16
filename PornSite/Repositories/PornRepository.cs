@@ -19,8 +19,8 @@ namespace PornSite.Repositories
                     Id = x.Id,
                     Img = x.Img,
                     Title = x.Title,
-                    Url = x.Url,
-                    Views = x.Views
+                    Views = x.Views,
+                    Preview = x.Preview
                 }).OrderByDescending(p=>p.Id).AsQueryable();
                 return query.GetDataFromQueryable(gridViewDataSetLoadOptions);
             }
@@ -34,8 +34,8 @@ namespace PornSite.Repositories
                     Id = x.Id,
                     Img = x.Img,
                     Title = x.Title,
-                    Url = x.Url,
-                    Views = x.Views
+                    Views = x.Views,
+                    Preview = x.Preview
                 }).OrderByDescending(p => p.Views).AsQueryable();
                 return query.GetDataFromQueryable(gridViewDataSetLoadOptions);
             }
@@ -50,14 +50,15 @@ namespace PornSite.Repositories
                      {
                          Id = x.Id,
                          Img = x.Img,
-                         Title = x.Title
+                         Title = x.Title,
+                         Preview = x.Preview
                      }).OrderByDescending(a => a.Id).ToList();
             }
         }
 
         public VideoDTO GetVideoById(int Id)
         {
-            
+
             using (var db = new myDb())
             {
                 Video video = db.Videos
@@ -73,12 +74,12 @@ namespace PornSite.Repositories
                 });
                 videoDTO.Description = video.Description;
                 videoDTO.Id = video.Id;
-                videoDTO.Img = video.Img;
+                //videoDTO.Img = video.Img;
                 videoDTO.Title = video.Title;
                 videoDTO.Url = video.Url;
                 videoDTO.Views = video.Views;
                 return videoDTO;
-            }
+
                 //return db.Videos
                 //    .Where(x => x.Id == Id)
                 //    .Select(p => new VideoDTO
@@ -96,6 +97,7 @@ namespace PornSite.Repositories
                 //        })
                 //    }).FirstOrDefault();
             }
+        }
         public IEnumerable<VideoDTO> GetSuggestedVideos(List<int> Categories)
         {
             if (Categories.Count >= 3)

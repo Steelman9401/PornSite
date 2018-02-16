@@ -14,6 +14,7 @@ namespace PornSite.Data
         public int Views { get; set; }
         public DateTime Date { get; set; }
         public string Img { get; set; }
+        public string Preview { get; set; }
         public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
     }
 }
