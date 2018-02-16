@@ -12,7 +12,7 @@
         </ItemTemplate>
     </dot:Repeater>
     <h3>Shlednuti: {{value: Video.Views}}</h3>
-    <dot:Button ButtonTagName="button" Click="{command: GetSuggestions()}">Test loadingu(crashne pokud nejsou elespon 2 kategorie)</dot:Button>
+    <dot:Button ButtonTagName="button" Click="{command: GetSuggestions()}">Test loadingu</dot:Button>
     <dot:Repeater DataSource="{value: SuggestedVideos}">
         <ItemTemplate>
             <h2>{{value: Title}}</h2>

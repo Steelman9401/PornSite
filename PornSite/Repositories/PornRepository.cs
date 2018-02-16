@@ -98,18 +98,27 @@ namespace PornSite.Repositories
             }
         public IEnumerable<VideoDTO> GetSuggestedVideos(List<int> Categories)
         {
-            int a = Categories[0];
-            int b = Categories[1];
-            using (var db = new myDb())
+            if (Categories.Count >= 3)
             {
-                return db.Videos.Where(x => x.Categories.Select(p => p.Id).Contains(a) || x.Categories.Select(p => p.Id).Contains(b))
-                      .Select(p => new VideoDTO
-                      {
-                          Id = p.Id,
-                          Title = p.Title,
-                          Img = p.Img
-                      }).ToList();
-                
+                int a = Categories[0];
+                int b = Categories[1];
+                int c = Categories[2];
+                using (var db = new myDb())
+                {
+                    return db.Videos.Where(x => x.Categories.Select(p => p.Id).Contains(a) || x.Categories.Select(p => p.Id).Contains(b) || x.Categories.Select(p=>p.Id).Contains(c)) //hnus
+                          .Select(p => new VideoDTO
+                          {
+                              Id = p.Id,
+                              Title = p.Title,
+                              Img = p.Img
+                          }).Take(8).ToList();
+
+                }
+            }
+            else
+            {
+                List<VideoDTO> videos = new List<VideoDTO>();
+                return videos;
             }
         }
         }
