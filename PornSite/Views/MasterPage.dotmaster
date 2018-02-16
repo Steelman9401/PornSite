@@ -13,8 +13,11 @@
     <header style="text-align:center">MasterPage</header>
 
 
-    <dot:ContentPlaceHolder ID="MainContent" />
-
+    <dot:SpaContentPlaceHolder ID="MainContent" />
+    <dot:UpdateProgress>
+        <img  style="width:5000px; height:5000px; position:fixed; top:0%; left:0%; opacity:0.4;" src="../Content/black-background-1468370534d5s.jpg" />
+        <div  class="loading"></div>
+    </dot:UpdateProgress>
     <footer style="text-align:center; margin-top:20px; font-weight:bold;">{{value: Year}} Ⓒ</footer>
 
 </body>
