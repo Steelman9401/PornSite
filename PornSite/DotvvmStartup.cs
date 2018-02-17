@@ -19,6 +19,7 @@ namespace PornSite
             config.RouteTable.Add("Default", "", "Views/default.dothtml");
             config.RouteTable.Add("video", "video/{Id}", "Views/video.dothtml");
             config.RouteTable.Add("views", "views", "Views/views.dothtml");
+            config.RouteTable.Add("admin", "admin", "Views/admin.dothtml");
             config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));       
         }
 
