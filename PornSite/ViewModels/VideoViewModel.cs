@@ -32,7 +32,7 @@ namespace PornSite.ViewModels
         {
             List<int> Categories = Video.Categories.Select(x => x.Id).ToList();
             LoadSwitch = 1;
-            //System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(3000);
             PornRepository rep = new PornRepository();
             SuggestedVideos = rep.GetSuggestedVideos(Categories);
         }

@@ -75,7 +75,7 @@ namespace PornSite.Repositories
                 videoDTO.Description = video.Description;
                 videoDTO.Id = video.Id;
                 //videoDTO.Img = video.Img;
-                videoDTO.Title = video.Title;
+                videoDTO.Title = video.Title;   //hnus, musi se upravit, ale zatim aspon funguje
                 videoDTO.Url = video.Url;
                 videoDTO.Views = video.Views;
                 return videoDTO;

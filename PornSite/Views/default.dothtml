@@ -8,7 +8,7 @@
             <dot:RouteLink RouteName="video" Param-Id="{value: Id}">
                 <h2>{{value: Title}}</h2>
             </dot:RouteLink>
-            <dot:RouteLink RouteName="video" Param-Id="{value: Id}"><video onmouseover="playVideo(this)" onmouseout="stopVideo(this)" width="250" height="200" poster="{value: Img}" loop>
+            <dot:RouteLink RouteName="video" Param-Id="{value: Id}"><video onmouseover="playVideo(this)" onmouseout="stopVideo(this)" width="250" height="200" poster="{value: Img}" loop preload="none">
     <source src="{value: Preview}" type="video/webm">
     Your browser does not support the video tag.
 </video></dot:RouteLink>

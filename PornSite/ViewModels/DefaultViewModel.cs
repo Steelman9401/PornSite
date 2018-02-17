@@ -34,10 +34,5 @@ namespace PornSite.ViewModels
             return base.Init();
         }
 
-        public void Load()
-        {
-            System.Threading.Thread.Sleep(3000);
-        }
-
     }
 }

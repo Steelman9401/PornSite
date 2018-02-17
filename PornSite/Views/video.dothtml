@@ -20,8 +20,24 @@
         </ItemTemplate>
     </dot:Repeater>
     <dot:UpdateProgress>
-        <img Visible="{value: LoadSwitch == 1 ? true:false}" style="width:5000px; height:5000px; position:fixed; top:0%; left:0%; opacity:0.4;" src="../Content/black-background-1468370534d5s.jpg" />
-        <div Visible="{value: LoadSwitch == 1 ? true:false}" class="loading"></div>
+        <div class="windows8">
+            <div id="overlay-back"></div>
+            <div class="wBall" id="wBall_1">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_2">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_3">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_4">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_5">
+                <div class="wInnerBall"></div>
+            </div>
+        </div>
     </dot:UpdateProgress>
 
     
