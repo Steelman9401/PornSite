@@ -14,13 +14,13 @@
             </dot:GridViewTemplateColumn>
         </Columns>
     </dot:GridView>
-    
-    <div DataContext="{value: Video}" Visible="{value: _parent.ModalSwitch}" style="position:fixed;width: 100%; /* Full width */
+
+    <div DataContext="{value: Video}" Visible="{value: _parent.ModalSwitch}" style="position:fixed;width: 100%;   /*modal dialog, ktery se zobrazi po stisknuti edit*/
     height: 100%; /* Full height */ z-index: 1; /* Sit on top */
-    left: 0; overflow: auto; 
+    left: 0; overflow: auto;
     top: 0;  background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */ ">
-        <div style=" background-color: #fefefe;
+        <div style=" background-color: #fefefe;                                                                 /*obsah modal dialogu*/
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
@@ -50,9 +50,9 @@
                 </ItemTemplate>
             </dot:Repeater>
             <dot:Button ButtonTagName="button" Click="{command: _parent.AddVideo(_this)}">Pridat video</dot:Button>
-        </div>
-       
-    </div>
+        </div>                                                                                      <%--konec obsahu--%>
+
+    </div>                                                                                           <%--konec modalu--%>
 
 </dot:Content>
 

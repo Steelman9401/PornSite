@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <title>PornSite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <dot:RequiredResource Name="bootstrap" />
+    <%--<dot:RequiredResource Name="bootstrap" />--%>
     <link href="../Content/style.css" rel="stylesheet" />
     <script src="../Content/scripts.js"></script>
 </head>
