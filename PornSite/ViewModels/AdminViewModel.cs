@@ -34,27 +34,38 @@ namespace PornSite.ViewModels
         private void FillList()
         {
             HtmlWeb web = new HtmlWeb();
-            HtmlDocument document = web.Load("https://www.redtube.com/");
-            IEnumerable<HtmlNode> liCountry = document.DocumentNode.SelectNodes("//ul[@id='block_hottest_videos_by_country']").First().ChildNodes.ToList();
-            IEnumerable<HtmlNode> liRecent = document.DocumentNode.SelectNodes("//ul[@id='most_recent_videos']").First().ChildNodes.ToList();
-            IEnumerable<HtmlNode> liComb = liCountry.Concat(liRecent).Where(x => x.Name == "li");
+            HtmlDocument document = web.Load("https://www.redtube.com");
+            IEnumerable<HtmlNode> liCountry = document.DocumentNode.SelectNodes("//ul[@id='block_hottest_videos_by_country']").First().ChildNodes.Where(x => x.Name == "li");
+            IEnumerable<HtmlNode> liRecent = document.DocumentNode.SelectNodes("//ul[@id='most_recent_videos']").First().ChildNodes.Where(x=>x.Name=="li");
+            IEnumerable<HtmlNode> liComb = liCountry.Concat(liRecent);
             foreach (HtmlNode item in liComb)
             {
                 var a = item.ChildNodes[1].ChildNodes[3];
                 if (a.Name == "a")
                 {
                     var Url = a.GetAttributeValue("href", string.Empty).Substring(1);
-                    if (!IfExists("https://embed.redtube.com/?id=" + Url))
-                    {
-                        VideoDTO video = new VideoDTO();
-                        video.Url = "https://embed.redtube.com/?id=" + Url;
-                        video.Title = a.ChildNodes[3].InnerHtml.Replace("  ", "").Substring(1);
-                        video.Img = a.ChildNodes[1].ChildNodes[1].GetAttributeValue("data-thumb_url", string.Empty);
-                        video.Preview = a.ChildNodes[1].ChildNodes[1].GetAttributeValue("data-mediabook", string.Empty);
-                        Videos.Add(video);
-                    }
+                    GetVideoData(a, Url);
                 }
-            }           
+                else if (a.Name == "span")
+                {
+                    
+                    var newA = a.PreviousSibling.PreviousSibling;
+                    var Url = newA.GetAttributeValue("href", string.Empty).Substring(1);
+                    GetVideoData(newA, Url);
+                }
+            }
+        }
+        private void GetVideoData(HtmlNode node, string Url)
+        {
+            if (!IfExists("https://embed.redtube.com/?id=" + Url))
+            {
+                VideoDTO video = new VideoDTO();
+                video.Url = "https://embed.redtube.com/?id=" + Url;
+                video.Title = node.ChildNodes[3].InnerHtml.Replace("  ", "").Substring(1);
+                video.Img = node.ChildNodes[1].ChildNodes[1].GetAttributeValue("data-thumb_url", string.Empty);
+                video.Preview = node.ChildNodes[1].ChildNodes[1].GetAttributeValue("data-mediabook", string.Empty);
+                Videos.Add(video);
+            }
         }
         private bool IfExists(string Url)
         {

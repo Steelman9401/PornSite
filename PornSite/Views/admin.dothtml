@@ -43,7 +43,8 @@
             <label>Popis</label>
             <br />
             <dot:TextBox Text="{value: Description}" Type="MultiLine" />
-            <iframe src="{value: Url}" frameborder="0" width="560" height="315" scrolling="no" allowfullscreen></iframe>
+            <br />
+            <iframe src="{value: Url}" frameborder="0" scrolling="no" style="width:600px; min-width:320px; height:300px;"></iframe>
             <dot:Repeater DataSource="{value: _parent.Categories}">
                 <ItemTemplate>
                     <p>{{value: _this }}</p>
