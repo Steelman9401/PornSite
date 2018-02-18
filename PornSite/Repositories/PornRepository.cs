@@ -125,11 +125,26 @@ namespace PornSite.Repositories
             }
         }
 
-        public async Task AddPorn(Video video, List<Category> cat)
+        public async Task AddPorn(VideoDTO vid, IEnumerable<string> Categories)
         {
+            Video video = new Video();
+            video.Description = vid.Description;
+            video.Title = vid.Title;
+            video.Url = vid.Url;
+            video.Img = vid.Img;
+            video.Date = DateTime.Now;
+            video.Preview = vid.Preview;
+            PornRepository rep = new PornRepository();
+            List<Category> listCat = new List<Category>();
+            foreach (string item in Categories)
+            {
+                Category cat = new Category();
+                cat.Name = item;
+                listCat.Add(cat);
+            }
             using (var db = new myDb())
             {
-                foreach (Category item in cat)
+                foreach (Category item in listCat)
                 {
                     Category tag = await db.Categories
                   .Where(x => x.Name == item.Name)
