@@ -15,19 +15,22 @@ namespace PornSite.ViewModels
         public int Id { get; set; }
         public IEnumerable<VideoDTO> SuggestedVideos { get; set; }
         public int LoadSwitch { get; set; } = 0;
+        PornRepository rep = new PornRepository();
         public override Task PreRender()
         {
-            PornRepository rep = new PornRepository();
+            Task.Run(() => this.UpdateViews());
             Video = rep.GetVideoById(Convert.ToInt32(Context.Parameters["Id"]));
-            LoadSwitch = 1;
             return base.PreRender();
+        }
+        private async Task UpdateViews()
+        {
+            await rep.UpdateViews(Id);
         }
         public override Task Init()
         {
             Id = Convert.ToInt32(Context.Parameters["Id"]);
             return base.Init(); 
-        }
-
+        }        
         public void GetSuggestions()
         {
             List<int> Categories = Video.Categories.Select(x => x.Id).ToList();

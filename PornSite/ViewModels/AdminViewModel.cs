@@ -18,19 +18,32 @@ namespace PornSite.ViewModels
         public VideoDTO Video { get; set; }
         public PornRepository rep { get; set; } = new PornRepository();
         public IEnumerable<string> Categories { get; set; }
-
+        public IEnumerable<string> DatabaseCategories { get; set; }
+        public string Test { get; set; }
         public bool ModalSwitch { get; set; }
 
-        public override Task PreRender()
+        public async override Task PreRender()
         {
             if (!Context.IsPostBack)
             {
-                Urls = rep.GetUrls();
+                var taskCat = Task.Run(() => this.GetCategories());
+                var taskUrl = Task.Run(() => this.GetUrls());
+                taskUrl.Wait();
                 FillList();
+                taskCat.Wait();
             }
-            return base.PreRender();
+            
+            await base.PreRender();
         }
 
+        private async Task GetCategories()
+        {
+            DatabaseCategories = await rep.GetAllCategories();
+        }
+        private async Task GetUrls()
+        {
+            Urls = await rep.GetUrls();
+        }
         private void FillList()
         {
             HtmlWeb web = new HtmlWeb();
@@ -38,25 +51,26 @@ namespace PornSite.ViewModels
             IEnumerable<HtmlNode> liCountry = document.DocumentNode.SelectNodes("//ul[@id='block_hottest_videos_by_country']").First().ChildNodes.Where(x => x.Name == "li");
             IEnumerable<HtmlNode> liRecent = document.DocumentNode.SelectNodes("//ul[@id='most_recent_videos']").First().ChildNodes.Where(x=>x.Name=="li");
             IEnumerable<HtmlNode> liComb = liCountry.Concat(liRecent);
+            int index = 0;
             foreach (HtmlNode item in liComb)
             {
                 var a = item.ChildNodes[1].ChildNodes[3];
                 if (a.Name == "a")
                 {
                     var Url = a.GetAttributeValue("href", string.Empty).Substring(1);
-                    GetVideoData(a, Url);
+                    GetVideoData(a, Url, ref index);                   
                 }
                 else if (a.Name == "span")
                 {
                     
                     var newA = a.PreviousSibling.PreviousSibling;
                     var Url = newA.GetAttributeValue("href", string.Empty).Substring(1);
-                    GetVideoData(newA, Url);
+                    GetVideoData(newA, Url, ref index);
                 }
             }
         }
-        private void GetVideoData(HtmlNode node, string Url)
-        {
+        private void GetVideoData(HtmlNode node, string Url, ref int index)
+        {          
             if (!IfExists("https://embed.redtube.com/?id=" + Url))
             {
                 VideoDTO video = new VideoDTO();
@@ -64,7 +78,9 @@ namespace PornSite.ViewModels
                 video.Title = node.ChildNodes[3].InnerHtml.Replace("  ", "").Substring(1);
                 video.Img = node.ChildNodes[1].ChildNodes[1].GetAttributeValue("data-thumb_url", string.Empty);
                 video.Preview = node.ChildNodes[1].ChildNodes[1].GetAttributeValue("data-mediabook", string.Empty);
+                video.Index = index;
                 Videos.Add(video);
+                index++;
             }
         }
         private bool IfExists(string Url)
@@ -87,7 +103,7 @@ namespace PornSite.ViewModels
             ModalSwitch = false;
         }
 
-        private void GetTags()
+        private  void GetTags()
         {
             HtmlWeb web = new HtmlWeb();
             HtmlDocument document = web.Load("https://www.redtube.com/" + Video.Url.Substring(30));
@@ -100,6 +116,14 @@ namespace PornSite.ViewModels
         }
 
         public void AddVideo(VideoDTO vid)
+        {
+            Task.Run(() => this.AddVideoAsync(vid));
+            ModalSwitch = false;
+            vid.Description = null;
+            int check = vid.Index;
+            Videos.RemoveAt(vid.Index);
+        }
+        public async Task AddVideoAsync(VideoDTO vid)
         {
             Video video = new Video();
             video.Description = vid.Description;
@@ -116,8 +140,7 @@ namespace PornSite.ViewModels
                 cat.Name = item;
                 listCat.Add(cat);
             }
-            rep.AddPorn(video, listCat);
-            ModalSwitch = false;
+            await rep.AddPorn(video, listCat);
         }
     }
 }

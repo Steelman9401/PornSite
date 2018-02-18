@@ -2,7 +2,13 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-
+    <datalist id="categories">
+        <dot:Repeater DataSource="{value: DatabaseCategories}">
+            <ItemTemplate>
+                <option value="{value: _this}">
+            </ItemTemplate>
+        </dot:Repeater>
+    </datalist>
     <dot:GridView class="table-bordered" DataSource="{value: Videos}">
         <Columns>
             <dot:GridViewTextColumn ValueBinding="{value: Title}" HeaderText="Name" />
@@ -45,9 +51,12 @@
             <dot:TextBox Text="{value: Description}" Type="MultiLine" />
             <br />
             <iframe src="{value: Url}" frameborder="0" scrolling="no" style="width:600px; min-width:320px; height:300px;"></iframe>
+            <label>Kategorie</label>
+            <br />
             <dot:Repeater DataSource="{value: _parent.Categories}">
                 <ItemTemplate>
-                    <p>{{value: _this }}</p>
+                    <br />
+                    <dot:TextBox list="categories" Text="{value: _this}"/>
                 </ItemTemplate>
             </dot:Repeater>
             <dot:Button ButtonTagName="button" Click="{command: _parent.AddVideo(_this)}">Pridat video</dot:Button>

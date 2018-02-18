@@ -14,6 +14,7 @@ namespace PornSite.DTO
         public string Description { get; set; }
         public int Views { get; set; }
         public string Preview { get; set; }
+        public int Index { get; set; }
         public IEnumerable<CategoryDTO> Categories { get; set; }
     }
 }

@@ -15,7 +15,6 @@ namespace PornSite.ViewModels
     public class DefaultViewModel : MasterPageViewModel
     {
         public GridViewDataSet<VideoDTO> Videos { get; set; }       
-        public IEnumerable<VideoDTO> VideosByCat { get; set; }
         public PornRepository rep { get; set; } = new PornRepository();
         public int LoadSwitch { get; set; } = 1;
         public DefaultViewModel()

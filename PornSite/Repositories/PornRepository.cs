@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace PornSite.Repositories
 {
@@ -56,47 +57,39 @@ namespace PornSite.Repositories
                      }).OrderByDescending(a => a.Id).ToList();
             }
         }
+        public async Task UpdateViews(int Id)
+        {
+            using (var db = new myDb())
+            {
+                Video video = await db.Videos
+                .Where(x => x.Id == Id).FirstOrDefaultAsync();
+                video.Views++;
+                await db.SaveChangesAsync();
+            }
+        }
 
         public VideoDTO GetVideoById(int Id)
         {
 
             using (var db = new myDb())
             {
-                Video video = db.Videos
-                    .Where(x => x.Id == Id).FirstOrDefault();
-                video.Views++;
-                db.SaveChanges();
-
-                VideoDTO videoDTO = new VideoDTO();
-                videoDTO.Categories = video.Categories.Select(o => new CategoryDTO
-                {
-                    Id = o.Id,
-                    Name = o.Name
-                });
-                videoDTO.Description = video.Description;
-                videoDTO.Id = video.Id;
-                //videoDTO.Img = video.Img;
-                videoDTO.Title = video.Title;   //hnus, musi se upravit, ale zatim aspon funguje
-                videoDTO.Url = video.Url;
-                videoDTO.Views = video.Views;
-                return videoDTO;
-
-                //return db.Videos
-                //    .Where(x => x.Id == Id)
-                //    .Select(p => new VideoDTO
-                //    {
-                //        Id = p.Id,
-                //        Img = p.Img,
-                //        Title = p.Title,
-                //        Url = p.Url,
-                //        Description = p.Description,
-                //        Categories = p.Categories
-                //        .Select(o => new CategoryDTO
-                //        {
-                //            Id = o.Id,
-                //            Name = o.Name
-                //        })
-                //    }).FirstOrDefault();
+                return db.Videos
+                    .Where(x => x.Id == Id)
+                    .Select(p => new VideoDTO
+                    {
+                        Id = p.Id,
+                        Img = p.Img,
+                        Title = p.Title,
+                        Url = p.Url,
+                        Description = p.Description,
+                        Views = p.Views,
+                        Categories = p.Categories
+                        .Select(o => new CategoryDTO
+                        {
+                            Id = o.Id,
+                            Name = o.Name
+                        })
+                    }).FirstOrDefault();
             }
         }
         public IEnumerable<VideoDTO> GetSuggestedVideos(List<int> Categories)
@@ -123,24 +116,24 @@ namespace PornSite.Repositories
                 return videos;
             }
         }
-        public IEnumerable<string> GetUrls()
+        public async Task<IEnumerable<string>> GetUrls()
         {
             using (var db = new myDb())
             {
-                return db.Videos.OrderByDescending(p => p.Id)
-                    .Select(x => x.Url).Take(100).ToList();
+                return await db.Videos.OrderByDescending(p => p.Id)
+                    .Select(x => x.Url).Take(100).ToListAsync();
             }
         }
 
-        public void AddPorn(Video video, List<Category> cat)
+        public async Task AddPorn(Video video, List<Category> cat)
         {
             using (var db = new myDb())
             {
                 foreach (Category item in cat)
                 {
-                    Category tag = db.Categories
+                    Category tag = await db.Categories
                   .Where(x => x.Name == item.Name)
-                  .FirstOrDefault();
+                  .FirstOrDefaultAsync();
                     if (tag == null)
                     {
                         video.Categories.Add(item);
@@ -151,8 +144,15 @@ namespace PornSite.Repositories
                     }
                 }
                 db.Videos.Add(video);
-                db.SaveChanges();
+               await db.SaveChangesAsync();
 
+            }
+        }
+        public async Task<IEnumerable<string>> GetAllCategories()
+        {
+            using (var db = new myDb())
+            {
+                return await db.Categories.Select(x => x.Name).ToListAsync();
             }
         }
     }
