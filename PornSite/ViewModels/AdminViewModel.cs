@@ -8,6 +8,7 @@ using HtmlAgilityPack;
 using PornSite.Data;
 using PornSite.DTO;
 using PornSite.Repositories;
+using PornSite.SupportClasses;
 
 namespace PornSite.ViewModels
 {
@@ -19,7 +20,19 @@ namespace PornSite.ViewModels
         public PornRepository rep { get; set; } = new PornRepository();
         public IEnumerable<string> Categories { get; set; }
         public IEnumerable<string> DatabaseCategories { get; set; }
-        public string Test { get; set; }
+        public List<WebCategory> WebCategories { get; set; } = new List<WebCategory>
+        {
+            new WebCategory() { Name = "Main", Url = "https://www.redtube.com"},
+            new WebCategory() { Name = "Anal", Url = "https://www.redtube.com/redtube/anal"},
+            new WebCategory() { Name = "Amateur", Url = "https://www.redtube.com/redtube/amateur"},
+            new WebCategory() { Name = "Asian", Url = "https://www.redtube.com/redtube/asian"},
+            new WebCategory() { Name = "Blonde", Url = "https://www.redtube.com/redtube/blonde"},
+            new WebCategory() { Name = "Ebony", Url = "https://www.redtube.com/redtube/ebony"},
+            new WebCategory() { Name = "Zrzky", Url = "https://www.redtube.com/redtube/redhead"},
+            new WebCategory() { Name = "MILF", Url = "https://www.redtube.com/redtube/milf"},
+
+        };
+        public string SelectedWebCategory { get; set; } = "https://www.redtube.com";
         public bool ModalSwitch { get; set; }
 
         public async override Task PreRender()
@@ -47,10 +60,18 @@ namespace PornSite.ViewModels
         private void FillList()
         {
             HtmlWeb web = new HtmlWeb();
-            HtmlDocument document = web.Load("https://www.redtube.com");
-            IEnumerable<HtmlNode> liCountry = document.DocumentNode.SelectNodes("//ul[@id='block_hottest_videos_by_country']").First().ChildNodes.Where(x => x.Name == "li");
-            IEnumerable<HtmlNode> liRecent = document.DocumentNode.SelectNodes("//ul[@id='most_recent_videos']").First().ChildNodes.Where(x=>x.Name=="li");
-            IEnumerable<HtmlNode> liComb = liCountry.Concat(liRecent);
+            HtmlDocument document = web.Load(SelectedWebCategory);
+            IEnumerable<HtmlNode> liComb;
+            if (SelectedWebCategory == "https://www.redtube.com")
+            {
+                IEnumerable<HtmlNode> liCountry = document.DocumentNode.SelectNodes("//ul[@id='block_hottest_videos_by_country']").First().ChildNodes.Where(x => x.Name == "li");
+                IEnumerable<HtmlNode> liRecent = document.DocumentNode.SelectNodes("//ul[@id='most_recent_videos']").First().ChildNodes.Where(x => x.Name == "li");
+                liComb = liCountry.Concat(liRecent);
+            }
+            else
+            {
+                liComb = document.DocumentNode.SelectNodes("//ul[@id='block_browse']").First().ChildNodes.Where(x => x.Name == "li");
+            }
             int index = 0;
             foreach (HtmlNode item in liComb)
             {
@@ -78,9 +99,12 @@ namespace PornSite.ViewModels
                 video.Title = node.ChildNodes[3].InnerHtml.Replace("  ", "").Substring(1);
                 video.Img = node.ChildNodes[1].ChildNodes[1].GetAttributeValue("data-thumb_url", string.Empty);
                 video.Preview = node.ChildNodes[1].ChildNodes[1].GetAttributeValue("data-mediabook", string.Empty);
-                video.Index = index;
-                Videos.Add(video);
-                index++;
+                if (!string.IsNullOrWhiteSpace(video.Img) && !string.IsNullOrWhiteSpace(video.Preview))
+                {
+                    video.Index = index;
+                    Videos.Add(video);
+                    index++;
+                }
             }
         }
         private bool IfExists(string Url)
@@ -119,8 +143,6 @@ namespace PornSite.ViewModels
         {
             Task.Run(() => this.AddVideoAsync(vid));
             ModalSwitch = false;
-            vid.Description = null;
-            int check = vid.Index;
             Videos.RemoveAt(vid.Index);
         }
         public async Task AddVideoAsync(VideoDTO vid)
@@ -131,7 +153,7 @@ namespace PornSite.ViewModels
             video.Url = vid.Url;
             video.Img = vid.Img;
             video.Date = DateTime.Now;
-            video.Preview = Video.Preview;
+            video.Preview = vid.Preview;
             PornRepository rep = new PornRepository();
             List<Category> listCat = new List<Category>();
             foreach (string item in Categories)
@@ -141,6 +163,11 @@ namespace PornSite.ViewModels
                 listCat.Add(cat);
             }
             await rep.AddPorn(video, listCat);
+        }
+        public void ChangeCategoryList()
+        {
+            Videos = new List<VideoDTO>();
+            FillList();
         }
     }
 }

@@ -139,6 +139,7 @@
     <Compile Include="Repositories\PornRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="DotvvmStartup.cs" />
+    <Compile Include="SupportClasses\WebCategory.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\DefaultViewModel.cs" />
     <Compile Include="ViewModels\MasterPageViewModel.cs" />
@@ -165,7 +166,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
-    <None Include="Properties\PublishProfiles\PornSite123 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\PornSite1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="GettingStarted.html" />
     <Content Include="Scripts\bootstrap.js" />

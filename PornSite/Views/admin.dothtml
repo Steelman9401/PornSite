@@ -9,6 +9,11 @@
             </ItemTemplate>
         </dot:Repeater>
     </datalist>
+    <dot:ComboBox DataSource="{value: WebCategories}"
+                  SelectedValue="{value: SelectedWebCategory}"
+                  ValueMember="Url"
+                  DisplayMember="Name"
+                  SelectionChanged="{command: ChangeCategoryList()}"/>
     <dot:GridView class="table-bordered" DataSource="{value: Videos}">
         <Columns>
             <dot:GridViewTextColumn ValueBinding="{value: Title}" HeaderText="Name" />
@@ -56,7 +61,7 @@
             <dot:Repeater DataSource="{value: _parent.Categories}">
                 <ItemTemplate>
                     <br />
-                    <dot:TextBox list="categories" Text="{value: _this}"/>
+                    <dot:TextBox list="categories" Text="{value: _this}" />
                 </ItemTemplate>
             </dot:Repeater>
             <dot:Button ButtonTagName="button" Click="{command: _parent.AddVideo(_this)}">Pridat video</dot:Button>
