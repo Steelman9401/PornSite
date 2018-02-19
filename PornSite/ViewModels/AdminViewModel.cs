@@ -75,7 +75,7 @@ namespace PornSite.ViewModels
         {
             Task.Run(() => this.AddVideoAsync(vid));
             ModalSwitch = false;
-            Videos.RemoveAt(vid.Index);
+            Videos.RemoveAll(x => x.Url == vid.Url);
         }
         public async Task AddVideoAsync(VideoDTO vid)
         {            
