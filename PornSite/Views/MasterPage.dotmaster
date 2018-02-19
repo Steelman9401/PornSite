@@ -14,8 +14,6 @@
 <body style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding:20px;">
     <header style="text-align:center"><dot:RouteLink RouteName="default">HOME</dot:RouteLink></header>
     <dot:RouteLink style="float:right;" RouteName="admin">Administrace</dot:RouteLink>
-    <button onclick="test()">sadas</button>
-
     <dot:SpaContentPlaceHolder ID="MainContent" />
     <dot:UpdateProgress>
         <div class="windows8">

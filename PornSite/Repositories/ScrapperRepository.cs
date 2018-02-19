@@ -9,7 +9,7 @@ namespace PornSite.Repositories
 {
     public class ScrapperRepository
     {
-        public List<VideoDTO> FillList(string SelectedWebCategory, IEnumerable<string> Urls)
+        public List<VideoDTO> FillList(string SelectedWebCategory, IEnumerable<string> Urls) //ziskani informaci o jednotlivych videiich
         {
             List<VideoDTO> Videos = new List<VideoDTO>();
             HtmlWeb web = new HtmlWeb();

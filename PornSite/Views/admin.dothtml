@@ -9,34 +9,33 @@
             </ItemTemplate>
         </dot:Repeater>
     </datalist>
-    <dot:ComboBox DataSource="{value: WebCategories}"
-                  SelectedValue="{value: SelectedWebCategory}"
-                  ValueMember="Url"
-                  DisplayMember="Name"
-                  SelectionChanged="{command: ChangeCategoryList()}"/>
-    <dot:GridView class="table-bordered" DataSource="{value: Videos}">
-        <Columns>
-            <dot:GridViewTextColumn ValueBinding="{value: Title}" HeaderText="Name" />
-            <dot:GridViewTextColumn ValueBinding="{value: Url}" HeaderText="Url" />
-            <dot:GridViewTemplateColumn AllowSorting="false">
-                <ContentTemplate>
-                    <dot:Button Click="{command: _parent.OpenModal(_this)}" Text="Edit" />
-                </ContentTemplate>
-            </dot:GridViewTemplateColumn>
-        </Columns>
-    </dot:GridView>
+        <dot:ComboBox DataSource="{value: WebCategories}"
+                      SelectedValue="{value: SelectedWebCategory}"
+                      ValueMember="Url"
+                      DisplayMember="Name"
+                      SelectionChanged="{command: ChangeCategoryList()}" />
+        <div style="text-align:center">
+            <ul class="webVideosList">
+                <dot:Repeater class="table-bordered" DataSource="{value: Videos}">
+                    <li onclick="pressButton(this)" class="webVideosListLi">
+                        {{value: Title}}
+                        <dot:Button Click="{command: _parent.OpenModal(_this)}" style="display:none;" ButtonTagName="button"></dot:Button>
+                    </li>
+                </dot:Repeater>
+            </ul>
+        </div>
 
-    <div DataContext="{value: Video}" Visible="{value: _parent.ModalSwitch}" style="position:fixed;width: 100%;   /*modal dialog, ktery se zobrazi po stisknuti edit*/
+        <div DataContext="{value: Video}" Visible="{value: _parent.ModalSwitch}" style="position:fixed;width: 100%;   /*modal dialog, ktery se zobrazi po stisknuti edit*/
     height: 100%; /* Full height */ z-index: 1; /* Sit on top */
     left: 0; overflow: auto;
     top: 0;  background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */ ">
-        <div style=" background-color: #fefefe;                                                                 /*obsah modal dialogu*/
+            <div style=" background-color: #fefefe;                                                                 /*obsah modal dialogu*/
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */">
-            <div style="padding:9px 15px;
+                <div style="padding:9px 15px;
     border-bottom:1px solid #eee;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
@@ -44,30 +43,30 @@
     -moz-border-radius-topright: 5px;
      border-top-left-radius: 5px;
      border-top-right-radius: 5px;">
-                <dot:Button ButtonTagName="button" Click="{command: _parent.CloseModal()}">Close</dot:Button>
-                <h3>{{value: Title}}</h3>
-            </div>
-            <label>Nazev</label>
-            <br />
-            <dot:TextBox Text="{value: Title}" />
-            <br />
-            <label>Popis</label>
-            <br />
-            <dot:TextBox Text="{value: Description}" Type="MultiLine" />
-            <br />
-            <iframe src="{value: Url}" frameborder="0" scrolling="no" style="width:600px; min-width:320px; height:300px;"></iframe>
-            <label>Kategorie</label>
-            <br />
-            <dot:Repeater DataSource="{value: _parent.Categories}">
-                <ItemTemplate>
-                    <br />
-                    <dot:TextBox list="categories" Text="{value: _this}" />
-                </ItemTemplate>
-            </dot:Repeater>
-            <dot:Button ButtonTagName="button" Click="{command: _parent.AddVideo(_this)}">Pridat video</dot:Button>
-        </div>                                                                                      <%--konec obsahu--%>
+                    <dot:Button ButtonTagName="button" Click="{command: _parent.CloseModal()}">Close</dot:Button>
+                    <h3>{{value: Title}}</h3>
+                </div>
+                <label>Nazev</label>
+                <br />
+                <dot:TextBox Text="{value: Title}" />
+                <br />
+                <label>Popis</label>
+                <br />
+                <dot:TextBox Text="{value: Description}" Type="MultiLine" />
+                <br />
+                <iframe src="{value: Url}" frameborder="0" scrolling="no" style="width:600px; min-width:320px; height:300px;"></iframe>
+                <label>Kategorie</label>
+                <br />
+                <dot:Repeater DataSource="{value: _parent.Categories}">
+                    <ItemTemplate>
+                        <br />
+                        <dot:TextBox list="categories" Text="{value: _this}" />
+                    </ItemTemplate>
+                </dot:Repeater>
+                <dot:Button ButtonTagName="button" Click="{command: _parent.AddVideo(_this)}">Pridat video</dot:Button>
+            </div>                                                                                      <%--konec obsahu--%>
 
-    </div>                                                                                           <%--konec modalu--%>
+        </div>                                                                                           <%--konec modalu--%>
 
 </dot:Content>
 
