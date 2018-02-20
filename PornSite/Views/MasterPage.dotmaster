@@ -6,43 +6,43 @@
     <meta charset="utf-8" />
     <title>PornSite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000" />
     <%--<dot:RequiredResource Name="bootstrap" />--%>
     <%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>--%>
     <link href="../Content/style.css" rel="stylesheet" />
     <script src="../Content/scripts.js"></script>
+    <link href="../Content/master.css" rel="stylesheet" />
 </head>
-<body style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding:20px;">
-    <header style="text-align:center"><dot:RouteLink RouteName="default">HOME</dot:RouteLink></header>
-    <dot:RouteLink style="float:right;" RouteName="admin">Administrace</dot:RouteLink>
-    <dot:SpaContentPlaceHolder ID="MainContent" />
-    <dot:UpdateProgress>
-        <div class="windows8">
-            <div id="overlay-back"></div>
-            <div class="wBall" id="wBall_1">
-                <div class="wInnerBall"></div>
-            </div>
-            <div class="wBall" id="wBall_2">
-                <div class="wInnerBall"></div>
-            </div>
-            <div class="wBall" id="wBall_3">
-                <div class="wInnerBall"></div>
-            </div>
-            <div class="wBall" id="wBall_4">
-                <div class="wInnerBall"></div>
-            </div>
-            <div class="wBall" id="wBall_5">
-                <div class="wInnerBall"></div>
-            </div>
+<body>
+    <header>
+        <div class="cointainer-row">
+            <a href="/"><h1 class="logo">Vymasti.<span class="si">si</span></h1></a>
+            <form>
+                <input class="search-text" type="text" name="search" placeholder="milf, pov, teen...">
+                <input id="search" value="hledat" class="search-button" type="submit">
+            </form>
+            <a class="categories">KATEGORIE</a>
+            <a class="login">přihlásit se</a>
         </div>
+    </header>
+    <dot:SpaContentPlaceHolder ID="MainContent" />
+    <footer>
+        <div class="cointainer-row">
+            <span>2018 &copy; vymasti.si</span>
+        </div>
+    </footer>
+
+    <dot:UpdateProgress>
+         <div ID="overlay-back"></div>
+        <div class="lds-heart"><div></div></div>
     </dot:UpdateProgress>
-    <footer style="text-align:center; margin-top:20px; font-weight:bold;">{{value: Year}} Ⓒ</footer>
     <script>
 
-    //$(window).on("load", function () {
-    //     $(document).on('keypress', function (e) {
-    //         location.href = "https://cms.hostelbookers.com/hbblog/wp-content/uploads/sites/3/2012/02/cat-happy-cat-e1329931204797.jpg";
-    //    });
-    //});
+                    //$(window).on("load", function () {
+                    //     $(document).on('keypress', function (e) {
+                    //         location.href = "https://cms.hostelbookers.com/hbblog/wp-content/uploads/sites/3/2012/02/cat-happy-cat-e1329931204797.jpg";
+                    //    });
+                    //});
 
     </script>
 

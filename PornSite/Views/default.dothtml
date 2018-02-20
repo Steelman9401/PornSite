@@ -1,23 +1,43 @@
 ﻿@viewModel PornSite.ViewModels.DefaultViewModel, PornSite
 @masterPage Views/MasterPage.dotmaster
 <dot:Content ContentPlaceHolderID="MainContent">
-    <dot:RouteLink RouteName="Default"><strong>Nejnovejsi </strong></dot:RouteLink>
-    <dot:RouteLink RouteName="views"> Nejsledovanejsi</dot:RouteLink>
-    <dot:Repeater DataSource="{value: Videos}">
-        <ItemTemplate>
-            <dot:RouteLink RouteName="video" Param-Id="{value: Id}">
-                <h2>{{value: Title}}</h2>
-            </dot:RouteLink>
-            <dot:RouteLink RouteName="video" Param-Id="{value: Id}"><video onmouseover="playVideo(this)" onmouseout="stopVideo(this)" width="250" height="200" poster="{value: Img}" loop preload="none">
-    <source src="{value: Preview}" type="video/webm">
-    Your browser does not support the video tag.
-</video></dot:RouteLink>
-            <p>{{value: Views}}</p>
-        </ItemTemplate>
-    </dot:Repeater>
-    <dot:DataPager DataSet="{value: Videos}" class="" />
-    <%--<dot:UpdateProgress>
-        <img Visible="{value: LoadSwitch == 1 ? true:false}" style="width:5000px; height:5000px; position:fixed; top:0%; left:0%; opacity:0.4;" src="../Content/black-background-1468370534d5s.jpg" />
-        <div Visible="{value: LoadSwitch == 1 ? true:false}" class="loading"></div>
-    </dot:UpdateProgress>--%>
+    <main>
+        <div class="cointainer-column">
+            <section class="safety-button">
+                <a href="http://cdn.akc.org/content/article-body-image/shiba_inu_cute_puppies.jpg"><button id="safety-button" title="záchranné tlačítko">pozor manželka</button></a>
+            </section>
+
+            <section class="safety-button">
+                <a href="http://cdn.akc.org/content/article-body-image/shiba_inu_cute_puppies.jpg"><button id="safety-button" title="záchranné tlačítko">pozor manželka</button></a>
+            </section>
+            <section class="menu">
+                <ul>
+                    <li>nejnovější</li>
+                    <li>nejsledovanější</li>
+                </ul>
+            </section>
+            <section>
+                <dot:Repeater class="videos" DataSource="{value: Videos}">
+                    <ItemTemplate>
+                        <div class="video">
+                            <dot:RouteLink RouteName="video" Param-Id="{value: Id}>
+                                <video style="height:150px !important; width:250px !important;" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
+                                    <source src="{value: Preview}" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <span>{{value: Title}}</span>
+                            </dot:RouteLink>
+                        </div>
+                    </ItemTemplate>
+                </dot:Repeater>
+            </section>
+            <section class="pagination">
+                <dot:DataPager DataSet="{value: Videos}" />
+            </section>
+            <br />
+            <br />
+            <br />
+        </div>
+    </main>
+
 </dot:Content>

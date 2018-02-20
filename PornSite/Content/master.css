@@ -1,0 +1,345 @@
+﻿html, body, p, ol, ul, li, textarea, iframe, hr, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI';
+}
+
+
+ul {
+    list-style: none
+}
+
+button, input, select, textarea {
+    margin: 0
+}
+
+html {
+    box-sizing: border-box
+}
+
+img, embed, audio, video {
+    height: auto;
+    max-width: 100%
+}
+
+iframe {
+    border: 0
+}
+
+header {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    height: auto;
+    padding: 12px 0;
+    font-family: 'Segoe UI';
+    position:fixed;
+    top:0px;
+}
+
+    header .cointainer-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: auto;
+        width: 95%;
+        max-width: 1100px;
+        margin: 0 auto
+    }
+
+        header .cointainer-row a {
+            text-decoration: none;
+            color: inherit
+        }
+
+            header .cointainer-row a .logo {
+                font-size: 27px;
+                font-weight: 400
+            }
+
+                header .cointainer-row a .logo .si {
+                    font-size: 24px;
+                    font-weight: 400;
+                    color: #66afec
+                }
+
+        header .cointainer-row form {
+            align-self: center
+        }
+
+            header .cointainer-row form .search-text {
+                border: none;
+                color: #fff;
+                background-color: #484848;
+                padding: 5px;
+                font-size: 14px;
+                width: 400px;
+                outline: none;
+                border-radius: 1px;
+                font-weight: 300
+            }
+
+            header .cointainer-row form .search-button {
+                border: none;
+                color: #fff;
+                background-color: #005489;
+                padding: 5px 20px;
+                font-size: 14px;
+                font-weight: 300;
+                cursor: pointer;
+                outline: none
+            }
+
+                header .cointainer-row form .search-button:hover {
+                    background-color: #2980b9
+                }
+
+        header .cointainer-row .categories {
+            align-self: center;
+            border: solid 1px #fff;
+            padding: 3px 13px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 400;
+            outline: none
+        }
+
+            header .cointainer-row .categories:hover {
+                background-color: #484848
+            }
+
+        header .cointainer-row .login {
+            align-self: center;
+            font-size: 13px;
+            font-weight: 400;
+            cursor: pointer
+        }
+
+            header .cointainer-row .login:hover {
+                text-decoration: underline
+            }
+
+@media only screen and (max-width: 960px) {
+    header .cointainer-row form .search-text {
+        width: 300px
+    }
+}
+
+@media only screen and (max-width: 810px) {
+    header .cointainer-row form .search-text {
+        width: 230px
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    header .cointainer-row {
+        flex-direction: column;
+        justify-content: center
+    }
+
+        header .cointainer-row a {
+            align-self: center;
+            margin-bottom: 10px
+        }
+
+        header .cointainer-row form .search-text {
+            width: 190px
+        }
+
+        header .cointainer-row .categories {
+            order: 1
+        }
+
+        header .cointainer-row .login {
+            margin: 10px 0
+        }
+}
+
+main {
+    width: 100%;
+    background-color: #212121;
+    color: #fff;
+    height: auto;
+    padding: 12px 0;
+    font-family: 'Open Sans', sans-serif
+}
+
+    main .cointainer-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: auto;
+        width: 95%;
+        max-width: 1100px;
+        margin: 0 auto
+    }
+
+        main .cointainer-column .safety-button {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            height: auto;
+            width: 100%;
+            padding: 10px 0px
+        }
+
+            main .cointainer-column .safety-button button {
+                border: 1px solid #890001;
+                font-size: 14px;
+                padding: 8px 27px;
+                font-weight: 300;
+                border-radius: 8px;
+                color: #fff;
+                background-color: #c0392b;
+                cursor: pointer;
+                outline: none
+            }
+
+                main .cointainer-column .safety-button button:hover {
+                    background-color: #f96b55
+                }
+
+        main .cointainer-column .menu {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            height: auto;
+            width: 100%;
+            padding: 5px 0px
+        }
+
+            main .cointainer-column .menu ul {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start
+            }
+
+                main .cointainer-column .menu ul li {
+                    margin-right: 20px;
+                    font-size: 14px;
+                    cursor: pointer
+                }
+
+                    main .cointainer-column .menu ul li:hover {
+                        text-decoration: underline
+                    }
+
+        main .cointainer-column .videos {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            height: auto;
+            width: 100%;
+            padding: 20px 0px
+        }
+
+            main .cointainer-column .videos .video {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                width: 22%;
+                margin-bottom: 25px
+            }
+
+                main .cointainer-column .videos .video a {
+                    text-decoration: none;
+                    color: inherit
+                }
+
+                    main .cointainer-column .videos .video a span {
+                        font-size: 14px
+                    }
+
+        main .cointainer-column .pagination {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            height: auto;
+            width: 100%;
+            padding: 10px 0px
+        }
+
+            main .cointainer-column .pagination ul {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start
+            }
+
+                main .cointainer-column .pagination ul li {
+                    font-size: 13px;
+                    cursor: pointer;
+                    background-color: #484848;
+                    color: #fff;
+                    padding: 7px 12px;
+                    font-weight: 600;
+                    margin-right: 8px;
+                    border-radius: 8px
+                }
+
+                    main .cointainer-column .pagination ul li:hover {
+                        background-color: #005489;
+                        color: #fff
+                    }
+
+                    main .cointainer-column .pagination ul li a {
+                        text-decoration: none;
+                        color:white;
+                    }
+
+                main .cointainer-column .pagination ul .active {
+                    background-color: #005489;
+                    color: #fff
+                }
+
+@media only screen and (max-width: 960px) {
+    main .cointainer-column .videos .video {
+        width: 29%
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    main .cointainer-column {
+        width: 70%
+    }
+
+        main .cointainer-column .videos .video {
+            width: 45%
+        }
+}
+
+@media only screen and (max-width: 490px) {
+    main .cointainer-column {
+        width: 65%
+    }
+
+        main .cointainer-column .videos .video {
+            width: 100%
+        }
+}
+
+footer {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    height: auto;
+    padding: 12px 0;
+    font-family: 'Open Sans', sans-serif;
+    position:fixed;
+    bottom:0;
+}
+
+    footer .cointainer-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: auto;
+        width: 95%;
+        max-width: 1100px;
+        margin: 0 auto
+    }
+
+        footer .cointainer-row span {
+            font-size: 13px
+        }

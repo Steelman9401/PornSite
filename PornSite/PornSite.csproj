@@ -154,6 +154,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\loading.gif" />
+    <Content Include="Content\master.css" />
+    <Content Include="Content\oie_1633429tJ6oFeR2.gif" />
     <Content Include="Content\scripts.js" />
     <Content Include="Content\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
