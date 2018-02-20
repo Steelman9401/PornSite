@@ -142,6 +142,7 @@
     <Compile Include="DotvvmStartup.cs" />
     <Compile Include="SupportClasses\WebCategory.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\admin\AdminDatabaseViewModel.cs" />
     <Compile Include="ViewModels\DefaultViewModel.cs" />
     <Compile Include="ViewModels\MasterPageViewModel.cs" />
     <Compile Include="ViewModels\VideoViewModel.cs" />
@@ -185,7 +186,8 @@
     <Content Include="Views\MasterPage.dotmaster" />
     <Content Include="Views\video.dothtml" />
     <Content Include="Views\views.dothtml" />
-    <Content Include="Views\admin.dothtml" />
+    <Content Include="Views\admin\admin.dothtml" />
+    <Content Include="Views\admin\adminDatabase.dothtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
