@@ -186,5 +186,14 @@ namespace PornSite.Repositories
                 return await db.Categories.Select(x => x.Name).ToListAsync();
             }
         }
+        public void RemoveVideo(int Id)
+        {
+            using (var db = new myDb())
+            {
+                var video = db.Videos.Find(Id);
+                db.Videos.Remove(video);
+                db.SaveChanges();
+            }
+        }
     }
     }

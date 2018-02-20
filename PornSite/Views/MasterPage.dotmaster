@@ -7,8 +7,8 @@
     <title>PornSite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000" />
-    <%--<dot:RequiredResource Name="bootstrap" />--%>
-    <%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>--%>
+    <dot:RequiredResource Name="bootstrap" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <link href="../Content/style.css" rel="stylesheet" />
     <script src="../Content/scripts.js"></script>
     <link href="../Content/master.css" rel="stylesheet" />
@@ -36,15 +36,7 @@
          <div ID="overlay-back"></div>
         <div class="lds-heart"><div></div></div>
     </dot:UpdateProgress>
-    <script>
-
-                    //$(window).on("load", function () {
-                    //     $(document).on('keypress', function (e) {
-                    //         location.href = "https://cms.hostelbookers.com/hbblog/wp-content/uploads/sites/3/2012/02/cat-happy-cat-e1329931204797.jpg";
-                    //    });
-                    //});
-
-    </script>
+    
 
 </body>
 </html>

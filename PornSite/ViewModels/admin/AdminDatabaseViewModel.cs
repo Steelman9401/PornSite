@@ -14,10 +14,22 @@ namespace PornSite.ViewModels.admin
     {
         public GridViewDataSet<VideoDTO> Videos { get; set; }
         public PornRepository Rep { get; set; } = new PornRepository();
+        public VideoDTO Video { get; set; }
+        public bool ModalSwitch { get; set; } = false;
         public override Task Init()
         {
             Videos = GridViewDataSet.Create(gridViewDataSetLoadDelegate: Rep.GetAllVideosAdmin, pageSize: 20);
             return base.Init();
+        }
+        public void RemoveVideo(VideoDTO video)
+        {
+            Task.Run(() => this.Rep.RemoveVideo(video.Id));
+            Videos.Items.Remove(video);
+        }
+        public void EditVideo(VideoDTO vid)
+        {
+            Video = vid;
+            ModalSwitch = true;
         }
     }
 }
