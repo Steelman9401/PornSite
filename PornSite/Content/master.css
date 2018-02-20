@@ -1,7 +1,6 @@
 ﻿html, body, p, ol, ul, li, textarea, iframe, hr, h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI';
 }
 
 
@@ -32,9 +31,8 @@ header {
     color: #fff;
     height: auto;
     padding: 12px 0;
-    font-family: 'Segoe UI';
-    position:fixed;
-    top:0px;
+    position: fixed;
+    top: 0px;
 }
 
     header .cointainer-row {
@@ -162,7 +160,7 @@ main {
     color: #fff;
     height: auto;
     padding: 12px 0;
-    font-family: 'Open Sans', sans-serif
+
 }
 
     main .cointainer-column {
@@ -325,7 +323,6 @@ footer {
     color: #fff;
     height: auto;
     padding: 12px 0;
-    font-family: 'Open Sans', sans-serif;
     position:fixed;
     bottom:0;
 }
