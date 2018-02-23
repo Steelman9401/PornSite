@@ -2,7 +2,5 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-
-    a
 </dot:Content>
 
