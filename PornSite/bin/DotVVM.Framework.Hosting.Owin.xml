@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotVVM.Framework.Hosting.Owin</name>
+    </assembly>
+    <members>
+        <member name="M:Owin.AppBuilderExtensions.UseDotVVM``1(Owin.IAppBuilder,System.String,System.Boolean,System.Boolean,System.Action{Microsoft.Extensions.DependencyInjection.IDotvvmOptions})">
+            <summary>
+            Adds DotVVM to the <see cref="T:Owin.IAppBuilder" /> request execution pipeline.
+            </summary>
+            <param name="app">The <see cref="T:Owin.IAppBuilder" /> instance.</param>
+            <param name="applicationRootPath">The path to application's root directory. It is used to resolve paths to views, etc.</param>
+            <param name="useErrorPages">
+            A value indicating whether to show detailed error page if an exception occurs. Disable this
+            in production.
+            </param>
+            <param name="debug">A value indicating whether the application should run in debug mode.</param>
+            <param name="options">An action to configure DotVVM services and extensions.</param>
+        </member>
+        <member name="M:DotVVM.Framework.Hosting.DotvvmAuthenticationHelper.ApplyRedirectResponse(Microsoft.Owin.IOwinContext,System.String)">
+            <summary>
+            Ensures the redirect required by the OWIN Security middleware is properly handled by DotVVM client library.
+            </summary>
+        </member>
+        <member name="M:DotVVM.Framework.Hosting.DotvvmRequestContextExtensions.GetOwinContext(DotVVM.Framework.Hosting.IDotvvmRequestContext)">
+            <summary>
+            Returns the underlying OWIN environment context.
+            </summary>
+            <param name="context">The request context.</param>
+        </member>
+        <member name="M:DotVVM.Framework.Hosting.DotvvmRequestContextExtensions.GetAuthentication(DotVVM.Framework.Hosting.IDotvvmRequestContext)">
+            <summary>
+            Gets the Authentication functionality available on the current request.
+            </summary>
+            <param name="context">The request context.</param>
+        </member>
+        <member name="M:DotVVM.Framework.Hosting.DotvvmRequestContextExtensions.GetDotvvmContext(Microsoft.Owin.IOwinContext)">
+            <summary>
+            Gets the <see cref="T:DotVVM.Framework.Hosting.IDotvvmRequestContext"/> bound to the specified <see cref="T:Microsoft.Owin.IOwinContext"/>.
+            </summary>
+        </member>
+        <member name="M:DotVVM.Framework.Hosting.Middlewares.DotvvmErrorPageMiddleware.RenderErrorResponse(Microsoft.Owin.IOwinContext,System.Exception)">
+            <summary>
+            Renders the error response.
+            </summary>
+        </member>
+        <member name="T:DotVVM.Framework.Hosting.DotvvmMiddleware">
+            <summary>
+            A middleware that handles DotVVM HTTP requests.
+            </summary>
+        </member>
+        <member name="M:DotVVM.Framework.Hosting.DotvvmMiddleware.#ctor(Microsoft.Owin.OwinMiddleware,DotVVM.Framework.Configuration.DotvvmConfiguration,System.Collections.Generic.IList{DotVVM.Framework.Hosting.Middlewares.IMiddleware})">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotVVM.Framework.Hosting.DotvvmMiddleware" /> class.
+            </summary>
+        </member>
+        <member name="M:DotVVM.Framework.Hosting.DotvvmMiddleware.Invoke(Microsoft.Owin.IOwinContext)">
+            <summary>
+            Process an individual request.
+            </summary>
+        </member>
+        <member name="M:DotVVM.Framework.Hosting.DotvvmMiddleware.GetVirtualDirectory(DotVVM.Framework.Hosting.IHttpContext)">
+            <summary>
+            Determines the current virtual directory.
+            </summary>
+        </member>
+        <member name="M:DotVVM.Framework.Hosting.DotvvmMiddleware.GetCleanRequestUrl(DotVVM.Framework.Hosting.IHttpContext)">
+            <summary>
+            Get clean request url without slashes.
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute">
+            <summary>
+            Specifies that the class or method requires the specified authorization.
+            </summary>
+        </member>
+        <member name="M:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute" /> class.
+            </summary>
+        </member>
+        <member name="M:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute" /> class.
+            </summary>
+            <param name="roles">The comma-separated list of roles. The user must be at least in one of them.</param>
+        </member>
+        <member name="P:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.Roles">
+            <summary>
+            Gets or sets the list of allowed roles.
+            </summary>
+        </member>
+        <member name="M:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.OnViewModelCreatedAsync(DotVVM.Framework.Hosting.IDotvvmRequestContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.OnCommandExecutingAsync(DotVVM.Framework.Hosting.IDotvvmRequestContext,DotVVM.Framework.Runtime.Filters.ActionInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.OnPageLoadingAsync(DotVVM.Framework.Hosting.IDotvvmRequestContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.Authorize(DotVVM.Framework.Hosting.IDotvvmRequestContext,System.Object)">
+            <summary>
+            Called when a request is being authorized. The authorization fails if: a) no user is associated with the request;
+            b) the user is not authenticated; c) the user is not in any of the authorized <see cref="P:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.Roles" />.
+            </summary>
+            <param name="context">The request context.</param>
+            <param name="appliedOn">The object which can contain [NotAuthorizedAttribute] that could suppress it.</param>
+        </member>
+        <member name="M:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.CanBeAuthorized(System.Object)">
+            <summary>
+            Returns whether the view model does require authorization.
+            </summary>
+            <param name="viewModel">The view model.</param>
+        </member>
+        <member name="M:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.HandleUnauthenticatedRequest(Microsoft.Owin.IOwinContext)">
+            <summary>
+            Handles requests that is not authenticated.
+            </summary>
+            <param name="context">The OWIN context.</param>
+        </member>
+        <member name="M:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.HandleUnauthorizedRequest(Microsoft.Owin.IOwinContext)">
+            <summary>
+            Handles requests that fail authorization.
+            </summary>
+            <param name="context">The OWIN context.</param>
+        </member>
+        <member name="M:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.IsUserAuthenticated(Microsoft.Owin.IOwinContext)">
+            <summary>
+            Returns whether the current user is authenticated (and is not anonymous).
+            </summary>
+            <param name="context">The OWIN context.</param>
+        </member>
+        <member name="M:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.IsUserAuthorized(Microsoft.Owin.IOwinContext)">
+            <summary>
+            Returns whether the current user is in on of the specified <see cref="P:DotVVM.Framework.Runtime.Filters.AuthorizeAttribute.Roles" />.
+            </summary>
+            <param name="context">The OWIN context.</param>
+        </member>
+        <member name="T:DotVVM.Framework.Security.DefaultCsrfProtector">
+            <summary>
+            Implements synchronizer token pattern for CSRF protection.
+            <para>The token is generated based on Session ID (random 256-bit value persisted in cookie), 
+            In contrast to ViewModelProtector, the request identity (full URI) and User identity (user name, if authenticated) cannot be used here, because of Back button which doesn't refresh the token in the cookie.</para>
+            <para>Value of stored Session ID and the token itself is encrypted and signed.</para>
+            </summary>
+        </member>
+        <member name="T:DotVVM.Framework.Security.DefaultViewModelProtector">
+            <summary>
+            Cryptographically protects serialized part of ViewModel with key derived from master key,
+            with request identity (full URI) and User identity (user name, if authenticated).
+            </summary>
+        </member>
+    </members>
+</doc>

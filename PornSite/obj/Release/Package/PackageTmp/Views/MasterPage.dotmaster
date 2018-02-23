@@ -1,0 +1,57 @@
+﻿@viewModel PornSite.ViewModels.MasterPageViewModel, PornSite
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>PornSite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000" />
+    <dot:RequiredResource Name="bootstrap" />
+    <dot:RequiredResource Name="jquery" />
+    <link href="PornSite/Content/style.css" rel="stylesheet" />
+    <script src="PornSite/Content/scripts.js"></script>
+    <link href="PornSite/Content/master.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <div class="cointainer-row">
+            <dot:RouteLink RouteName="Default"><h1 class="logo">Vymasti.<span class="si">si</span></h1></dot:RouteLink>
+            <div class="menu-icon" id="menu-icon"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <form id="form">
+                <input class="search-text" type="text" name="search" placeholder="milf, pov, teen...">
+                <input id="search" value="hledat" class="search-button" type="submit">
+            </form>
+            <ul id="menu">
+                <li>KATEGORIE</li>
+                <li>PŘIHLÁSIT SE</li>
+            </ul>
+            <a class="categories">KATEGORIE</a>
+            <a class="login">přihlásit se</a>
+        </div>
+    </header>
+
+    <dot:SpaContentPlaceHolder ID="MainContent" style="margin-top:50px;"/>
+    <footer>
+        <div class="cointainer-row">
+            <span>2018 &copy; vymasti.si</span>
+        </div>
+    </footer>
+
+    <dot:UpdateProgress>
+        <div ID="overlay-back"></div>
+        <div class="lds-heart"><div></div></div>
+    </dot:UpdateProgress>
+  <script>
+      window.onload = function () {
+                       
+                  $("#menu-icon").click(function () {
+                      $("#form").slideToggle(200);
+                      $("#menu").slideToggle(200);
+              });
+      }
+  </script>
+</body>
+</html>
