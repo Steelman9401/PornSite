@@ -7,13 +7,13 @@ namespace PornSite.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class updates : IMigrationMetadata
+    public sealed partial class userComment : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updates));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(userComment));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802162241186_updates"; }
+            get { return "201802222246195_userComment"; }
         }
         
         string IMigrationMetadata.Source

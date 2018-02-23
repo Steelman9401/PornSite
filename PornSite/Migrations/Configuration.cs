@@ -9,7 +9,7 @@ namespace PornSite.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(PornSite.Data.myDb context)

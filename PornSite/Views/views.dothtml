@@ -2,23 +2,37 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <dot:RouteLink RouteName="Default">Nejnovejsi </dot:RouteLink>
-    <dot:RouteLink RouteName="views"><strong> Nejsledovanejsi</strong></dot:RouteLink>
-    <dot:Repeater DataSource="{value: Videos}">
-        <ItemTemplate>
-            <dot:RouteLink RouteName="video" Param-Id="{value: Id}">
-                <h2>{{value: Title}}</h2>
-            </dot:RouteLink>
-            <dot:RouteLink RouteName="video" Param-Id="{value: Id}">
-                <video onmouseover="playVideo(this)" onmouseout="stopVideo(this)" width="250" height="200" poster="{value: Img}" loop>
-                    <source src="{value: Preview}" type="video/webm">
-                    Your browser does not support the video tag.
-                </video>
-            </dot:RouteLink>
-            <p>{{value: Views}}</p>
-        </ItemTemplate>
-    </dot:Repeater>
-    <dot:DataPager DataSet="{value: Videos}" class="" />
+    <main>
+        <div class="cointainer-column">
+            <section class="menu">
+                <ul>
+                    <dot:RouteLink RouteName="Default"><li>nejnovější</li></dot:RouteLink>
+                    <dot:RouteLink RouteName="views"><li><strong>nejsledovanější</strong></li></dot:RouteLink>
+                </ul>
+            </section>
+            <section>
+                <dot:Repeater class="videos" DataSource="{value: Videos}">
+                    <ItemTemplate>
+                        <div class="video">
+                            <dot:RouteLink RouteName="video" Param-Id="{value: Id}>
+                                <video style="height:150px !important; width:250px !important;" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
+                                    <source src="{value: Preview}" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <span>{{value: Title}}</span>
+                            </dot:RouteLink>
+                        </div>
+                    </ItemTemplate>
+                </dot:Repeater>
+            </section>
+            <section class="pagination">
+                <dot:DataPager DataSet="{value: Videos}" />
+            </section>
+            <br />
+            <br />
+            <br />
+        </div>
+    </main>
 
 </dot:Content>
 

@@ -3,7 +3,7 @@ namespace PornSite.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class updates : DbMigration
+    public partial class userComment : DbMigration
     {
         public override void Up()
         {
@@ -32,6 +32,31 @@ namespace PornSite.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Comments",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Text = c.String(),
+                        User_Id = c.Int(),
+                        Video_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Users", t => t.User_Id)
+                .ForeignKey("dbo.Videos", t => t.Video_Id)
+                .Index(t => t.User_Id)
+                .Index(t => t.Video_Id);
+            
+            CreateTable(
+                "dbo.Users",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Username = c.String(),
+                        Password = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.VideoCategories",
                 c => new
                     {
@@ -48,11 +73,17 @@ namespace PornSite.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.Comments", "Video_Id", "dbo.Videos");
+            DropForeignKey("dbo.Comments", "User_Id", "dbo.Users");
             DropForeignKey("dbo.VideoCategories", "Category_Id", "dbo.Categories");
             DropForeignKey("dbo.VideoCategories", "Video_Id", "dbo.Videos");
             DropIndex("dbo.VideoCategories", new[] { "Category_Id" });
             DropIndex("dbo.VideoCategories", new[] { "Video_Id" });
+            DropIndex("dbo.Comments", new[] { "Video_Id" });
+            DropIndex("dbo.Comments", new[] { "User_Id" });
             DropTable("dbo.VideoCategories");
+            DropTable("dbo.Users");
+            DropTable("dbo.Comments");
             DropTable("dbo.Videos");
             DropTable("dbo.Categories");
         }

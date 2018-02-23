@@ -8,3 +8,10 @@ function stopVideo(e) {
 function pressButton(e) {
     e.children[0].click();
 }
+
+$(document).ready(function () {
+    $("#menu-icon").click(function () {
+        $("#form").slideToggle(200);
+        $("#menu").slideToggle(200);
+    });
+});

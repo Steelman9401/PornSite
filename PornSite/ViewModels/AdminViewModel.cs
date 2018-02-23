@@ -18,7 +18,7 @@ namespace PornSite.ViewModels
         public ScrapperRepository scrapRep { get; set; } = new ScrapperRepository();
         public IEnumerable<string> Urls { get; set; }
         public VideoDTO Video { get; set; }
-        public PornRepository pornRep { get; set; } = new PornRepository();
+        public PornRepository PornRep { get; set; } = new PornRepository();
         public IEnumerable<string> Categories { get; set; }
         public IEnumerable<string> DatabaseCategories { get; set; }
         public List<WebCategory> WebCategories { get; set; } = new List<WebCategory>
@@ -40,28 +40,16 @@ namespace PornSite.ViewModels
         {
             if (!Context.IsPostBack)
             {
-                var taskCat = Task.Run(() => this.GetCategories());
-                var taskUrl = Task.Run(() => this.GetUrls());
-                taskUrl.Wait();
+                DatabaseCategories = await PornRep.GetAllCategories();
+                Urls = await PornRep.GetUrls();
                 Videos = scrapRep.FillList(SelectedWebCategory,Urls);
-                taskCat.Wait();
             }
             
             await base.PreRender();
         }
-
-        private async Task GetCategories()
-        {
-            DatabaseCategories = await pornRep.GetAllCategories();
-        }
-        private async Task GetUrls()
-        {
-            Urls = await pornRep.GetUrls();
-        }
        
         public void OpenModal(VideoDTO vid)
         {
-
             Video = vid;
             Categories = scrapRep.GetTags(vid);
             ModalSwitch = true;
@@ -71,15 +59,11 @@ namespace PornSite.ViewModels
             ModalSwitch = false;
         }
 
-        public void AddVideo(VideoDTO vid)
+        public async Task AddVideo(VideoDTO vid)
         {
-            Task.Run(() => this.AddVideoAsync(vid));
+            await PornRep.AddPorn(vid, Categories);
             ModalSwitch = false;
             Videos.RemoveAll(x => x.Url == vid.Url);
-        }
-        public async Task AddVideoAsync(VideoDTO vid)
-        {            
-            await pornRep.AddPorn(vid, Categories);
         }
         public void ChangeCategoryList()
         {

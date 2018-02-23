@@ -1,9 +1,19 @@
-﻿html, body, p, ol, ul, li, textarea, iframe, hr, h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI';
+﻿footer, header, main {
+    font-family: 'Open Sans',sans-serif
 }
 
+html {
+    box-sizing: border-box
+}
+
+* {
+    box-sizing: inherit
+}
+
+body, h1, h2, h3, h4, h5, h6, hr, html, li, ol, p, textarea, ul {
+    margin: 0;
+    padding: 0
+}
 
 ul {
     list-style: none
@@ -13,27 +23,18 @@ button, input, select, textarea {
     margin: 0
 }
 
-html {
-    box-sizing: border-box
-}
-
-img, embed, audio, video {
+embed audio, img, video {
     height: auto;
     max-width: 100%
 }
 
-iframe {
-    border: 0
-}
-
 header {
+    position: fixed;
     width: 100%;
     background-color: #000;
     color: #fff;
     height: auto;
-    padding: 12px 0;
-    /*position: fixed;*/
-    top: 0px;
+    top: 0
 }
 
     header .cointainer-row {
@@ -51,19 +52,38 @@ header {
             color: inherit
         }
 
-            header .cointainer-row a .logo {
-                font-size: 27px;
-                font-weight: 400
+        header .cointainer-row .login:hover, main .cointainer-column .menu ul li:hover {
+            text-decoration: underline
+        }
+
+        header .cointainer-row a .logo {
+            font-size: 27px;
+            font-weight: 400
+        }
+
+            header .cointainer-row a .logo .si {
+                font-size: 24px;
+                font-weight: 400;
+                color: #66afec
             }
 
-                header .cointainer-row a .logo .si {
-                    font-size: 24px;
-                    font-weight: 400;
-                    color: #66afec
-                }
+        header .cointainer-row .menu-icon {
+            display: none;
+            background: url(../img/menu-icon-w.png) center no-repeat;
+            background-size: 100%;
+            width: 27px;
+            height: 27px;
+            cursor: pointer
+        }
+
+            header .cointainer-row .menu-icon:hover {
+                background: url(../img/menu-icon-b.png) center no-repeat;
+                background-size: 100%
+            }
 
         header .cointainer-row form {
-            align-self: center
+            align-self: center;
+            display: block
         }
 
             header .cointainer-row form .search-text {
@@ -73,7 +93,7 @@ header {
                 padding: 5px;
                 font-size: 14px;
                 width: 400px;
-                outline: none;
+                outline: 0;
                 border-radius: 1px;
                 font-weight: 300
             }
@@ -86,27 +106,44 @@ header {
                 font-size: 14px;
                 font-weight: 300;
                 cursor: pointer;
-                outline: none
+                outline: 0
             }
 
                 header .cointainer-row form .search-button:hover {
                     background-color: #2980b9
                 }
 
+        header .cointainer-row .categories:hover, header .cointainer-row ul li:hover {
+            background-color: #484848
+        }
+
+        header .cointainer-row ul {
+            display: none;
+            width: 100%
+        }
+
+            header .cointainer-row ul li {
+                width: 100%;
+                font-size: 14px;
+                cursor: pointer;
+                padding: 9px 0;
+                text-align: center
+            }
+
+                header .cointainer-row ul li:last-child {
+                    border-top: 1px solid #484848
+                }
+
         header .cointainer-row .categories {
             align-self: center;
-            border: solid 1px #fff;
+            border: 1px solid #fff;
             padding: 3px 13px;
             cursor: pointer;
             border-radius: 5px;
             font-size: 16px;
             font-weight: 400;
-            outline: none
+            outline: 0
         }
-
-            header .cointainer-row .categories:hover {
-                background-color: #484848
-            }
 
         header .cointainer-row .login {
             align-self: center;
@@ -115,43 +152,48 @@ header {
             cursor: pointer
         }
 
-            header .cointainer-row .login:hover {
-                text-decoration: underline
-            }
-
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width:960px) {
     header .cointainer-row form .search-text {
         width: 300px
     }
 }
 
-@media only screen and (max-width: 810px) {
+@media only screen and (max-width:810px) {
     header .cointainer-row form .search-text {
         width: 230px
     }
 }
 
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width:760px) {
     header .cointainer-row {
-        flex-direction: column;
-        justify-content: center
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap
     }
 
-        header .cointainer-row a {
-            align-self: center;
-            margin-bottom: 10px
+        header .cointainer-row .menu-icon {
+            display: block
         }
 
-        header .cointainer-row form .search-text {
-            width: 190px
+        header .cointainer-row form {
+            display: none;
+            width: 100%;
+            margin: 12px 0
         }
 
-        header .cointainer-row .categories {
-            order: 1
-        }
+            header .cointainer-row form .search-text {
+                width: 80%;
+                padding: 8px 5px
+            }
 
-        header .cointainer-row .login {
-            margin: 10px 0
+            header .cointainer-row form .search-button {
+                width: 20%;
+                margin-left: -5px;
+                padding: 8px 5px
+            }
+
+        header .cointainer-row .categories, header .cointainer-row .login {
+            display: none
         }
 }
 
@@ -160,8 +202,7 @@ main {
     background-color: #212121;
     color: #fff;
     height: auto;
-    padding: 12px 0;
-
+    padding: 73px 0 12px
 }
 
     main .cointainer-column {
@@ -180,7 +221,7 @@ main {
             justify-content: center;
             height: auto;
             width: 100%;
-            padding: 10px 0px
+            padding: 10px 0
         }
 
             main .cointainer-column .safety-button button {
@@ -192,7 +233,7 @@ main {
                 color: #fff;
                 background-color: #c0392b;
                 cursor: pointer;
-                outline: none
+                outline: 0
             }
 
                 main .cointainer-column .safety-button button:hover {
@@ -205,7 +246,7 @@ main {
             justify-content: flex-start;
             height: auto;
             width: 100%;
-            padding: 5px 0px
+            padding: 5px 0
         }
 
             main .cointainer-column .menu ul {
@@ -220,10 +261,6 @@ main {
                     cursor: pointer
                 }
 
-                    main .cointainer-column .menu ul li:hover {
-                        text-decoration: underline
-                    }
-
         main .cointainer-column .videos {
             display: flex;
             flex-direction: row;
@@ -231,7 +268,7 @@ main {
             flex-wrap: wrap;
             height: auto;
             width: 100%;
-            padding: 20px 0px
+            padding: 20px 0
         }
 
             main .cointainer-column .videos .video {
@@ -257,7 +294,7 @@ main {
             justify-content: center;
             height: auto;
             width: 100%;
-            padding: 10px 0px
+            padding: 10px 0
         }
 
             main .cointainer-column .pagination ul {
@@ -277,28 +314,22 @@ main {
                     border-radius: 8px
                 }
 
-                    main .cointainer-column .pagination ul li:hover {
+                    main .cointainer-column .pagination ul .active, main .cointainer-column .pagination ul li:hover {
                         background-color: #005489;
                         color: #fff
                     }
 
                     main .cointainer-column .pagination ul li a {
-                        text-decoration: none;
-                        color:white;
+                        text-decoration: none
                     }
 
-                main .cointainer-column .pagination ul .active {
-                    background-color: #005489;
-                    color: #fff
-                }
-
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width:960px) {
     main .cointainer-column .videos .video {
         width: 29%
     }
 }
 
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width:760px) {
     main .cointainer-column {
         width: 70%
     }
@@ -308,7 +339,7 @@ main {
         }
 }
 
-@media only screen and (max-width: 490px) {
+@media only screen and (max-width:490px) {
     main .cointainer-column {
         width: 65%
     }
@@ -323,9 +354,7 @@ footer {
     background-color: #000;
     color: #fff;
     height: auto;
-    padding: 12px 0;
-    /*position:fixed;*/
-    bottom:0;
+    padding: 12px 0
 }
 
     footer .cointainer-row {

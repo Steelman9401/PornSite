@@ -84,12 +84,12 @@ namespace PornSite.Repositories
             }
         }
 
-        public VideoDTO GetVideoById(int Id)
+        public async Task<VideoDTO> GetVideoById(int Id)
         {
 
             using (var db = new myDb())
             {
-                return db.Videos
+                return await db.Videos
                     .Where(x => x.Id == Id)
                     .Select(p => new VideoDTO
                     {
@@ -105,10 +105,10 @@ namespace PornSite.Repositories
                             Id = o.Id,
                             Name = o.Name
                         })
-                    }).FirstOrDefault();
+                    }).FirstOrDefaultAsync();
             }
         }
-        public IEnumerable<VideoDTO> GetSuggestedVideos(List<int> Categories)
+        public async Task<IEnumerable<VideoDTO>> GetSuggestedVideos(List<int> Categories)
         {
             if (Categories.Count >= 3)
             {
@@ -117,13 +117,13 @@ namespace PornSite.Repositories
                 int c = Categories[2];
                 using (var db = new myDb())
                 {
-                    return db.Videos.Where(x => x.Categories.Select(p => p.Id).Contains(a) || x.Categories.Select(p => p.Id).Contains(b) || x.Categories.Select(p=>p.Id).Contains(c)) //hnus
+                    return  await db.Videos.Where(x => x.Categories.Select(p => p.Id).Contains(a) || x.Categories.Select(p => p.Id).Contains(b) || x.Categories.Select(p=>p.Id).Contains(c)) //hnus
                           .Select(p => new VideoDTO
                           {
                               Id = p.Id,
                               Title = p.Title,
                               Img = p.Img
-                          }).Take(8).ToList();
+                          }).Take(8).ToListAsync();
                 }
             }
             else
@@ -140,7 +140,6 @@ namespace PornSite.Repositories
                     .Select(x => x.Url).Take(100).ToListAsync();
             }
         }
-
         public async Task AddPorn(VideoDTO vid, IEnumerable<string> Categories)
         {
             Video video = new Video();

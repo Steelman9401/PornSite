@@ -4,16 +4,13 @@
     <main>
         <div class="cointainer-column">
             <section class="safety-button">
-                <a href="http://cdn.akc.org/content/article-body-image/shiba_inu_cute_puppies.jpg"><button id="safety-button" title="záchranné tlačítko">pozor manželka</button></a>
+                <button id="safety-button" title="záchranné tlačítko">pozor manželka</button>
             </section>
 
-            <section class="safety-button">
-                <a href="http://cdn.akc.org/content/article-body-image/shiba_inu_cute_puppies.jpg"><button id="safety-button" title="záchranné tlačítko">pozor manželka</button></a>
-            </section>
             <section class="menu">
                 <ul>
-                    <li>nejnovější</li>
-                    <li>nejsledovanější</li>
+                    <dot:RouteLink RouteName="Default"><li><strong>nejnovější</strong></li></dot:RouteLink>
+                    <dot:RouteLink RouteName="views"><li>nejsledovanější</li></dot:RouteLink>
                 </ul>
             </section>
             <section>

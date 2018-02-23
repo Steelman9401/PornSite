@@ -3,7 +3,7 @@
 
 <dot:Content ContentPlaceHolderID="MainContent">
     <h2>{{value: Video.Title}}</h2>
-    <iframe ID="frame" src="{value: Video.Url}" frameborder="0" width="560" height="315" ></iframe>
+    <iframe ID="frame" src="{value: Video.Url}" frameborder="0" width="560" height="315"></iframe>
     <p>{{value: Video.Description}}</p>
     <dot:Repeater DataSource="{value: Video.Categories}">
         <ItemTemplate>
@@ -22,10 +22,20 @@
         <div ID="overlay-back"></div>
         <div class="lds-heart"><div></div></div>
     </dot:UpdateProgress>
-
-
+    <dot:Button ButtonTagName="button" Click="{command: GetComments()}">Comments</dot:Button>
+    <dot:Button ButtonTagName="button" Click="{command: AddComment()}">Add Comment</dot:Button>
+    <dot:TextBox placeholder="napis koment" Text="{value: ComText}" />
+    <dot:Repeater DataSource="{value: Comments}">
+        <ItemTemplate>
+            <p>{{value: Username}}</p>
+            <p>{{value: Text}}</p>
+        </ItemTemplate>
+    </dot:Repeater>
+    <section class="pagination">
+        <dot:DataPager DataSet="{value: Comments}" />
+    </section>
     <script>
-      
+
     </script>
 
 </dot:Content>

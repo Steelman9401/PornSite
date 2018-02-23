@@ -12,9 +12,10 @@ namespace PornSite.Data
         public string Url { get; set; }
         public string Description { get; set; }
         public int Views { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
         public string Img { get; set; }
         public string Preview { get; set; }
         public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

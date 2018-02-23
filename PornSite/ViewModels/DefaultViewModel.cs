@@ -14,22 +14,27 @@ namespace PornSite.ViewModels
 {
     public class DefaultViewModel : MasterPageViewModel
     {
-        public GridViewDataSet<VideoDTO> Videos { get; set; }       
+        public GridViewDataSet<VideoDTO> Videos { get; set; }
         public PornRepository rep { get; set; } = new PornRepository();
-        public int LoadSwitch { get; set; } = 1;
         public DefaultViewModel()
 		{
             
 		}
         public override Task PreRender()
         {
-            LoadSwitch = 1;
+            if (Videos.IsRefreshRequired || !Context.IsPostBack)
+            {
+                Videos.OnLoadingData = option =>rep.GetAllVideos(option);
+            }
             return base.PreRender();
         }
 
         public override Task Init()
-        {   
-            Videos = GridViewDataSet.Create(gridViewDataSetLoadDelegate: rep.GetAllVideos, pageSize: 20);
+        {
+            Videos = new GridViewDataSet<VideoDTO>()
+            {
+                PagingOptions = { PageSize = 20 }
+            };
             return base.Init();
         }
 
