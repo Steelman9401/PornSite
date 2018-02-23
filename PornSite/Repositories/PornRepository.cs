@@ -27,6 +27,24 @@ namespace PornSite.Repositories
                 return query.GetDataFromQueryable(gridViewDataSetLoadOptions);
             }
         }
+
+        public GridViewDataSetLoadedData<VideoDTO> GetSearchResult(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, string search)
+        {
+            using (var db = new myDb())
+            {
+                var query = db.Videos
+                    .Where(x => x.Title.ToLower().Contains(search) || x.Categories.Select(p => p.Name.ToLower()).Contains(search))
+                    .Select(a => new VideoDTO
+                    {
+                        Id = a.Id,
+                        Img = a.Img,
+                        Title = a.Title,
+                        Views = a.Views,
+                        Preview = a.Preview
+                    }).OrderByDescending(t => t.Id).AsQueryable();
+                return query.GetDataFromQueryable(gridViewDataSetLoadOptions);
+            }
+        }
         public GridViewDataSetLoadedData<VideoDTO> GetAllVideosAdmin(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions)
         {
             using (var db = new myDb())

@@ -11,29 +11,43 @@
         </ItemTemplate>
     </dot:Repeater>
     <h3>Shlednuti: {{value: Video.Views}}</h3>
-    <dot:Button ButtonTagName="button" Click="{command: GetSuggestions()}">Test loadingu</dot:Button>
-    <dot:Repeater DataSource="{value: SuggestedVideos}">
+    <dot:Button class="waves-effect waves-light btn" ButtonTagName="button" Click="{command: GetSuggestions()}">Podobna videa</dot:Button>
+    <dot:Button class="waves-effect waves-light btn" ButtonTagName="button" Click="{command: GetComments()}">Comments</dot:Button>
+    <dot:Repeater DataSource="{value: SuggestedVideos}" Visible="{value: Switch == 0 ? true:false}">
         <ItemTemplate>
             <h2>{{value: Title}}</h2>
             <img src="{value: Img}" />
         </ItemTemplate>
     </dot:Repeater>
-    <dot:UpdateProgress>
+    <br />
+    <br />
+    <%--<dot:UpdateProgress>
         <div ID="overlay-back"></div>
         <div class="lds-heart"><div></div></div>
-    </dot:UpdateProgress>
-    <dot:Button ButtonTagName="button" Click="{command: GetComments()}">Comments</dot:Button>
-    <dot:Button ButtonTagName="button" Click="{command: AddComment()}">Add Comment</dot:Button>
-    <dot:TextBox placeholder="napis koment" Text="{value: ComText}" />
+    </dot:UpdateProgress>--%>
+    <div Visible="{value: Switch == 1 ? true:false}>
+    <dot:Button class="waves-effect waves-light btn" ButtonTagName="button" Click="{command: AddComment()}">Add Comment</dot:Button>
+    <dot:TextBox style="width:200px;" placeholder="napis koment" Text="{value: ComText}" />
     <dot:Repeater DataSource="{value: Comments}">
         <ItemTemplate>
-            <p>{{value: Username}}</p>
-            <p>{{value: Text}}</p>
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">{{value: Username}}</span>
+                            <p>
+                                {{value: Text}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ItemTemplate>
     </dot:Repeater>
     <section class="pagination">
         <dot:DataPager DataSet="{value: Comments}" />
     </section>
+        </div>
     <script>
 
     </script>

@@ -17,14 +17,18 @@ namespace PornSite.ViewModels
         public int Id { get; set; }
         public IEnumerable<VideoDTO> SuggestedVideos { get; set; }
         public string ComText { get; set; }
-        public GridViewDataSet<CommentDTO> Comments { get; set; }
+        public int Switch { get; set; } = 0;
+        public GridViewDataSet<CommentDTO> Comments { get; set; } = new GridViewDataSet<CommentDTO>()
+        {
+                PagingOptions = { PageSize = 3 }
+        };
         PornRepository PornRep = new PornRepository();
         public CommentRepository ComRep { get; set; } = new CommentRepository();
         public async override Task PreRender()
         {
             if (!Context.IsPostBack)
             {
-                var taskUpdate = PornRep.UpdateViews(Id);
+                var taskUpdate = PornRep.UpdateViews(Id);  ////vyresit nacitani z databaze, ted se nactou zbytecne oba
                 Video = await PornRep.GetVideoById(Id);
             }
             else if (Comments.IsRefreshRequired)
@@ -37,22 +41,19 @@ namespace PornSite.ViewModels
         public override Task Init()
         {
             Id = Convert.ToInt32(Context.Parameters["Id"]);
-            Comments = new GridViewDataSet<CommentDTO>()
-            {
-                PagingOptions = { PageSize = 3 }
-            };
             return base.Init(); 
         }
-        public async void GetSuggestions()
+        public async Task GetSuggestions()
         {
             List<int> Categories = Video.Categories.Select(x => x.Id).ToList();
-            System.Threading.Thread.Sleep(3000);
+            Switch = 0;
             PornRepository rep = new PornRepository();
             SuggestedVideos = await rep.GetSuggestedVideos(Categories);
         }
 
         public void GetComments()
         {
+            Switch = 1;
             Comments.OnLoadingData = option => ComRep.GetCommentsByVideoId(option, Id);
         }
 
@@ -60,7 +61,7 @@ namespace PornSite.ViewModels
         {
             CommentDTO comment = new CommentDTO();
             comment.Text = ComText;
-            comment.User_Id = 1;
+            comment.User_Id = 8;
             comment.Video_Id = Id;
             comment.Username = "Tvuj koment";
             await ComRep.AddComment(comment);

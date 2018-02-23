@@ -38,7 +38,7 @@
       "defaultValues": {}
     },
     "search": {
-      "url": "search",
+      "url": "search/{text}",
       "virtualPath": "Views/search.dothtml",
       "defaultValues": {}
     },

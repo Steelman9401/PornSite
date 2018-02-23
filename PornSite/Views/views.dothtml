@@ -2,7 +2,6 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <main>
         <div class="cointainer-column">
             <section class="menu">
                 <ul>
@@ -32,7 +31,6 @@
             <br />
             <br />
         </div>
-    </main>
 
 </dot:Content>
 

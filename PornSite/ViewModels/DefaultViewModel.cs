@@ -16,15 +16,26 @@ namespace PornSite.ViewModels
     {
         public GridViewDataSet<VideoDTO> Videos { get; set; }
         public PornRepository rep { get; set; } = new PornRepository();
+        public int Switch { get; set; } = 0;
         public DefaultViewModel()
 		{
             
 		}
         public override Task PreRender()
         {
-            if (Videos.IsRefreshRequired || !Context.IsPostBack)
+            if (Switch == 0)
             {
-                Videos.OnLoadingData = option =>rep.GetAllVideos(option);
+                if (Videos.IsRefreshRequired || !Context.IsPostBack)
+                {
+                    Videos.OnLoadingData = option => rep.GetAllVideos(option);
+                }
+            }
+            else
+            {
+                if (Videos.IsRefreshRequired || !Context.IsPostBack)
+                {
+                    Videos.OnLoadingData = option => rep.GetAllVideosByViews(option);
+                }
             }
             return base.PreRender();
         }
@@ -36,6 +47,24 @@ namespace PornSite.ViewModels
                 PagingOptions = { PageSize = 20 }
             };
             return base.Init();
+        }
+
+        public void Test()
+        {
+            Switch = 1;
+            Videos = new GridViewDataSet<VideoDTO>()
+            {
+                PagingOptions = { PageSize = 20 }
+            };
+        }
+
+        public void Test2()
+        {
+            Switch = 0;
+            Videos = new GridViewDataSet<VideoDTO>()
+            {
+                PagingOptions = { PageSize = 20 }
+            };
         }
 
     }

@@ -33,16 +33,7 @@
         <div class="col-md-4"></div>
     </div>
     <script>
-
-        //$(window).on("load", function () {
-        //     $(document).on('keypress', function (e) {
-        //         location.href = "https://cms.hostelbookers.com/hbblog/wp-content/uploads/sites/3/2012/02/cat-happy-cat-e1329931204797.jpg";
-        //    });
-        //});
-        $(document).ready(function () {
-            alert('sup');
-        });
-
+      
     </script>
 
 </dot:Content>

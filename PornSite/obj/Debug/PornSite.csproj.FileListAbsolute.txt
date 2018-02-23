@@ -108,3 +108,5 @@ C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.csproj.GenerateResou
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.csproj.CoreCompileInputs.cache
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.dll
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.pdb
+C:\Users\domin\Desktop\PornSite\PornSite\bin\Oracle.ManagedDataAccess.dll
+C:\Users\domin\Desktop\PornSite\PornSite\bin\Oracle.ManagedDataAccess.EntityFramework.dll
