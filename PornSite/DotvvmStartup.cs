@@ -22,6 +22,7 @@ namespace PornSite
             config.RouteTable.Add("adminWeb", "admin/web", "Views/admin/admin.dothtml");
             config.RouteTable.Add("adminDatabase", "admin/database", "Views/admin/adminDatabase.dothtml");
             config.RouteTable.Add("search", "search/{text}", "Views/search.dothtml");
+            config.RouteTable.Add("register", "register", "Views/register.dothtml");
             config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));       
         }
 

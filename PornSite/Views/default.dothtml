@@ -2,6 +2,10 @@
 @masterPage Views/MasterPage.dotmaster
 <dot:Content ContentPlaceHolderID="MainContent">
     <div class="cointainer-column">
+        <video width="320" height="240" controls>
+            <source src="https://ev.rdtcdn.com/media/videos/201801/17/2815603/480p_600k_2815603.mp4?validfrom=1519576258&validto=1519583458&rate=58k&burst=1400k&hash=pRVJY9LM10DwyqAl0v6r4vJaHxM%3D" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
         <section class="menu">
             <ul>
                 <li><dot:Button class="btn btn-primary" ButtonTagName="button" Click="{command: Test2()}">Nejnovejsi</dot:Button></li>

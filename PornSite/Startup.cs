@@ -18,6 +18,15 @@ namespace PornSite
     {
         public void Configuration(IAppBuilder app)
         {
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/"),       // don't use ~/login here - the ~ in URLs is a DotVVM feature, OWIN security doesn't know it
+                Provider = new CookieAuthenticationProvider()
+                {
+                    OnApplyRedirect = e => DotvvmAuthenticationHelper.ApplyRedirectResponse(e.OwinContext, e.RedirectUri)
+                }
+            });
             var applicationPhysicalPath = HostingEnvironment.ApplicationPhysicalPath;
 
             ConfigureAuth(app);

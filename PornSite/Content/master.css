@@ -1,23 +1,14 @@
-﻿footer, header, main {
-    font-family: 'Open Sans',sans-serif
-}
-
-html {
+﻿html {
     box-sizing: border-box
 }
 
 * {
     box-sizing: inherit
 }
-body {
-    background-color: #212121 !important;
-    margin: 0;
-    padding: 0;
-}
 
- h1, h2, h3, h4, h5, h6, hr, html, li, ol, p, textarea, ul {
+html, body, p, ol, ul, li, textarea, iframe, hr, h1, h2, h3, h4, h5, h6 {
     margin: 0;
-    padding: 0;
+    padding: 0
 }
 
 ul {
@@ -28,11 +19,14 @@ button, input, select, textarea {
     margin: 0
 }
 
-embed audio, img, video {
+img, embed, iframe, audio, video {
     height: auto;
     max-width: 100%
 }
 
+iframe {
+    border: 0
+}
 
 header {
     position: fixed;
@@ -40,7 +34,8 @@ header {
     background-color: #000;
     color: #fff;
     height: auto;
-    top: 0
+    padding: 12px 0;
+    font-family: 'Open Sans', sans-serif
 }
 
     header .cointainer-row {
@@ -58,33 +53,34 @@ header {
             color: inherit
         }
 
-        header .cointainer-row .login:hover, main .cointainer-column .menu ul li:hover {
-            text-decoration: underline
-        }
-
-        header .cointainer-row a .logo {
-            font-size: 27px;
-            font-weight: 400
-        }
-
-            header .cointainer-row a .logo .si {
-                font-size: 24px;
-                font-weight: 400;
-                color: #66afec
+            header .cointainer-row a .logo {
+                font-size: 27px;
+                font-weight: 400
             }
+
+                header .cointainer-row a .logo .si {
+                    font-size: 24px;
+                    font-weight: 400;
+                    color: #66afec
+                }
 
         header .cointainer-row .menu-icon {
             display: none;
-            background: url(../img/menu-icon-w.png) center no-repeat;
+            align-self: center;
+            background: url(../img/menu-icon-w.png);
             background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
             width: 27px;
             height: 27px;
             cursor: pointer
         }
 
             header .cointainer-row .menu-icon:hover {
-                background: url(../img/menu-icon-b.png) center no-repeat;
-                background-size: 100%
+                background: url(../img/menu-icon-b.png);
+                background-size: 100%;
+                background-repeat: no-repeat;
+                background-position: center
             }
 
         header .cointainer-row form {
@@ -99,7 +95,7 @@ header {
                 padding: 5px;
                 font-size: 14px;
                 width: 400px;
-                outline: 0;
+                outline: none;
                 border-radius: 1px;
                 font-weight: 300
             }
@@ -112,16 +108,12 @@ header {
                 font-size: 14px;
                 font-weight: 300;
                 cursor: pointer;
-                outline: 0
+                outline: none
             }
 
                 header .cointainer-row form .search-button:hover {
                     background-color: #2980b9
                 }
-
-        header .cointainer-row .categories:hover, header .cointainer-row ul li:hover {
-            background-color: #484848
-        }
 
         header .cointainer-row ul {
             display: none;
@@ -136,20 +128,28 @@ header {
                 text-align: center
             }
 
+                header .cointainer-row ul li:hover {
+                    background-color: #484848
+                }
+
                 header .cointainer-row ul li:last-child {
                     border-top: 1px solid #484848
                 }
 
         header .cointainer-row .categories {
             align-self: center;
-            border: 1px solid #fff;
+            border: solid 1px #fff;
             padding: 3px 13px;
             cursor: pointer;
             border-radius: 5px;
             font-size: 16px;
             font-weight: 400;
-            outline: 0
+            outline: none
         }
+
+            header .cointainer-row .categories:hover {
+                background-color: #484848
+            }
 
         header .cointainer-row .login {
             align-self: center;
@@ -158,19 +158,23 @@ header {
             cursor: pointer
         }
 
-@media only screen and (max-width:960px) {
+            header .cointainer-row .login:hover {
+                text-decoration: underline
+            }
+
+@media only screen and (max-width: 960px) {
     header .cointainer-row form .search-text {
         width: 300px
     }
 }
 
-@media only screen and (max-width:810px) {
+@media only screen and (max-width: 810px) {
     header .cointainer-row form .search-text {
         width: 230px
     }
 }
 
-@media only screen and (max-width:760px) {
+@media only screen and (max-width: 760px) {
     header .cointainer-row {
         flex-direction: row;
         justify-content: space-between;
@@ -198,17 +202,25 @@ header {
                 padding: 8px 5px
             }
 
-        header .cointainer-row .categories, header .cointainer-row .login {
+        header .cointainer-row .categories {
+            display: none
+        }
+
+        header .cointainer-row .login {
             display: none
         }
 }
 
 main {
     width: 100%;
-    background-color: #212121 !important;
+    background-color: #212121;
     color: #fff;
     height: auto;
-    padding: 73px 0 12px
+    padding-top: 73px;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-bottom: 12px;
+    font-family: 'Open Sans', sans-serif
 }
 
     main .cointainer-column {
@@ -227,7 +239,7 @@ main {
             justify-content: center;
             height: auto;
             width: 100%;
-            padding: 10px 0
+            padding: 10px 0px
         }
 
             main .cointainer-column .safety-button button {
@@ -239,7 +251,7 @@ main {
                 color: #fff;
                 background-color: #c0392b;
                 cursor: pointer;
-                outline: 0
+                outline: none
             }
 
                 main .cointainer-column .safety-button button:hover {
@@ -252,7 +264,7 @@ main {
             justify-content: flex-start;
             height: auto;
             width: 100%;
-            padding: 5px 0
+            padding: 5px 0px
         }
 
             main .cointainer-column .menu ul {
@@ -267,6 +279,10 @@ main {
                     cursor: pointer
                 }
 
+                    main .cointainer-column .menu ul li:hover {
+                        text-decoration: underline
+                    }
+
         main .cointainer-column .videos {
             display: flex;
             flex-direction: row;
@@ -274,7 +290,7 @@ main {
             flex-wrap: wrap;
             height: auto;
             width: 100%;
-            padding: 20px 0
+            padding: 20px 0px
         }
 
             main .cointainer-column .videos .video {
@@ -300,7 +316,7 @@ main {
             justify-content: center;
             height: auto;
             width: 100%;
-            padding: 10px 0
+            padding: 10px 0px
         }
 
             main .cointainer-column .pagination ul {
@@ -320,7 +336,7 @@ main {
                     border-radius: 8px
                 }
 
-                    main .cointainer-column .pagination ul .active, main .cointainer-column .pagination ul li:hover {
+                    main .cointainer-column .pagination ul li:hover {
                         background-color: #005489;
                         color: #fff
                     }
@@ -329,13 +345,18 @@ main {
                         text-decoration: none
                     }
 
-@media only screen and (max-width:960px) {
+                main .cointainer-column .pagination ul .active {
+                    background-color: #005489;
+                    color: #fff
+                }
+
+@media only screen and (max-width: 960px) {
     main .cointainer-column .videos .video {
         width: 29%
     }
 }
 
-@media only screen and (max-width:760px) {
+@media only screen and (max-width: 760px) {
     main .cointainer-column {
         width: 70%
     }
@@ -345,7 +366,7 @@ main {
         }
 }
 
-@media only screen and (max-width:490px) {
+@media only screen and (max-width: 490px) {
     main .cointainer-column {
         width: 65%
     }
@@ -361,8 +382,7 @@ footer {
     color: #fff;
     height: auto;
     padding: 12px 0;
-    position:fixed;
-    bottom:0px;
+    font-family: 'Open Sans', sans-serif
 }
 
     footer .cointainer-row {
@@ -378,3 +398,109 @@ footer {
         footer .cointainer-row span {
             font-size: 13px
         }
+
+#modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background: rgba(0,0,0,0.6);
+    overflow: auto;
+    color: #fff;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 69
+}
+
+    #modal .cointainer-modal {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+        background: #000;
+        padding: 10px 15px;
+        max-width: 95%;
+        min-width: 600px;
+        min-height: 300px;
+        border: solid 1px #fff;
+        border-radius: 5px
+    }
+
+        #modal .cointainer-modal .modal-header {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end
+        }
+
+            #modal .cointainer-modal .modal-header #close {
+                background: url(../img/close-g.png);
+                background-size: 100%;
+                background-repeat: no-repeat;
+                background-position: center;
+                width: 27px;
+                height: 27px;
+                cursor: pointer
+            }
+
+                #modal .cointainer-modal .modal-header #close:hover {
+                    background: url(../img/close-w.png);
+                    background-size: 100%;
+                    background-repeat: no-repeat;
+                    background-position: center
+                }
+
+        #modal .cointainer-modal .modal-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 14px;
+            width: 100%;
+            padding-top: 39px
+        }
+
+            #modal .cointainer-modal .modal-body span {
+                font-size: 15px;
+                color: #c0392b
+            }
+
+            #modal .cointainer-modal .modal-body form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 15px
+            }
+
+                #modal .cointainer-modal .modal-body form .modal-button {
+                    border: none;
+                    color: #fff;
+                    background-color: #005489;
+                    padding: 5px 20px;
+                    font-size: 14px;
+                    font-weight: 300;
+                    cursor: pointer;
+                    outline: none;
+                    margin-top: 15px
+                }
+
+                    #modal .cointainer-modal .modal-body form .modal-button:hover {
+                        background-color: #2980b9
+                    }
+
+                #modal .cointainer-modal .modal-body form .modal-textbox {
+                    border: none;
+                    color: #fff;
+                    background-color: #484848;
+                    padding: 5px;
+                    margin: 5px 0;
+                    font-size: 14px;
+                    width: 250px;
+                    outline: none;
+                    border-radius: 1px;
+                    font-weight: 300
+                }
