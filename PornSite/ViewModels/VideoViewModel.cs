@@ -61,7 +61,7 @@ namespace PornSite.ViewModels
         {
             CommentDTO comment = new CommentDTO();
             comment.Text = ComText;
-            comment.User_Id = 8;
+            comment.User_Id = 1;
             comment.Video_Id = Id;
             comment.Username = "Tvuj koment";
             await ComRep.AddComment(comment);

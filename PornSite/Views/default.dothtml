@@ -4,8 +4,8 @@
     <div class="cointainer-column">
         <section class="menu">
             <ul>
-                <li><dot:Button class="waves-effect waves-light btn" ButtonTagName="button" Click="{command: Test2()}">Nejnovejsi</dot:Button></li>
-                <li><dot:Button class="waves-effect waves-light btn" ButtonTagName="button" Click="{command: Test()}">Nejsledovanejsi</dot:Button></li>
+                <li><dot:Button class="btn btn-primary" ButtonTagName="button" Click="{command: Test2()}">Nejnovejsi</dot:Button></li>
+                <li><dot:Button class="btn btn-primary" ButtonTagName="button" Click="{command: Test()}">Nejsledovanejsi</dot:Button></li>
             </ul>
         </section>
         <section>

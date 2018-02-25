@@ -1,40 +1,34 @@
 ﻿@viewModel PornSite.ViewModels.DefaultViewModel, PornSite
 @masterPage Views/MasterPage.dotmaster
 <dot:Content ContentPlaceHolderID="MainContent">
-    <main>
-        <div class="cointainer-column">
-            <section class="safety-button">
-                <button id="safety-button" title="záchranné tlačítko">pozor manželka</button>
-            </section>
-
-            <section class="menu">
-                <ul>
-                    <dot:RouteLink RouteName="Default"><li><strong>nejnovější</strong></li></dot:RouteLink>
-                    <dot:RouteLink RouteName="views"><li>nejsledovanější</li></dot:RouteLink>
-                </ul>
-            </section>
-            <section>
-                <dot:Repeater class="videos" DataSource="{value: Videos}">
-                    <ItemTemplate>
-                        <div class="video">
-                            <dot:RouteLink RouteName="video" Param-Id="{value: Id}>
-                                <video style="height:150px !important; width:250px !important;" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
-                                    <source src="{value: Preview}" type="video/webm">
-                                    Your browser does not support the video tag.
-                                </video>
-                                <span>{{value: Title}}</span>
-                            </dot:RouteLink>
-                        </div>
-                    </ItemTemplate>
-                </dot:Repeater>
-            </section>
-            <section class="pagination">
-                <dot:DataPager DataSet="{value: Videos}" />
-            </section>
-            <br />
-            <br />
-            <br />
-        </div>
-    </main>
+    <div class="cointainer-column">
+        <section class="menu">
+            <ul>
+                <li><dot:Button class="btn btn-primary" ButtonTagName="button" Click="{command: Test2()}">Nejnovejsi</dot:Button></li>
+                <li><dot:Button class="btn btn-primary" ButtonTagName="button" Click="{command: Test()}">Nejsledovanejsi</dot:Button></li>
+            </ul>
+        </section>
+        <section>
+            <dot:Repeater class="videos" DataSource="{value: Videos}">
+                <ItemTemplate>
+                    <div class="video">
+                        <dot:RouteLink RouteName="video" Param-Id="{value: Id}>
+                            <video style="height:150px !important; width:250px !important;" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
+                                <source src="{value: Preview}" type="video/webm">
+                                Your browser does not support the video taga.
+                            </video>
+                            <span>{{value: Title}}</span>
+                        </dot:RouteLink>
+                    </div>
+                </ItemTemplate>
+            </dot:Repeater>
+        </section>
+        <section class="pagination">
+            <dot:DataPager DataSet="{value: Videos}" />
+        </section>
+        <br />
+        <br />
+        <br />
+    </div>
 
 </dot:Content>

@@ -4,7 +4,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>PornSite</title>
+    <title>Vymasti.si</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000" />
     <dot:RequiredResource Name="bootstrap" />
@@ -13,6 +13,7 @@
     <script src="../Content/scripts.js"></script>
     <link href="../Content/master.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 </head>
 <body>
@@ -21,8 +22,8 @@
             <dot:RouteLink RouteName="Default"><h1 class="logo">Vymasti.<span class="si">si</span></h1></dot:RouteLink>
             <div class="menu-icon" id="menu-icon"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
             <form id="form">
-                <input class="search-text" type="text" name="search" placeholder="milf, pov, teen...">
-                <input id="search" value="hledat" class="search-button" type="submit">
+                <dot:TextBox Text="{value: Search}" class="search-text" name="search" placeholder="milf, pov, teen..." />
+                <dot:Button Click="{command: DoSearch()}" ButtonTagName="button" ID="search" Text="hledat" class="search-button" IsSubmitButton="true" />
             </form>
             <ul id="menu">
                 <li>KATEGORIE</li>
@@ -32,17 +33,17 @@
             <a class="login">přihlásit se</a>
         </div>
     </header>
-
+    <main>
     <dot:SpaContentPlaceHolder ID="MainContent" style="margin-top:50px;"/>
+    </main>
     <footer>
         <div class="cointainer-row">
-            <span>2018 &copy; vymasti.si</span>
+            <dot:RouteLink RouteName="adminWeb">Administrace</dot:RouteLink>
         </div>
     </footer>
 
     <dot:UpdateProgress>
         <div ID="overlay-back"></div>
-        <div class="lds-heart"><div></div></div>
     </dot:UpdateProgress>
   <script>
       window.onload = function () {

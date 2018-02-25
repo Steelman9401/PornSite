@@ -9,15 +9,15 @@
             </ItemTemplate>
         </dot:Repeater>
     </datalist>
-        <dot:ComboBox DataSource="{value: WebCategories}"
+        <dot:ComboBox style="color:white; background-color:black;" DataSource="{value: WebCategories}"
                       SelectedValue="{value: SelectedWebCategory}"
                       ValueMember="Url"
                       DisplayMember="Name"
                       SelectionChanged="{command: ChangeCategoryList()}" />
         <div style="text-align:center">
             <ul class="webVideosList">
-                <dot:Repeater class="table-bordered" DataSource="{value: Videos}">
-                    <li onclick="pressButton(this)" class="webVideosListLi">
+                <dot:Repeater class="table" DataSource="{value: Videos}" style="color:white;">
+                    <li onclick="pressButton(this)" class="webVideosListLi" style="background-color: black; border:none;">
                         {{value: Title}}
                         <dot:Button Click="{command: _parent.OpenModal(_this)}" style="display:none;" ButtonTagName="button"></dot:Button>
                     </li>
@@ -26,7 +26,7 @@
         </div>
 
         <div DataContext="{value: Video}" Visible="{value: _parent.ModalSwitch}" style="position:fixed;width: 100%;   /*modal dialog, ktery se zobrazi po stisknuti edit*/
-    height: 100%; /* Full height */ z-index: 1; /* Sit on top */
+    height: 100%; /* Full height */ z-index: 1; color:black; /* Sit on top */
     left: 0; overflow: auto;
     top: 0;  background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */ ">

@@ -106,3 +106,4 @@ C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.csproj.GenerateRes
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.csproj.CoreCompileInputs.cache
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.dll
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.pdb
+C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.csprojResolveAssemblyReference.cache

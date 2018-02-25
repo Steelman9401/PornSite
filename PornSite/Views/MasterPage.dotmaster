@@ -4,7 +4,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>PornSite</title>
+    <title>Vymasti.si</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000" />
     <dot:RequiredResource Name="bootstrap" />
@@ -13,7 +13,6 @@
     <script src="../Content/scripts.js"></script>
     <link href="../Content/master.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 </head>
@@ -39,14 +38,13 @@
     </main>
     <footer>
         <div class="cointainer-row">
-            <span>2018 &copy; vymasti.si</span>
+            <dot:RouteLink RouteName="adminWeb">Administrace</dot:RouteLink>
         </div>
     </footer>
 
-    <%--<dot:UpdateProgress>
+    <dot:UpdateProgress>
         <div ID="overlay-back"></div>
-        <div class="lds-heart"><div></div></div>
-    </dot:UpdateProgress>--%>
+    </dot:UpdateProgress>
   <script>
       window.onload = function () {
                        

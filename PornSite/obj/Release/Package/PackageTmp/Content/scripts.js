@@ -1,4 +1,5 @@
 ﻿function playVideo(e) {
+    e.load();
     e.play();
 }
 function stopVideo(e) {
