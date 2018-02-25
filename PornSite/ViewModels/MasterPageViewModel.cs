@@ -34,7 +34,7 @@ namespace PornSite.ViewModels
             LoggedUser = await rep.UserLogin(Username, Password);
             if(LoggedUser!=null)
             {
-               
+                ShowLogin = false;
             }
             int a = 5;
         }

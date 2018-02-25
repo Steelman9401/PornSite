@@ -60,19 +60,17 @@
   },
   "resources": {
     "scripts": {
-      "dotvvm.internal": {
+      "knockout": {
         "Location": {
           "$type": "DotVVM.Framework.ResourceManagement.EmbeddedResourceLocation, DotVVM.Framework",
           "Assembly": "DotVVM.Framework, Version=1.1.7.0, Culture=neutral, PublicKeyToken=23f3607db32275da",
-          "Name": "DotVVM.Framework.Resources.Scripts.DotVVM.js",
+          "Name": "DotVVM.Framework.Resources.Scripts.knockout-latest.js",
           "DebugFilePath": null
         },
         "LocationFallback": null,
         "MimeType": "text/javascript",
         "VerifyResourceIntegrity": false,
-        "Dependencies": [
-          "knockout"
-        ],
+        "Dependencies": [],
         "RenderPosition": 1
       },
       "bootstrap": {
@@ -89,33 +87,30 @@
         ],
         "RenderPosition": 1
       },
-      "dotvvm.debug": {
+      "jquery": {
+        "Location": {
+          "$type": "DotVVM.Framework.ResourceManagement.UrlResourceLocation, DotVVM.Framework",
+          "Url": "~/Scripts/jquery-1.9.1.min.js"
+        },
+        "LocationFallback": null,
+        "MimeType": "text/javascript",
+        "VerifyResourceIntegrity": false,
+        "Dependencies": [],
+        "RenderPosition": 1
+      },
+      "dotvvm.internal": {
         "Location": {
           "$type": "DotVVM.Framework.ResourceManagement.EmbeddedResourceLocation, DotVVM.Framework",
           "Assembly": "DotVVM.Framework, Version=1.1.7.0, Culture=neutral, PublicKeyToken=23f3607db32275da",
-          "Name": "DotVVM.Framework.Resources.Scripts.DotVVM.Debug.js",
+          "Name": "DotVVM.Framework.Resources.Scripts.DotVVM.js",
           "DebugFilePath": null
         },
         "LocationFallback": null,
         "MimeType": "text/javascript",
         "VerifyResourceIntegrity": false,
         "Dependencies": [
-          "dotvvm",
-          "jquery"
+          "knockout"
         ],
-        "RenderPosition": 1
-      },
-      "knockout": {
-        "Location": {
-          "$type": "DotVVM.Framework.ResourceManagement.EmbeddedResourceLocation, DotVVM.Framework",
-          "Assembly": "DotVVM.Framework, Version=1.1.7.0, Culture=neutral, PublicKeyToken=23f3607db32275da",
-          "Name": "DotVVM.Framework.Resources.Scripts.knockout-latest.js",
-          "DebugFilePath": null
-        },
-        "LocationFallback": null,
-        "MimeType": "text/javascript",
-        "VerifyResourceIntegrity": false,
-        "Dependencies": [],
         "RenderPosition": 1
       },
       "globalize": {
@@ -131,23 +126,19 @@
         "Dependencies": [],
         "RenderPosition": 1
       },
-      "jquery": {
+      "dotvvm.debug": {
         "Location": {
-          "$type": "DotVVM.Framework.ResourceManagement.UrlResourceLocation, DotVVM.Framework",
-          "Url": "~/Scripts/jquery-1.9.1.min.js"
+          "$type": "DotVVM.Framework.ResourceManagement.EmbeddedResourceLocation, DotVVM.Framework",
+          "Assembly": "DotVVM.Framework, Version=1.1.7.0, Culture=neutral, PublicKeyToken=23f3607db32275da",
+          "Name": "DotVVM.Framework.Resources.Scripts.DotVVM.Debug.js",
+          "DebugFilePath": null
         },
         "LocationFallback": null,
         "MimeType": "text/javascript",
         "VerifyResourceIntegrity": false,
-        "Dependencies": [],
-        "RenderPosition": 1
-      }
-    },
-    "DotVVM.Framework.ResourceManagement.InlineScriptResource": {
-      "dotvvm": {
-        "Code": "if (window.dotvvm) { throw 'DotVVM is already loaded!'; } window.dotvvm = new DotVVM();",
         "Dependencies": [
-          "dotvvm.internal"
+          "dotvvm",
+          "jquery"
         ],
         "RenderPosition": 1
       }
@@ -187,6 +178,15 @@
         "VerifyResourceIntegrity": false,
         "Dependencies": [],
         "RenderPosition": 0
+      }
+    },
+    "DotVVM.Framework.ResourceManagement.InlineScriptResource": {
+      "dotvvm": {
+        "Code": "if (window.dotvvm) { throw 'DotVVM is already loaded!'; } window.dotvvm = new DotVVM();",
+        "Dependencies": [
+          "dotvvm.internal"
+        ],
+        "RenderPosition": 1
       }
     }
   },
