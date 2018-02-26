@@ -9,9 +9,9 @@
     <meta name="theme-color" content="#000" />
     <dot:RequiredResource Name="bootstrap" />
     <dot:RequiredResource Name="jquery" />
-    <link href="../Content/style.css" rel="stylesheet" />
-    <script src="../Content/scripts.js"></script>
-    <link href="../Content/master.css" rel="stylesheet" />
+    <link href="PornSite/Content/style.css" rel="stylesheet" />
+    <script src="PornSite/Content/scripts.js"></script>
+    <link href="PornSite/Content/master.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
 
 </head>
@@ -41,32 +41,38 @@
         </div>
     </footer>
 
-    <dot:UpdateProgress>
+    <%--<dot:UpdateProgress>
         <div ID="overlay-back"></div>
-    </dot:UpdateProgress>
+    </dot:UpdateProgress>--%>
     <script>
         window.onload = function () {
 
             $("#menu-icon").click(function () {
+                alert('dsda');
                 $("#form").slideToggle(200);
                 $("#menu").slideToggle(200);
             });
+            $("#show").click(function () {
+                document.getElementById("lol").click();
+                $('#modal').fadeIn(350);
+            });
+
         }
     </script>
-    <div Visible="{value: ShowLogin ? true:false}" id="modal">
+    <%--<div style="display:none;" id="modal">
         <div class="cointainer-modal">
             <div class="modal-header">
                 <div id="close"></div>
             </div>
             <div class="modal-body">
-                <span>Máš to špatně, kelte!</span>
+                <span style="color:white; font-size:15px; font-weight:bold;">Nazev videa</span>
                 <form>
                     <dot:TextBox Text="{value: Username}" class="modal-textbox" placeholder="username" />
                     <dot:TextBox Text="{value: Password}" Type="Password" class="modal-textbox" placeholder="heslo" />
-                    <dot:Button class="modal-button" Click="{command: SignIn()}">prihlasit se</dot:Button>
+                    <dot:Button class="modal-button" Click="{command: SignIn()}">prihlasit se</dot:Button>                  
                 </form>
             </div>
         </div>
-    </div>
+    </div>--%>
 </body>
 </html>

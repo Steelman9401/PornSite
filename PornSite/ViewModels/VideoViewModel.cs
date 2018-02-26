@@ -43,30 +43,6 @@ namespace PornSite.ViewModels
             Id = Convert.ToInt32(Context.Parameters["Id"]);
             return base.Init(); 
         }
-        public async Task GetSuggestions()
-        {
-            List<int> Categories = Video.Categories.Select(x => x.Id).ToList();
-            Switch = 0;
-            PornRepository rep = new PornRepository();
-            SuggestedVideos = await rep.GetSuggestedVideos(Categories);
-        }
-
-        public void GetComments()
-        {
-            Switch = 1;
-            Comments.OnLoadingData = option => ComRep.GetCommentsByVideoId(option, Id);
-        }
-
-        public async Task AddComment()
-        {
-            CommentDTO comment = new CommentDTO();
-            comment.Text = ComText;
-            comment.User_Id = 1;
-            comment.Video_Id = Id;
-            comment.Username = "Tvuj koment";
-            await ComRep.AddComment(comment);
-            Comments.Items.Insert(0, comment);
-        }
     }
 }
 

@@ -9,178 +9,184 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/DotVVM.Core.dll">
-      <publishTime>10/27/2017 17:35:38</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="bin/DotVVM.Framework.dll">
-      <publishTime>10/27/2017 17:35:54</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="bin/DotVVM.Framework.Hosting.Owin.dll">
-      <publishTime>10/27/2017 17:36:10</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>10/23/2017 13:15:18</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>10/23/2017 13:15:20</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="bin/HtmlAgilityPack.dll">
-      <publishTime>02/12/2018 19:54:38</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="bin/HtmlAgilityPack.pdb">
-      <publishTime>02/12/2018 19:54:38</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
-      <publishTime>02/27/2014 14:06:32</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>06/18/2015 20:18:40</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeAnalysis.dll">
-      <publishTime>06/18/2015 20:18:34</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Microsoft.Extensions.DependencyInjection.Abstractions.dll">
-      <publishTime>06/22/2016 09:14:56</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Microsoft.Extensions.DependencyInjection.dll">
-      <publishTime>06/22/2016 09:14:56</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Microsoft.Extensions.Options.dll">
-      <publishTime>06/22/2016 09:14:56</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Microsoft.Extensions.Primitives.dll">
-      <publishTime>06/22/2016 09:14:56</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.dll">
-      <publishTime>04/05/2017 11:53:36</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.FileSystems.dll">
-      <publishTime>02/13/2015 13:16:32</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
-      <publishTime>02/13/2015 13:16:34</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
-      <publishTime>04/05/2017 11:53:42</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.dll">
-      <publishTime>04/05/2017 11:53:42</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.StaticFiles.dll">
-      <publishTime>02/13/2015 13:16:44</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>06/13/2016 23:06:14</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/Owin.dll">
-      <publishTime>11/13/2012 12:19:34</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/PornSite.dll">
-      <publishTime>02/23/2018 03:53:47</publishTime>
+      <publishTime>02/26/2018 13:38:28</publishTime>
     </File>
     <File Include="bin/PornSite.pdb">
-      <publishTime>02/23/2018 03:53:47</publishTime>
+      <publishTime>02/26/2018 13:38:28</publishTime>
     </File>
     <File Include="bin/System.Collections.Immutable.dll">
-      <publishTime>05/07/2015 18:07:08</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="bin/System.Reflection.Metadata.dll">
-      <publishTime>05/08/2015 13:51:40</publishTime>
+      <publishTime>02/26/2018 00:03:32</publishTime>
     </File>
     <File Include="Content/black-background-1468370534d5s.jpg">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css.map">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.min.css">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.min.css.map">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css.map">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Content/loading.gif">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Content/master.css">
-      <publishTime>02/23/2018 03:53:46</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Content/oie_1633429tJ6oFeR2.gif">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Content/scripts.js">
-      <publishTime>02/23/2018 02:34:37</publishTime>
+      <publishTime>02/26/2018 13:36:20</publishTime>
     </File>
     <File Include="Content/style.css">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 01:07:55</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff2">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="GettingStarted.html">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Scripts/jquery-1.9.1.js">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Scripts/jquery-1.9.1.min.js">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Scripts/jquery-1.9.1.min.map">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Views/admin/admin.dothtml">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Views/admin/adminDatabase.dothtml">
-      <publishTime>02/22/2018 20:46:26</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Views/default.dothtml">
-      <publishTime>02/23/2018 03:20:04</publishTime>
+      <publishTime>02/26/2018 13:34:31</publishTime>
     </File>
     <File Include="Views/MasterPage.dotmaster">
-      <publishTime>02/23/2018 03:53:46</publishTime>
+      <publishTime>02/26/2018 13:38:28</publishTime>
+    </File>
+    <File Include="Views/register.dothtml">
+      <publishTime>02/26/2018 00:03:31</publishTime>
+    </File>
+    <File Include="Views/search.dothtml">
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Views/video.dothtml">
-      <publishTime>02/23/2018 03:09:36</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Views/views.dothtml">
-      <publishTime>02/23/2018 03:20:04</publishTime>
+      <publishTime>02/26/2018 00:03:31</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/23/2018 03:53:47</publishTime>
+      <publishTime>02/26/2018 13:38:28</publishTime>
     </File>
   </ItemGroup>
 </Project>

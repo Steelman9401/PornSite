@@ -87,7 +87,7 @@
     transition: background .75s ease-in;
     -moz-transition: background .75s ease-in;
     -webkit-transition: background .75s ease-in;
-    opacity: 0.6;
+    opacity: 0;
     filter: alpha(opacity=60);
     z-index: 5;
 }

@@ -36,7 +36,6 @@ namespace PornSite.ViewModels
             {
                 ShowLogin = false;
             }
-            int a = 5;
         }
     }
 }

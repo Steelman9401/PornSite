@@ -1,18 +1,15 @@
 ﻿function playVideo(e) {
-    e.load();
     e.play();
 }
 function stopVideo(e) {
-    e.load();
     e.pause();
 }
 function pressButton(e) {
     e.children[0].click();
+    $("#modal").fadeIn(500);
 }
 
-$(document).ready(function () {
-    $("#menu-icon").click(function () {
-        $("#form").slideToggle(200);
-        $("#menu").slideToggle(200);
-    });
-});
+function hideVideo(e) {
+    e.nextElementSibling.click();
+    $("#modal").fadeOut(500);
+}

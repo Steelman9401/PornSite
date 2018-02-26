@@ -1,24 +1,23 @@
 ﻿@viewModel PornSite.ViewModels.DefaultViewModel, PornSite
 @masterPage Views/MasterPage.dotmaster
 <dot:Content ContentPlaceHolderID="MainContent">
-    <div class="cointainer-column">
+    <div class="cointainer-column">     
         <section class="menu">
             <ul>
-                <li><dot:Button class="btn btn-primary" ButtonTagName="button" Click="{command: Test2()}">Nejnovejsi</dot:Button></li>
-                <li><dot:Button class="btn btn-primary" ButtonTagName="button" Click="{command: Test()}">Nejsledovanejsi</dot:Button></li>
+                <li><dot:Button ID="btnTesting" class="btn btn-primary" ButtonTagName="button" Click="{command: LoadLatest()}">Nejnovejsi</dot:Button></li>
+                <li><dot:Button class="btn btn-primary" ButtonTagName="button" Click="{command: LoadMostViewed()}">Nejsledovanejsi</dot:Button></li>
             </ul>
         </section>
         <section>
             <dot:Repeater class="videos" DataSource="{value: Videos}">
                 <ItemTemplate>
-                    <div class="video">
-                        <dot:RouteLink RouteName="video" Param-Id="{value: Id}>
+                    <div class="video"  style="cursor: pointer" onclick="pressButton(this)">
+                        <dot:Button Click="{command: _root.LoadVideo(_this)}" ButtonTagName="button" style="display:none;" />
                             <video style="height:150px !important; width:250px !important;" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
                                 <source src="{value: Preview}" type="video/webm">
                                 Your browser does not support the video taga.
                             </video>
                             <span>{{value: Title}}</span>
-                        </dot:RouteLink>
                     </div>
                 </ItemTemplate>
             </dot:Repeater>
@@ -26,9 +25,23 @@
         <section class="pagination">
             <dot:DataPager DataSet="{value: Videos}" />
         </section>
-        <br />
-        <br />
-        <br />
     </div>
-
+    <div <%--Visible="{value: _root.ShowVideo ? true:false}"--%> style="display:none;" id="modal">
+        <div class="cointainer-modal">
+            <div class="modal-header">
+                <dot:Button style="" ButtonTagName="button" onclick="hideVideo(this)" Text="Close" />
+                <dot:Button style="display:none;" ButtonTagName="button" Text="Close" Click="{command: HideVideo()}" />
+                <p>{{value: Video.Title}}</p>
+            </div>
+            <div class="modal-body">
+                <iframe ID="frame" src="{value: Video.Url}" frameborder="0" width="560" height="500"></iframe>
+                <p>{{value: Video.Description}}</p>
+                <dot:Repeater DataSource="{value: Video.Categories}">
+                    <ItemTemplate>
+                        <span>{{value: Name}}, </span>
+                    </ItemTemplate>
+                </dot:Repeater>
+            </div>
+        </div>
+    </div>
 </dot:Content>
