@@ -1,23 +1,29 @@
 ﻿@viewModel PornSite.ViewModels.DefaultViewModel, PornSite
 @masterPage Views/MasterPage.dotmaster
 <dot:Content ContentPlaceHolderID="MainContent">
-    <div class="cointainer-column">     
+    <div class="cointainer-column">
+
+        <video width="320" height="240" controls>
+            <source src="PornSite/PORN/videoplayback.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
         <section class="menu">
             <ul>
                 <li><dot:Button ID="btnTesting" class="btn btn-primary" ButtonTagName="button" Click="{command: LoadLatest()}">Nejnovejsi</dot:Button></li>
                 <li><dot:Button class="btn btn-primary" ButtonTagName="button" Click="{command: LoadMostViewed()}">Nejsledovanejsi</dot:Button></li>
             </ul>
         </section>
+        <h3 Visible="{value: SearchParametr=='' ? false:true}" style="float:left">Vysledky hledani pro: <strong>{{value: SearchParametr}}</strong></h3>
         <section>
             <dot:Repeater class="videos" DataSource="{value: Videos}">
                 <ItemTemplate>
-                    <div class="video"  style="cursor: pointer" onclick="pressButton(this)">
+                    <div class="video" style="cursor: pointer" onclick="pressButton(this)">
                         <dot:Button Click="{command: _root.LoadVideo(_this)}" ButtonTagName="button" style="display:none;" />
-                            <video style="height:150px !important; width:250px !important;" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
-                                <source src="{value: Preview}" type="video/webm">
-                                Your browser does not support the video taga.
-                            </video>
-                            <span>{{value: Title}}</span>
+                        <video style="height:150px !important; width:250px !important;" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
+                            <source src="{value: Preview}" type="video/webm">
+                            Your browser does not support the video taga.
+                        </video>
+                        <span>{{value: Title}}</span>
                     </div>
                 </ItemTemplate>
             </dot:Repeater>
@@ -26,22 +32,63 @@
             <dot:DataPager DataSet="{value: Videos}" />
         </section>
     </div>
-    <div <%--Visible="{value: _root.ShowVideo ? true:false}"--%> style="display:none;" id="modal">
+    <div id="modal-video" style="display:none;">
         <div class="cointainer-modal">
             <div class="modal-header">
-                <dot:Button style="" ButtonTagName="button" onclick="hideVideo(this)" Text="Close" />
-                <dot:Button style="display:none;" ButtonTagName="button" Text="Close" Click="{command: HideVideo()}" />
-                <p>{{value: Video.Title}}</p>
+                <div onclick="hideVideo(this)" id="close"><button>Zavrit</button></div>
+                <dot:Button ButtonTagName="button" style="display:none" Click="{command: _root.HideVideo()}"></dot:Button>
             </div>
-            <div class="modal-body">
-                <iframe ID="frame" src="{value: Video.Url}" frameborder="0" width="560" height="500"></iframe>
-                <p>{{value: Video.Description}}</p>
-                <dot:Repeater DataSource="{value: Video.Categories}">
-                    <ItemTemplate>
-                        <span>{{value: Name}}, </span>
-                    </ItemTemplate>
-                </dot:Repeater>
+            <div class="modal-body" DataContext="{value: Video}">
+                <div class="modal-container">
+                    <h2>{{value: Title}}</h2>
+                    <iframe src="{value: Url}" frameborder="0" width="640" height="360" scrolling="no" allowfullscreen=""></iframe>
+                    <div class="tags">
+                        <dot:Repeater DataSource="{value: Categories}">
+                            <ItemTemplate>
+                                <a>{{value: Name}}</a>
+                            </ItemTemplate>
+                        </dot:Repeater>
+                    </div>
+                    <div class="menu">
+                        <ul>
+                            <li onclick="buttonPress(this)">komentáře</li>
+                            <dot:Button ButtonTagName="button" Click="{command: _root.GetComments()}" style="display:none"></dot:Button>
+                            <li onclick="buttonPress(this)">podobná videa</li>
+                            <dot:Button ButtonTagName="button" Click="{command: _root.GetSuggestions()}" style="display:none"></dot:Button>
+                        </ul>
+                    </div>
+                    <h3 Visible="{value: _root.CatComSwitch==1 ? true:false}">Komentáře</h3>
+                    <div Visible="{value: _root.CatComSwitch==1 ? true:false}" class="comments">
+                        <dot:TextBox Visible="{value: _root.UserId!=null ? true:false}" Text="{value: _root.ComText}" />
+                        <dot:Button  Visible="{value: _root.UserId!=null ? true:false}" Click="{command: _root.AddComment()}">Pridat komentar</dot:Button>
+                        <br />
+                        <br />
+                        <dot:Repeater DataSource="{value: Comments}">
+                            <ItemTemplate>
+                                <div class="comment">
+                                    <span>{{value: Username}}</span>
+                                    <p>{{value: Text}}</p>
+                                </div>
+                            </ItemTemplate>
+                        </dot:Repeater>
+                        <dot:DataPager DataSet="{value: Comments}" />
+                    </div>
+                    <h3 Visible="{value: _root.CatComSwitch==2 ? true:false}">Podobná videa</h3>
+                    <div Visible="{value: _root.CatComSwitch==2 ? true:false}"class="related-videos">
+                        <dot:Repeater DataSource="{value: SuggestedVideos}">
+                            <ItemTemplate>
+                                <div class="related-video">
+                                    <a href="#">
+                                        <img src="{value: Img}">
+                                        <span>{{value: Title}}</span>
+                                    </a>
+                                </div>
+                            </ItemTemplate>
+                        </dot:Repeater>                      
+                    </div>
+                </div>
             </div>
+            <div Visible="{value:_root.CatComSwitch==0 ? false:true}" class="gradient"></div>
         </div>
     </div>
 </dot:Content>

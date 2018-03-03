@@ -49,18 +49,34 @@ namespace PornSite.Repositories
                 return true;
             }
         }
-        public async Task<UserDTO> UserLogin(string username, string password)
+        public async Task<string> CheckUser(string username, string password)
         {
             password = sha256(password);
             using (var db = new myDb())
             {
-                return await db.Users
+                
+                  var user =  await db.Users
                     .Where(x => x.Username == username && x.Password == password)
                     .Select(p => new UserDTO()
                     {
                         Id = p.Id,
-                        Username = p.Username
+                        Admin = p.Admin
                     }).FirstOrDefaultAsync();
+                if (user != null)
+                {
+                    if (user.Admin)
+                    {
+                        return "A" + user.Id.ToString();
+                    }
+                    else
+                    {
+                        return user.Id.ToString();
+                    }
+                }
+                else
+                {
+                    return "";
+                }
             }
         }
     }

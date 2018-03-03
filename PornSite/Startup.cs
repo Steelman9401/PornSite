@@ -37,6 +37,7 @@ namespace PornSite
             var dotvvmConfiguration = app.UseDotVVM<DotvvmStartup>(applicationPhysicalPath, debug: IsInDebugMode(), options: options =>
             {
                 options.AddDefaultTempStorages("temp");
+                options.AddUploadedFileStorage("App_Data/Temp");
             });
 
 

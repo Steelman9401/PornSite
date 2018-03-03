@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DotVVM.Framework.Controls;
+using DotVVM.Framework.Storage;
 using DotVVM.Framework.ViewModel;
 using HtmlAgilityPack;
 using PornSite.Data;
@@ -15,6 +18,8 @@ namespace PornSite.ViewModels
     public class AdminViewModel : MasterPageViewModel
     {
         public List<VideoDTO> Videos { get; set; } = new List<VideoDTO>();
+        public bool EnableButton { get; set; } = false;
+        public UploadedFilesCollection UploadedVideos { get; set; } = new UploadedFilesCollection();
         public ScrapperRepository scrapRep { get; set; } = new ScrapperRepository();
         public IEnumerable<string> Urls { get; set; }
         public VideoDTO Video { get; set; }
@@ -42,12 +47,12 @@ namespace PornSite.ViewModels
             {
                 DatabaseCategories = await PornRep.GetAllCategories();
                 Urls = await PornRep.GetUrls();
-                Videos = scrapRep.FillList(SelectedWebCategory,Urls);
+                Videos = scrapRep.FillList(SelectedWebCategory, Urls);
             }
-            
+
             await base.PreRender();
         }
-       
+
         public void OpenModal(VideoDTO vid)
         {
             Video = vid;
@@ -61,14 +66,35 @@ namespace PornSite.ViewModels
 
         public async Task AddVideo(VideoDTO vid)
         {
+            var storage = Context.Configuration.ServiceLocator.GetService<IUploadedFileStorage>();
+            var file = UploadedVideos.Files[0];
+            var uploadPath = GetUploadPath();
+            var targetPath = Path.Combine(uploadPath, file.FileId + ".mp4");
+            storage.SaveAs(file.FileId, targetPath);
+            storage.DeleteFile(file.FileId);
+            vid.Url = "/PORN/" + file.FileId + ".mp4";
             await PornRep.AddPorn(vid, Categories);
             ModalSwitch = false;
             Videos.RemoveAll(x => x.Url == vid.Url);
+            UploadedVideos.Clear();
         }
         public void ChangeCategoryList()
         {
             Videos = new List<VideoDTO>();
             Videos = scrapRep.FillList(SelectedWebCategory, Urls);
+        }
+        public void VideoUploaded()
+        {
+            EnableButton = true;
+        }
+        private string GetUploadPath()
+        {
+            var uploadPath = Path.Combine(Context.Configuration.ApplicationPhysicalPath, "PORN");
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+            return uploadPath;
         }
     }
 }

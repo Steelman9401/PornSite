@@ -51,8 +51,6 @@ C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Debug\PornSite.csprojResolveAs
 C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Debug\PornSite.csproj.CoreCompileInputs.cache
 C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Debug\PornSite.dll
 C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Debug\PornSite.pdb
-C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Debug\PornSite.Migrations.userComment.resources
-C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Debug\PornSite.csproj.GenerateResource.Cache
 C:\Users\domin\Desktop\PornSite\PornSite\bin\PornSite.dll.config
 C:\Users\domin\Desktop\PornSite\PornSite\bin\PornSite.dll
 C:\Users\domin\Desktop\PornSite\PornSite\bin\PornSite.pdb
@@ -108,3 +106,5 @@ C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.csproj.GenerateResou
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.csproj.CoreCompileInputs.cache
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.dll
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.pdb
+C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Debug\PornSite.Migrations.root.resources
+C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Debug\PornSite.csproj.GenerateResource.Cache

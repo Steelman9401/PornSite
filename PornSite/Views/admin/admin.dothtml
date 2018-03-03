@@ -63,7 +63,8 @@
                         <dot:TextBox list="categories" Text="{value: _this}" />
                     </ItemTemplate>
                 </dot:Repeater>
-                <dot:Button ButtonTagName="button" Click="{command: _parent.AddVideo(_this)}">Pridat video</dot:Button>
+            <dot:FileUpload UploadedFiles="{value: _root.UploadedVideos}" UploadCompleted="{command: _root.VideoUploaded()}" />
+                <dot:Button Enabled="{value: _root.EnableButton}" ButtonTagName="button" Click="{command: _parent.AddVideo(_this)}">Pridat video</dot:Button>
             </div>                                                                                      <%--konec obsahu--%>
 
         </div>                                                                                           <%--konec modalu--%>

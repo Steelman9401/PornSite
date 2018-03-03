@@ -7,7 +7,7 @@
     <title>Vymasti.si</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000" />
-    <dot:RequiredResource Name="bootstrap" />
+    <%--<dot:RequiredResource Name="bootstrap" />--%>
     <dot:RequiredResource Name="jquery" />
     <link href="PornSite/Content/style.css" rel="stylesheet" />
     <script src="PornSite/Content/scripts.js"></script>
@@ -29,7 +29,9 @@
                 <li>PŘIHLÁSIT SE</li>
             </ul>
             <a class="categories">KATEGORIE</a>
-            <dot:Button Click="{command: ShowLoginModal()}" class="btn btn-primary" ButtonTagName="button">login</dot:Button>
+            <a Visible="{value:CurrentUser=='' ? true:false}" class="login" onclick="buttonPress(this)">přihlásit se</a>
+            <dot:Button Click="{command: ShowLoginModal()}" class="btn btn-primary" ButtonTagName="button" style="display:none"></dot:Button>
+            <a Visible="{value: CurrentUser!=null ? true:false}" class="login">{{value: CurrentUser}}</a>
         </div>
     </header>
     <main>
@@ -57,9 +59,9 @@
                 $('#modal').fadeIn(350);
             });
 
-        }
+    }
     </script>
-    <%--<div style="display:none;" id="modal">
+    <div id="modal-login" Visible="{value: ShowLogin ? true:false}">
         <div class="cointainer-modal">
             <div class="modal-header">
                 <div id="close"></div>
@@ -69,10 +71,11 @@
                 <form>
                     <dot:TextBox Text="{value: Username}" class="modal-textbox" placeholder="username" />
                     <dot:TextBox Text="{value: Password}" Type="Password" class="modal-textbox" placeholder="heslo" />
-                    <dot:Button class="modal-button" Click="{command: SignIn()}">prihlasit se</dot:Button>                  
+                    <dot:Button class="modal-button" Click="{command: SignIn()}">prihlasit se</dot:Button>
                 </form>
+                <dot:RouteLink RouteName="register">Registrace</dot:RouteLink>
             </div>
         </div>
-    </div>--%>
+    </div>
 </body>
 </html>

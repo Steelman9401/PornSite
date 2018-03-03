@@ -10,6 +10,7 @@ namespace PornSite.Data
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public bool Admin { get; set; } = false;
         public virtual ICollection<Comment>Comments { get; set; }
     }
 }

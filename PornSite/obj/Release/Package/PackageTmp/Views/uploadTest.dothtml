@@ -1,0 +1,9 @@
+﻿@viewModel PornSite.ViewModels.UploadTestViewModel, PornSite
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <dot:FileUpload UploadedFiles="{value: UploadedVideos}" UploadCompleted="{command: SaveVideo()}" />
+
+</dot:Content>
+

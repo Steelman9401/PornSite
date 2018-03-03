@@ -134,9 +134,9 @@
     <Compile Include="DTO\CategoryDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="DTO\VideoDTO.cs" />
-    <Compile Include="Migrations\201802222246195_userComment.cs" />
-    <Compile Include="Migrations\201802222246195_userComment.Designer.cs">
-      <DependentUpon>201802222246195_userComment.cs</DependentUpon>
+    <Compile Include="Migrations\201803011537598_root.cs" />
+    <Compile Include="Migrations\201803011537598_root.Designer.cs">
+      <DependentUpon>201803011537598_root.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -153,6 +153,7 @@
     <Compile Include="ViewModels\MasterPageViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\UploadTestViewModel.cs" />
     <Compile Include="ViewModels\VideoViewModel.cs" />
     <Compile Include="ViewModels\ViewsViewModel.cs" />
   </ItemGroup>
@@ -198,6 +199,7 @@
     <Content Include="Views\admin\adminDatabase.dothtml" />
     <Content Include="Views\search.dothtml" />
     <Content Include="Views\register.dothtml" />
+    <Content Include="Views\uploadTest.dothtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -210,8 +212,8 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802222246195_userComment.resx">
-      <DependentUpon>201802222246195_userComment.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803011537598_root.resx">
+      <DependentUpon>201803011537598_root.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

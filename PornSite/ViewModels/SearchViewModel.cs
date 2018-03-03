@@ -29,7 +29,7 @@ namespace PornSite.ViewModels
         {
             if (Videos.IsRefreshRequired || !Context.IsPostBack)
             {
-                Videos.OnLoadingData = option => rep.GetSearchResult(option, SearchQ.ToLower());
+                Videos.OnLoadingDataAsync = option => rep.GetSearchResult(option, SearchQ.ToLower());
             }
             return base.PreRender();
         }

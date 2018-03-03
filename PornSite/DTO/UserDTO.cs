@@ -10,6 +10,7 @@ namespace PornSite.DTO
     {
         public int Id { get; set; }
         public string Username { get; set; }
+        public bool Admin { get; set; } = false;
         public IEnumerable<CommentDTO> Comments { get; set; }
     }
 }
