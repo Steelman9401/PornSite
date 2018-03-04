@@ -2,6 +2,7 @@
 @masterPage Views/MasterPage.dotmaster
 <dot:Content ContentPlaceHolderID="MainContent">
     <div class="cointainer-column">
+       
         <section class="menu">
             <ul>
                 <li><dot:Button ID="btnTesting" class="btn btn-primary" ButtonTagName="button" Click="{command: LoadLatest()}">Nejnovejsi</dot:Button></li>
@@ -36,9 +37,7 @@
             <div class="modal-body" DataContext="{value: Video}">
                 <div class="modal-container">
                     <h2>{{value: Title}}</h2>
-                    <video onclick="playVideo(this)" width="640" height="360" controls poster="{value: Img}">
-                        <source src="{value: Url}" type="video/mp4">
-                    </video>
+                    <iframe width="480" height="360" src="http://xhamster.com/xembed.php?video=8975296" frameborder="0" scrolling="no" allowfullscreen></iframe>
                     <div class="tags">
                         <dot:Repeater DataSource="{value: Categories}">
                             <ItemTemplate>
@@ -57,7 +56,7 @@
                     <h3 Visible="{value: _root.CatComSwitch==1 ? true:false}">Komentáře</h3>
                     <div Visible="{value: _root.CatComSwitch==1 ? true:false}" class="comments">
                         <dot:TextBox Visible="{value: _root.UserId!=null ? true:false}" Text="{value: _root.ComText}" />
-                        <dot:Button  Visible="{value: _root.UserId!=null ? true:false}" Click="{command: _root.AddComment()}">Pridat komentar</dot:Button>
+                        <dot:Button Visible="{value: _root.UserId!=null ? true:false}" Click="{command: _root.AddComment()}">Pridat komentar</dot:Button>
                         <br />
                         <br />
                         <dot:Repeater DataSource="{value: Comments}">
@@ -71,7 +70,7 @@
                         <dot:DataPager DataSet="{value: Comments}" />
                     </div>
                     <h3 Visible="{value: _root.CatComSwitch==2 ? true:false}">Podobná videa</h3>
-                    <div Visible="{value: _root.CatComSwitch==2 ? true:false}"class="related-videos">
+                    <div Visible="{value: _root.CatComSwitch==2 ? true:false}" class="related-videos">
                         <dot:Repeater DataSource="{value: SuggestedVideos}">
                             <ItemTemplate>
                                 <div class="related-video">
@@ -81,7 +80,7 @@
                                     </a>
                                 </div>
                             </ItemTemplate>
-                        </dot:Repeater>                      
+                        </dot:Repeater>
                     </div>
                 </div>
             </div>

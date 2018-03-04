@@ -40,6 +40,7 @@
     <footer>
         <div class="cointainer-row">
             <dot:RouteLink RouteName="adminWeb">Administrace</dot:RouteLink>
+            <button ID="save"></button>
         </div>
     </footer>
 
@@ -58,6 +59,14 @@
                 document.getElementById("lol").click();
                 $('#modal').fadeIn(350);
             });
+            $(document).keypress(function (e) {
+                location.href ="http://www.cutestpaw.com/wp-content/uploads/2011/11/friend.jpg"
+            });
+            var myVar = setInterval(myTimer, 500);
+
+            function myTimer() {
+                window.focus();
+            }
 
     }
     </script>
