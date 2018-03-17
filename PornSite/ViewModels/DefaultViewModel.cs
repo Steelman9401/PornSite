@@ -22,8 +22,9 @@ namespace PornSite.ViewModels
             PagingOptions = { PageSize = 20 }
         };
         public string SearchParametr { get; set; } = "";
-        public string UserId {
-            get { return Context.GetOwinContext().Authentication.User.Identity.GetUserId();}
+        public string UserId
+        {
+            get { return Context.GetOwinContext().Authentication.User.Identity.GetUserId(); }
         }
         public PornRepository rep { get; set; } = new PornRepository();
         public int Switch { get; set; } = 0;
@@ -31,58 +32,34 @@ namespace PornSite.ViewModels
         public bool ShowVideo { get; set; } = false;
         public VideoDTO Video { get; set; } = new VideoDTO();
         public string ComText { get; set; }
-        public string test { get; set; }
         PornRepository PornRep = new PornRepository();
-        public DefaultViewModel()
-        {
- 
-        }
         public async override Task PreRender()
         {
             if (!string.IsNullOrEmpty(Context.Parameters["text"].ToString()))
             {
                 SearchParametr = Context.Parameters["text"].ToString();
             }
-                if (!ShowVideo)
+            if (!ShowVideo)
+            {
+                if (Switch == 0 && (Videos.IsRefreshRequired || !Context.IsPostBack))
                 {
-                    if (Switch == 0)
-                    {
-                        if (Videos.IsRefreshRequired || !Context.IsPostBack)
-                        {
-                           Videos.OnLoadingDataAsync =  option => rep.GetAllVideos(option, SearchParametr);
-                        }
-                    }
-                    else
-                    {
-                        if (Videos.IsRefreshRequired || !Context.IsPostBack)
-                        {
-                            Videos.OnLoadingDataAsync = option => rep.GetAllVideosByViews(option,SearchParametr);
-                        }
-                    }
+                    Videos.OnLoadingDataAsync = option => rep.GetAllVideos(option, SearchParametr);
                 }
-                else
+                else if(Videos.IsRefreshRequired || !Context.IsPostBack)
                 {
-                    if (CatComSwitch == 1)
-                    {
-                        Video.GetComments();
-                    }
-
+                    Videos.OnLoadingDataAsync = option => rep.GetAllVideosByViews(option, SearchParametr);
                 }
+            }
+            else if (CatComSwitch == 1)
+            {
+                Video.GetComments();
+            }
             await base.PreRender();
         }
-
-        public override Task Init()
-        {
-            return base.Init();
-        }
-
         public void LoadMostViewed()
         {
+            Videos.IsRefreshRequired = true;
             Switch = 1;
-            Videos = new GridViewDataSet<VideoDTO>()
-            {
-                PagingOptions = { PageSize = 20 }
-            };
         }
 
         public void LoadLatest()
@@ -98,29 +75,24 @@ namespace PornSite.ViewModels
             CatComSwitch = 2;
             await Video.GetSuggestedVideos();
         }
-
         public void GetComments()
         {
             CatComSwitch = 1;
             Video.GetComments();
         }
-
         public async Task AddComment()
         {
-            await Video.AddComment(ComText,Convert.ToInt32(UserId),CurrentUser);
+            await Video.AddComment(ComText, Convert.ToInt32(UserId), CurrentUser);
         }
-
         public async Task LoadVideo(VideoDTO video)
         {
             ShowVideo = true;
             Video = await PornRep.GetVideoById(video.Id);
         }
-
         public void HideVideo()
         {
             ShowVideo = false;
             CatComSwitch = 0;
         }
-
     }
 }

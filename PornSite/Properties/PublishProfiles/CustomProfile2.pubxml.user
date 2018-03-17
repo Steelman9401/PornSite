@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/MBiqv3ZC0mbrxKCDOvS8QAAAAACAAAAAAAQZgAAAAEAACAAAACX24aYtylIH6RLeq83IgmYkGqXOoywPoIuYGXH0RIN9gAAAAAOgAAAAAIAACAAAABYs+sBmSNElsNfXTJxS/y3EaRwtV84iH8LYXb67DShgCAAAAD6M2ryZYS8oWthXbsEg2PbPVPbWD25Z0gXq1mQS9l23kAAAACcIP1Zh+gB+4mKjQYYudxBdIRm/5QGYPnr/q0sZops+lyTMpyTaG9+JgsNX+JbCjDQlN0qRNnDjbkcJ7rH398P</EncryptedPassword>
+    <_PublishTargetUrl>ftp://ftp-eu.site4now.net/vymastisi</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/DotVVM.Core.dll">
+      <publishTime>03/05/2018 15:16:18</publishTime>
+    </File>
+    <File Include="bin/DotVVM.Framework.dll">
+      <publishTime>03/05/2018 15:16:18</publishTime>
+    </File>
+    <File Include="bin/DotVVM.Framework.Hosting.Owin.dll">
+      <publishTime>03/05/2018 15:16:18</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/HtmlAgilityPack.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/HtmlAgilityPack.pdb">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeAnalysis.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.DependencyInjection.Abstractions.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.DependencyInjection.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Options.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Primitives.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.FileSystems.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.StaticFiles.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>03/05/2018 15:16:19</publishTime>
+    </File>
+    <File Include="bin/PornSite.dll">
+      <publishTime>03/07/2018 02:03:49</publishTime>
+    </File>
+    <File Include="bin/PornSite.pdb">
+      <publishTime>03/07/2018 02:03:49</publishTime>
+    </File>
+    <File Include="bin/System.Collections.Immutable.dll">
+      <publishTime>03/05/2018 15:16:20</publishTime>
+    </File>
+    <File Include="bin/System.Reflection.Metadata.dll">
+      <publishTime>03/05/2018 15:16:21</publishTime>
+    </File>
+    <File Include="Content/black-background-1468370534d5s.jpg">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Content/bootstrap-theme.css">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Content/bootstrap-theme.css.map">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Content/bootstrap-theme.min.css">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Content/bootstrap-theme.min.css.map">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css.map">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css.map">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Content/loading.gif">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Content/master.css">
+      <publishTime>03/07/2018 01:16:34</publishTime>
+    </File>
+    <File Include="Content/oie_1633429tJ6oFeR2.gif">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Content/scripts.js">
+      <publishTime>03/07/2018 01:15:10</publishTime>
+    </File>
+    <File Include="Content/style.css">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="GettingStarted.html">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.9.1.js">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.9.1.min.js">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.9.1.min.map">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Views/admin/admin.dothtml">
+      <publishTime>03/05/2018 20:46:51</publishTime>
+    </File>
+    <File Include="Views/admin/adminDatabase.dothtml">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Views/default.dothtml">
+      <publishTime>03/07/2018 00:49:19</publishTime>
+    </File>
+    <File Include="Views/MasterPage.dotmaster">
+      <publishTime>03/05/2018 23:54:19</publishTime>
+    </File>
+    <File Include="Views/register.dothtml">
+      <publishTime>03/05/2018 15:16:17</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>03/07/2018 02:04:00</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

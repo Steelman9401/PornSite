@@ -15,8 +15,8 @@
                 <ItemTemplate>
                     <div class="video" style="cursor: pointer" onclick="pressButton(this)">
                         <dot:Button Click="{command: _root.LoadVideo(_this)}" ButtonTagName="button" style="display:none;" />
-                        <video style="height:150px !important; width:250px !important;" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
-                            <source src="{value: Preview}" type="video/webm">
+                        <video style="height:150px !important; width:250px !important;  object-fit: fill;" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
+                            <source src="{value: Preview}" type="video/webm">                    
                             Your browser does not support the video taga.
                         </video>
                         <span>{{value: Title}}</span>
@@ -37,7 +37,7 @@
             <div class="modal-body" DataContext="{value: Video}">
                 <div class="modal-container">
                     <h2>{{value: Title}}</h2>
-                    <iframe width="480" height="360" src="http://xhamster.com/xembed.php?video=8975296" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                    <iframe width="480" height="360" src="{value: Url}" frameborder="0" scrolling="no" allowfullscreen></iframe>
                     <div class="tags">
                         <dot:Repeater DataSource="{value: Categories}">
                             <ItemTemplate>
@@ -74,10 +74,12 @@
                         <dot:Repeater DataSource="{value: SuggestedVideos}">
                             <ItemTemplate>
                                 <div class="related-video">
-                                    <a href="#">
-                                        <img src="{value: Img}">
-                                        <span>{{value: Title}}</span>
-                                    </a>
+                                    <dot:Button Click="{command: _root.LoadVideo(_this)}" ButtonTagName="button" Text="show" />
+                                    <video style="" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
+                                        <source src="{value: Preview}" type="video/webm">
+                                        Your browser does not support the video taga.
+                                    </video>
+
                                 </div>
                             </ItemTemplate>
                         </dot:Repeater>

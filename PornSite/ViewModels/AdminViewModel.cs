@@ -18,24 +18,22 @@ namespace PornSite.ViewModels
     public class AdminViewModel : MasterPageViewModel
     {
         public List<VideoDTO> Videos { get; set; } = new List<VideoDTO>();
-        public bool EnableButton { get; set; } = false;
-        public UploadedFilesCollection UploadedVideos { get; set; } = new UploadedFilesCollection();
-        public ScrapperRepository scrapRep { get; set; } = new ScrapperRepository();
-        public IEnumerable<string> Urls { get; set; }
+        public ScrapperRepository ScrapRep { get; set; } = new ScrapperRepository();
+        public IEnumerable<string> Images { get; set; }
+        public int SwitchWebsite { get; set; }
         public VideoDTO Video { get; set; }
         public PornRepository PornRep { get; set; } = new PornRepository();
-        public IEnumerable<string> Categories { get; set; }
         public IEnumerable<string> DatabaseCategories { get; set; }
         public List<WebCategory> WebCategories { get; set; } = new List<WebCategory>
         {
-            new WebCategory() { Name = "Main", Url = "https://www.redtube.com"},
-            new WebCategory() { Name = "Anal", Url = "https://www.redtube.com/redtube/anal"},
-            new WebCategory() { Name = "Amateur", Url = "https://www.redtube.com/redtube/amateur"},
-            new WebCategory() { Name = "Asian", Url = "https://www.redtube.com/redtube/asian"},
-            new WebCategory() { Name = "Blonde", Url = "https://www.redtube.com/redtube/blonde"},
-            new WebCategory() { Name = "Ebony", Url = "https://www.redtube.com/redtube/ebony"},
-            new WebCategory() { Name = "Zrzky", Url = "https://www.redtube.com/redtube/redhead"},
-            new WebCategory() { Name = "MILF", Url = "https://www.redtube.com/redtube/milf"},
+            new WebCategory() { Name = "Main", Url = ""},
+            new WebCategory() { Name = "Anal", Url = "anal"},
+            new WebCategory() { Name = "Amateur", Url = "amateur"},
+            new WebCategory() { Name = "Asian", Url = "asian"},
+            new WebCategory() { Name = "Blonde", Url = "blonde"},
+            new WebCategory() { Name = "Ebony", Url = "ebony"},
+            new WebCategory() { Name = "Zrzky", Url = "redhead"},
+            new WebCategory() { Name = "MILF", Url = "milf"},
 
         };
         public string SelectedWebCategory { get; set; } = "https://www.redtube.com";
@@ -46,8 +44,8 @@ namespace PornSite.ViewModels
             if (!Context.IsPostBack)
             {
                 DatabaseCategories = await PornRep.GetAllCategories();
-                Urls = await PornRep.GetUrls();
-                Videos = scrapRep.FillList(SelectedWebCategory, Urls);
+                Images = await PornRep.GetImages();
+                ScrapRep.GetRedTubeVideos(Videos,string.Empty,Images);
             }
 
             await base.PreRender();
@@ -56,7 +54,14 @@ namespace PornSite.ViewModels
         public void OpenModal(VideoDTO vid)
         {
             Video = vid;
-            Categories = scrapRep.GetTags(vid);
+            if (SwitchWebsite == 0)
+            {
+                ScrapRep.GetCategoriesRedTube(ref vid);
+            }
+            else
+            {
+                ScrapRep.GetCategoriesXhamster(ref vid);
+            }
             ModalSwitch = true;
         }
         public void CloseModal()
@@ -66,35 +71,29 @@ namespace PornSite.ViewModels
 
         public async Task AddVideo(VideoDTO vid)
         {
-            var storage = Context.Configuration.ServiceLocator.GetService<IUploadedFileStorage>();
-            var file = UploadedVideos.Files[0];
-            var uploadPath = GetUploadPath();
-            var targetPath = Path.Combine(uploadPath, file.FileId + ".mp4");
-            storage.SaveAs(file.FileId, targetPath);
-            storage.DeleteFile(file.FileId);
-            vid.Url = "/PORN/" + file.FileId + ".mp4";
-            await PornRep.AddPorn(vid, Categories);
+            await PornRep.AddPorn(vid);
             ModalSwitch = false;
             Videos.RemoveAll(x => x.Url == vid.Url);
-            UploadedVideos.Clear();
         }
         public void ChangeCategoryList()
         {
             Videos = new List<VideoDTO>();
-            Videos = scrapRep.FillList(SelectedWebCategory, Urls);
+            if (SwitchWebsite == 1)
+                ScrapRep.GetXhamsterVideos(Videos, SelectedWebCategory,Images);
+            else
+                ScrapRep.GetRedTubeVideos(Videos, SelectedWebCategory,Images);
         }
-        public void VideoUploaded()
+        public void SwitchToRedTube()
         {
-            EnableButton = true;
+            SwitchWebsite = 0;
+            Videos = new List<VideoDTO>();
+            ScrapRep.GetRedTubeVideos(Videos, SelectedWebCategory,Images);
         }
-        private string GetUploadPath()
+        public void SwitchToXhamster()
         {
-            var uploadPath = Path.Combine(Context.Configuration.ApplicationPhysicalPath, "PORN");
-            if (!Directory.Exists(uploadPath))
-            {
-                Directory.CreateDirectory(uploadPath);
-            }
-            return uploadPath;
+            SwitchWebsite = 1;
+            Videos = new List<VideoDTO>();
+            ScrapRep.GetXhamsterVideos(Videos, SelectedWebCategory,Images);
         }
     }
 }

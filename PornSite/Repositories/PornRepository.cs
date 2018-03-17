@@ -18,6 +18,7 @@ namespace PornSite.Repositories
             {
                 using (var db = new myDb())
                 {
+                    db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
                     var query = await db.Videos.Select(x => new VideoDTO
                     {
                         Id = x.Id,
@@ -120,6 +121,13 @@ namespace PornSite.Repositories
         {
             using (var db = new myDb())
             {
+                return db.Categories.Find(catId).Videos.Select( x=> new VideoDTO()
+                {
+                    Id = x.Id,
+                    Img = x.Img,
+                    Title = x.Title,
+                    Preview = x.Preview
+                }).OrderByDescending(a => a.Id).ToList();
                 return db.Videos
                      .Where(p => p.Categories.Select(x => x.Id).ToList().Contains(catId)) //to list mozna neni potreba
                      .Select(x => new VideoDTO()
@@ -131,39 +139,28 @@ namespace PornSite.Repositories
                      }).OrderByDescending(a => a.Id).ToList();
             }
         }
-        public async Task UpdateViews(int Id)
-        {
-            using (var db = new myDb())
-            {
-                Video video = await db.Videos
-                .Where(x => x.Id == Id).FirstOrDefaultAsync();
-                video.Views++;
-                await db.SaveChangesAsync();
-            }
-        }
-
         public async Task<VideoDTO> GetVideoById(int Id)
         {
 
             using (var db = new myDb())
             {
-                return await db.Videos
-                    .Where(x => x.Id == Id)
-                    .Select(p => new VideoDTO
-                    {
-                        Id = p.Id,
-                        Img = p.Img,
-                        Title = p.Title,
-                        Url = p.Url,
-                        Description = p.Description,
-                        Views = p.Views,
-                        Categories = p.Categories
-                        .Select(o => new CategoryDTO
-                        {
-                            Id = o.Id,
-                            Name = o.Name
-                        })
-                    }).FirstOrDefaultAsync();
+                db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+                Video video = await db.Videos.FindAsync(Id);
+                video.Views++;
+                await db.SaveChangesAsync();
+                VideoDTO vid = new VideoDTO();
+                vid.Id = video.Id;
+                vid.Img = video.Img;
+                vid.Title = video.Title;
+                vid.Url = video.Url;
+                vid.Views = video.Views;
+                db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+                vid.Categories = video.Categories.Select(x=> new CategoryDTO()
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                }).ToList();
+                return vid;
             }
         }
         public async Task<IEnumerable<VideoDTO>> GetSuggestedVideos(List<int> Categories)
@@ -180,7 +177,8 @@ namespace PornSite.Repositories
                           {
                               Id = p.Id,
                               Title = p.Title,
-                              Img = p.Img
+                              Img = p.Img,
+                              Preview = p.Preview
                           }).Take(8).ToListAsync();
                 }
             }
@@ -190,15 +188,15 @@ namespace PornSite.Repositories
                 return videos;
             }
         }
-        public async Task<IEnumerable<string>> GetUrls()
+        public async Task<IEnumerable<string>> GetImages()
         {
             using (var db = new myDb())
             {
                 return await db.Videos.OrderByDescending(p => p.Id)
-                    .Select(x => x.Url).Take(100).ToListAsync();
+                    .Select(x => x.Img).Take(100).ToListAsync();
             }
         }
-        public async Task AddPorn(VideoDTO vid, IEnumerable<string> Categories)
+        public async Task AddPorn(VideoDTO vid)
         {
             Video video = new Video();
             video.Description = vid.Description;
@@ -207,12 +205,14 @@ namespace PornSite.Repositories
             video.Img = vid.Img;
             video.Date = DateTime.Now;
             video.Preview = vid.Preview;
+            video.HD = vid.HD;
+            video.Duration = vid.Duration;
             PornRepository rep = new PornRepository();
             List<Category> listCat = new List<Category>();
-            foreach (string item in Categories)
+            foreach (CategoryDTO item in vid.Categories)
             {
                 Category cat = new Category();
-                cat.Name = item;
+                cat.Name = item.Name;
                 listCat.Add(cat);
             }
             using (var db = new myDb())

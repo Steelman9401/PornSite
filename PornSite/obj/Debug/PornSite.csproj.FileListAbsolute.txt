@@ -106,5 +106,5 @@ C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.csproj.GenerateResou
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.csproj.CoreCompileInputs.cache
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.dll
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.pdb
-C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Debug\PornSite.Migrations.root.resources
-C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Debug\PornSite.csproj.GenerateResource.Cache
+C:\Users\domin\source\repos\PornSite\PornSite\obj\Debug\PornSite.Migrations.durHD.resources
+C:\Users\domin\source\repos\PornSite\PornSite\obj\Debug\PornSite.csproj.GenerateResource.Cache

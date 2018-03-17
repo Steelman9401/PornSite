@@ -127,16 +127,16 @@
   <ItemGroup>
     <Compile Include="Data\Category.cs" />
     <Compile Include="Data\Comment.cs" />
-    <Compile Include="Data\CommentDTO.cs" />
+    <Compile Include="DTO\CommentDTO.cs" />
     <Compile Include="Data\myDb.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Data\Video.cs" />
     <Compile Include="DTO\CategoryDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="DTO\VideoDTO.cs" />
-    <Compile Include="Migrations\201803011537598_root.cs" />
-    <Compile Include="Migrations\201803011537598_root.Designer.cs">
-      <DependentUpon>201803011537598_root.cs</DependentUpon>
+    <Compile Include="Migrations\201803122356429_durHD.cs" />
+    <Compile Include="Migrations\201803122356429_durHD.Designer.cs">
+      <DependentUpon>201803122356429_durHD.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -150,7 +150,6 @@
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\admin\AdminDatabaseViewModel.cs" />
     <Compile Include="ViewModels\DefaultViewModel.cs" />
-    <Compile Include="ViewModels\IframeTestViewModel.cs" />
     <Compile Include="ViewModels\MasterPageViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
@@ -176,6 +175,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\vymastisi - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="GettingStarted.html" />
@@ -193,7 +193,6 @@
     <Content Include="Views\admin\admin.dothtml" />
     <Content Include="Views\admin\adminDatabase.dothtml" />
     <Content Include="Views\register.dothtml" />
-    <Content Include="Views\iframeTest.dothtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -206,8 +205,8 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803011537598_root.resx">
-      <DependentUpon>201803011537598_root.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803122356429_durHD.resx">
+      <DependentUpon>201803122356429_durHD.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

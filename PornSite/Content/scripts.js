@@ -1,9 +1,7 @@
 ﻿function loadVideo(e) {
-    e.load();
     e.play();
 }
 function playVideo(e) {
-    e.load();
     e.play();
 }
 function stopVideo(e) {
@@ -25,6 +23,3 @@ function hideVideo(e) {
     $("#modal-video").slideToggle(200);
 }
 
-document.getElementById("showComments").addEventListener("click", function () {
-    alert('clicked');
-});

@@ -15,11 +15,12 @@ namespace PornSite.DTO
         public string Title { get; set; }
         public string Img { get; set; }
         public string Url { get; set; }
+        public string Duration { get; set; }
+        public bool HD { get; set; }
         public string Description { get; set; }
         public int Views { get; set; }
         public string Preview { get; set; }
-        public int Index { get; set; }
-        public IEnumerable<CategoryDTO> Categories { get; set; }
+        public List<CategoryDTO> Categories { get; set; }
         public GridViewDataSet<CommentDTO> Comments { get; set; } = new GridViewDataSet<CommentDTO>()
         {
             PagingOptions = { PageSize = 3 }
@@ -47,6 +48,15 @@ namespace PornSite.DTO
             comment.Username = username;
             await ComRep.AddComment(comment);
             Comments.Items.Insert(0, comment);
+        }
+        public void AddCategory()
+        {
+            CategoryDTO cat = new CategoryDTO();
+            Categories.Add(cat);
+        }
+        public void RemoveCategory(CategoryDTO cat)
+        {
+            Categories.Remove(cat);
         }
     }
 }

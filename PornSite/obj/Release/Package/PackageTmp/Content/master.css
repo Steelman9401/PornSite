@@ -67,7 +67,6 @@ header {
         header .cointainer-row .menu-icon {
             display: none;
             align-self: center;
-            background: url(../img/menu-icon-w.png);
             background-size: 100%;
             background-repeat: no-repeat;
             background-position: center;
@@ -77,7 +76,6 @@ header {
         }
 
             header .cointainer-row .menu-icon:hover {
-                background: url(../img/menu-icon-b.png);
                 background-size: 100%;
                 background-repeat: no-repeat;
                 background-position: center

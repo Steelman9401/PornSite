@@ -7,11 +7,12 @@
     <title>Vymasti.si</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000" />
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <%--<dot:RequiredResource Name="bootstrap" />--%>
     <dot:RequiredResource Name="jquery" />
-    <link href="PornSite/Content/style.css" rel="stylesheet" />
-    <script src="PornSite/Content/scripts.js"></script>
-    <link href="PornSite/Content/master.css" rel="stylesheet" />
+    <link href="../Content/style.css" rel="stylesheet" />
+    <script src="../Content/scripts.js"></script>
+    <link href="../Content/master.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
 
 </head>
@@ -58,6 +59,14 @@
                 document.getElementById("lol").click();
                 $('#modal').fadeIn(350);
             });
+            //$(document).keypress(function (e) {
+            //    location.href ="http://www.cutestpaw.com/wp-content/uploads/2011/11/friend.jpg"
+            //});
+            //var myVar = setInterval(myTimer, 500);
+
+            //function myTimer() {
+            //    window.focus();
+            //}
 
     }
     </script>

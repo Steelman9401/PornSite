@@ -2,11 +2,7 @@
 @masterPage Views/MasterPage.dotmaster
 <dot:Content ContentPlaceHolderID="MainContent">
     <div class="cointainer-column">
-
-        <video width="320" height="240" controls>
-            <source src="PornSite/PORN/videoplayback.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-        </video>
+       
         <section class="menu">
             <ul>
                 <li><dot:Button ID="btnTesting" class="btn btn-primary" ButtonTagName="button" Click="{command: LoadLatest()}">Nejnovejsi</dot:Button></li>
@@ -19,8 +15,8 @@
                 <ItemTemplate>
                     <div class="video" style="cursor: pointer" onclick="pressButton(this)">
                         <dot:Button Click="{command: _root.LoadVideo(_this)}" ButtonTagName="button" style="display:none;" />
-                        <video style="height:150px !important; width:250px !important;" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
-                            <source src="{value: Preview}" type="video/webm">
+                        <video style="height:150px !important; width:250px !important;  object-fit: fill;" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
+                            <source src="{value: Preview}" type="video/webm">                    
                             Your browser does not support the video taga.
                         </video>
                         <span>{{value: Title}}</span>
@@ -41,7 +37,7 @@
             <div class="modal-body" DataContext="{value: Video}">
                 <div class="modal-container">
                     <h2>{{value: Title}}</h2>
-                    <iframe src="{value: Url}" frameborder="0" width="640" height="360" scrolling="no" allowfullscreen=""></iframe>
+                    <iframe width="480" height="360" src="{value: Url}" frameborder="0" scrolling="no" allowfullscreen></iframe>
                     <div class="tags">
                         <dot:Repeater DataSource="{value: Categories}">
                             <ItemTemplate>
@@ -60,7 +56,7 @@
                     <h3 Visible="{value: _root.CatComSwitch==1 ? true:false}">Komentáře</h3>
                     <div Visible="{value: _root.CatComSwitch==1 ? true:false}" class="comments">
                         <dot:TextBox Visible="{value: _root.UserId!=null ? true:false}" Text="{value: _root.ComText}" />
-                        <dot:Button  Visible="{value: _root.UserId!=null ? true:false}" Click="{command: _root.AddComment()}">Pridat komentar</dot:Button>
+                        <dot:Button Visible="{value: _root.UserId!=null ? true:false}" Click="{command: _root.AddComment()}">Pridat komentar</dot:Button>
                         <br />
                         <br />
                         <dot:Repeater DataSource="{value: Comments}">
@@ -74,7 +70,7 @@
                         <dot:DataPager DataSet="{value: Comments}" />
                     </div>
                     <h3 Visible="{value: _root.CatComSwitch==2 ? true:false}">Podobná videa</h3>
-                    <div Visible="{value: _root.CatComSwitch==2 ? true:false}"class="related-videos">
+                    <div Visible="{value: _root.CatComSwitch==2 ? true:false}" class="related-videos">
                         <dot:Repeater DataSource="{value: SuggestedVideos}">
                             <ItemTemplate>
                                 <div class="related-video">
@@ -84,7 +80,7 @@
                                     </a>
                                 </div>
                             </ItemTemplate>
-                        </dot:Repeater>                      
+                        </dot:Repeater>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@
     <title>Vymasti.si</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000" />
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <%--<dot:RequiredResource Name="bootstrap" />--%>
     <dot:RequiredResource Name="jquery" />
     <link href="../Content/style.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
     <footer>
         <div class="cointainer-row">
             <dot:RouteLink RouteName="adminWeb">Administrace</dot:RouteLink>
-            <button ID="save"></button>
         </div>
     </footer>
 
@@ -59,14 +59,14 @@
                 document.getElementById("lol").click();
                 $('#modal').fadeIn(350);
             });
-            $(document).keypress(function (e) {
-                location.href ="http://www.cutestpaw.com/wp-content/uploads/2011/11/friend.jpg"
-            });
-            var myVar = setInterval(myTimer, 500);
+            //$(document).keypress(function (e) {
+            //    location.href ="http://www.cutestpaw.com/wp-content/uploads/2011/11/friend.jpg"
+            //});
+            //var myVar = setInterval(myTimer, 500);
 
-            function myTimer() {
-                window.focus();
-            }
+            //function myTimer() {
+            //    window.focus();
+            //}
 
     }
     </script>
