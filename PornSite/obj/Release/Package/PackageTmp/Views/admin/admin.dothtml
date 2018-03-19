@@ -2,29 +2,39 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <datalist id="categories">
-        <dot:Repeater DataSource="{value: DatabaseCategories}">
-            <ItemTemplate>
-                <option value="{value: _this}">
-            </ItemTemplate>
-        </dot:Repeater>
-    </datalist>
+    <main>
+        <h1 style="text-align:center;">Administrace</h1>
+        <dot:Button ButtonTagName="button" Click="{command: SwitchToRedTube()}">REDTUBE</dot:Button>
+        <dot:Button ButtonTagName="button" Click="{command: SwitchToXhamster()}">XHAMSTER</dot:Button>
+        <dot:Button ButtonTagName="button" Click="{command: SwitchToDrTuber()}">DRTUBER(MOBILE)</dot:Button>
+        <datalist id="categories">
+            <dot:Repeater DataSource="{value: DatabaseCategories}">
+                <ItemTemplate>
+                    <option value="{value: _this}">
+                </ItemTemplate>
+            </dot:Repeater>
+        </datalist>
         <dot:ComboBox style="color:white; background-color:black;" DataSource="{value: WebCategories}"
                       SelectedValue="{value: SelectedWebCategory}"
                       ValueMember="Url"
                       DisplayMember="Name"
                       SelectionChanged="{command: ChangeCategoryList()}" />
-        <div style="text-align:center">
-            <ul class="webVideosList">
-                <dot:Repeater class="table" DataSource="{value: Videos}" style="color:white;">
-                    <li onclick="pressButton(this)" class="webVideosListLi" style="background-color: black; border:none;">
-                        {{value: Title}}
-                        <dot:Button Click="{command: _parent.OpenModal(_this)}" style="display:none;" ButtonTagName="button"></dot:Button>
-                    </li>
+        <div class="cointainer-column">
+            <section class="videos">
+                <dot:Repeater DataSource="{value: Videos}">
+                    <ItemTemplate>
+                        <div class="video" onclick="buttonPress(this)">
+                            <video style="height:150px !important; width:250px !important;  object-fit: fill;" onmouseover="playVideo(this)" o onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
+                                <source src="{value: Preview}" type="video/webm">
+                                Your browser does not support the video taga.
+                            </video>
+                            <span>{{value: Title}}</span>
+                            <dot:Button Click="{command: _root.OpenModal(_this)}" ButtonTagName="button" style="display:none"></dot:Button>
+                        </div>
+                    </ItemTemplate>
                 </dot:Repeater>
-            </ul>
+            </section>
         </div>
-
         <div DataContext="{value: Video}" Visible="{value: _parent.ModalSwitch}" style="position:fixed;width: 100%;   /*modal dialog, ktery se zobrazi po stisknuti edit*/
     height: 100%; /* Full height */ z-index: 1; color:black; /* Sit on top */
     left: 0; overflow: auto;
@@ -57,16 +67,18 @@
                 <iframe src="{value: Url}" frameborder="0" scrolling="no" style="width:600px; min-width:320px; height:300px;"></iframe>
                 <label>Kategorie</label>
                 <br />
-                <dot:Repeater DataSource="{value: _parent.Categories}">
+                <dot:Repeater DataSource="{value: Categories}">
                     <ItemTemplate>
                         <br />
-                        <dot:TextBox list="categories" Text="{value: _this}" />
+                        <dot:TextBox list="categories" Text="{value: Name}" />
+                        <dot:Button Click="{command: _parent.RemoveCategory(_this)}">Smazat</dot:Button>
                     </ItemTemplate>
                 </dot:Repeater>
+                <dot:Button Click="{command: AddCategory()}" ButtonTagName="button">Pridat kategorii</dot:Button>
                 <dot:Button ButtonTagName="button" Click="{command: _parent.AddVideo(_this)}">Pridat video</dot:Button>
             </div>                                                                                      <%--konec obsahu--%>
 
         </div>                                                                                           <%--konec modalu--%>
-
+    </main>
 </dot:Content>
 

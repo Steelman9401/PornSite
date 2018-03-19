@@ -107,4 +107,5 @@ C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.dll
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.pdb
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.csprojResolveAssemblyReference.cache
 C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.csprojResolveAssemblyReference.cache
-C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Release\PornSite.Migrations.root.resources
+C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Release\PornSite.Migrations.durHD.resources
+C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Release\PornSite.csproj.CopyComplete

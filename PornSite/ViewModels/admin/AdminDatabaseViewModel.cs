@@ -12,24 +12,26 @@ namespace PornSite.ViewModels.admin
 {
     public class AdminDatabaseViewModel : PornSite.ViewModels.MasterPageViewModel
     {
-        public GridViewDataSet<VideoDTO> Videos { get; set; }
-        public PornRepository Rep { get; set; } = new PornRepository();
+        public AdminRepository AdminRep { get; set; } = new AdminRepository();
+        public GridViewDataSet<VideoDTO> Videos { get; set; } = new GridViewDataSet<VideoDTO>()
+        {
+            PagingOptions = { PageSize = 20 }
+        };
         public VideoDTO Video { get; set; }
         public bool ModalSwitch { get; set; } = false;
-        public override Task Init()
+        public override Task PreRender()
         {
-            Videos = GridViewDataSet.Create(gridViewDataSetLoadDelegate: Rep.GetAllVideosAdmin, pageSize: 20);
-            return base.Init();
+            Videos.OnLoadingDataAsync = option => AdminRep.GetAllVideosAdmin(option);
+            return base.PreRender();
         }
-        public void RemoveVideo(VideoDTO video)
-        {
-            Task.Run(() => this.Rep.RemoveVideo(video.Id));
-            Videos.Items.Remove(video);
-        }
-        public void EditVideo(VideoDTO vid)
-        {
-            Video = vid;
+        public async Task EditVideo(VideoDTO vid)
+        {            
             ModalSwitch = true;
+            Video = await AdminRep.GetVideoById(vid.Id);
+        }
+        public void CloseVideo()
+        {
+            ModalSwitch = false;
         }
     }
 }

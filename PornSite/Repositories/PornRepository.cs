@@ -12,108 +12,153 @@ namespace PornSite.Repositories
 {
     public class PornRepository
     {
-        public async Task<GridViewDataSetLoadedData<VideoDTO>> GetAllVideos(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, string search)
+        public async Task<GridViewDataSetLoadedData<VideoDTO>> GetAllVideos(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, string search, bool loadmobile)
         {
-            if (string.IsNullOrEmpty(search))
+            if (loadmobile)
             {
-                using (var db = new myDb())
+                if (string.IsNullOrEmpty(search))
                 {
-                    db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
-                    var query = await db.Videos.Select(x => new VideoDTO
+                    using (var db = new myDb())
                     {
-                        Id = x.Id,
-                        Img = x.Img,
-                        Title = x.Title,
-                        Views = x.Views,
-                        Preview = x.Preview
-                    }).OrderByDescending(p => p.Id).ToListAsync();
-                    return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
+                        db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+                        var query = await db.Videos.Where(p => p.Url.Contains("tuber")).Select(x => new VideoDTO
+                        {
+                            Id = x.Id,
+                            Img = x.Img,
+                            Title = x.Title,
+                            Views = x.Views,
+                            Preview = x.Preview
+                        }).OrderByDescending(p => p.Id).ToListAsync();
+                        return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
+                    }
+                }
+                else
+                {
+                    using (var db = new myDb())
+                    {
+                        var query = await db.Videos
+                            .Where(x => x.Url.Contains("tuber") && (x.Title.ToLower().Contains(search) || x.Categories.Select(p => p.Name.ToLower()).Contains(search)))
+                            .Select(a => new VideoDTO
+                            {
+                                Id = a.Id,
+                                Img = a.Img,
+                                Title = a.Title,
+                                Views = a.Views,
+                                Preview = a.Preview
+                            }).OrderByDescending(t => t.Id).ToListAsync();
+                        return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
+                    }
                 }
             }
             else
             {
-                using (var db = new myDb())
+                if (string.IsNullOrEmpty(search))
                 {
-                    var query = await db.Videos
-                        .Where(x => x.Title.ToLower().Contains(search) || x.Categories.Select(p => p.Name.ToLower()).Contains(search))
-                        .Select(a => new VideoDTO
+                    using (var db = new myDb())
+                    {
+                        db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+                        var query = await db.Videos.Select(x => new VideoDTO
                         {
-                            Id = a.Id,
-                            Img = a.Img,
-                            Title = a.Title,
-                            Views = a.Views,
-                            Preview = a.Preview
-                        }).OrderByDescending(t => t.Id).ToListAsync();
-                    return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
+                            Id = x.Id,
+                            Img = x.Img,
+                            Title = x.Title,
+                            Views = x.Views,
+                            Preview = x.Preview
+                        }).OrderByDescending(p => p.Id).ToListAsync();
+                        return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
+                    }
+                }
+                else
+                {
+                    using (var db = new myDb())
+                    {
+                        var query = await db.Videos
+                            .Where(x => x.Title.ToLower().Contains(search) || x.Categories.Select(p => p.Name.ToLower()).Contains(search))
+                            .Select(a => new VideoDTO
+                            {
+                                Id = a.Id,
+                                Img = a.Img,
+                                Title = a.Title,
+                                Views = a.Views,
+                                Preview = a.Preview
+                            }).OrderByDescending(t => t.Id).ToListAsync();
+                        return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
+                    }
                 }
             }
         }
-
-        public async Task<GridViewDataSetLoadedData<VideoDTO>> GetSearchResult(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, string search)
+        public async Task<GridViewDataSetLoadedData<VideoDTO>>GetAllVideosByViews(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, string search, bool loadmobile)
         {
-            using (var db = new myDb())
+            if (loadmobile)
             {
-                var query = await db.Videos
-                    .Where(x => x.Title.ToLower().Contains(search) || x.Categories.Select(p => p.Name.ToLower()).Contains(search))
-                    .Select(a => new VideoDTO
-                    {
-                        Id = a.Id,
-                        Img = a.Img,
-                        Title = a.Title,
-                        Views = a.Views,
-                        Preview = a.Preview
-                    }).OrderByDescending(t => t.Id).ToListAsync();
-                return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
-            }
-        }
-        public GridViewDataSetLoadedData<VideoDTO> GetAllVideosAdmin(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions)
-        {
-            using (var db = new myDb())
-            {
-                var query = db.Videos.Select(x => new VideoDTO
+                if (string.IsNullOrEmpty(search))
                 {
-                    Id = x.Id,
-                    Img = x.Img,
-                    Title = x.Title,
-                    Views = x.Views,
-                    Preview = x.Preview,
-                    Description = x.Description
-                }).OrderByDescending(p => p.Id).AsQueryable();
-                return query.GetDataFromQueryable(gridViewDataSetLoadOptions);
-            }
-        }
-        public async Task<GridViewDataSetLoadedData<VideoDTO>>GetAllVideosByViews(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, string search)
-        {
-            if (string.IsNullOrEmpty(search))
-            {
-                using (var db = new myDb())
-                {
-                    var query = await db.Videos.Select(x => new VideoDTO
+                    using (var db = new myDb())
                     {
-                        Id = x.Id,
-                        Img = x.Img,
-                        Title = x.Title,
-                        Views = x.Views,
-                        Preview = x.Preview
-                    }).OrderByDescending(p => p.Views).ToListAsync();
-                    return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
+                        var query = await db.Videos
+                            .Where(p=>p.Url.Contains("tuber"))
+                            .Select(x => new VideoDTO
+                        {
+                            Id = x.Id,
+                            Img = x.Img,
+                            Title = x.Title,
+                            Views = x.Views,
+                            Preview = x.Preview
+                        }).OrderByDescending(p => p.Views).ToListAsync();
+                        return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
+                    }
+                }
+                else
+                {
+                    using (var db = new myDb())
+                    {
+                        var query = await db.Videos
+                            .Where(x => x.Title.ToLower().Contains(search) || x.Categories.Select(p => p.Name.ToLower()).Contains(search))
+                            .Select(a => new VideoDTO
+                            {
+                                Id = a.Id,
+                                Img = a.Img,
+                                Title = a.Title,
+                                Views = a.Views,
+                                Preview = a.Preview
+                            }).OrderByDescending(t => t.Views).ToListAsync();
+                        return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
+                    }
                 }
             }
             else
             {
-                using (var db = new myDb())
+                if (string.IsNullOrEmpty(search))
                 {
-                    var query = await db.Videos
-                        .Where(x => x.Title.ToLower().Contains(search) || x.Categories.Select(p => p.Name.ToLower()).Contains(search))
-                        .Select(a => new VideoDTO
+                    using (var db = new myDb())
+                    {
+                        var query = await db.Videos.Select(x => new VideoDTO
                         {
-                            Id = a.Id,
-                            Img = a.Img,
-                            Title = a.Title,
-                            Views = a.Views,
-                            Preview = a.Preview
-                        }).OrderByDescending(t => t.Views).ToListAsync();
-                    return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
+                            Id = x.Id,
+                            Img = x.Img,
+                            Title = x.Title,
+                            Views = x.Views,
+                            Preview = x.Preview
+                        }).OrderByDescending(p => p.Views).ToListAsync();
+                        return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
+                    }
+                }
+                else
+                {
+                    using (var db = new myDb())
+                    {
+                        var query = await db.Videos
+                            .Where(x => x.Title.ToLower().Contains(search) || x.Categories.Select(p => p.Name.ToLower()).Contains(search))
+                            .Select(a => new VideoDTO
+                            {
+                                Id = a.Id,
+                                Img = a.Img,
+                                Title = a.Title,
+                                Views = a.Views,
+                                Preview = a.Preview
+                            }).OrderByDescending(t => t.Views).ToListAsync();
+                        return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
+                    }
                 }
             }
         }
@@ -187,69 +232,12 @@ namespace PornSite.Repositories
                 List<VideoDTO> videos = new List<VideoDTO>();
                 return videos;
             }
-        }
-        public async Task<IEnumerable<string>> GetImages()
-        {
-            using (var db = new myDb())
-            {
-                return await db.Videos.OrderByDescending(p => p.Id)
-                    .Select(x => x.Img).Take(100).ToListAsync();
-            }
-        }
-        public async Task AddPorn(VideoDTO vid)
-        {
-            Video video = new Video();
-            video.Description = vid.Description;
-            video.Title = vid.Title;
-            video.Url = vid.Url;
-            video.Img = vid.Img;
-            video.Date = DateTime.Now;
-            video.Preview = vid.Preview;
-            video.HD = vid.HD;
-            video.Duration = vid.Duration;
-            PornRepository rep = new PornRepository();
-            List<Category> listCat = new List<Category>();
-            foreach (CategoryDTO item in vid.Categories)
-            {
-                Category cat = new Category();
-                cat.Name = item.Name;
-                listCat.Add(cat);
-            }
-            using (var db = new myDb())
-            {
-                foreach (Category item in listCat)
-                {
-                    Category tag = await db.Categories
-                  .Where(x => x.Name == item.Name)
-                  .FirstOrDefaultAsync();
-                    if (tag == null)
-                    {
-                        video.Categories.Add(item);
-                    }
-                    else
-                    {
-                        video.Categories.Add(tag);
-                    }
-                }
-                db.Videos.Add(video);
-               await db.SaveChangesAsync();
-
-            }
-        }
+        }       
         public async Task<IEnumerable<string>> GetAllCategories()
         {
             using (var db = new myDb())
             {
                 return await db.Categories.Select(x => x.Name).ToListAsync();
-            }
-        }
-        public void RemoveVideo(int Id)
-        {
-            using (var db = new myDb())
-            {
-                var video = db.Videos.Find(Id);
-                db.Videos.Remove(video);
-                db.SaveChanges();
             }
         }
     }

@@ -20,7 +20,7 @@ namespace PornSite.DTO
         public string Description { get; set; }
         public int Views { get; set; }
         public string Preview { get; set; }
-        public List<CategoryDTO> Categories { get; set; }
+        public IEnumerable<CategoryDTO> Categories { get; set; }
         public GridViewDataSet<CommentDTO> Comments { get; set; } = new GridViewDataSet<CommentDTO>()
         {
             PagingOptions = { PageSize = 3 }
@@ -52,11 +52,31 @@ namespace PornSite.DTO
         public void AddCategory()
         {
             CategoryDTO cat = new CategoryDTO();
-            Categories.Add(cat);
+            var newCat = Categories.ToList();
+            newCat.Add(cat);
+            Categories = newCat;
         }
         public void RemoveCategory(CategoryDTO cat)
         {
-            Categories.Remove(cat);
+            var newCat = Categories.ToList();
+            newCat.Remove(cat);
+            Categories = newCat;
         }
+        public async Task AddVideo()
+        {
+            AdminRepository AdminRep = new AdminRepository();
+            await AdminRep.AddPorn(this);
+        }
+        public async Task RemoveVideo()
+        {
+            AdminRepository AdminRep = new AdminRepository();
+            await AdminRep.RemoveVideo(this.Id);
+        }
+        public async Task UpdateVideo()
+        {
+            AdminRepository AdminRep = new AdminRepository();
+            await AdminRep.UpdateVideo(this);
+        }
+       
     }
 }

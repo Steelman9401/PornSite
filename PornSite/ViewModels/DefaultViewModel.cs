@@ -26,6 +26,7 @@ namespace PornSite.ViewModels
         {
             get { return Context.GetOwinContext().Authentication.User.Identity.GetUserId(); }
         }
+        public bool LoadMobile { get; set; } = false;
         public PornRepository rep { get; set; } = new PornRepository();
         public int Switch { get; set; } = 0;
         public int CatComSwitch { get; set; } = 0;
@@ -43,11 +44,11 @@ namespace PornSite.ViewModels
             {
                 if (Switch == 0 && (Videos.IsRefreshRequired || !Context.IsPostBack))
                 {
-                    Videos.OnLoadingDataAsync = option => rep.GetAllVideos(option, SearchParametr);
+                    Videos.OnLoadingDataAsync = option => rep.GetAllVideos(option, SearchParametr, LoadMobile);
                 }
-                else if(Videos.IsRefreshRequired || !Context.IsPostBack)
+                else if( Switch == 1 && (Videos.IsRefreshRequired || !Context.IsPostBack))
                 {
-                    Videos.OnLoadingDataAsync = option => rep.GetAllVideosByViews(option, SearchParametr);
+                    Videos.OnLoadingDataAsync = option => rep.GetAllVideosByViews(option, SearchParametr, LoadMobile);
                 }
             }
             else if (CatComSwitch == 1)
@@ -93,6 +94,10 @@ namespace PornSite.ViewModels
         {
             ShowVideo = false;
             CatComSwitch = 0;
+        }
+        public void GetMobileVideos()
+        {
+            Videos.IsRefreshRequired = true;
         }
     }
 }

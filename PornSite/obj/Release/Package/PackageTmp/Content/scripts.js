@@ -9,7 +9,10 @@ function stopVideo(e) {
     e.pause();
 }
 function buttonPress(e) {
-    e.nextElementSibling.click();
+    e.getElementsByTagName("button")[0].click();
+    //$("#modal-video").css("display", "flex")
+    //    .hide()
+    //    .slideToggle(300);
 }
 function pressButton(e) {
     e.children[0].click();
@@ -22,4 +25,15 @@ function hideVideo(e) {
     e.nextElementSibling.click();
     $("#modal-video").slideToggle(200);
 }
+
+$('.button').click(function () {
+    var buttonId = $(this).attr('id');
+    $('#modal-container').removeAttr('class').addClass(buttonId);
+    $('body').addClass('modal-active');
+})
+
+$('#modal-container').click(function () {
+    $(this).addClass('out');
+    $('body').removeClass('modal-active');
+});
 

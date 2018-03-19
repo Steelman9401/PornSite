@@ -22,6 +22,7 @@ namespace PornSite.ViewModels
         public IEnumerable<string> Images { get; set; }
         public int SwitchWebsite { get; set; }
         public VideoDTO Video { get; set; }
+        public AdminRepository AdminRep { get; set; } = new AdminRepository();
         public PornRepository PornRep { get; set; } = new PornRepository();
         public IEnumerable<string> DatabaseCategories { get; set; }
         public List<WebCategory> WebCategories { get; set; } = new List<WebCategory>
@@ -44,8 +45,8 @@ namespace PornSite.ViewModels
             if (!Context.IsPostBack)
             {
                 DatabaseCategories = await PornRep.GetAllCategories();
-                Images = await PornRep.GetImages();
-                ScrapRep.GetRedTubeVideos(Videos,string.Empty,Images);
+                Images = await AdminRep.GetImages();
+                ScrapRep.GetRedTubeVideos(Videos, string.Empty, Images);
             }
 
             await base.PreRender();
@@ -55,13 +56,11 @@ namespace PornSite.ViewModels
         {
             Video = vid;
             if (SwitchWebsite == 0)
-            {
-                ScrapRep.GetCategoriesRedTube(ref vid);
-            }
-            else
-            {
-                ScrapRep.GetCategoriesXhamster(ref vid);
-            }
+            ScrapRep.GetCategoriesRedTube(ref vid);
+            else if(SwitchWebsite==1)          
+            ScrapRep.GetCategoriesXhamster(ref vid);
+            else if (SwitchWebsite == 2)
+            ScrapRep.GetCategoriesDrTuber(ref vid);
             ModalSwitch = true;
         }
         public void CloseModal()
@@ -71,17 +70,19 @@ namespace PornSite.ViewModels
 
         public async Task AddVideo(VideoDTO vid)
         {
-            await PornRep.AddPorn(vid);
             ModalSwitch = false;
             Videos.RemoveAll(x => x.Url == vid.Url);
+            await vid.AddVideo();
         }
         public void ChangeCategoryList()
         {
             Videos = new List<VideoDTO>();
             if (SwitchWebsite == 1)
                 ScrapRep.GetXhamsterVideos(Videos, SelectedWebCategory,Images);
-            else
+            else if(SwitchWebsite==0)
                 ScrapRep.GetRedTubeVideos(Videos, SelectedWebCategory,Images);
+            else if(SwitchWebsite==2)
+                ScrapRep.GetDrTuberVideos(Videos, SelectedWebCategory, Images);
         }
         public void SwitchToRedTube()
         {
@@ -94,6 +95,12 @@ namespace PornSite.ViewModels
             SwitchWebsite = 1;
             Videos = new List<VideoDTO>();
             ScrapRep.GetXhamsterVideos(Videos, SelectedWebCategory,Images);
+        }
+        public void SwitchToDrTuber()
+        {
+            SwitchWebsite = 2;
+            Videos = new List<VideoDTO>();
+            ScrapRep.GetDrTuberVideos(Videos, SelectedWebCategory, Images);
         }
     }
 }

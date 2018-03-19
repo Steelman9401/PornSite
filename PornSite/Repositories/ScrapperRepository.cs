@@ -123,6 +123,50 @@ namespace PornSite.Repositories
 
             }
         }
+        public void GetDrTuberVideos(List<VideoDTO> Videos, string category, IEnumerable<string> Images)
+        {
+            using (var client = new WebClient())
+            {
+                var html = "";
+                client.Headers.Add("user-agent", "Mozilla / 5.0(Windows NT 10.0; WOW64; Trident / 7.0; rv: 11.0) like Gecko");              
+                    try
+                    {
+                    if (category == "ebony")
+                    {
+                        html = client.DownloadString("http://www.drtuber.com/black-and-ebony");
+                    }
+                    else
+                    {
+                        html = client.DownloadString("http://www.drtuber.com/" + category);
+                    }
+                    }
+                    catch
+                    {
+                        html = client.DownloadString("http://www.drtuber.com/" + category + "s");
+                    }
+                HtmlDocument document = new HtmlDocument();
+                document.LoadHtml(html);
+                var videos = document.DocumentNode.SelectNodes("//a[@class='th ch-video']").ToList();
+                foreach (HtmlNode item in videos)
+                {
+                    VideoDTO video = new VideoDTO();
+                    var img = item.SelectSingleNode(".//img");
+                    var toolbar = item.SelectSingleNode("./strong");
+                    var hd = toolbar.SelectSingleNode(".//i[@class='quality']");
+                    if(hd!=null)
+                    {
+                        video.HD = true;
+                    }
+                    video.Duration = toolbar.SelectSingleNode(".//em[@class='time_thumb']").InnerText.Replace(" ", "");
+                    video.Img = img.GetAttributeValue("src", string.Empty);
+                    video.Preview = img.GetAttributeValue("data-webm", string.Empty);
+                    video.Title = img.GetAttributeValue("alt", string.Empty);
+                    video.Url = "http://www.drtuber.com" + item.GetAttributeValue("href", string.Empty);
+                    Videos.Add(video);
+
+                }
+            }
+        }
         private bool ImageExists(string image, IEnumerable<string> Images)
         {
             int count = Images.Where(x => x == image).Count();
@@ -168,11 +212,43 @@ namespace PornSite.Repositories
                 document.LoadHtml(html);
                 var url = video.Url.Substring(20);
                 video.Url = "https://embed.redtube.com/?id=" + url;
-                video.Categories = document.DocumentNode.SelectNodes("//div[@class='video-infobox-content']")[4].SelectNodes(".//a")
-                    .Select(x => new CategoryDTO()
-                    {
-                        Name = x.InnerText
-                    }).ToList();
+                try
+                {
+                    video.Categories = document.DocumentNode.SelectNodes("//div[@class='video-infobox-content']")[4].SelectNodes(".//a")
+                        .Select(x => new CategoryDTO()
+                        {
+                            Name = x.InnerText
+                        }).ToList();
+                }
+                catch
+                {
+
+                }
+            }
+        }
+        public void GetCategoriesDrTuber(ref VideoDTO video)
+        {
+            using (var client = new WebClient())
+            {
+                client.Headers.Add("user-agent", "Mozilla / 5.0(Windows NT 10.0; WOW64; Trident / 7.0; rv: 11.0) like Gecko");
+                var html = client.DownloadString(video.Url);
+                HtmlDocument document = new HtmlDocument();
+                document.LoadHtml(html);
+                var array = video.Url.Split('/');
+                video.Url = "http://www.drtuber.com/embed/" + array[4];
+                try
+                {
+                    video.Categories = document.DocumentNode.SelectSingleNode("//div[@class='categories_list']")
+                        .SelectNodes(".//a")
+                        .Select(x => new CategoryDTO()
+                        {
+                            Name = x.GetAttributeValue("title", string.Empty)
+                        }).ToList();
+                }
+                catch
+                {
+
+                }
             }
         }
     }

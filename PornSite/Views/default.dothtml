@@ -1,92 +1,128 @@
 ﻿@viewModel PornSite.ViewModels.DefaultViewModel, PornSite
 @masterPage Views/MasterPage.dotmaster
 <dot:Content ContentPlaceHolderID="MainContent">
-    <div class="cointainer-column">
-       
-        <section class="menu">
-            <ul>
-                <li><dot:Button ID="btnTesting" class="btn btn-primary" ButtonTagName="button" Click="{command: LoadLatest()}">Nejnovejsi</dot:Button></li>
-                <li><dot:Button class="btn btn-primary" ButtonTagName="button" Click="{command: LoadMostViewed()}">Nejsledovanejsi</dot:Button></li>
-            </ul>
-        </section>
-        <h3 Visible="{value: SearchParametr=='' ? false:true}" style="float:left">Vysledky hledani pro: <strong>{{value: SearchParametr}}</strong></h3>
-        <section>
-            <dot:Repeater class="videos" DataSource="{value: Videos}">
-                <ItemTemplate>
-                    <div class="video" style="cursor: pointer" onclick="pressButton(this)">
-                        <dot:Button Click="{command: _root.LoadVideo(_this)}" ButtonTagName="button" style="display:none;" />
-                        <video style="height:150px !important; width:250px !important;  object-fit: fill;" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
-                            <source src="{value: Preview}" type="video/webm">                    
-                            Your browser does not support the video taga.
-                        </video>
-                        <span>{{value: Title}}</span>
-                    </div>
-                </ItemTemplate>
-            </dot:Repeater>
-        </section>
-        <section class="pagination">
-            <dot:DataPager DataSet="{value: Videos}" />
-        </section>
-    </div>
-    <div id="modal-video" style="display:none;">
-        <div class="cointainer-modal">
-            <div class="modal-header">
-                <div onclick="hideVideo(this)" id="close"><button>Zavrit</button></div>
-                <dot:Button ButtonTagName="button" style="display:none" Click="{command: _root.HideVideo()}"></dot:Button>
-            </div>
-            <div class="modal-body" DataContext="{value: Video}">
-                <div class="modal-container">
-                    <h2>{{value: Title}}</h2>
-                    <iframe width="480" height="360" src="{value: Url}" frameborder="0" scrolling="no" allowfullscreen></iframe>
-                    <div class="tags">
-                        <dot:Repeater DataSource="{value: Categories}">
-                            <ItemTemplate>
-                                <a>{{value: Name}}</a>
-                            </ItemTemplate>
-                        </dot:Repeater>
-                    </div>
-                    <div class="menu">
-                        <ul>
-                            <li onclick="buttonPress(this)">komentáře</li>
-                            <dot:Button ButtonTagName="button" Click="{command: _root.GetComments()}" style="display:none"></dot:Button>
-                            <li onclick="buttonPress(this)">podobná videa</li>
-                            <dot:Button ButtonTagName="button" Click="{command: _root.GetSuggestions()}" style="display:none"></dot:Button>
-                        </ul>
-                    </div>
-                    <h3 Visible="{value: _root.CatComSwitch==1 ? true:false}">Komentáře</h3>
-                    <div Visible="{value: _root.CatComSwitch==1 ? true:false}" class="comments">
-                        <dot:TextBox Visible="{value: _root.UserId!=null ? true:false}" Text="{value: _root.ComText}" />
-                        <dot:Button Visible="{value: _root.UserId!=null ? true:false}" Click="{command: _root.AddComment()}">Pridat komentar</dot:Button>
-                        <br />
-                        <br />
-                        <dot:Repeater DataSource="{value: Comments}">
-                            <ItemTemplate>
-                                <div class="comment">
-                                    <span>{{value: Username}}</span>
-                                    <p>{{value: Text}}</p>
-                                </div>
-                            </ItemTemplate>
-                        </dot:Repeater>
-                        <dot:DataPager DataSet="{value: Comments}" />
-                    </div>
-                    <h3 Visible="{value: _root.CatComSwitch==2 ? true:false}">Podobná videa</h3>
-                    <div Visible="{value: _root.CatComSwitch==2 ? true:false}" class="related-videos">
-                        <dot:Repeater DataSource="{value: SuggestedVideos}">
-                            <ItemTemplate>
-                                <div class="related-video">
-                                    <dot:Button Click="{command: _root.LoadVideo(_this)}" ButtonTagName="button" Text="show" />
-                                    <video style="" onmouseover="playVideo(this)" onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
-                                        <source src="{value: Preview}" type="video/webm">
-                                        Your browser does not support the video taga.
-                                    </video>
+    <main>
+        <div class="cointainer-column">
+            <section class="menu">
+                <ul>
+                    <li>nejnovější</li>
+                    <li>nejsledovanější</li>
+                </ul>
+            </section>
+            <dot:CheckBox Text=" pouze videa pro mobil" Checked="{value: LoadMobile}" Changed="{command: GetMobileVideos()}" />
+            <section class="videos">
+                <dot:Repeater DataSource="{value: Videos}">
+                    <ItemTemplate>
+                        <div class="video" onclick="buttonPress(this)">
+                            <video style="height:150px !important; width:250px !important;  object-fit: fill;" onmouseover="playVideo(this)" o onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
+                                <source src="{value: Preview}" type="video/webm">
+                                Your browser does not support the video taga.
+                            </video>
+                            <span>{{value: Title}}</span>
+                            <dot:Button Click="{command: _root.LoadVideo(_this)}" ButtonTagName="button" style="display:none"></dot:Button>
+                        </div>
+                    </ItemTemplate>
+                </dot:Repeater>
+                <dot:DataPager class="pagination" DataSet="{value: Videos}" />
+            </section>
+            <div ID="backgroundO" style="position:fixed;top:0;width:100%; height:100%; z-index:50; left:0; background: rgba(0,0,0,0.6); display:none;">
 
-                                </div>
-                            </ItemTemplate>
-                        </dot:Repeater>
+            </div>
+            <div id="modal-video">
+                <div class="cointainer-modal">
+                    <div class="modal-header">
+                        <div id="close">
+                            <dot:Button ID="closeButton" style="display:none" Click="{command: HideVideo()}" ButtonTagName="button"></dot:Button>
+                        </div>
                     </div>
+                    <div class="modal-body" DataContext="{value: Video}">
+                        <dot:UpdateProgress>
+                            <div class="loader">
+                                <div id="floatingCirclesG">
+                                    <div class="f_circleG" id="frotateG_01"></div>
+                                    <div class="f_circleG" id="frotateG_02"></div>
+                                    <div class="f_circleG" id="frotateG_03"></div>
+                                    <div class="f_circleG" id="frotateG_04"></div>
+                                    <div class="f_circleG" id="frotateG_05"></div>
+                                    <div class="f_circleG" id="frotateG_06"></div>
+                                    <div class="f_circleG" id="frotateG_07"></div>
+                                    <div class="f_circleG" id="frotateG_08"></div>
+                                </div>
+                            </div>
+                        </dot:UpdateProgress>
+                        <div class="modal-container">
+                            <iframe width="960" height="550" src="{value: Url}"></iframe>
+                            <h2>{{value: Title}}</h2>
+                            <div class="tags">
+                                <span>Kategorie:</span>
+                                <dot:Repeater DataSource="{value: Categories}">
+                                    <ItemTemplate>
+                                        <a>{{value: Name}}<span style="color:white;">,</span></a>
+                                    </ItemTemplate>
+                                </dot:Repeater>
+                            </div>
+                            <div class="menu">
+                                <ul>
+                                    <li id="comments">komentáře</li>
+                                    <li id="related">podobná videa</li>
+                                </ul>
+                            </div>
+                            <div class="comments">
+                                <h3>Komentáře</h3>
+                                <div class="comment">
+                                    <span>User</span>
+                                    <p>nejakej komentar</p>
+                                </div>
+                                <div class="comment">
+                                    <span>User2</span>
+                                    <p>nejakej komentarnejakej komentarnejakej komentar</p>
+                                </div>
+                                <div class="comment">
+                                    <span>User3</span>
+                                    <p>nejakej komentarnejakej komentar</p>
+                                </div>
+                                <div class="pagination">
+                                    <ul>
+                                        <li><a><<</a></li>
+                                        <li><a><</a></li>
+                                        <li class="active"><a>1</a></li>
+                                        <li><a>2</a></li>
+                                        <li><a>3</a></li>
+                                        <li><a>></a></li>
+                                        <li><a>>></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="related-videos-container">
+                                <h3>Podobná videa</h3>
+                                <div class="related-videos">
+                                    <div class="related-video">
+                                        <a href="#">
+                                            <img src="img/video.jpg">
+                                            <span>video</span>
+                                        </a>
+                                    </div>
+                                    <div class="related-video">
+                                        <a href="#">
+                                            <img src="img/video.jpg">
+                                            <span>video</span>
+                                        </a>
+                                    </div>
+                                    <div class="related-video">
+                                        <a href="#">
+                                            <img src="img/video.jpg">
+                                            <span>video</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gradient"></div>
                 </div>
             </div>
-            <div Visible="{value:_root.CatComSwitch==0 ? false:true}" class="gradient"></div>
         </div>
-    </div>
+        <a href="#modal-video" class="btn">Open Modal</a>
+    </main>
+
 </dot:Content>

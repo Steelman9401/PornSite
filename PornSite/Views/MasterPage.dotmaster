@@ -9,35 +9,61 @@
     <meta name="theme-color" content="#000" />
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <%--<dot:RequiredResource Name="bootstrap" />--%>
-    <dot:RequiredResource Name="jquery" />
+    <link href="../Content/animate.css" rel="stylesheet" />
     <link href="../Content/style.css" rel="stylesheet" />
-    <script src="../Content/scripts.js"></script>
     <link href="../Content/master.css" rel="stylesheet" />
+    <link href="../Content/light-modal.min.css" rel="stylesheet" /
+    <script src="../Scripts/jquery-3.3.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
 
 </head>
 <body>
     <header>
         <div class="cointainer-row">
-            <dot:RouteLink RouteName="Default"><h1 class="logo">Vymasti.<span class="si">si</span></h1></dot:RouteLink>
-            <div class="menu-icon" id="menu-icon"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <a href="/"><h1 class="logo">Vymasti.<span class="si">si</span></h1></a>
+            <div class="menu-icon" id="menu-icon"></div>
             <form id="form">
-                <dot:TextBox Text="{value: Search}" class="search-text" name="search" placeholder="milf, pov, teen..." />
-                <dot:Button Click="{command: DoSearch()}" ButtonTagName="button" ID="search" Text="hledat" class="search-button" IsSubmitButton="true" />
+                <input class="search-text" type="text" name="search" placeholder="milf, pov, teen...">
+                <input id="search" value="hledat" class="search-button" type="submit">
             </form>
             <ul id="menu">
-                <li>KATEGORIE</li>
-                <li>PŘIHLÁSIT SE</li>
+                <li><a href="/kategorie">KATEGORIE</a></li>
+                <li class="menu-login">PŘIHLÁSIT SE</li>
             </ul>
             <a class="categories">KATEGORIE</a>
-            <a Visible="{value:CurrentUser=='' ? true:false}" class="login" onclick="buttonPress(this)">přihlásit se</a>
-            <dot:Button Click="{command: ShowLoginModal()}" class="btn btn-primary" ButtonTagName="button" style="display:none"></dot:Button>
-            <a Visible="{value: CurrentUser!=null ? true:false}" class="login">{{value: CurrentUser}}</a>
+            <a class="login">přihlásit se</a>
         </div>
     </header>
-    <main>
-        <dot:SpaContentPlaceHolder ID="MainContent" style="margin-top:50px;" />
-    </main>
+
+    <div id="categories-preview">
+        <div class="container">
+            <a>
+                <img>
+                <span>teen</span>
+            </a>
+            <a>
+                <img>
+                <span>teen</span>
+            </a>
+            <a>
+                <img>
+                <span>teen</span>
+            </a>
+            <a>
+                <img>
+                <span>teen</span>
+            </a>
+            <a>
+                <img>
+                <span>teen</span>
+            </a>
+            <a href="/kategorie">
+                <img>
+                <span>další</span>
+            </a>
+        </div>
+    </div>
+    <dot:SpaContentPlaceHolder ID="MainContent" style="margin-top:50px;" />
     <footer>
         <div class="cointainer-row">
             <dot:RouteLink RouteName="adminWeb">Administrace</dot:RouteLink>
@@ -68,7 +94,7 @@
             //    window.focus();
             //}
 
-    }
+        }
     </script>
     <div id="modal-login" Visible="{value: ShowLogin ? true:false}">
         <div class="cointainer-modal">
@@ -86,5 +112,11 @@
             </div>
         </div>
     </div>
+    <script src="../Content/scripts.js"></script>
+    <script src="../Scripts/modal.js"></script>
+    <script src="../Scripts/modal-video.js"></script>
+    <script src="../Scripts/menu.js"></script>
+    <script src="../Scripts/login.js"></script>
+    <script src="../Scripts/categories.js"></script>
 </body>
 </html>
