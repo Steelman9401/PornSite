@@ -17,15 +17,7 @@ namespace PornSite.ViewModels
 {
     public class DefaultViewModel : MasterPageViewModel
     {
-        public GridViewDataSet<VideoDTO> Videos { get; set; } = new GridViewDataSet<VideoDTO>()
-        {
-            PagingOptions = { PageSize = 20 }
-        };
         public string SearchParametr { get; set; } = "";
-        public string UserId
-        {
-            get { return Context.GetOwinContext().Authentication.User.Identity.GetUserId(); }
-        }
         public bool LoadMobile { get; set; } = false;
         public PornRepository rep { get; set; } = new PornRepository();
         public int Switch { get; set; } = 0;
@@ -34,8 +26,32 @@ namespace PornSite.ViewModels
         public VideoDTO Video { get; set; } = new VideoDTO();
         public string ComText { get; set; }
         PornRepository PornRep = new PornRepository();
+        public List<VideoDTO> RecommendedVideos { get; set; } = new List<VideoDTO>();
+        public GridViewDataSet<VideoDTO> Videos { get; set; } = new GridViewDataSet<VideoDTO>()
+        {
+            PagingOptions = { PageSize = 20 }
+        };
+        public string UserId
+        {
+            get { return Context.GetOwinContext().Authentication.User.Identity.GetUserId(); }
+        }
         public async override Task PreRender()
         {
+            if (Videos.IsFirstPage && !Context.IsPostBack) //first load
+            {
+                RecommendedVideos = await PornRep.GetRecommendedVideos();
+            }
+            else if(!ShowVideo && Videos.IsRefreshRequired)
+            {
+                if (Videos.IsRefreshRequired && Videos.IsFirstPage)
+                {
+                    RecommendedVideos = await PornRep.GetRecommendedVideos();
+                }
+                else
+                {
+                    RecommendedVideos = null;
+                }
+            }
             if (!string.IsNullOrEmpty(Context.Parameters["text"].ToString()))
             {
                 SearchParametr = Context.Parameters["text"].ToString();

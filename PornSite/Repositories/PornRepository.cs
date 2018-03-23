@@ -87,6 +87,75 @@ namespace PornSite.Repositories
                 }
             }
         }
+        public async Task<List<VideoDTO>> GetRecommendedVideos()
+        {
+            if (HttpContext.Current.Request.Cookies["CategoryCount"] != null)
+            {
+                List<string> categories = HttpContext.Current.Request.Cookies["CategoryCount"]["array"]
+                    .Split(':')
+                    .Take(2)
+                    .Select(x => x.ToString().Split(',')[0]).ToList();
+                int first = Convert.ToInt32(categories[0]);
+                int second = Convert.ToInt32(categories[1]);
+                using (var db = new myDb())
+                {
+                    int count = db.Videos
+                        .Where(x => x.Categories.Select(p => p.Id)
+                        .Contains(first) && x.Categories
+                        .Select(o => o.Id)
+                        .Contains(second)).Count();
+                    if (count > 3)
+                    {
+                        int skip = GetRandomNumber(count);
+                        return await db.Videos
+                            .Where(x => x.Categories
+                            .Select(p => p.Id)
+                            .Contains(first) && x.Categories
+                            .Select(o => o.Id)
+                            .Contains(second))
+                            .Select(a => new VideoDTO()
+                            {
+                                Id = a.Id,
+                                Img = a.Img,
+                                Title = a.Title,
+                                Views = a.Views,
+                                Preview = a.Preview
+                            }).OrderBy(s=>s.Id).Skip(skip).Take(4).ToListAsync();
+                    }
+                    else
+                    {
+                        count = db.Videos.Count();
+                        int skip = GetRandomNumber(count);
+                        return await db.Videos
+                           .Select(a => new VideoDTO()
+                           {
+                               Id = a.Id,
+                               Img = a.Img,
+                               Title = a.Title,
+                               Views = a.Views,
+                               Preview = a.Preview
+                           }).OrderBy(s => s.Id).Skip(skip).Take(4).ToListAsync();
+                    }
+                }
+            }
+            else
+            {
+                using (var db = new myDb())
+                {
+                    int count = db.Videos.Count();
+                    int skip = GetRandomNumber(count);
+                    return await db.Videos
+                             .Select(a => new VideoDTO()
+                             {
+                                 Id = a.Id,
+                                 Img = a.Img,
+                                 Title = a.Title,
+                                 Views = a.Views,
+                                 Preview = a.Preview
+                             }).OrderBy(s => s.Id).Skip(skip).Take(4).ToListAsync();
+                }
+            }
+        }
         public async Task<GridViewDataSetLoadedData<VideoDTO>>GetAllVideosByViews(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, string search, bool loadmobile)
         {
             if (loadmobile)
@@ -205,6 +274,7 @@ namespace PornSite.Repositories
                     Id = x.Id,
                     Name = x.Name
                 }).ToList();
+                UpdateCookie(vid.Categories);
                 return vid;
             }
         }
@@ -239,6 +309,94 @@ namespace PornSite.Repositories
             {
                 return await db.Categories.Select(x => x.Name).ToListAsync();
             }
+        }
+        private void BubbleSort(string cookie, ref string[] arr, int type)
+        {
+            if (!string.IsNullOrEmpty(cookie))
+            {
+                arr = cookie.Split(':');
+            }
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                for (int j = 0; j < arr.Length - i - 1; j++)
+                {
+                    if (Convert.ToInt32(arr[j + 1].Split(',')[type]) > Convert.ToInt32(arr[j].Split(',')[type]))
+                    {
+                        string tmp = arr[j + 1];
+                        arr[j + 1] = arr[j];
+                        arr[j] = tmp;
+                    }
+                }
+            }
+        }
+        private void UpdateCookieValue(ref string[] inputArray, int key)
+        {
+            int min = 0;
+            bool found = false;
+            int max = inputArray.Length - 1;
+            while (min <= max)
+            {
+                int mid = (min + max) / 2;
+                if (key == Convert.ToInt32(inputArray[mid].Split(',')[0]))
+                {
+                    var cat = inputArray[mid].Split(',')[0];
+                    var count = Convert.ToInt32(inputArray[mid].Split(',')[1]);
+                    count++;
+                    inputArray[mid] = cat + "," + count;
+                    found = true;
+                    break;
+                }
+                else if (key > Convert.ToInt32(inputArray[mid].Split(',')[0]))
+                {
+                    max = mid - 1;
+                }
+                else
+                {
+                    min = mid + 1;
+                }
+            }
+            if(!found)
+            {
+                Array.Resize(ref inputArray, inputArray.Length + 1);
+                inputArray[inputArray.Length - 1] = key + "," + "1";
+
+            }
+        }
+        private void UpdateCookie(IEnumerable<CategoryDTO> CategoryIds)
+        {
+            string cookie = null;
+            if (HttpContext.Current.Request.Cookies["CategoryCount"] != null)
+            {
+                cookie = HttpContext.Current.Request.Cookies["CategoryCount"]["array"];
+            }
+            if (!string.IsNullOrEmpty(cookie))
+            {
+                string[] sorted = null;
+                BubbleSort(cookie, ref sorted, 0);
+                foreach (CategoryDTO item in CategoryIds)
+                {
+                    UpdateCookieValue(ref sorted, item.Id);
+                }
+                BubbleSort(string.Empty, ref sorted, 1);
+                HttpContext.Current.Response.Cookies["CategoryCount"]["array"] = String.Join(":", sorted);
+            }
+            else
+            {
+                string newCookieString = null;
+                foreach(CategoryDTO item in CategoryIds)
+                {
+                    newCookieString = newCookieString + item.Id + ",1:";
+                }
+                HttpCookie myCookie = new HttpCookie("CategoryCount");
+                myCookie["array"] = newCookieString.Remove(newCookieString.Length - 1);
+                myCookie.Expires = DateTime.Now.AddDays(36500d);
+                HttpContext.Current.Response.Cookies.Add(myCookie);
+            }
+        }
+        private int GetRandomNumber(int n)
+        {
+            Random rnd = new Random();
+            return rnd.Next(0, n-4);
         }
     }
     }
