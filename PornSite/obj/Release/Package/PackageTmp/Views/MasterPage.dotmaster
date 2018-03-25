@@ -21,7 +21,7 @@
     <header>
         <div class="cointainer-row">
             <a href="/"><h1 class="logo">Vymasti.<span class="si">si</span></h1></a>
-            <div class="menu-icon" id="menu-icon"></div>
+            <div class="menu-icon" id="menu-icon"><i class="fas fa-bars"></i></div>
             <form id="form">
                 <input class="search-text" type="text" name="search" placeholder="milf, pov, teen...">
                 <input id="search" value="hledat" class="search-button" type="submit">
@@ -74,17 +74,6 @@
         <div ID="overlay-back"></div>
     </dot:UpdateProgress>--%>
     <script>
-        window.onload = function () {
-
-            $("#menu-icon").click(function () {
-                alert('dsda');
-                $("#form").slideToggle(200);
-                $("#menu").slideToggle(200);
-            });
-            $("#show").click(function () {
-                document.getElementById("lol").click();
-                $('#modal').fadeIn(350);
-            });
             //$(document).keypress(function (e) {
             //    location.href ="http://www.cutestpaw.com/wp-content/uploads/2011/11/friend.jpg"
             //});

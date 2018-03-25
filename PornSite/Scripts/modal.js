@@ -5,7 +5,7 @@
     $(document).on("click", ".video", function () {
         $("#modal-video").css('display', 'flex');
         $("#backgroundO").fadeIn();
-        $("#modal-video").addClass("animated bounceInUp");
+        $("#modal-video").addClass("animated slideInDown");
         $("body").addClass("modal-on");
         $(".comments").hide();
         $(".related-videos-container").hide();
@@ -16,6 +16,7 @@
         
         $("#modal-video").hide();
         $("#backgroundO").fadeOut(500);
+        document.getElementById("closeButton").click();
         $("body").removeClass("modal-on");
     });
 

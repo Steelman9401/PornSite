@@ -17,11 +17,11 @@ namespace PornSite.ViewModels
 {
     public class AdminViewModel : MasterPageViewModel
     {
-        public List<VideoDTO> Videos { get; set; } = new List<VideoDTO>();
+        public List<VideoAdminDTO> Videos { get; set; } = new List<VideoAdminDTO>();
         public ScrapperRepository ScrapRep { get; set; } = new ScrapperRepository();
         public IEnumerable<string> Images { get; set; }
         public int SwitchWebsite { get; set; }
-        public VideoDTO Video { get; set; }
+        public VideoAdminDTO Video { get; set; }
         public AdminRepository AdminRep { get; set; } = new AdminRepository();
         public PornRepository PornRep { get; set; } = new PornRepository();
         public IEnumerable<string> DatabaseCategories { get; set; }
@@ -52,7 +52,7 @@ namespace PornSite.ViewModels
             await base.PreRender();
         }
 
-        public void OpenModal(VideoDTO vid)
+        public void OpenModal(VideoAdminDTO vid)
         {
             Video = vid;
             if (SwitchWebsite == 0)
@@ -68,7 +68,7 @@ namespace PornSite.ViewModels
             ModalSwitch = false;
         }
 
-        public async Task AddVideo(VideoDTO vid)
+        public async Task AddVideo(VideoAdminDTO vid)
         {
             ModalSwitch = false;
             Videos.RemoveAll(x => x.Url == vid.Url);
@@ -76,7 +76,7 @@ namespace PornSite.ViewModels
         }
         public void ChangeCategoryList()
         {
-            Videos = new List<VideoDTO>();
+            Videos = new List<VideoAdminDTO>();
             if (SwitchWebsite == 1)
                 ScrapRep.GetXhamsterVideos(Videos, SelectedWebCategory,Images);
             else if(SwitchWebsite==0)
@@ -87,19 +87,19 @@ namespace PornSite.ViewModels
         public void SwitchToRedTube()
         {
             SwitchWebsite = 0;
-            Videos = new List<VideoDTO>();
+            Videos = new List<VideoAdminDTO>();
             ScrapRep.GetRedTubeVideos(Videos, SelectedWebCategory,Images);
         }
         public void SwitchToXhamster()
         {
             SwitchWebsite = 1;
-            Videos = new List<VideoDTO>();
+            Videos = new List<VideoAdminDTO>();
             ScrapRep.GetXhamsterVideos(Videos, SelectedWebCategory,Images);
         }
         public void SwitchToDrTuber()
         {
             SwitchWebsite = 2;
-            Videos = new List<VideoDTO>();
+            Videos = new List<VideoAdminDTO>();
             ScrapRep.GetDrTuberVideos(Videos, SelectedWebCategory, Images);
         }
     }

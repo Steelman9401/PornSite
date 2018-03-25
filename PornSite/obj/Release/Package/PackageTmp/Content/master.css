@@ -10,9 +10,9 @@ html, body, p, ol, ul, li, textarea, iframe, hr, h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0
 }
-.video
-{
+video {
     cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 ul {
@@ -40,9 +40,10 @@ header {
     height: auto;
     padding: 12px 0;
     font-family: 'Open Sans', sans-serif;
-    top:0;
+    top: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.testAnim {
+.slideInDown {
     -webkit-animation-duration: 0.5s !important;
     animation-duration: 0.5s !important;
     -webkit-animation-fill-mode: both;
@@ -78,20 +79,13 @@ header {
         header .cointainer-row .menu-icon {
             display: none;
             align-self: center;
-            background: url(../img/menu-icon-w.png);
-            background-size: 100%;
-            background-repeat: no-repeat;
-            background-position: center;
             width: 27px;
             height: 27px;
             cursor: pointer
         }
 
             header .cointainer-row .menu-icon:hover {
-                background: url(../img/menu-icon-b.png);
-                background-size: 100%;
-                background-repeat: no-repeat;
-                background-position: center
+                
             }
 
         header .cointainer-row form {
@@ -962,7 +956,8 @@ body.modal-on {
     #modal-video .cointainer-modal {
         height: 100%;
         width: 100%;
-        border-radius: 0px
+        border-radius: 0px;
+        border:none;
     }
 }
 

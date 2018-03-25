@@ -133,7 +133,9 @@
     <Compile Include="Data\Video.cs" />
     <Compile Include="DTO\CategoryDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
-    <Compile Include="DTO\VideoDTO.cs" />
+    <Compile Include="DTO\VideoAdminDTO.cs" />
+    <Compile Include="DTO\VideoDetailDTO.cs" />
+    <Compile Include="DTO\VideoListDTO.cs" />
     <Compile Include="Migrations\201803122356429_durHD.cs" />
     <Compile Include="Migrations\201803122356429_durHD.Designer.cs">
       <DependentUpon>201803122356429_durHD.cs</DependentUpon>

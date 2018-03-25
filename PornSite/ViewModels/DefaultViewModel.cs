@@ -23,11 +23,11 @@ namespace PornSite.ViewModels
         public int Switch { get; set; } = 0;
         public int CatComSwitch { get; set; } = 0;
         public bool ShowVideo { get; set; } = false;
-        public VideoDTO Video { get; set; } = new VideoDTO();
+        public VideoDetailDTO Video { get; set; } = new VideoDetailDTO();
         public string ComText { get; set; }
         PornRepository PornRep = new PornRepository();
-        public List<VideoDTO> RecommendedVideos { get; set; } = new List<VideoDTO>();
-        public GridViewDataSet<VideoDTO> Videos { get; set; } = new GridViewDataSet<VideoDTO>()
+        public List<VideoListDTO> RecommendedVideos { get; set; } = new List<VideoListDTO>();
+        public GridViewDataSet<VideoListDTO> Videos { get; set; } = new GridViewDataSet<VideoListDTO>()
         {
             PagingOptions = { PageSize = 20 }
         };
@@ -82,7 +82,7 @@ namespace PornSite.ViewModels
         public void LoadLatest()
         {
             Switch = 0;
-            Videos = new GridViewDataSet<VideoDTO>()
+            Videos = new GridViewDataSet<VideoListDTO>()
             {
                 PagingOptions = { PageSize = 20 }
             };
@@ -101,7 +101,7 @@ namespace PornSite.ViewModels
         {
             await Video.AddComment(ComText, Convert.ToInt32(UserId), CurrentUser);
         }
-        public async Task LoadVideo(VideoDTO video)
+        public async Task LoadVideo(VideoListDTO video)
         {
             ShowVideo = true;
             Video = await PornRep.GetVideoById(video.Id);

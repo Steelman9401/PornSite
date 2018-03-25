@@ -10,7 +10,7 @@ namespace PornSite.Repositories
 {
     public class ScrapperRepository
     {
-        public void GetXhamsterVideos(List<VideoDTO> Videos, string category, IEnumerable<string> Images)
+        public void GetXhamsterVideos(List<VideoAdminDTO> Videos, string category, IEnumerable<string> Images)
         {
             using (var client = new WebClient())
             {
@@ -54,7 +54,7 @@ namespace PornSite.Repositories
                 }
                 foreach (HtmlNode item in videosConc)
                 {
-                    VideoDTO video = new VideoDTO();
+                    VideoAdminDTO video = new VideoAdminDTO();
                     var a = item.FirstChild.NextSibling;
                     video.Img = a.ChildNodes[3].GetAttributeValue("src", string.Empty);
                     if (!ImageExists(video.Img, Images))
@@ -69,7 +69,7 @@ namespace PornSite.Repositories
             }
 
         }
-        public void GetRedTubeVideos(List<VideoDTO> Videos, string category, IEnumerable<string> Images)
+        public void GetRedTubeVideos(List<VideoAdminDTO> Videos, string category, IEnumerable<string> Images)
         {
             using (var client = new WebClient())
             {
@@ -95,7 +95,7 @@ namespace PornSite.Repositories
                 var videoDivs = document.DocumentNode.SelectNodes("//div[@class='video_block_wrapper']").ToList();
                 foreach (HtmlNode item in videoDivs)
                 {
-                    VideoDTO video = new VideoDTO();
+                    VideoAdminDTO video = new VideoAdminDTO();
                     var a = item.SelectSingleNode(".//a");
                     var img = a.SelectSingleNode(".//img");
                     video.Img = img.GetAttributeValue("data-thumb_url", string.Empty);
@@ -123,7 +123,7 @@ namespace PornSite.Repositories
 
             }
         }
-        public void GetDrTuberVideos(List<VideoDTO> Videos, string category, IEnumerable<string> Images)
+        public void GetDrTuberVideos(List<VideoAdminDTO> Videos, string category, IEnumerable<string> Images)
         {
             using (var client = new WebClient())
             {
@@ -149,7 +149,7 @@ namespace PornSite.Repositories
                 var videos = document.DocumentNode.SelectNodes("//a[@class='th ch-video']").ToList();
                 foreach (HtmlNode item in videos)
                 {
-                    VideoDTO video = new VideoDTO();
+                    VideoAdminDTO video = new VideoAdminDTO();
                     var img = item.SelectSingleNode(".//img");
                     var toolbar = item.SelectSingleNode("./strong");
                     var hd = toolbar.SelectSingleNode(".//i[@class='quality']");
@@ -175,7 +175,7 @@ namespace PornSite.Repositories
             else
                 return false;
         }
-        public void GetCategoriesXhamster(ref VideoDTO video)
+        public void GetCategoriesXhamster(ref VideoAdminDTO video)
         {
             using (var client = new WebClient())
             {
@@ -202,7 +202,7 @@ namespace PornSite.Repositories
                 }
             }
         }
-        public void GetCategoriesRedTube(ref VideoDTO video)
+        public void GetCategoriesRedTube(ref VideoAdminDTO video)
         {
             using (var client = new WebClient())
             {
@@ -226,7 +226,7 @@ namespace PornSite.Repositories
                 }
             }
         }
-        public void GetCategoriesDrTuber(ref VideoDTO video)
+        public void GetCategoriesDrTuber(ref VideoAdminDTO video)
         {
             using (var client = new WebClient())
             {

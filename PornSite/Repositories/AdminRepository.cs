@@ -12,16 +12,15 @@ namespace PornSite.Repositories
 {
     public class AdminRepository
     {
-        public async Task<GridViewDataSetLoadedData<VideoDTO>> GetAllVideosAdmin(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions)
+        public async Task<GridViewDataSetLoadedData<VideoAdminDTO>> GetAllVideosAdmin(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions)
         {
             using (var db = new myDb())
             {
-                var query = await db.Videos.Select(x => new VideoDTO
+                var query = await db.Videos.Select(x => new VideoAdminDTO
                 {
                     Id = x.Id,
                     Img = x.Img,
                     Title = x.Title,
-                    Views = x.Views,
                     Preview = x.Preview,
                     Description = x.Description
                 }).OrderByDescending(p => p.Id).ToListAsync();
@@ -36,13 +35,13 @@ namespace PornSite.Repositories
                     .Select(x => x.Img).Take(100).ToListAsync();
             }
         }
-        public async Task<VideoDTO> GetVideoById(int Id)
+        public async Task<VideoAdminDTO> GetVideoById(int Id)
         {
             using (var db = new myDb())
             {
                 return await db.Videos.
                     Where(x => x.Id == Id)
-                    .Select(p => new VideoDTO
+                    .Select(p => new VideoAdminDTO
                     {
                         Id = p.Id,
                         Description = p.Description,
@@ -59,7 +58,7 @@ namespace PornSite.Repositories
                     }).FirstOrDefaultAsync();
             }
         }
-        public async Task AddPorn(VideoDTO vid)
+        public async Task AddPorn(VideoAdminDTO vid)
         {
             Video video = new Video();
             video.Description = vid.Description;
@@ -99,7 +98,7 @@ namespace PornSite.Repositories
 
             }
         }
-        public async Task UpdateVideo(VideoDTO video)
+        public async Task UpdateVideo(VideoAdminDTO video)
         {
             using (var db = new myDb())
             {
