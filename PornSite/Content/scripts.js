@@ -36,7 +36,9 @@ $('#modal-container').click(function () {
     $(this).addClass('out');
     $('body').removeClass('modal-active');
 });
-//$("div").mousedown(function () {
-//    alert("Handler for .mousedown() called.");
-//});
+
+$("video").on("hover", function (e) {
+    alert("sup");
+});
+
 

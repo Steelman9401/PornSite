@@ -29,7 +29,7 @@
                     <dot:Repeater DataSource="{value: Videos}">
                         <ItemTemplate>
                             <div class="video" onclick="buttonPress(this)">
-                                <video style="height:150px !important; width:250px !important;  object-fit: fill;" onmouseover="playVideo(this)" o onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
+                                <video style="height:150px !important; width:250px !important;object-fit: fill;" onmouseover="playVideo(this)" o onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
                                     <source src="{value: Preview}" type="video/webm">
                                     Your browser does not support the video taga.
                                 </video>

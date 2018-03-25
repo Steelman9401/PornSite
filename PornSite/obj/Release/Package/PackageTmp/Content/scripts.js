@@ -9,7 +9,6 @@ function stopVideo(e) {
     e.pause();
 }
 function buttonPress(e) {
-    console.log(e.getElementsByTagName("button"));
     e.getElementsByTagName("button")[0].click();
     //$("#modal-video").css("display", "flex")
     //    .hide()
@@ -37,4 +36,9 @@ $('#modal-container').click(function () {
     $(this).addClass('out');
     $('body').removeClass('modal-active');
 });
+
+$('video').on("touchstart", function (e) {
+    alert("sup");
+});
+
 
