@@ -23,8 +23,8 @@
             <a href="/"><h1 class="logo">Vymasti.<span class="si">si</span></h1></a>
             <div class="menu-icon" id="menu-icon"><i class="fas fa-bars"></i></div>
             <form id="form">
-                <input class="search-text" type="text" name="search" placeholder="milf, pov, teen...">
-                <input id="search" value="hledat" class="search-button" type="submit">
+                <dot:TextBox Type="Search" Text="{value: Search}" class="search-text" name="search" placeholder="milf, pov, teen..." />
+                <dot:Button ButtonTagName="button" Click="{command: DoSearch()}" id="search" Text="hledat" class="search-button" type="submit" />
             </form>
             <ul id="menu">
                 <li><a href="/kategorie">KATEGORIE</a></li>
@@ -59,7 +59,7 @@
             </a>
             <a href="/kategorie">
                 <img>
-                <span>další</span>
+                <dot:RouteLink RouteName="categories"><span>další</span></dot:RouteLink>
             </a>
         </div>
     </div>

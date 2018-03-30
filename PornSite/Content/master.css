@@ -48,6 +48,7 @@ header {
     font-family: 'Open Sans', sans-serif;
     top: 0;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index:100;
 }
 .slideInDown {
     -webkit-animation-duration: 0.5s !important;
@@ -236,7 +237,8 @@ header {
     color: #fff;
     height: auto;
     padding: 40px 0;
-    font-family: 'Open Sans', sans-serif
+    font-family: 'Open Sans', sans-serif;
+    z-index: 100;
 }
 
     #categories-preview .container {
@@ -367,7 +369,7 @@ main {
         }
                 main .cointainer-column .videos .video:hover
                 {
-                    transform: scale(1.3);
+                    transform: scale(1.2);
                 }
 
                 main .cointainer-column .videos .video a {

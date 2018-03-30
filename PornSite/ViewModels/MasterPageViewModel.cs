@@ -32,7 +32,7 @@ namespace PornSite.ViewModels
         {
             if (!string.IsNullOrEmpty(Search))
             {
-                Context.RedirectToRoute("Default", new { text = new string(Search.ToArray()) });
+                Context.RedirectToRoute("search", new { text = new string(Search.ToArray()) });
             }
         }
         public void ShowLoginModal()

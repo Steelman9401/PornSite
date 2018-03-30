@@ -135,6 +135,13 @@ namespace PornSite.Repositories
                 await db.SaveChangesAsync();
             }
         }
+        public async Task<IEnumerable<string>> GetCategories()
+        {
+            using (var db = new myDb())
+            {
+                return await db.Categories.Select(x => x.Name).ToListAsync();
+            }
+        }
     }
 
 }

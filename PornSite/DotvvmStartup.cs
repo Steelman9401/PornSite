@@ -16,14 +16,13 @@ namespace PornSite
 
         private void ConfigureRoutes(DotvvmConfiguration config, string applicationPath)
         {
-            config.RouteTable.Add("Default", "{text?}", "Views/default.dothtml");
-            config.RouteTable.Add("video", "video/{Id}", "Views/video.dothtml");
-            config.RouteTable.Add("views", "views", "Views/views.dothtml");
+            config.RouteTable.Add("Default", "", "Views/default.dothtml");
             config.RouteTable.Add("adminWeb", "admin/web", "Views/admin/admin.dothtml");
             config.RouteTable.Add("adminDatabase", "admin/database", "Views/admin/adminDatabase.dothtml");
             config.RouteTable.Add("search", "search/{text}", "Views/search.dothtml");
-            config.RouteTable.Add("register", "user/register", "Views/register.dothtml");
-            config.RouteTable.Add("upload", "admin/upload", "Views/uploadTest.dothtml");
+            config.RouteTable.Add("register", "register", "Views/register.dothtml");
+            config.RouteTable.Add("categories", "categories", "Views/categories.dothtml");
+            config.RouteTable.Add("category", "category/{Id}", "Views/category.dothtml");
             config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));       
         }
 

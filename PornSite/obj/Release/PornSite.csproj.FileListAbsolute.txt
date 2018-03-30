@@ -109,3 +109,5 @@ C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.csprojResolveAssem
 C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.csprojResolveAssemblyReference.cache
 C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Release\PornSite.Migrations.durHD.resources
 C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Release\PornSite.csproj.CopyComplete
+C:\Users\domin\source\repos\PornSite\PornSite\bin\LinqKit.dll
+C:\Users\domin\source\repos\PornSite\PornSite\bin\LinqKit.xml

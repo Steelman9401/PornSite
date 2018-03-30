@@ -1,0 +1,15 @@
+﻿@viewModel PornSite.ViewModels.CategoriesViewModel, PornSite
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+    <main>
+        <div class="cointainer-column">
+            <dot:Repeater DataSource="{value: Categories}">
+                <ItemTemplate>
+                    <p><dot:RouteLink style="color:white" RouteName="category" Param-Id="{value: Id}">{{value: Name}}</dot:RouteLink></p>
+                </ItemTemplate>
+            </dot:Repeater>
+         </div>
+    </main>
+</dot:Content>
+

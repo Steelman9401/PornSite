@@ -109,3 +109,5 @@ C:\Users\domin\Desktop\PornSite\PornSite\obj\Debug\PornSite.pdb
 C:\Users\domin\source\repos\PornSite\PornSite\obj\Debug\PornSite.Migrations.durHD.resources
 C:\Users\domin\source\repos\PornSite\PornSite\obj\Debug\PornSite.csproj.GenerateResource.Cache
 C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Debug\PornSite.csproj.CopyComplete
+C:\Users\domin\source\repos\PornSite\PornSite\bin\LinqKit.dll
+C:\Users\domin\source\repos\PornSite\PornSite\bin\LinqKit.xml

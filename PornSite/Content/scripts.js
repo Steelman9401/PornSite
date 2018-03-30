@@ -14,6 +14,19 @@ function buttonPress(e) {
     //    .hide()
     //    .slideToggle(300);
 }
+function universalPress(e)
+{
+    e.parentElement.getElementsByTagName("button")[0].click();
+    e.style.fontWeight = "bold";
+    if (e === document.getElementById("mostViewedLinkSearch")) {
+        document.getElementById("newestLinkSearch").style.fontWeight = "normal";
+    }
+    else
+    {
+        document.getElementById("mostViewedLinkSearch").style.fontWeight = "normal";
+    }
+
+}
 function pressButton(e) {
     e.children[0].click();
     $("#modal-video").css("display", "flex")

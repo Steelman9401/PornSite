@@ -14,6 +14,19 @@ function buttonPress(e) {
     //    .hide()
     //    .slideToggle(300);
 }
+function universalPress(e)
+{
+    e.parentElement.getElementsByTagName("button")[0].click();
+    e.style.fontWeight = "bold";
+    if (e === document.getElementById("mostViewedLinkSearch")) {
+        document.getElementById("newestLinkSearch").style.fontWeight = "normal";
+    }
+    else
+    {
+        document.getElementById("mostViewedLinkSearch").style.fontWeight = "normal";
+    }
+
+}
 function pressButton(e) {
     e.children[0].click();
     $("#modal-video").css("display", "flex")
@@ -37,7 +50,7 @@ $('#modal-container').click(function () {
     $('body').removeClass('modal-active');
 });
 
-$('video').on("touchstart", function (e) {
+$("video").on("hover", function (e) {
     alert("sup");
 });
 

@@ -18,15 +18,16 @@ namespace PornSite.ViewModels
     public class DefaultViewModel : MasterPageViewModel
     {
         public string SearchParametr { get; set; } = "";
-        public bool LoadMobile { get; set; } = false;
-        public PornRepository rep { get; set; } = new PornRepository();
+        public bool LoadMobile { get; set; }
+        public bool LoadRecommended { get; set; } = true;
         public int Switch { get; set; } = 0;
         public int CatComSwitch { get; set; } = 0;
         public bool ShowVideo { get; set; } = false;
         public VideoDetailDTO Video { get; set; } = new VideoDetailDTO();
         public string ComText { get; set; }
         PornRepository PornRep = new PornRepository();
-        public List<VideoListDTO> RecommendedVideos { get; set; } = new List<VideoListDTO>();
+        public List<VideoListDTO> RecommendedVideos { get; set; }
+        public List<VideoListDTO> History { get; set; } = new List<VideoListDTO>();
         public GridViewDataSet<VideoListDTO> Videos { get; set; } = new GridViewDataSet<VideoListDTO>()
         {
             PagingOptions = { PageSize = 20 }
@@ -37,55 +38,42 @@ namespace PornSite.ViewModels
         }
         public async override Task PreRender()
         {
-            if (Videos.IsFirstPage && !Context.IsPostBack) //first load
+            if (!Context.IsPostBack)
+            {
+                History = await PornRep.GetVideoHistory();
+            }
+            if(LoadRecommended)
             {
                 RecommendedVideos = await PornRep.GetRecommendedVideos();
             }
-            else if(!ShowVideo && Videos.IsRefreshRequired)
-            {
-                if (Videos.IsRefreshRequired && Videos.IsFirstPage)
-                {
-                    RecommendedVideos = await PornRep.GetRecommendedVideos();
-                }
-                else
-                {
-                    RecommendedVideos = null;
-                }
-            }
-            if (!string.IsNullOrEmpty(Context.Parameters["text"].ToString()))
-            {
-                SearchParametr = Context.Parameters["text"].ToString();
-            }
             if (!ShowVideo)
             {
-                if (Switch == 0 && (Videos.IsRefreshRequired || !Context.IsPostBack))
+                if (Videos.IsRefreshRequired || !Context.IsPostBack)
                 {
-                    Videos.OnLoadingDataAsync = option => rep.GetAllVideos(option, SearchParametr, LoadMobile);
-                }
-                else if( Switch == 1 && (Videos.IsRefreshRequired || !Context.IsPostBack))
-                {
-                    Videos.OnLoadingDataAsync = option => rep.GetAllVideosByViews(option, SearchParametr, LoadMobile);
+                    Videos.OnLoadingDataAsync = option => PornRep.GetAllVideos(option,LoadMobile,Switch);
                 }
             }
             else if (CatComSwitch == 1)
             {
                 Video.GetComments();
             }
+            LoadRecommended = true;
             await base.PreRender();
         }
-        public void LoadMostViewed()
+        public void LoadMostViewedVideos()
         {
+            LoadRecommended = false;
+            Videos.PageIndex = 0;
             Videos.IsRefreshRequired = true;
             Switch = 1;
         }
 
-        public void LoadLatest()
+        public void LoadLatestVideos()
         {
+            Videos.PageIndex = 0;
+            LoadRecommended = false;
+            Videos.IsRefreshRequired = true;
             Switch = 0;
-            Videos = new GridViewDataSet<VideoListDTO>()
-            {
-                PagingOptions = { PageSize = 20 }
-            };
         }
         public async Task GetSuggestions()
         {
@@ -103,16 +91,28 @@ namespace PornSite.ViewModels
         }
         public async Task LoadVideo(VideoListDTO video)
         {
+            LoadRecommended = false;
             ShowVideo = true;
             Video = await PornRep.GetVideoById(video.Id);
+            if (!History.Select(x=>x.Id).Contains(video.Id))
+            {
+                History.Insert(0, video);
+            }
+            if (History.Count == 5)
+            {
+                History.RemoveAt(History.Count - 1);
+            }
         }
         public void HideVideo()
         {
+            LoadRecommended = false;
             ShowVideo = false;
             CatComSwitch = 0;
         }
         public void GetMobileVideos()
         {
+            Videos.PageIndex = 0;
+            LoadRecommended = false;
             Videos.IsRefreshRequired = true;
         }
     }

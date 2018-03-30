@@ -44,7 +44,7 @@ namespace PornSite.ViewModels
         {
             if (!Context.IsPostBack)
             {
-                DatabaseCategories = await PornRep.GetAllCategories();
+                DatabaseCategories = await AdminRep.GetCategories();
                 Images = await AdminRep.GetImages();
                 ScrapRep.GetRedTubeVideos(Videos, string.Empty, Images);
             }

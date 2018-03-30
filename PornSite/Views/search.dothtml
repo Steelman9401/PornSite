@@ -1,0 +1,45 @@
+﻿@viewModel PornSite.ViewModels.SearchViewModel, PornSite
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+    <main>
+        <div class="cointainer-column">
+            <div Visible="{value: SearchCount>0}">
+                <h2 style="font-weight:normal">výsledek hledaní pro: <strong>{{value: SearchParameter}}</strong></h2>
+                <h3>nalezeno <span style="color:#1a8dd9">{{value: SearchCount}}</span> videí</h3>
+                <br />
+                <section class="menu">
+                    <ul style="color:#1a8dd9">
+                        <li>
+                            <h2 ID="newestLinkSearch" style="font-weight:bold;" onclick="universalPress(this)">nejnovější</h2>
+                            <dot:Button Click="{command: LoadLatestVideos()}" ButtonTagName="button" style="display:none;"></dot:Button>
+                        </li>
+                        <li>
+                            <h2 ID="mostViewedLinkSearch" style="font-weight:normal" onclick="universalPress(this)">nejsledovanější</h2>
+                            <dot:Button Click="{command: LoadMostViewedVideos()}" ButtonTagName="button" style="display:none;"></dot:Button>
+                        </li>
+                    </ul>
+                </section>
+                <dot:CheckBox Text=" pouze videa pro mobil" Checked="{value: LoadMobile}" Changed="{command: LoadMobileVideos()}" />
+            </div>
+            <h2 style="font-weight:normal" Visible="{value: SearchCount==0}">Nenalezena žádná videa pro: <strong>{{value: SearchParameter}}</strong></h2>
+            <section class="videos">
+                <dot:Repeater DataSource="{value: Videos}">
+                    <ItemTemplate>
+                        <div class="video" onclick="buttonPress(this)">
+                            <video style="height:150px !important; width:250px !important;object-fit: fill;" onmouseover="playVideo(this)" o onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
+                                <source src="{value: Preview}" type="video/webm">
+                                Your browser does not support the video taga.
+                            </video>
+                            <span>{{value: Title}}</span>
+                            <p>{{value: Views}}</p>
+                            <dot:Button Click="{command: _root.LoadVideo(_this)}" ButtonTagName="button" style="display:none"></dot:Button>
+                        </div>
+                    </ItemTemplate>
+                </dot:Repeater>
+                <dot:DataPager class="pagination" DataSet="{value: Videos}" />
+            </section>
+        </div>
+        </main>
+</dot:Content>
+
