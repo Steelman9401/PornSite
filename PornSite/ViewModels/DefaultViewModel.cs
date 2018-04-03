@@ -19,7 +19,7 @@ namespace PornSite.ViewModels
     {
         public string SearchParametr { get; set; } = "";
         public bool LoadMobile { get; set; }
-        public bool LoadRecommended { get; set; } = true;
+        public bool LoadRecommended { get; set; }
         public int Switch { get; set; } = 0;
         public int CatComSwitch { get; set; } = 0;
         public bool ShowVideo { get; set; } = false;
@@ -36,15 +36,21 @@ namespace PornSite.ViewModels
         {
             get { return Context.GetOwinContext().Authentication.User.Identity.GetUserId(); }
         }
+
         public async override Task PreRender()
         {
             if (!Context.IsPostBack)
             {
                 History = await PornRep.GetVideoHistory();
+                RecommendedVideos = await PornRep.GetRecommendedVideos(LoadMobile);
             }
-            if(LoadRecommended)
+            if(Videos.IsFirstPage)
             {
-                RecommendedVideos = await PornRep.GetRecommendedVideos();
+                LoadRecommended = true;
+            }
+            else
+            {
+                LoadRecommended = false;
             }
             if (!ShowVideo)
             {
@@ -57,7 +63,7 @@ namespace PornSite.ViewModels
             {
                 Video.GetComments();
             }
-            LoadRecommended = true;
+  
             await base.PreRender();
         }
         public void LoadMostViewedVideos()
@@ -105,14 +111,15 @@ namespace PornSite.ViewModels
         }
         public void HideVideo()
         {
-            LoadRecommended = false;
             ShowVideo = false;
             CatComSwitch = 0;
+            Video.Url = "";
         }
-        public void GetMobileVideos()
+        public async Task GetMobileVideos()
         {
             Videos.PageIndex = 0;
             LoadRecommended = false;
+            RecommendedVideos = await PornRep.GetRecommendedVideos(LoadMobile);
             Videos.IsRefreshRequired = true;
         }
     }

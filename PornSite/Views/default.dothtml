@@ -3,6 +3,8 @@
 <dot:Content ContentPlaceHolderID="MainContent">
     <main>
         <div class="cointainer-column">
+            <p ID="holdTest">dsadsa</p>
+            <div Visible="{value: LoadRecommended}">
             <h1 style="color:#1a8dd9" Visible="{value: RecommendedVideos !=null ? true:false}">Doporučená videa</h1>
             <section class="videos">
                 <dot:Repeater DataSource="{value: RecommendedVideos}">
@@ -33,6 +35,7 @@
                     </ItemTemplate>
                 </dot:Repeater>
             </section>
+             </div>
             <section class="menu">
                 <ul style="color:#1a8dd9">
                     <li>
@@ -87,13 +90,13 @@
                             </div>
                         </dot:UpdateProgress>
                         <div class="modal-container">
-                            <iframe width="960" height="550" src="{value: Url}"></iframe>
+                            <iframe ID="iframeVideo" width="960" height="550" src="{value: Url}"></iframe>
                             <h2>{{value: Title}}</h2>
                             <div class="tags">
                                 <span>Kategorie:</span>
                                 <dot:Repeater DataSource="{value: Categories}">
                                     <ItemTemplate>
-                                        <a>{{value: Name}}<span style="color:white;">,</span></a>
+                                        <a>{{value: Name}} </a>
                                     </ItemTemplate>
                                 </dot:Repeater>
                             </div>

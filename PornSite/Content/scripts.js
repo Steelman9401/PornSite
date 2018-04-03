@@ -1,13 +1,16 @@
 ﻿function loadVideo(e) {
+    e.load();
     e.play();
 }
 function playVideo(e) {
+    e.load();
     e.play();
 }
 function stopVideo(e) {
     e.load();
     e.pause();
 }
+
 function buttonPress(e) {
     e.getElementsByTagName("button")[0].click();
     //$("#modal-video").css("display", "flex")

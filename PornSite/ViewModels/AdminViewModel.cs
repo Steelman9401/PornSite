@@ -71,8 +71,11 @@ namespace PornSite.ViewModels
         public async Task AddVideo(VideoAdminDTO vid)
         {
             ModalSwitch = false;
-            Videos.RemoveAll(x => x.Url == vid.Url);
-            await vid.AddVideo();
+            if(await vid.AddVideo())
+            {
+                Videos.RemoveAll(x => x.Url == vid.Url);
+                ModalSwitch = false;
+            }
         }
         public void ChangeCategoryList()
         {
@@ -101,6 +104,10 @@ namespace PornSite.ViewModels
             SwitchWebsite = 2;
             Videos = new List<VideoAdminDTO>();
             ScrapRep.GetDrTuberVideos(Videos, SelectedWebCategory, Images);
+        }
+        public void HideVideo()
+        {
+
         }
     }
 }

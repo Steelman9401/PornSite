@@ -138,12 +138,16 @@ namespace PornSite.Repositories
                 }
                 HttpContext.Current.Response.Cookies["History"].Value = String.Join(",", list.ToArray());
             }
-            else
+            else if(cookie==null)
             {
                 HttpCookie myCookie = new HttpCookie("History");
                 myCookie.Value = Id;
                 myCookie.Expires = DateTime.Now.AddDays(36500d);
                 HttpContext.Current.Response.Cookies.Add(myCookie);
+            }
+            else
+            {
+                HttpContext.Current.Response.Cookies["History"].Value = Id;
             }
         }
     }

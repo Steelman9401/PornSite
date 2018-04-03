@@ -10,6 +10,7 @@ using DotVVM.Framework.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 [assembly: OwinStartup(typeof(PornSite.Startup))]
 namespace PornSite
@@ -45,6 +46,11 @@ namespace PornSite
             app.UseStaticFiles(new StaticFileOptions()
             {
                 FileSystem = new PhysicalFileSystem(applicationPhysicalPath)
+            });
+            app.Run(context =>
+            {
+                context.Response.Redirect("/");
+                return Task.FromResult(0);
             });
         }
         public void ConfigureAuth(IAppBuilder app)

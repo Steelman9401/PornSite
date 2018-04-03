@@ -22,8 +22,7 @@ namespace PornSite
             config.RouteTable.Add("search", "search/{text}", "Views/search.dothtml");
             config.RouteTable.Add("register", "register", "Views/register.dothtml");
             config.RouteTable.Add("categories", "categories", "Views/categories.dothtml");
-            config.RouteTable.Add("category", "category/{Id}", "Views/category.dothtml");
-            config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));       
+            config.RouteTable.Add("category", "category/{Id}", "Views/category.dothtml");      
         }
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)

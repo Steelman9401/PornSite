@@ -108,12 +108,13 @@ namespace PornSite.Repositories
                 dbVideo.Img = video.Img;
                 dbVideo.Preview = video.Preview;
                 dbVideo.Url = video.Url;
+                dbVideo.Categories.Clear();
                 foreach(CategoryDTO item in video.Categories)
                 {
-                    var category = await db.Categories.FindAsync(item.Id);
+                    var category = await db.Categories.Where(x => x.Name == item.Name).FirstOrDefaultAsync();
                     if (category != null)
                     {
-                        category.Name = item.Name;
+                        dbVideo.Categories.Add(category);
                     }
                     else
                     {

@@ -55,14 +55,19 @@ namespace PornSite.Repositories
                 foreach (HtmlNode item in videosConc)
                 {
                     VideoAdminDTO video = new VideoAdminDTO();
-                    var a = item.FirstChild.NextSibling;
+                    var a = item.SelectSingleNode(".//a");
                     video.Img = a.ChildNodes[3].GetAttributeValue("src", string.Empty);
                     if (!ImageExists(video.Img, Images))
                     {
+                        var hd = a.SelectSingleNode(".//i[@class='thumb-image-container__icon thumb-image-container__icon--hd']");
+                        if(hd!=null)
+                        {
+                            video.HD = true;
+                        }
                         video.Preview = a.GetAttributeValue("data-previewvideo", string.Empty);
                         video.Url = a.GetAttributeValue("href", string.Empty);
-                        video.Title = a.ChildNodes[3].GetAttributeValue("alt", string.Empty);
-                        video.Duration = a.ChildNodes[5].InnerText;
+                        video.Title = a.SelectSingleNode(".//img").GetAttributeValue("alt", string.Empty);
+                        video.Duration = a.SelectSingleNode(".//div[@class='thumb-image-container__duration']").InnerText;
                         Videos.Add(video);
                     }
                 }
@@ -198,7 +203,8 @@ namespace PornSite.Repositories
                 }
                 catch
                 {
-
+                    List<CategoryDTO> list = new List<CategoryDTO>();
+                    video.Categories = list;
                 }
             }
         }
@@ -222,7 +228,8 @@ namespace PornSite.Repositories
                 }
                 catch
                 {
-
+                    List<CategoryDTO> list = new List<CategoryDTO>();
+                    video.Categories = list;
                 }
             }
         }
@@ -247,7 +254,8 @@ namespace PornSite.Repositories
                 }
                 catch
                 {
-
+                    List<CategoryDTO> list = new List<CategoryDTO>();
+                    video.Categories = list;
                 }
             }
         }

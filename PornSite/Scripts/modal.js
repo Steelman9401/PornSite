@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
-    $('.loader').fadeOut();
-
     //kliknuti na nahled videa
     $(document).on("click", ".video", function () {
+
         $("#modal-video").css('display', 'flex');
+        $("#modal-video").removeClass("animated slideOutUp");
         $("#backgroundO").fadeIn();
         $("#modal-video").addClass("animated slideInDown");
         $("body").addClass("modal-on");
@@ -14,8 +14,9 @@
     //kliknuti na krizek
     $(document).on("click", "#close", function () {
         
-        $("#modal-video").hide();
+       // $("#modal-video").hide();
         $("#backgroundO").fadeOut(500);
+        $("#modal-video").addClass("animated slideOutUp");
         document.getElementById("closeButton").click();
         $("body").removeClass("modal-on");
     });
@@ -25,7 +26,9 @@
         if (!$(e.target).parents("#modal-video").length) {
             document.getElementById("closeButton").click();
             e.stopPropagation();
-            $("#modal-video").hide();
+            //window.history.pushState('main', null);
+            //$("#modal-video").hide();
+            $("#modal-video").addClass("animated slideOutUp");
             $("#backgroundO").fadeOut(500);
             $("body").removeClass("modal-on");
         }

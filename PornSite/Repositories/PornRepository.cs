@@ -124,25 +124,41 @@ namespace PornSite.Repositories
             if (HttpContext.Current.Request.Cookies["History"] != null)
             {
                 string[] array = HttpContext.Current.Request.Cookies["History"].Value.Split(',');
-                using (var db = new myDb())
+                if (array.Length < 5)
                 {
-                    var predicate = PredicateBuilder.New<Video>();
-                    foreach (string item in array)
+                    using (var db = new myDb())
                     {
-                        int Id = Convert.ToInt32(item);
-                        predicate = predicate.Or(x => x.Id == Id);
-                    }
-                    return await db.Videos.AsExpandable()
-                        .Where(predicate)
-                        .Select(a => new VideoListDTO()
+                        var predicate = PredicateBuilder.New<Video>();
+                        foreach (string item in array)
                         {
-                            Id = a.Id,
-                            Img = a.Img,
-                            Title = a.Title,
-                            Duration = a.Duration,
-                            HD = a.HD,
-                            Preview = a.Preview
-                        }).ToListAsync();
+                            try
+                            {
+                                int Id = Convert.ToInt32(item);
+                                predicate = predicate.Or(x => x.Id == Id);
+                            }
+                            catch
+                            {
+                                HttpContext.Current.Response.Cookies["History"].Expires = DateTime.Now.AddDays(-1);
+                                break;
+                            }
+                        }
+                        return await db.Videos.AsExpandable()
+                            .Where(predicate)
+                            .Select(a => new VideoListDTO()
+                            {
+                                Id = a.Id,
+                                Img = a.Img,
+                                Title = a.Title,
+                                Duration = a.Duration,
+                                HD = a.HD,
+                                Preview = a.Preview
+                            }).ToListAsync();
+                    }
+                }
+                else
+                {
+                    HttpContext.Current.Response.Cookies["History"].Expires = DateTime.Now.AddDays(-1);
+                    return new List<VideoListDTO>();
                 }
             }
             else
@@ -150,7 +166,7 @@ namespace PornSite.Repositories
                 return new List<VideoListDTO>();
             }
         }
-        public async Task<List<VideoListDTO>> GetRecommendedVideos()
+        public async Task<List<VideoListDTO>> GetRecommendedVideos(bool loadmobile)
         {
             if (HttpContext.Current.Request.Cookies["CategoryCount"] != null)
             {
@@ -166,7 +182,11 @@ namespace PornSite.Repositories
                         foreach (string item in categories)
                         {
                             int Id = Convert.ToInt32(item);
+                            if(loadmobile)
+                            predicate = predicate.Or(x => x.Categories.Select(p => p.Id).Contains(Id) && x.Url.Contains("tuber"));
+                            else
                             predicate = predicate.Or(x => x.Categories.Select(p => p.Id).Contains(Id));
+
                         }
                         int count = db.Videos.AsExpandable().Where(predicate).Count();
                         if (count > 3) //personalizovane vysledky
@@ -177,7 +197,13 @@ namespace PornSite.Repositories
                         }
                         else //random videa
                         {
-                            IQueryable<Video> query = db.Videos;
+                            IQueryable<Video> query;
+                            if (loadmobile)
+                                query = db.Videos.Where(x => x.Url.Contains("tuber"));
+                            else
+                            {
+                                query = db.Videos;
+                            }
                             return await GetRecommendedVideosData(query);
                         }
                     }
@@ -186,7 +212,7 @@ namespace PornSite.Repositories
                 {
                     using (var db = new myDb())
                     {
-                        HttpContext.Current.Request.Cookies["CategoryCount"].Expires = DateTime.Now.AddDays(-1);
+                        HttpContext.Current.Response.Cookies["CategoryCount"].Expires = DateTime.Now.AddDays(-1);
                         IQueryable<Video> query = db.Videos;
                         return await GetRecommendedVideosData(query);
                     }
@@ -196,7 +222,13 @@ namespace PornSite.Repositories
             {
                 using (var db = new myDb())
                 {
-                    IQueryable<Video> query = db.Videos;
+                    IQueryable<Video> query;
+                    if (loadmobile)
+                        query = db.Videos.Where(x => x.Url.Contains("tuber"));
+                    else
+                    {
+                        query = db.Videos;
+                    }
                     return await GetRecommendedVideosData(query);
                 }
             }
