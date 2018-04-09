@@ -4,7 +4,10 @@ using PornSite.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -27,14 +30,6 @@ namespace PornSite.Repositories
                 return query.AsQueryable().GetDataFromQueryable(gridViewDataSetLoadOptions);
             }
         }
-        public async Task<IEnumerable<string>> GetImages()
-        {
-            using (var db = new myDb())
-            {
-                return await db.Videos.OrderByDescending(p => p.Id)
-                    .Select(x => x.Img).Take(100).ToListAsync();
-            }
-        }
         public async Task<VideoAdminDTO> GetVideoById(int Id)
         {
             using (var db = new myDb())
@@ -50,31 +45,44 @@ namespace PornSite.Repositories
                         Title = p.Title,
                         Url = p.Url,
                         Categories = p.Categories
-                       .Select(a => new CategoryDTO
-                       {
-                           Id = a.Id,
-                           Name = a.Name
-                       })
+                       .Select(a => a.Name)
                     }).FirstOrDefaultAsync();
             }
         }
         public async Task AddPorn(VideoAdminDTO vid)
         {
+            var downloadPath = GetDownloadPath();
+            var previewfileName = GetVideoFileName(vid.Preview);
+            var imgfileName = GetVideoFileName(vid.Img);
+            if (imgfileName.Contains("?"))
+            {
+                imgfileName = imgfileName.Substring(0, imgfileName.IndexOf("?"));
+            }
+            if(previewfileName.Contains("?"))
+            {
+                previewfileName = previewfileName.Substring(0, previewfileName.IndexOf("?"));
+            }
+            using (var client = new WebClient())
+            {
+                client.DownloadFile(vid.Preview, downloadPath + "/" + previewfileName);
+                client.DownloadFile(vid.Img, downloadPath + "/" + imgfileName);
+            }
             Video video = new Video();
             video.Description = vid.Description;
             video.Title = vid.Title;
+            video.Title_en = vid.Title_en;
             video.Url = vid.Url;
-            video.Img = vid.Img;
+            video.Img = "/Previews/" + imgfileName;
             video.Date = DateTime.Now;
-            video.Preview = vid.Preview;
+            video.Preview = "/Previews/" + previewfileName;
             video.HD = vid.HD;
             video.Duration = vid.Duration;
             PornRepository rep = new PornRepository();
             List<Category> listCat = new List<Category>();
-            foreach (CategoryDTO item in vid.Categories)
+            foreach (string item in vid.Categories)
             {
                 Category cat = new Category();
-                cat.Name = item.Name;
+                cat.Name = item;
                 listCat.Add(cat);
             }
             using (var db = new myDb())
@@ -109,9 +117,9 @@ namespace PornSite.Repositories
                 dbVideo.Preview = video.Preview;
                 dbVideo.Url = video.Url;
                 dbVideo.Categories.Clear();
-                foreach(CategoryDTO item in video.Categories)
+                foreach(string item in video.Categories)
                 {
-                    var category = await db.Categories.Where(x => x.Name == item.Name).FirstOrDefaultAsync();
+                    var category = await db.Categories.Where(x => x.Name == item).FirstOrDefaultAsync();
                     if (category != null)
                     {
                         dbVideo.Categories.Add(category);
@@ -119,7 +127,7 @@ namespace PornSite.Repositories
                     else
                     {
                         Category dbCat = new Category();
-                        dbCat.Name = item.Name;
+                        dbCat.Name = item;
                         dbVideo.Categories.Add(dbCat);
                     }
                 }
@@ -140,9 +148,43 @@ namespace PornSite.Repositories
         {
             using (var db = new myDb())
             {
-                return await db.Categories.Select(x => x.Name).ToListAsync();
+                return await db.Categories
+                    .Select(x => x.Name).ToListAsync();
             }
         }
+
+        private string GetVideoFileName(string url)
+        {
+            string [] array = url.Split('/');
+            string trimmedUrl = "";
+            for(int i = 1;i<=4;i++)
+            {
+                trimmedUrl = trimmedUrl.Insert(0, array[array.Length - i]);
+            }
+            return trimmedUrl;
+        }
+        private string GetDownloadPath()
+        {
+            var virtualPath = Path.Combine(HttpContext.Current.Request.ApplicationPath, "Previews");
+            var finalPath = HttpContext.Current.Request.MapPath(virtualPath);
+            if (!Directory.Exists(finalPath))
+            {
+                Directory.CreateDirectory(finalPath);
+            }
+            return finalPath;
+        }
+        public bool VideoExists(string url)
+        {
+            using (var db = new myDb())
+            {
+                var urls = db.Videos.OrderByDescending(x => x.Id).Select(p => p.Url).Take(10).ToList();
+                if (urls.Contains(url))
+                    return true;
+                else
+                    return false;
+            }
+        }
+
     }
 
 }

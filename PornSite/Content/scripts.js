@@ -13,7 +13,7 @@ function stopVideo(e) {
 
 function buttonPress(e) {
     e.getElementsByTagName("button")[0].click();
-    //$("#modal-video").css("display", "flex")
+    //$("#normalVideo").css("display", "flex")
     //    .hide()
     //    .slideToggle(300);
 }
@@ -32,14 +32,14 @@ function universalPress(e)
 }
 function pressButton(e) {
     e.children[0].click();
-    $("#modal-video").css("display", "flex")
+    $("#normalVideo").css("display", "flex")
         .hide()
         .slideToggle(200);
 }
 
 function hideVideo(e) {
     e.nextElementSibling.click();
-    $("#modal-video").slideToggle(200);
+    $("#normalVideo").slideToggle(200);
 }
 
 $('.button').click(function () {

@@ -111,3 +111,4 @@ C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Release\PornSite.Migrations.du
 C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Release\PornSite.csproj.CopyComplete
 C:\Users\domin\source\repos\PornSite\PornSite\bin\LinqKit.dll
 C:\Users\domin\source\repos\PornSite\PornSite\bin\LinqKit.xml
+C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.global.resources

@@ -5,12 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Net;
+using System.Threading.Tasks;
+using PornSite.Data;
+using System.Data.Entity;
 
 namespace PornSite.Repositories
 {
     public class ScrapperRepository
     {
-        public void GetXhamsterVideos(List<VideoAdminDTO> Videos, string category, IEnumerable<string> Images)
+        public IEnumerable<string> Images { get; set; }
+        public async Task GetXhamsterVideos(List<VideoListAdminDTO> Videos, string category)
         {
             using (var client = new WebClient())
             {
@@ -54,9 +58,10 @@ namespace PornSite.Repositories
                 }
                 foreach (HtmlNode item in videosConc)
                 {
-                    VideoAdminDTO video = new VideoAdminDTO();
+                    VideoListAdminDTO video = new VideoListAdminDTO();
                     var a = item.SelectSingleNode(".//a");
                     video.Img = a.ChildNodes[3].GetAttributeValue("src", string.Empty);
+                    Images = GetImages();
                     if (!ImageExists(video.Img, Images))
                     {
                         var hd = a.SelectSingleNode(".//i[@class='thumb-image-container__icon thumb-image-container__icon--hd']");
@@ -74,7 +79,7 @@ namespace PornSite.Repositories
             }
 
         }
-        public void GetRedTubeVideos(List<VideoAdminDTO> Videos, string category, IEnumerable<string> Images)
+        public async Task GetRedTubeVideos(List<VideoListAdminDTO> Videos, string category)
         {
             using (var client = new WebClient())
             {
@@ -100,10 +105,11 @@ namespace PornSite.Repositories
                 var videoDivs = document.DocumentNode.SelectNodes("//div[@class='video_block_wrapper']").ToList();
                 foreach (HtmlNode item in videoDivs)
                 {
-                    VideoAdminDTO video = new VideoAdminDTO();
+                    VideoListAdminDTO video = new VideoListAdminDTO();
                     var a = item.SelectSingleNode(".//a");
                     var img = a.SelectSingleNode(".//img");
                     video.Img = img.GetAttributeValue("data-thumb_url", string.Empty);
+                    Images = GetImages();
                     if (!ImageExists(video.Img, Images))
                     {
                         var duration = item.SelectSingleNode(".//span[@class='duration']").InnerText.Replace(" ", "").Replace("\n", "");
@@ -117,7 +123,7 @@ namespace PornSite.Repositories
                             video.Duration = duration;
                         }
                         video.Preview = img.GetAttributeValue("data-mediabook", string.Empty);
-                        video.Title = img.GetAttributeValue("alt", string.Empty);
+                        video.Title_en = img.GetAttributeValue("alt", string.Empty);
                         video.Url = "https://redtube.com" + a.GetAttributeValue("href", string.Empty);
                         if (!string.IsNullOrWhiteSpace(video.Img) && !string.IsNullOrWhiteSpace(video.Preview))
                         {
@@ -128,7 +134,7 @@ namespace PornSite.Repositories
 
             }
         }
-        public void GetDrTuberVideos(List<VideoAdminDTO> Videos, string category, IEnumerable<string> Images)
+        public void GetDrTuberVideos(List<VideoListAdminDTO> Videos, string category)
         {
             using (var client = new WebClient())
             {
@@ -154,33 +160,47 @@ namespace PornSite.Repositories
                 var videos = document.DocumentNode.SelectNodes("//a[@class='th ch-video']").ToList();
                 foreach (HtmlNode item in videos)
                 {
-                    VideoAdminDTO video = new VideoAdminDTO();
+                    VideoListAdminDTO video = new VideoListAdminDTO();
                     var img = item.SelectSingleNode(".//img");
-                    var toolbar = item.SelectSingleNode("./strong");
-                    var hd = toolbar.SelectSingleNode(".//i[@class='quality']");
-                    if(hd!=null)
+                    Images = GetImages();
+                    if (!ImageExists(img.GetAttributeValue("src", string.Empty),Images))
                     {
-                        video.HD = true;
+                        var toolbar = item.SelectSingleNode("./strong");
+                        var hd = toolbar.SelectSingleNode(".//i[@class='quality']");
+                        if (hd != null)
+                        {
+                            video.HD = true;
+                        }
+                        video.Duration = toolbar.SelectSingleNode(".//em[@class='time_thumb']").InnerText.Replace(" ", "");
+                        video.Img = img.GetAttributeValue("src", string.Empty);
+                        video.Preview = img.GetAttributeValue("data-webm", string.Empty);
+                        video.Title = img.GetAttributeValue("alt", string.Empty);
+                        video.Url = "http://www.drtuber.com" + item.GetAttributeValue("href", string.Empty);
+                        Videos.Add(video);
                     }
-                    video.Duration = toolbar.SelectSingleNode(".//em[@class='time_thumb']").InnerText.Replace(" ", "");
-                    video.Img = img.GetAttributeValue("src", string.Empty);
-                    video.Preview = img.GetAttributeValue("data-webm", string.Empty);
-                    video.Title = img.GetAttributeValue("alt", string.Empty);
-                    video.Url = "http://www.drtuber.com" + item.GetAttributeValue("href", string.Empty);
-                    Videos.Add(video);
 
                 }
             }
         }
         private bool ImageExists(string image, IEnumerable<string> Images)
         {
-            int count = Images.Where(x => x == image).Count();
+            var array = image.Split('/');
+            string trimmedUrl = "";
+            for(int i = 1;i<=4;i++)
+            {
+                trimmedUrl = trimmedUrl.Insert(0, array[array.Length - i]);
+            }
+            if(trimmedUrl.Contains('?'))
+            {
+                trimmedUrl = trimmedUrl.Substring(0, trimmedUrl.IndexOf("?"));
+            }
+            int count = Images.Where(x => x == trimmedUrl).Count();
             if (count != 0)
                 return true;
             else
                 return false;
         }
-        public void GetCategoriesXhamster(ref VideoAdminDTO video)
+        public void GetCategoriesXhamster(VideoAdminDTO video)
         {
             using (var client = new WebClient())
             {
@@ -188,27 +208,27 @@ namespace PornSite.Repositories
                 var html = client.DownloadString(video.Url);
                 HtmlDocument document = new HtmlDocument();
                 document.LoadHtml(html);
-                string[] array = video.Url.Split('-');
-                video.Url = "https://xhamster.com/xembed.php?video=" + array[array.Length - 1];
+                if (!video.Url.Contains("embed"))
+                {
+                    string[] array = video.Url.Split('-');
+                    video.Url = "https://xhamster.com/xembed.php?video=" + array[array.Length - 1];
+                }
                 try
                 {
                     video.Categories = document.DocumentNode.SelectNodes("//div[@class='entity-description-container__categories categories-container']")
                         .First()
                         .ChildNodes
                         .Where(x => x.Name == "a")
-                        .Select(p => p.InnerText.Replace(" ", "").Replace("\n", "")).Select(o => new CategoryDTO()
-                        {
-                            Name = o
-                        }).ToList();
+                        .Select(p => p.InnerText.Replace(" ", "").Replace("\n", "")).Select(o => o);
                 }
                 catch
                 {
-                    List<CategoryDTO> list = new List<CategoryDTO>();
+                    List<string> list = new List<string>();
                     video.Categories = list;
                 }
             }
         }
-        public void GetCategoriesRedTube(ref VideoAdminDTO video)
+        public void GetCategoriesRedTube(VideoAdminDTO video)
         {
             using (var client = new WebClient())
             {
@@ -216,24 +236,24 @@ namespace PornSite.Repositories
                 var html = client.DownloadString(video.Url);
                 HtmlDocument document = new HtmlDocument();
                 document.LoadHtml(html);
-                var url = video.Url.Substring(20);
-                video.Url = "https://embed.redtube.com/?id=" + url;
+                if (!video.Url.Contains("embed"))
+                {
+                    var url = video.Url.Substring(20);
+                    video.Url = "https://embed.redtube.com/?id=" + url;
+                }
                 try
                 {
                     video.Categories = document.DocumentNode.SelectNodes("//div[@class='video-infobox-content']")[4].SelectNodes(".//a")
-                        .Select(x => new CategoryDTO()
-                        {
-                            Name = x.InnerText
-                        }).ToList();
+                        .Select(x => x.InnerText);
                 }
                 catch
                 {
-                    List<CategoryDTO> list = new List<CategoryDTO>();
+                    List<string> list = new List<string>();
                     video.Categories = list;
                 }
             }
         }
-        public void GetCategoriesDrTuber(ref VideoAdminDTO video)
+        public void GetCategoriesDrTuber(VideoAdminDTO video)
         {
             using (var client = new WebClient())
             {
@@ -241,22 +261,32 @@ namespace PornSite.Repositories
                 var html = client.DownloadString(video.Url);
                 HtmlDocument document = new HtmlDocument();
                 document.LoadHtml(html);
-                var array = video.Url.Split('/');
-                video.Url = "http://www.drtuber.com/embed/" + array[4];
+                if (!video.Url.Contains("embed"))
+                {
+                    var array = video.Url.Split('/');
+                    video.Url = "http://www.drtuber.com/embed/" + array[4];
+                }
                 try
                 {
                     video.Categories = document.DocumentNode.SelectSingleNode("//div[@class='categories_list']")
                         .SelectNodes(".//a")
-                        .Select(x => new CategoryDTO()
-                        {
-                            Name = x.GetAttributeValue("title", string.Empty)
-                        }).ToList();
+                        .Select(x => x.GetAttributeValue("title", string.Empty)).ToList();
                 }
                 catch
                 {
-                    List<CategoryDTO> list = new List<CategoryDTO>();
+                    List<string> list = new List<string>();
                     video.Categories = list;
                 }
+            }
+        }
+        private IEnumerable<string> GetImages()
+        {
+            using (var db = new myDb())
+            {
+                //var query = db.Videos.Where(x=>x.Categories.Select(p=>p.Name).Contains(category));
+                var images = db.Videos.OrderByDescending(p => p.Id)
+                    .Select(x => x.Img).Take(50).ToList();
+                return images.Select(x => x.Split('/')[2]);
             }
         }
     }

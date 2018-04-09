@@ -316,8 +316,15 @@ namespace PornSite.Repositories
         }
         private int GetRandomNumber(int n)
         {
-            Random rnd = new Random();
-            return rnd.Next(0, n - 4);
+            if (n > 3)
+            {
+                Random rnd = new Random();
+                return rnd.Next(0, n - 4);
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

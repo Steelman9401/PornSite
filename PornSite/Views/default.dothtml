@@ -3,7 +3,6 @@
 <dot:Content ContentPlaceHolderID="MainContent">
     <main>
         <div class="cointainer-column">
-            <p ID="holdTest">dsadsa</p>
             <div Visible="{value: LoadRecommended}">
             <h1 style="color:#1a8dd9" Visible="{value: RecommendedVideos !=null ? true:false}">Doporučená videa</h1>
             <section class="videos">
@@ -67,11 +66,11 @@
             <div ID="backgroundO" style="position:fixed;top:0;width:100%; height:100%; z-index:50; left:0; background: rgba(0,0,0,0.6); display:none;">
 
             </div>
-            <div id="modal-video">
+            <div ID="normalVideo" class="modal-video">
                 <div class="cointainer-modal">
                     <div class="modal-header">
                         <div id="close">
-                            <dot:Button ID="closeButton" style="display:none" Click="{command: HideVideo()}" ButtonTagName="button"></dot:Button>
+                            <dot:Button class="close-button" style="display:none" Click="{command: HideVideo()}" ButtonTagName="button"></dot:Button>
                         </div>
                     </div>
                     <div class="modal-body" DataContext="{value: Video}">
@@ -137,19 +136,19 @@
                                 <div class="related-videos">
                                     <div class="related-video">
                                         <a href="#">
-                                            <img src="img/video.jpg">
+                                            <img src="">
                                             <span>video</span>
                                         </a>
                                     </div>
                                     <div class="related-video">
                                         <a href="#">
-                                            <img src="img/video.jpg">
+                                            <img src="">
                                             <span>video</span>
                                         </a>
                                     </div>
                                     <div class="related-video">
                                         <a href="#">
-                                            <img src="img/video.jpg">
+                                            <img src="">
                                             <span>video</span>
                                         </a>
                                     </div>
@@ -161,7 +160,6 @@
                 </div>
             </div>
         </div>
-        <a href="#modal-video" class="btn">Open Modal</a>
     </main>
 
 </dot:Content>

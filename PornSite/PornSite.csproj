@@ -138,10 +138,15 @@
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="DTO\VideoAdminDTO.cs" />
     <Compile Include="DTO\VideoDetailDTO.cs" />
+    <Compile Include="DTO\VideoListAdminDTO.cs" />
     <Compile Include="DTO\VideoListDTO.cs" />
     <Compile Include="Migrations\201803122356429_durHD.cs" />
     <Compile Include="Migrations\201803122356429_durHD.Designer.cs">
       <DependentUpon>201803122356429_durHD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804081437180_global.cs" />
+    <Compile Include="Migrations\201804081437180_global.Designer.cs">
+      <DependentUpon>201804081437180_global.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -233,6 +238,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201803122356429_durHD.resx">
       <DependentUpon>201803122356429_durHD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804081437180_global.resx">
+      <DependentUpon>201804081437180_global.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

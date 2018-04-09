@@ -17,14 +17,12 @@ namespace PornSite.ViewModels
 {
     public class AdminViewModel : MasterPageViewModel
     {
-        public List<VideoAdminDTO> Videos { get; set; } = new List<VideoAdminDTO>();
+        public List<VideoListAdminDTO> Videos { get; set; } = new List<VideoListAdminDTO>();
         public ScrapperRepository ScrapRep { get; set; } = new ScrapperRepository();
-        public IEnumerable<string> Images { get; set; }
         public int SwitchWebsite { get; set; }
-        public VideoAdminDTO Video { get; set; }
+        public VideoAdminDTO Video { get; set; } = new VideoAdminDTO();
         public AdminRepository AdminRep { get; set; } = new AdminRepository();
         public PornRepository PornRep { get; set; } = new PornRepository();
-        public IEnumerable<string> DatabaseCategories { get; set; }
         public List<WebCategory> WebCategories { get; set; } = new List<WebCategory>
         {
             new WebCategory() { Name = "Main", Url = ""},
@@ -38,74 +36,76 @@ namespace PornSite.ViewModels
 
         };
         public string SelectedWebCategory { get; set; } = "https://www.redtube.com";
-        public bool ModalSwitch { get; set; }
 
         public async override Task PreRender()
         {
             if (!Context.IsPostBack)
             {
-                DatabaseCategories = await AdminRep.GetCategories();
-                Images = await AdminRep.GetImages();
-                ScrapRep.GetRedTubeVideos(Videos, string.Empty, Images);
+                ScrapRep.GetRedTubeVideos(Videos, string.Empty);
             }
 
             await base.PreRender();
         }
 
-        public void OpenModal(VideoAdminDTO vid)
+        public async Task OpenModal(VideoListAdminDTO vid)
         {
-            Video = vid;
+            Video.Duration = vid.Duration;
+            Video.HD = vid.HD;
+            Video.Img = vid.Img;
+            Video.Preview = vid.Preview;
+            Video.Title_en = vid.Title_en;
+            Video.Url = vid.Url;
+            Video.DatabaseCategories = await AdminRep.GetCategories();
             if (SwitchWebsite == 0)
-            ScrapRep.GetCategoriesRedTube(ref vid);
+            ScrapRep.GetCategoriesRedTube(Video);
             else if(SwitchWebsite==1)          
-            ScrapRep.GetCategoriesXhamster(ref vid);
+            ScrapRep.GetCategoriesXhamster(Video);
             else if (SwitchWebsite == 2)
-            ScrapRep.GetCategoriesDrTuber(ref vid);
-            ModalSwitch = true;
-        }
-        public void CloseModal()
-        {
-            ModalSwitch = false;
-        }
-
-        public async Task AddVideo(VideoAdminDTO vid)
-        {
-            ModalSwitch = false;
-            if(await vid.AddVideo())
-            {
-                Videos.RemoveAll(x => x.Url == vid.Url);
-                ModalSwitch = false;
-            }
+            ScrapRep.GetCategoriesDrTuber(Video);
         }
         public void ChangeCategoryList()
         {
-            Videos = new List<VideoAdminDTO>();
+            Videos = new List<VideoListAdminDTO>();
             if (SwitchWebsite == 1)
-                ScrapRep.GetXhamsterVideos(Videos, SelectedWebCategory,Images);
+                ScrapRep.GetXhamsterVideos(Videos, SelectedWebCategory);
             else if(SwitchWebsite==0)
-                ScrapRep.GetRedTubeVideos(Videos, SelectedWebCategory,Images);
+                ScrapRep.GetRedTubeVideos(Videos, SelectedWebCategory);
             else if(SwitchWebsite==2)
-                ScrapRep.GetDrTuberVideos(Videos, SelectedWebCategory, Images);
+                ScrapRep.GetDrTuberVideos(Videos, SelectedWebCategory);
         }
         public void SwitchToRedTube()
         {
             SwitchWebsite = 0;
-            Videos = new List<VideoAdminDTO>();
-            ScrapRep.GetRedTubeVideos(Videos, SelectedWebCategory,Images);
+            Videos = new List<VideoListAdminDTO>();
+            ScrapRep.GetRedTubeVideos(Videos, SelectedWebCategory);
+        }
+        public async Task AddVideo()
+        {
+            await Video.AddVideo();
+            Videos.RemoveAll(x => x.Url == Video.Url);
+        }
+        public void CreateCustomVideo()
+        {
+            Video = new VideoAdminDTO();
+            Video.IsCustom = true;
         }
         public void SwitchToXhamster()
         {
             SwitchWebsite = 1;
-            Videos = new List<VideoAdminDTO>();
-            ScrapRep.GetXhamsterVideos(Videos, SelectedWebCategory,Images);
+            Videos = new List<VideoListAdminDTO>();
+            ScrapRep.GetXhamsterVideos(Videos, SelectedWebCategory);
         }
         public void SwitchToDrTuber()
         {
             SwitchWebsite = 2;
-            Videos = new List<VideoAdminDTO>();
-            ScrapRep.GetDrTuberVideos(Videos, SelectedWebCategory, Images);
+            Videos = new List<VideoListAdminDTO>();
+            ScrapRep.GetDrTuberVideos(Videos, SelectedWebCategory);
         }
         public void HideVideo()
+        {
+            Video = null;
+        }
+        public void DoStuff()
         {
 
         }

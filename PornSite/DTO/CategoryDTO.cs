@@ -9,7 +9,7 @@ namespace PornSite.DTO
     public class CategoryDTO
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Kategorie nemuze byt prazdna")]
         public string Name { get; set; }
+        public string Name_en { get; set; }
     }
 }

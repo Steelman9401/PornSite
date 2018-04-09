@@ -17,11 +17,12 @@ button {
 }
 
 
-
 html, body, p, ol, ul, li, textarea, iframe, hr, h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0
 }
+
+
 video {
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -671,7 +672,7 @@ body.modal-on {
     overflow: hidden
 }
 
-#modal-video {
+.modal-video {
     display: none;
     justify-content: center;
     align-items: center;
@@ -685,7 +686,7 @@ body.modal-on {
     z-index: 500;
 }
 
-    #modal-video .cointainer-modal {
+    .modal-video .cointainer-modal {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -704,7 +705,7 @@ body.modal-on {
         box-shadow: 0px 3px 28px -5px rgba(26,141,217,1);
     }
 
-        #modal-video .cointainer-modal .modal-header {
+        .modal-video .cointainer-modal .modal-header {
             width: 100%;
             display: flex;
             flex-direction: row;
@@ -714,7 +715,7 @@ body.modal-on {
             border:none;
         }
 
-            #modal-video .cointainer-modal .modal-header #close {
+            .modal-video .cointainer-modal .modal-header #close {
                 background: url(close-g.png);
                 background-size: 100%;
                 background-repeat: no-repeat;
@@ -724,14 +725,14 @@ body.modal-on {
                 cursor: pointer
             }
 
-                #modal-video .cointainer-modal .modal-header #close:hover {
+                .modal-video .cointainer-modal .modal-header #close:hover {
                     background: url(close-w.png);
                     background-size: 100%;
                     background-repeat: no-repeat;
                     background-position: center
                 }
 
-        #modal-video .cointainer-modal .modal-body {
+        .modal-video .cointainer-modal .modal-body {
             font-size: 14px;
             width: 100%;
             padding-top: 5px;
@@ -745,7 +746,7 @@ body.modal-on {
             align-self: flex-start
         }
 
-            #modal-video .cointainer-modal .modal-body .loader {
+            .modal-video .cointainer-modal .modal-body .loader {
                 position: absolute;
                 height: 100%;
                 width: 100%;
@@ -755,7 +756,7 @@ body.modal-on {
                 background-color: #000
             }
 
-            #modal-video .cointainer-modal .modal-body .modal-container {
+            .modal-video .cointainer-modal .modal-body .modal-container {
                 height: auto;
                 margin: 0 auto;
                 width: 960px;
@@ -765,7 +766,7 @@ body.modal-on {
                 overflow: hidden
             }
 
-                #modal-video .cointainer-modal .modal-body .modal-container h2 {
+                .modal-video .cointainer-modal .modal-body .modal-container h2 {
                     font-size: 21px;
                     margin-top: 15px;
                     margin-bottom: 10px;
@@ -773,7 +774,7 @@ body.modal-on {
                     align-self: flex-start
                 }
 
-                #modal-video .cointainer-modal .modal-body .modal-container .tags {
+                .modal-video .cointainer-modal .modal-body .modal-container .tags {
                     width: 100%;
                     display: flex;
                     flex-direction: row;
@@ -781,13 +782,13 @@ body.modal-on {
                     margin: 5px 0
                 }
 
-                    #modal-video .cointainer-modal .modal-body .modal-container .tags span {
+                    .modal-video .cointainer-modal .modal-body .modal-container .tags span {
                         font-size: 16px;
                         font-weight: 300;
                         margin-right: 5px
                     }
 
-                    #modal-video .cointainer-modal .modal-body .modal-container .tags a {
+                    .modal-video .cointainer-modal .modal-body .modal-container .tags a {
                         cursor: pointer;
                         color: #005489;
                         font-size: 16px;
@@ -796,11 +797,11 @@ body.modal-on {
                         margin-right: 2px
                     }
 
-                        #modal-video .cointainer-modal .modal-body .modal-container .tags a:hover {
+                        .modal-video .cointainer-modal .modal-body .modal-container .tags a:hover {
                             color: #2980b9
                         }
 
-                #modal-video .cointainer-modal .modal-body .modal-container .menu {
+                .modal-video .cointainer-modal .modal-body .modal-container .menu {
                     width: 100%;
                     display: flex;
                     flex-direction: row;
@@ -808,13 +809,13 @@ body.modal-on {
                     margin-top: 35px
                 }
 
-                    #modal-video .cointainer-modal .modal-body .modal-container .menu ul {
+                    .modal-video .cointainer-modal .modal-body .modal-container .menu ul {
                         display: flex;
                         flex-direction: row;
                         justify-content: flex-start
                     }
 
-                        #modal-video .cointainer-modal .modal-body .modal-container .menu ul li {
+                        .modal-video .cointainer-modal .modal-body .modal-container .menu ul li {
                             color: #fff;
                             background-color: #005489;
                             padding: 7px 25px;
@@ -830,24 +831,24 @@ body.modal-on {
                             -moz-transition-duration: 0.5s
                         }
 
-                            #modal-video .cointainer-modal .modal-body .modal-container .menu ul li:hover {
+                            .modal-video .cointainer-modal .modal-body .modal-container .menu ul li:hover {
                                 background-color: #2980b9;
                                 color: black
                             }
 
-                #modal-video .cointainer-modal .modal-body .modal-container .comments {
+                .modal-video .cointainer-modal .modal-body .modal-container .comments {
                     width: 100%;
                     display: none;
                     margin: 50px 0
                 }
 
-                    #modal-video .cointainer-modal .modal-body .modal-container .comments h3 {
+                    .modal-video .cointainer-modal .modal-body .modal-container .comments h3 {
                         align-self: flex-start;
                         font-size: 18px;
                         margin-bottom: 15px
                     }
 
-                    #modal-video .cointainer-modal .modal-body .modal-container .comments .comment {
+                    .modal-video .cointainer-modal .modal-body .modal-container .comments .comment {
                         width: 100%;
                         display: flex;
                         flex-direction: column;
@@ -855,18 +856,18 @@ body.modal-on {
                         margin: 5px 0
                     }
 
-                        #modal-video .cointainer-modal .modal-body .modal-container .comments .comment span {
+                        .modal-video .cointainer-modal .modal-body .modal-container .comments .comment span {
                             font-size: 16px;
                             font-weight: 600;
                             color: #005489
                         }
 
-                        #modal-video .cointainer-modal .modal-body .modal-container .comments .comment p {
+                        .modal-video .cointainer-modal .modal-body .modal-container .comments .comment p {
                             font-size: 14px;
                             font-weight: 400
                         }
 
-                    #modal-video .cointainer-modal .modal-body .modal-container .comments .pagination {
+                    .modal-video .cointainer-modal .modal-body .modal-container .comments .pagination {
                         display: flex;
                         flex-direction: row;
                         justify-content: center;
@@ -875,13 +876,13 @@ body.modal-on {
                         margin-top: 30px
                     }
 
-                        #modal-video .cointainer-modal .modal-body .modal-container .comments .pagination ul {
+                        .modal-video .cointainer-modal .modal-body .modal-container .comments .pagination ul {
                             display: flex;
                             flex-direction: row;
                             justify-content: flex-start
                         }
 
-                            #modal-video .cointainer-modal .modal-body .modal-container .comments .pagination ul li {
+                            .modal-video .cointainer-modal .modal-body .modal-container .comments .pagination ul li {
                                 font-size: 12px;
                                 cursor: pointer;
                                 background-color: #484848;
@@ -892,33 +893,33 @@ body.modal-on {
                                 border-radius: 8px
                             }
 
-                                #modal-video .cointainer-modal .modal-body .modal-container .comments .pagination ul li:hover {
+                                .modal-video .cointainer-modal .modal-body .modal-container .comments .pagination ul li:hover {
                                     background-color: #005489;
                                     color: #fff
                                 }
 
-                                #modal-video .cointainer-modal .modal-body .modal-container .comments .pagination ul li a {
+                                .modal-video .cointainer-modal .modal-body .modal-container .comments .pagination ul li a {
                                     text-decoration: none
                                 }
 
-                            #modal-video .cointainer-modal .modal-body .modal-container .comments .pagination ul .active {
+                            .modal-video .cointainer-modal .modal-body .modal-container .comments .pagination ul .active {
                                 background-color: #005489;
                                 color: #fff
                             }
 
-                #modal-video .cointainer-modal .modal-body .modal-container .related-videos-container {
+                .modal-video .cointainer-modal .modal-body .modal-container .related-videos-container {
                     width: 100%;
                     display: none;
                     margin: 50px 0
                 }
 
-                    #modal-video .cointainer-modal .modal-body .modal-container .related-videos-container h3 {
+                    .modal-video .cointainer-modal .modal-body .modal-container .related-videos-container h3 {
                         align-self: flex-start;
                         font-size: 18px;
                         margin-bottom: 15px
                     }
 
-                    #modal-video .cointainer-modal .modal-body .modal-container .related-videos-container .related-videos {
+                    .modal-video .cointainer-modal .modal-body .modal-container .related-videos-container .related-videos {
                         display: flex;
                         flex-direction: row;
                         justify-content: space-between;
@@ -927,7 +928,7 @@ body.modal-on {
                         width: 100%
                     }
 
-                        #modal-video .cointainer-modal .modal-body .modal-container .related-videos-container .related-videos .related-video {
+                        .modal-video .cointainer-modal .modal-body .modal-container .related-videos-container .related-videos .related-video {
                             display: flex;
                             flex-direction: column;
                             justify-content: flex-start;
@@ -935,16 +936,16 @@ body.modal-on {
                             margin-bottom: 25px
                         }
 
-                            #modal-video .cointainer-modal .modal-body .modal-container .related-videos-container .related-videos .related-video a {
+                            .modal-video .cointainer-modal .modal-body .modal-container .related-videos-container .related-videos .related-video a {
                                 text-decoration: none;
                                 color: inherit
                             }
 
-                                #modal-video .cointainer-modal .modal-body .modal-container .related-videos-container .related-videos .related-video a span {
+                                .modal-video .cointainer-modal .modal-body .modal-container .related-videos-container .related-videos .related-video a span {
                                     font-size: 14px
                                 }
 
-        #modal-video .cointainer-modal .gradient {
+        .modal-video .cointainer-modal .gradient {
             position: absolute;
             bottom: 0px;
             left: 0px;
@@ -960,41 +961,41 @@ body.modal-on {
         }
 
 @media only screen and (max-width: 1598px) {
-    #modal-video .cointainer-modal .modal-body .modal-container {
+    .modal-video .cointainer-modal .modal-body .modal-container {
         width: 640px
     }
 
-        #modal-video .cointainer-modal .modal-body .modal-container .menu {
+        .modal-video .cointainer-modal .modal-body .modal-container .menu {
             margin-top: 20px
         }
 }
 
 @media only screen and (max-width: 1150px) {
-    #modal-video .cointainer-modal .modal-body .modal-container {
+    .modal-video .cointainer-modal .modal-body .modal-container {
         width: 480px
     }
 
-        #modal-video .cointainer-modal .modal-body .modal-container .menu {
+        .modal-video .cointainer-modal .modal-body .modal-container .menu {
             margin-top: 40px
         }
 }
 
 @media only screen and (max-width: 760px) {
-    #modal-video .cointainer-modal .modal-body .modal-container {
+    .modal-video .cointainer-modal .modal-body .modal-container {
         width: 90%
     }
 
-        #modal-video .cointainer-modal .modal-body .modal-container .menu {
+        .modal-video .cointainer-modal .modal-body .modal-container .menu {
             margin-top: 20px
         }
 
-        #modal-video .cointainer-modal .modal-body .modal-container .tags {
+        .modal-video .cointainer-modal .modal-body .modal-container .tags {
             flex-wrap: wrap
         }
 }
 
 @media only screen and (max-width: 420px) {
-    #modal-video .cointainer-modal {
+    .modal-video .cointainer-modal {
         height: 100%;
         width: 100%;
         border-radius: 0px;
@@ -1173,5 +1174,65 @@ body.modal-on {
 
     100% {
         background-color: #000
+    }
+}
+#myModal .modal-content {
+    background-color: #212121;
+}
+#myModal h4 {
+    color: #1a8dd9;
+}
+#myModal label {
+
+    color: #1a8dd9;
+}
+#myModal .modal-header {
+
+    border-bottom: 1px solid #e5e5e530;
+}
+#myModal .modalButtons
+{
+    float:left;
+}
+#myModal .modalButtons button
+{
+    margin-top:10px;
+}
+#categories
+{
+    margin-top:10px;
+}
+#adminFrame {
+    height: 500px;
+    width: 100%;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+ #category-form {
+    margin-top: 0px;
+}
+.form-cat-name {
+    width: 80%;
+}
+@media only screen and (max-width: 448px) {
+    .form-cat-name {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #adminFrame
+    {
+        height:250px;
+    }
+}
+@media only screen and (max-width: 428px) {
+    #adminFrame {
+        height: 150px;
+    }
+}
+@media only screen and (max-width: 992px) {
+    #category-form {
+        margin-top:100px;
     }
 }
