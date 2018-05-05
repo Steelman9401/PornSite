@@ -7,7 +7,7 @@
     });
 
     //kliknuti na krizek
-    $(document).on("click", "#close", function () {
+    $(document).on("click", "#close-log", function () {
         $("#modal-login").hide();
         $("body").removeClass("modal-on");
     });

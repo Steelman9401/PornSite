@@ -14,5 +14,6 @@ namespace PornSite.DTO
         public string Duration { get; set; } 
         public int Views { get; set; }
         public bool HD { get; set; }
+        public long TimeStamp { get; set; }
     }
 }

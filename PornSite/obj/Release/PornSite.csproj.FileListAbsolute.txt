@@ -112,3 +112,8 @@ C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Release\PornSite.csproj.CopyCo
 C:\Users\domin\source\repos\PornSite\PornSite\bin\LinqKit.dll
 C:\Users\domin\source\repos\PornSite\PornSite\bin\LinqKit.xml
 C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.global.resources
+C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.userUpdate.resources
+C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.userCategory.resources
+C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.addedmain.resources
+C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.categoryImage.resources
+C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.added_timestamp.resources

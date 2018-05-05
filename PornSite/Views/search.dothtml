@@ -2,44 +2,150 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <main>
-        <div class="cointainer-column">
-            <div Visible="{value: SearchCount>0}">
-                <h2 style="font-weight:normal">výsledek hledaní pro: <strong>{{value: SearchParameter}}</strong></h2>
-                <h3>nalezeno <span style="color:#1a8dd9">{{value: SearchCount}}</span> videí</h3>
-                <br />
-                <section class="menu">
-                    <ul style="color:#1a8dd9">
-                        <li>
-                            <h2 ID="newestLinkSearch" style="font-weight:bold;" onclick="universalPress(this)">nejnovější</h2>
-                            <dot:Button Click="{command: LoadLatestVideos()}" ButtonTagName="button" style="display:none;"></dot:Button>
-                        </li>
-                        <li>
-                            <h2 ID="mostViewedLinkSearch" style="font-weight:normal" onclick="universalPress(this)">nejsledovanější</h2>
-                            <dot:Button Click="{command: LoadMostViewedVideos()}" ButtonTagName="button" style="display:none;"></dot:Button>
-                        </li>
-                    </ul>
-                </section>
-                <dot:CheckBox Text=" pouze videa pro mobil" Checked="{value: LoadMobile}" Changed="{command: LoadMobileVideos()}" />
+    <div id="background-modal"></div>
+    <dot:InlineScript>
+        //dotvvm.events.afterPostback.subscribe(function () {
+        //    $("main").css("display", "none");
+        //    $("main").fadeIn(400);
+        //}
+        //);
+    </dot:InlineScript>
+    <div class="cointainer-column">
+        <section class="safety-button">
+            <button id="safety-button" title="záchranné tlačítko">!</button>
+            <p ID="safety-info" style="margin-top:15px; float:right; text-decoration:underline; cursor:pointer">k čemu to kurva je?</p>
+        </section>
+        <section class="section-title">
+            <h2 style="color:white;">Hledaný výraz: <span class="category-name">{{value: SearchParameter}}</span> <span style="font-size: 21px;">({{value: SearchCount}})</span></h2>
+            <ul>
+                <li ID="newest" class="active-li click remove-loader-main no-scroll">
+                    nejnovější
+                    <dot:Button ButtonTagName="button" Click="{command: LoadLatestVideos()}" style="display:none;" />
+                </li>
+                <li ID="most-viewed" class="click remove-loader-main no-scroll">
+                    nejsledovanější
+                    <dot:Button ButtonTagName="button" Click="{command: LoadMostViewedVideos()}" style="display:none;" />
+                </li>
+            </ul>
+            <div class="mobile-only">
+                <input type="checkbox" name="mobile" value="1">
+                <span>zobrazit pouze mobile-friendly videa</span>
             </div>
-            <h2 style="font-weight:normal" Visible="{value: SearchCount==0}">Nenalezena žádná videa pro: <strong>{{value: SearchParameter}}</strong></h2>
-            <section class="videos">
-                <dot:Repeater DataSource="{value: Videos}">
-                    <ItemTemplate>
-                        <div class="video" onclick="buttonPress(this)">
-                            <video style="height:150px !important; width:250px !important;object-fit: fill;" onmouseover="playVideo(this)" o onmouseout="stopVideo(this)" poster="{value: Img}" loop preload="none">
-                                <source src="{value: Preview}" type="video/webm">
-                                Your browser does not support the video taga.
-                            </video>
-                            <span>{{value: Title}}</span>
-                            <p>{{value: Views}}</p>
-                            <dot:Button Click="{command: _root.LoadVideo(_this)}" ButtonTagName="button" style="display:none"></dot:Button>
+        </section>
+
+        <dot:Repeater class="videos latest" DataSource="{value: Videos}">
+            <ItemTemplate>
+                <div class="video click remove-loader-main">
+                    <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
+                    <a>
+                        <div class="preview">
+                            <video poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                            <span style="display:none;" class="today">DNES</span>
+                            <div class="preview-text">
+                                <span Visible="{value: HD}" class="hd">HD</span>
+                                <span>{{value: Duration}}</span>
+                            </div>
                         </div>
-                    </ItemTemplate>
-                </dot:Repeater>
-                <dot:DataPager class="pagination" DataSet="{value: Videos}" />
-            </section>
+                    </a>
+                    <a id="video-title">
+                        <span class="title">{{value: Title}}</span>
+                    </a>
+                </div>
+            </ItemTemplate>
+        </dot:Repeater>
+        <section class="pagination">
+            <dot:DataPager DataSet="{value: Videos}" class="remove-loader-main" />
+        </section>
+        <div id="modal-video">
+            <div class="cointainer-modal" DataContext="{value: Video}">
+                <div class="modal-header">
+                    <div id="close"></div>
+                    <dot:Button ID="close-btn" ButtonTagName="button" style="display:none;" Click="{command: _parent.HideVideo()}" />
+                </div>
+                <div class="modal-body" id="modal-video-body">
+                    <dot:UpdateProgress ID="loader-modal">
+                        <div class="loader">
+                            <div id="floatingCirclesG">
+                                <div class="f_circleG" id="frotateG_01"></div>
+                                <div class="f_circleG" id="frotateG_02"></div>
+                                <div class="f_circleG" id="frotateG_03"></div>
+                                <div class="f_circleG" id="frotateG_04"></div>
+                                <div class="f_circleG" id="frotateG_05"></div>
+                                <div class="f_circleG" id="frotateG_06"></div>
+                                <div class="f_circleG" id="frotateG_07"></div>
+                                <div class="f_circleG" id="frotateG_08"></div>
+                            </div>
+                        </div>
+                    </dot:UpdateProgress>
+                    <div class="modal-container">
+                        <!--<video width="960" controls>
+                    <source src="video/soustajici-berusky.mp4" type="video/mp4">
+                    Tvůj prohlížeč nepodporuje HTML5 video.
+                </video>-->
+                        <div ID="iframe-wrap" class="iframe-container">
+                            <iframe ID="frame" src="{value: Url}" frameborder="0" width="1200" height="720" scrolling="no" allowfullscreen></iframe>
+                        </div>
+                        <h2>{{value: Title}}</h2>
+                        <div class="tags">
+                            <span>Kategorie:</span>
+                            <dot:Repeater DataSource="{value: Categories}">
+                                <ItemTemplate>
+                                    <div class="click-link show-header" style="display: inline-block">
+                                        <dot:RouteLink style="display:none" RouteName="category" Param-Id="{value: Id}" Param-Name="{value: Name}">{{value: Name}} </dot:RouteLink>
+                                        <a>{{value: Name}}</a>
+                                    </div>
+                                </ItemTemplate>
+                            </dot:Repeater>
+                        </div>
+                        <div class="menu">
+                            <ul>
+                                <li class="related no-scroll click remove-loader-main remove-loader-modal">
+                                    podobná videa
+                                    <dot:Button ButtonTagName="button" style="display:none;" Click="{command: LoadSuggestedVideos()}" />
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="related-videos-container">
+                            <h3>Podobná videa</h3>
+                            <dot:UpdateProgress ID="loader-related">
+                                <div class="loader">
+                                    <div id="floatingCirclesG">
+                                        <div class="f_circleG" id="frotateG_01"></div>
+                                        <div class="f_circleG" id="frotateG_02"></div>
+                                        <div class="f_circleG" id="frotateG_03"></div>
+                                        <div class="f_circleG" id="frotateG_04"></div>
+                                        <div class="f_circleG" id="frotateG_05"></div>
+                                        <div class="f_circleG" id="frotateG_06"></div>
+                                        <div class="f_circleG" id="frotateG_07"></div>
+                                        <div class="f_circleG" id="frotateG_08"></div>
+                                    </div>
+                                </div>
+                            </dot:UpdateProgress>
+                            <dot:Repeater DataSource="{value: SuggestedVideos}" class="related-videos">
+                                <ItemTemplate>
+                                    <div class="related-video click remove-loader-main remove-loader-related remove-loader-modal">
+                                        <dot:Button ButtonTagName="button" style="display:none;" Click="{command: _root.LoadVideo(_this)}" />
+                                        <a id="related-video">
+                                            <div class="preview">
+                                                <video poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                                                <span style="display:none;" class="today">DNES</span>
+                                                <div class="preview-text">
+                                                    <span Visible="{value: HD}" class="hd">HD</span>
+                                                    <span>{{value: Duration}}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a id="related-video-title">
+                                            <span class="title">{{value: Title}}</span>
+                                        </a>
+                                    </div>
+                                </ItemTemplate>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gradient"></div>
         </div>
-        </main>
+    </div>
 </dot:Content>
 

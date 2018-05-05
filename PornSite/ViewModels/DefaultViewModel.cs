@@ -21,10 +21,9 @@ namespace PornSite.ViewModels
         public bool LoadMobile { get; set; }
         public bool LoadRecommended { get; set; }
         public int Switch { get; set; } = 0;
-        public int CatComSwitch { get; set; } = 0;
+        public long TimeStamp { get; set; } = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         public bool ShowVideo { get; set; } = false;
         public VideoDetailDTO Video { get; set; } = new VideoDetailDTO();
-        public string ComText { get; set; }
         PornRepository PornRep = new PornRepository();
         public List<VideoListDTO> RecommendedVideos { get; set; }
         public List<VideoListDTO> History { get; set; } = new List<VideoListDTO>();
@@ -32,10 +31,6 @@ namespace PornSite.ViewModels
         {
             PagingOptions = { PageSize = 20 }
         };
-        public string UserId
-        {
-            get { return Context.GetOwinContext().Authentication.User.Identity.GetUserId(); }
-        }
 
         public async override Task PreRender()
         {
@@ -59,11 +54,6 @@ namespace PornSite.ViewModels
                     Videos.OnLoadingDataAsync = option => PornRep.GetAllVideos(option,LoadMobile,Switch);
                 }
             }
-            else if (CatComSwitch == 1)
-            {
-                Video.GetComments();
-            }
-  
             await base.PreRender();
         }
         public void LoadMostViewedVideos()
@@ -83,17 +73,7 @@ namespace PornSite.ViewModels
         }
         public async Task GetSuggestions()
         {
-            CatComSwitch = 2;
-            await Video.GetSuggestedVideos();
-        }
-        public void GetComments()
-        {
-            CatComSwitch = 1;
-            Video.GetComments();
-        }
-        public async Task AddComment()
-        {
-            await Video.AddComment(ComText, Convert.ToInt32(UserId), CurrentUser);
+            await Video.LoadSuggestedVideos();
         }
         public async Task LoadVideo(VideoListDTO video)
         {
@@ -112,10 +92,9 @@ namespace PornSite.ViewModels
         public void HideVideo()
         {
             ShowVideo = false;
-            CatComSwitch = 0;
             Video.Url = "";
         }
-        public async Task GetMobileVideos()
+        public async Task LoadMobileVideos()
         {
             Videos.PageIndex = 0;
             LoadRecommended = false;

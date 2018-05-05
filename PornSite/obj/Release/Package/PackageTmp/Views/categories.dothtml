@@ -2,14 +2,26 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <main>
-        <div class="cointainer-column">
-            <dot:Repeater DataSource="{value: Categories}">
-                <ItemTemplate>
-                    <p><dot:RouteLink style="color:white" RouteName="category" Param-Id="{value: Id}">{{value: Name}}</dot:RouteLink></p>
-                </ItemTemplate>
-            </dot:Repeater>
-         </div>
-    </main>
+    <dot:InlineScript>
+        dotvvm.events.init.subscribe(function () {
+            $("main").css("display", "none");
+            $("main").fadeIn(400);
+        }
+        );
+    </dot:InlineScript>
+    <div id="categories">
+        <h2>Kategorie</h2>
+        <dot:Repeater DataSource="{value: Categories}" class="container">
+            <ItemTemplate>
+                <div class="category click-link">
+                    <dot:RouteLink style="display:none;" RouteName="category" Param-Id="{value: Id}" Param-Name="{value: Name}"></dot:RouteLink>
+                    <a>
+                        <img src="{value: Img}">
+                        <span>{{value: Name}}</span>
+                    </a>
+                </div>
+            </ItemTemplate>
+        </dot:Repeater>
+    </div>
 </dot:Content>
 

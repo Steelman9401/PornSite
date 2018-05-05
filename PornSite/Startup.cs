@@ -19,21 +19,7 @@ namespace PornSite
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseCookieAuthentication(new CookieAuthenticationOptions()
-            {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/"),       // don't use ~/login here - the ~ in URLs is a DotVVM feature, OWIN security doesn't know it
-                Provider = new CookieAuthenticationProvider()
-                {
-                    OnApplyRedirect = e => DotvvmAuthenticationHelper.ApplyRedirectResponse(e.OwinContext, e.RedirectUri)
-                }
-            });
             var applicationPhysicalPath = HostingEnvironment.ApplicationPhysicalPath;
-
-            ConfigureAuth(app);
-
-
-
             // use DotVVM
             var dotvvmConfiguration = app.UseDotVVM<DotvvmStartup>(applicationPhysicalPath, debug: IsInDebugMode(), options: options =>
             {
@@ -51,21 +37,6 @@ namespace PornSite
             {
                 context.Response.Redirect("/");
                 return Task.FromResult(0);
-            });
-        }
-        public void ConfigureAuth(IAppBuilder app)
-        {
-            app.UseCookieAuthentication(new CookieAuthenticationOptions()
-            {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Authentication/SignIn"),
-                Provider = new CookieAuthenticationProvider()
-                {
-                    OnApplyRedirect = context =>
-                    {
-                        DotvvmAuthenticationHelper.ApplyRedirectResponse(context.OwinContext, context.RedirectUri);
-                    }
-                }
             });
         }
 

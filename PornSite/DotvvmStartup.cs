@@ -17,12 +17,9 @@ namespace PornSite
         private void ConfigureRoutes(DotvvmConfiguration config, string applicationPath)
         {
             config.RouteTable.Add("Default", "", "Views/default.dothtml");
-            config.RouteTable.Add("adminWeb", "admin/web", "Views/admin/admin.dothtml");
-            config.RouteTable.Add("adminDatabase", "admin/database", "Views/admin/adminDatabase.dothtml");
             config.RouteTable.Add("search", "search/{text}", "Views/search.dothtml");
-            config.RouteTable.Add("register", "register", "Views/register.dothtml");
             config.RouteTable.Add("categories", "categories", "Views/categories.dothtml");
-            config.RouteTable.Add("category", "category/{Id}", "Views/category.dothtml");      
+            config.RouteTable.Add("category", "category/{Id}/{Name}", "Views/category.dothtml");      
         }
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
@@ -46,10 +43,10 @@ namespace PornSite
                 Location = new UrlResourceLocation("~/Scripts/bootstrap.min.js"),
                 Dependencies = new[] { "bootstrap-css", "jquery" }
             });
-            config.Resources.Register("jquery", new ScriptResource
-            {
-                Location = new UrlResourceLocation("~/Scripts/jquery-1.9.1.min.js")
-            });
+            //config.Resources.Register("jquery", new ScriptResource
+            //{
+            //    Location = new UrlResourceLocation("~/Scripts/jquery-1.9.1.min.js")
+            //});
         }
     }
 }

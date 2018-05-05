@@ -9,11 +9,11 @@
         if ($(window).width() > 744) {
             $("#menu").hide();
             $("#form").show();
-            active = 0;
+            active = 1;
         } else {
-            if (!active) {
+            if (active == 1) {
                 $("#form").hide();
-                active = 1;
+                active = 0;
             }
         }
     });

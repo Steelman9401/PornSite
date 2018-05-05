@@ -8,6 +8,8 @@ using System.Web;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using LinqKit;
+using System.Text;
+using System.Globalization;
 
 namespace PornSite.Repositories
 {
@@ -17,10 +19,20 @@ namespace PornSite.Repositories
         {
             using (var db = new myDb())
             {
+                return await  db.Videos
+                    .Where(x => x.Title
+                    .Contains(search) || x.Categories
+                    .Any(p => p.Name.Contains(search))|| x.Categories
+                    .Any(o=>o.Name_en.Contains(search))).CountAsync();
+            }
+        }
+        public async Task<int> GetCategoryVideosCount(int Id)
+        {
+            using (var db = new myDb())
+            {
                 return await db.Videos
-               .Where(x => x.Title.ToLower()
-               .Contains(search) || x.Categories
-               .Select(p => p.Name.ToLower()).Contains(search)).CountAsync();
+                    .Where(x => x.Categories.Select(p => p.Id).Contains(Id))
+                    .CountAsync();
             }
         }
         public async Task<GridViewDataSetLoadedData<VideoListDTO>> GetSearchResult(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, string search, bool loadmomobile, int specific)
@@ -28,15 +40,16 @@ namespace PornSite.Repositories
             using (var db = new myDb())
             {
                 IQueryable<Video> query = db.Videos
-                    .Where(x => x.Title.ToLower()
+                    .Where(x => x.Title
                     .Contains(search) || x.Categories
-                    .Select(p => p.Name.ToLower()).Contains(search));
+                    .Any(p => p.Name.Contains(search))|| x.Categories
+                    .Any(o=>o.Name_en.Contains(search)));
                 if (specific == 0) // nejnovejsi
                 {
                     query = query.OrderByDescending(x => x.Id);
                     if (loadmomobile) // videa pouze pro mobil
                     {
-                        query = query.Where(p => p.Url.Contains("tuber"));
+                        query = query.Where(p => p.Url.Contains("tuber") || p.Url.Contains("pornhub"));
                     }
                 }
                 else // nejsledovanejsi
@@ -44,18 +57,18 @@ namespace PornSite.Repositories
                     query = query.OrderByDescending(x => x.Views);
                     if (loadmomobile) // nejsledovanejsi videa pouze pro mobil
                     {
-                        query = query.Where(p => p.Url.Contains("tuber"));
+                        query = query.Where(p => p.Url.Contains("tuber") || p.Url.Contains("pornhub"));
                     }
                 }
                 var finalquery = query // finalni poskladana query
                         .Select(a => new VideoListDTO
                         {
                             Id = a.Id,
-                            Img = a.Img,
+                            Img = "/Admin/Previews/"+ a.Img,
                             Title = a.Title,
                             Duration = a.Duration,
                             HD = a.HD,
-                            Preview = a.Preview,
+                            Preview = "/Admin/Previews/" + a.Preview,
                             Views = a.Views
                         }).AsQueryable();
                 return finalquery.GetDataFromQueryable(gridViewDataSetLoadOptions);
@@ -65,13 +78,13 @@ namespace PornSite.Repositories
         {
             using (var db = new myDb())
             {
-                IQueryable<Video> query = db.Videos;
+                IQueryable<Video> query = db.Videos.Where(x=>x.AllowMain==true);
                 if (specific == 0) //nejnovejsi
                 {
                     query = query.OrderByDescending(x => x.Id);
                     if (loadmobile) //videa pouze pro mobil
                     {
-                        query = query.Where(p => p.Url.Contains("tuber"));
+                        query = query.Where(p => p.Url.Contains("tuber") || p.Url.Contains("pornhub"));
                     }
                 }
                 else //nejsledovanejsi videa
@@ -79,44 +92,56 @@ namespace PornSite.Repositories
                     query = query.OrderByDescending(x => x.Views);
                     if (loadmobile) // nejsledovanejsi videa pouze pro mobil
                     {
-                        query = query.Where(p => p.Url.Contains("tuber"));
+                        query = query.Where(p => p.Url.Contains("tuber") || p.Url.Contains("pornhub"));
                     }
                 }
+                DateTime currentDate = DateTime.Now;
                 var finalquery = query // finalni poskladana query
                         .Select(a => new VideoListDTO
                         {
                             Id = a.Id,
-                            Img = a.Img,
+                            Img = "/Admin/Previews/" + a.Img,
                             Title = a.Title,
                             Duration = a.Duration,
                             HD = a.HD,
-                            Preview = a.Preview,
-                            Views = a.Views
-                        }).AsQueryable();
+                            Preview = "/Admin/Previews/" + a.Preview,
+                            Views = a.Views,
+                            TimeStamp = a.TimeStamp
+            }).AsQueryable();
                 return finalquery.GetDataFromQueryable(gridViewDataSetLoadOptions);
             }
         }
-        public async Task<GridViewDataSetLoadedData<VideoListDTO>> GetVideosByCategory(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, int Id)
+        public async Task<GridViewDataSetLoadedData<VideoListDTO>> GetVideosByCategory(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, int Id, int specific, bool loadmobile)
         {
             using (var db = new myDb())
             {
-                var query = db.Categories.Find(Id).Videos.Select(x => new VideoListDTO()
+                IQueryable<Video> query = db.Videos.Where(x=>x.Categories.Select(p=>p.Id).Contains(Id));
+                if (specific == 0) //nejnovejsi
+                {
+                    query = query.OrderByDescending(x => x.Id);
+                    if (loadmobile) //videa pouze pro mobil
+                    {
+                        query = query.Where(p => p.Url.Contains("tuber") || p.Url.Contains("pornhub"));
+                    }
+                }
+                else //nejsledovanejsi videa
+                {
+                    query = query.OrderByDescending(x => x.Views);
+                    if (loadmobile) // nejsledovanejsi videa pouze pro mobil
+                    {
+                        query = query.Where(p => p.Url.Contains("tuber") || p.Url.Contains("pornhub"));
+                    }
+                }
+                var finalquery = query.Select(x => new VideoListDTO()
                 {
                     Id = x.Id,
-                    Img = x.Img,
+                    Img = "/Admin/Previews/" + x.Img,
                     Title = x.Title,
                     Duration = x.Duration,
                     HD = x.HD,
-                    Preview = x.Preview
-                }).OrderByDescending(a => a.Id).AsQueryable();
-                return query.GetDataFromQueryable(gridViewDataSetLoadOptions);
-            }
-        }
-        public async Task<string> GetCategoryNameById(int Id)
-        {
-            using (var db = new myDb())
-            {
-                return await db.Categories.Where(p => p.Id == Id).Select(x => x.Name).FirstOrDefaultAsync();
+                    Preview = "/Admin/Previews/" + x.Preview,
+                }).AsQueryable();
+                return finalquery.GetDataFromQueryable(gridViewDataSetLoadOptions);
             }
         }
         public async Task<List<VideoListDTO>> GetVideoHistory()
@@ -147,11 +172,11 @@ namespace PornSite.Repositories
                             .Select(a => new VideoListDTO()
                             {
                                 Id = a.Id,
-                                Img = a.Img,
+                                Img = "/Admin/Previews/"+ a.Img,
                                 Title = a.Title,
                                 Duration = a.Duration,
                                 HD = a.HD,
-                                Preview = a.Preview
+                                Preview = "/Admin/Previews/" + a.Preview
                             }).ToListAsync();
                     }
                 }
@@ -183,7 +208,7 @@ namespace PornSite.Repositories
                         {
                             int Id = Convert.ToInt32(item);
                             if(loadmobile)
-                            predicate = predicate.Or(x => x.Categories.Select(p => p.Id).Contains(Id) && x.Url.Contains("tuber"));
+                            predicate = predicate.Or(x => x.Categories.Select(p => p.Id).Contains(Id) && (x.Url.Contains("tuber") || x.Url.Contains("pornhub")));
                             else
                             predicate = predicate.Or(x => x.Categories.Select(p => p.Id).Contains(Id));
 
@@ -199,7 +224,7 @@ namespace PornSite.Repositories
                         {
                             IQueryable<Video> query;
                             if (loadmobile)
-                                query = db.Videos.Where(x => x.Url.Contains("tuber"));
+                                query = db.Videos.Where(x => x.Url.Contains("tuber") || x.Url.Contains("pornhub"));
                             else
                             {
                                 query = db.Videos;
@@ -224,7 +249,7 @@ namespace PornSite.Repositories
                 {
                     IQueryable<Video> query;
                     if (loadmobile)
-                        query = db.Videos.Where(x => x.Url.Contains("tuber"));
+                        query = db.Videos.Where(x => x.Url.Contains("tuber") || x.Url.Contains("pornhub"));
                     else
                     {
                         query = db.Videos;
@@ -241,11 +266,11 @@ namespace PornSite.Repositories
                 .Select(a => new VideoListDTO()
                 {
                     Id = a.Id,
-                    Img = a.Img,
+                    Img = "/Admin/Previews/" + a.Img,
                     Title = a.Title,
                     Duration = a.Duration,
                     HD = a.HD,
-                    Preview = a.Preview
+                    Preview = "/Admin/Previews/"+ a.Preview
                 }).OrderBy(s => s.Id).Skip(skip).Take(4).ToListAsync();
         }
         public async Task<VideoDetailDTO> GetVideoById(int Id)
@@ -275,7 +300,7 @@ namespace PornSite.Repositories
                 return vid;
             }
         }
-        public async Task<IEnumerable<VideoListDTO>> GetSuggestedVideos(List<int> Categories)
+        public async Task<IEnumerable<VideoListDTO>> GetSuggestedVideos(List<int> Categories, int Id)
         {
             if (Categories.Count >= 3)
             {
@@ -284,16 +309,16 @@ namespace PornSite.Repositories
                 int c = Categories[2];
                 using (var db = new myDb())
                 {
-                    return await db.Videos.Where(x => x.Categories.Select(p => p.Id).Contains(a) || x.Categories.Select(p => p.Id).Contains(b) || x.Categories.Select(p => p.Id).Contains(c)) //hnus
+                    return await db.Videos.Where(x => x.Id!= Id &&(x.Categories.Select(p => p.Id).Contains(a) || x.Categories.Select(p => p.Id).Contains(b) || x.Categories.Select(p => p.Id).Contains(c))) //hnus
                           .Select(p => new VideoListDTO
                           {
                               Id = p.Id,
                               Title = p.Title,
-                              Img = p.Img,
-                              Preview = p.Preview,
+                              Img = "/Admin/Previews/" + p.Img,
+                              Preview = "/Admin/Previews/" + p.Preview,
                               Duration = p.Duration,
                               HD = p.HD
-                          }).Take(8).ToListAsync();
+                          }).Take(6).ToListAsync();
                 }
             }
             else
@@ -310,7 +335,8 @@ namespace PornSite.Repositories
                     .Select(x => new CategoryDTO()
                     {
                         Id = x.Id,
-                        Name = x.Name
+                        Name = x.Name,
+                        Img = "/Admin/CategoryImg/" + x.Img
                     }).ToListAsync();
             }
         }
@@ -326,5 +352,6 @@ namespace PornSite.Repositories
                 return 0;
             }
         }
+
     }
 }

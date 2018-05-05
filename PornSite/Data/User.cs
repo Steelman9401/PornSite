@@ -11,6 +11,8 @@ namespace PornSite.Data
         public string Username { get; set; }
         public string Password { get; set; }
         public bool Admin { get; set; } = false;
+        public virtual ICollection<Video> Videos { get; set; }
         public virtual ICollection<Comment>Comments { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
     }
 }

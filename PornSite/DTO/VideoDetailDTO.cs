@@ -25,28 +25,10 @@ namespace PornSite.DTO
             PagingOptions = { PageSize = 3 }
         };
 
-        public void GetComments()
-        {
-            CommentRepository ComRep = new CommentRepository();
-            Comments.OnLoadingData = option => ComRep.GetCommentsByVideoId(option, this.Id);
-        }
-
-        public async Task GetSuggestedVideos()
+        public async Task LoadSuggestedVideos()
         {
             PornRepository rep = new PornRepository();
-            SuggestedVideos = await rep.GetSuggestedVideos(Categories.Select(x => x.Id).ToList());
-        }
-
-        public async Task AddComment(string ComText, int UserId, string username)
-        {
-            CommentRepository ComRep = new CommentRepository();
-            CommentDTO comment = new CommentDTO();
-            comment.Text = ComText;
-            comment.User_Id = UserId;
-            comment.Video_Id = this.Id;
-            comment.Username = username;
-            await ComRep.AddComment(comment);
-            Comments.Items.Insert(0, comment);
+            SuggestedVideos = await rep.GetSuggestedVideos(Categories.Select(x => x.Id).ToList(),this.Id);
         }
     }
 }

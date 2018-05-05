@@ -17,24 +17,9 @@
       "virtualPath": "Views/default.dothtml",
       "defaultValues": {}
     },
-    "adminWeb": {
-      "url": "admin/web",
-      "virtualPath": "Views/admin/admin.dothtml",
-      "defaultValues": {}
-    },
-    "adminDatabase": {
-      "url": "admin/database",
-      "virtualPath": "Views/admin/adminDatabase.dothtml",
-      "defaultValues": {}
-    },
     "search": {
       "url": "search/{text}",
       "virtualPath": "Views/search.dothtml",
-      "defaultValues": {}
-    },
-    "register": {
-      "url": "register",
-      "virtualPath": "Views/register.dothtml",
       "defaultValues": {}
     },
     "categories": {
@@ -43,7 +28,7 @@
       "defaultValues": {}
     },
     "category": {
-      "url": "category/{Id}",
+      "url": "category/{Id}/{Name}",
       "virtualPath": "Views/category.dothtml",
       "defaultValues": {}
     }
@@ -80,9 +65,19 @@
       "jquery": {
         "Location": {
           "$type": "DotVVM.Framework.ResourceManagement.UrlResourceLocation, DotVVM.Framework",
-          "Url": "~/Scripts/jquery-1.9.1.min.js"
+          "Url": "https://code.jquery.com/jquery-2.1.1.min.js"
         },
-        "LocationFallback": null,
+        "LocationFallback": {
+          "JavascriptCondition": "window.jQuery",
+          "AlternativeLocations": [
+            {
+              "$type": "DotVVM.Framework.ResourceManagement.EmbeddedResourceLocation, DotVVM.Framework",
+              "Assembly": "DotVVM.Framework, Version=1.1.7.0, Culture=neutral, PublicKeyToken=23f3607db32275da",
+              "Name": "DotVVM.Framework.Resources.Scripts.jquery-2.1.1.min.js",
+              "DebugFilePath": null
+            }
+          ]
+        },
         "MimeType": "text/javascript",
         "VerifyResourceIntegrity": false,
         "Dependencies": [],

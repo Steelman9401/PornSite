@@ -21,16 +21,22 @@ namespace PornSite.ViewModels
         PornRepository PornRep = new PornRepository();
         public int SearchCount { get; set; }
         public bool LoadMobile { get; set; }
-        public VideoDetailDTO Video { get; set; }
+        public VideoDetailDTO Video { get; set; } = new VideoDetailDTO();
         public bool ShowVideo { get; set; }
         public async override Task PreRender()
         {
-            if (!string.IsNullOrEmpty(Context.Parameters["text"].ToString()))
+            if (!ShowVideo)
             {
-                SearchParameter = Context.Parameters["text"].ToString();
+                if (!string.IsNullOrEmpty(Context.Parameters["text"].ToString()))
+                {
+                    SearchParameter = Context.Parameters["text"].ToString();
+                }               
+                    Videos.OnLoadingDataAsync = option => PornRep.GetSearchResult(option, SearchParameter, LoadMobile, VideoSwitch);
+                if (Videos.IsFirstPage)
+                {
+                    SearchCount = await PornRep.GetSearchResultCount(SearchParameter);
+                }
             }
-            Videos.OnLoadingDataAsync = option => PornRep.GetSearchResult(option, SearchParameter,LoadMobile,VideoSwitch);
-            SearchCount = await PornRep.GetSearchResultCount(SearchParameter);
             await base.PreRender();
         }
         public async Task LoadVideo(VideoListDTO video)
@@ -55,6 +61,11 @@ namespace PornSite.ViewModels
             Videos.PageIndex = 0;
             Videos.IsRefreshRequired = true;
         }
-        
+        public void HideVideo()
+        {
+            ShowVideo = false;
+            Video.Url = "";
+        }
+
     }
 }
