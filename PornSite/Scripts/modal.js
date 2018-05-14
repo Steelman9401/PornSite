@@ -1,19 +1,57 @@
 ﻿var loaded;
 $(document).ready(function () {
+    var touchmoved;
+    var lastValueScroll = 0;
+    var previewStarted;
     //kliknuti na nahled videa
-    $(document).on("click", ".video", function () {
-        loaded = true;
-        $("#modal-video").css('display', 'flex');
-        $("#modal-video").removeClass("animated fadeOutUp");
-        if ($(window).width() < 760) {
-            $("header").css('display', 'none');
+    $(document).on("touchend click", ".video", function (e) {
+        if (touchmoved != true) {
+            if (previewStarted) {
+                hideVideo(e.currentTarget.getElementsByTagName("video")[0]);
+                previewStarted = false;
+            }
+            else {
+                $(".video-load").css("display", "none");
+                e.currentTarget.getElementsByTagName("button")[0].click();
+                $("#loader-main").css("display", "none");
+                loaded = true;
+                $("#modal-video").css('display', 'flex');
+                $("#modal-video").removeClass("animated fadeOutUp");
+                if ($(window).width() < 760) {
+                    $("header").css('display', 'none');
+                }
+                setTimeout(function () { $("#modal-video").removeClass("animated fadeInDown"); }, 501);
+                $("#modal-video").addClass("animated fadeInDown");
+                $("#background-modal").fadeIn();
+                //$("body").addClass("modal-on");
+                $(".comments").hide();
+                $(".related-videos-container").hide();
+            }
         }
-        setTimeout(function () { $("#modal-video").removeClass("animated fadeInDown"); }, 501);
-        $("#modal-video").addClass("animated fadeInDown");
-        $("#background-modal").fadeIn();
-        //$("body").addClass("modal-on");
-        $(".comments").hide();
-        $(".related-videos-container").hide();
+    }).on('touchmove', ".video", function (e) {
+        touchmoved = true;
+        if (previewStarted && !iOS) {
+            var scrollFromTop = $(document).scrollTop();
+            var difference = Math.abs(scrollFromTop - lastValueScroll);
+            if (difference > 100) {
+                lastValueScroll = scrollFromTop;
+                hideVideo(e.currentTarget.getElementsByTagName("video")[0]);
+                previewStarted = false;
+            }
+        }
+    }).on('touchstart', ".video", function (e) {
+        touchmoved = false;
+        if (!iOS) {
+            var scrollFromTop = $(document).scrollTop();
+            $(".video-load").css("display", "block");
+            setTimeout(function () {
+                var difference = Math.abs(scrollFromTop - $(document).scrollTop());
+                if (!loaded && difference < 50) {
+                    hoverVideo(e.currentTarget.getElementsByTagName("video")[0]);
+                    previewStarted = true;
+                }
+            }, 1000);
+        }
     });
 
     //kliknuti na krizek

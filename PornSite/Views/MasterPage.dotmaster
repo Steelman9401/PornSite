@@ -1,62 +1,39 @@
 ﻿@viewModel PornSite.ViewModels.MasterPageViewModel, PornSite
 <!DOCTYPE html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="cs" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118823697-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-118823697-1');
+    </script>
     <meta charset="utf-8" />
-    <title>Vymasti.si</title>
+    <title>Nejmodernější česká porno stránka - Vymasti.si</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000" />
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
     <link href="../Content/animate.css" rel="stylesheet" />
-    <link href="../Content/style.css" rel="stylesheet" />
     <link href="../Content/master.css" rel="stylesheet" />
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="../Content/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Content/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Content/img/favicon-16x16.png">
+    <link rel="manifest" href="../Content/img/site.webmanifest">
+    <link rel="mask-icon" href="../Content/img/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="exoclick-site-verification" content="0e2e3062d0479a13f6bea54be49dcf53">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="Description" content="Nejmodernější česká porno stránka!">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
 
 </head>
 <body>
-    <%--<style>
-        #countdown {
-            position: fixed;
-            background-color: black;
-            width: 100%;
-            height: 100%;
-            z-index: 2000;
-            text-align: center;
-            font-size: 50px;
-            font-family: 'Open Sans', sans-serif;
-            color: #26a9ff;
-        }
-
-            #countdown h1 {
-                display: inline-block;
-                margin-top: 15%;
-            }
-
-            #countdown img {
-                width: 30%;
-                height: 30%;
-            }
-
-        #kara {
-            display: none;
-        }
-    </style>
-    <audio ID="song" src="../Content/img/Europe - The Final Countdown(with lyrics) (1) (mp3cut.net).mp3"></audio>
-    <audio ID="kara-hl">
-        <source src="../Content/img/Ji%c5%99%c3%ad%20K%c3%a1ra%20-%20D%c4%9blej!.mp3" type="audio/mpeg" />
-    </audio>
-
-    <audio ID="party">
-        <source src="../Content/img/Ji%c5%99%c3%ad%20K%c3%a1ra%20svatba%20bezdomovc%c5%af%20-%20nejlep%c5%a1%c3%ad%20momenty%20(SS%20Division%20Valonie)%20(mp3cut.net).mp3" type="audio/mpeg" />
-    </audio>--%>
-    <%--<div ID="countdown">
-        <img ID="kara" src="../Content/img/kara.png" />
-        <br />
-        <h1 ID="timer"></h1>
-    </div>--%>
     <div ID="hide-page">
         <button ID="safe-button">Nebezpečí zažehnáno</button>
         <iframe ID="potter" width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -77,10 +54,10 @@
                         <dot:RouteLink RouteName="categories" style="display:none;"></dot:RouteLink>
                     </div>
                 </li>
-                <li class="menu-login no-scroll">PŘIHLÁSIT SE</li>
+                <li onclick="location.href='https://www.facebook.com/vymasti.si/'" class="menu-login no-scroll"><i style="margin-right:8px;" class="fas fa-thumbs-up"></i>NÁS NA FACEBOOKU</li>
             </ul>
             <a class="categories" id="category">KATEGORIE</a>
-            <a class="login">přihlásit se</a>
+            <a href="https://www.facebook.com/vymasti.si/" class="login"><i style="margin-right:8px;" class="fas fa-thumbs-up"></i>nás na facebooku</a>
         </div>
         <div id="categories-preview">
             <div class="container">
@@ -151,67 +128,26 @@
             </div>
         </div>
     </div>
-
-    <%--<script>
-        $(document).ready(function () {
-            var playing;
-            // Set the date we're counting down to
-            var countDownDate = new Date("May 6, 2018 00:00:00").getTime();
-
-            // Update the count down every 1 second
-            var x = setInterval(function () {
-                // Get todays date and time
-                var now = new Date().getTime();
-                // Find the distance between now an the count down date
-                var distance = countDownDate - now;
-
-                // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                if (days === 0 && hours === 0 && minutes === 0 && !playing && seconds === 22) {
-                    $("#countdown").fadeOut(50000);
-                    document.getElementById("song").play();
-                    playing = true;
-                }
-                // Output the result in an element with id="demo"
-                document.getElementById("timer").innerHTML = days + "d " + hours + "h "
-                    + minutes + "m " + seconds + "s ";
-
-                // If the count down is over, write some text
-                if (distance < 0 && distance > -1000) {
-                    $("#countdown").stop();
-                    $("#countdown").css("opacity", "1");
-                    document.getElementById("song").pause();
-                    document.getElementById("kara-hl").play();
-                    document.getElementById("timer").innerHTML = "Děleeeej," + "<br>" + "už si měl bejt 4 minuty ty magore!";
-                    document.getElementById("timer").style.marginTop = "0px";
-                    clearInterval(x);
-                    $("#kara").slideDown(500);
-                    setTimeout(function () { $("#countdown").addClass("animated bounceOutRight"); document.getElementById("party").play(); }, 9000);
-                    setTimeout(function () { $("#countdown").css("display", "none") }, 11000);
-                }
-                else {
-                    if (distance < 0) {
-                        clearInterval(x);
-                        $("#countdown").css("display", "none");
-                    }
-                }
-
-            }, 1000);
-        });
-    </script>
-    <div id="fb-root"></div>--%>
-    <%--<dot:UpdateProgress>
-        <div ID="overlay-back"></div>
-    </dot:UpdateProgress>--%>
-    <script src="../Content/scripts.js"></script>
+    <div id="modal-confirmation">
+        <div class="cointainer-modal">
+            <div class="modal-body">
+                <h4>Vymasti.<span class="si">si</span></h4>
+                <p>Přišels leštit bambus? Musíme tě upozornit, že tento web je pouze pro dospělé!</p>
+                <button onclick="$('#modal-confirmation').css('display', 'none');" id="confirm">VSTOUPIT</button>
+            </div>
+        </div>
+    </div>
+    <div id="cookies">
+        <p>Tento web využívá cookies. Jeho používáním s tím vyjadřuješ souhlas.</p>
+        <button onclick="$('#cookies').css('display', 'none');" id="agree">OK</button>
+    </div>
+    <script src="../Scripts/init.js"></script>
+    <script src="../Scripts/login.js"></script>
+    <script src="../Scripts/scripts.js"></script>
+    <script src="../Scripts/scrolling.js"></script>
     <script src="../Scripts/modal.js"></script>
     <script src="../Scripts/modal-video.js"></script>
     <script src="../Scripts/menu.js"></script>
-    <script src="../Scripts/login.js"></script>
     <script src="../Scripts/categories.js"></script>
     <script src="../Scripts/video-thumbnail.js"></script>
 </body>

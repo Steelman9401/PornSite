@@ -1,7 +1,10 @@
 ﻿var check = 0;
+var video = null;
+var videoPlaying;
 function hoverVideo(e) {
-    if ($(window).width() > 1149) {
+    if (!videoPlaying) {
         e.src = e.getAttribute("data-src");
+        videoPlaying = true;
         $(e).get(0).load();
         $(e).get(0).play(); 
         e.parentElement.getElementsByClassName("preview-text")[0].style.display = "none";
@@ -16,10 +19,10 @@ function hoverVideo(e) {
     }
 
 function hideVideo(e) {
-    if ($(window).width() > 1149) {
         e.pause();
         e.load();
         e.src = "";
+        videoPlaying = false;
         e.parentElement.getElementsByClassName("preview-text")[0].style.display = "flex";
         if (check == 0) {
             e.parentElement.getElementsByClassName("today")[0].style.display = "flex";
@@ -27,5 +30,12 @@ function hideVideo(e) {
         else {
             check = 0;
         }
-    }
-    }
+}
+
+$(document).ready(function () {
+    $("#category").on("taphold", function () {
+        alert("hello");
+    });                       
+});
+
+

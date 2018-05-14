@@ -12,8 +12,8 @@
     </dot:InlineScript>
     <div class="cointainer-column">
         <section class="safety-button">
-            <button id="safety-button" title="záchranné tlačítko">!</button>
-            <p ID="safety-info" style="margin-top:15px; float:right; text-decoration:underline; cursor:pointer">k čemu to kurva je?</p>
+            <button id="safety-button" title="záchranné tlačítko">POZOR MANŽELKA</button>
+            <p ID="safety-info" style="margin-top:8px; float:right; text-decoration:underline; cursor:pointer">k čemu to kurva je?</p>
         </section>
         <section class="section-title">
             <h2 style="color:white;">Hledaný výraz: <span class="category-name">{{value: SearchParameter}}</span> <span style="font-size: 21px;">({{value: SearchCount}})</span></h2>
@@ -28,22 +28,21 @@
                 </li>
             </ul>
             <div class="mobile-only">
-                <input type="checkbox" name="mobile" value="1">
-                <span>zobrazit pouze mobile-friendly videa</span>
+                <dot:CheckBox Checked="{value: LoadMobile}" Changed="{command: LoadMobileVideos()}" Text="zobrazit pouze videa pro telefony" />
             </div>
         </section>
 
         <dot:Repeater class="videos latest" DataSource="{value: Videos}">
             <ItemTemplate>
-                <div class="video click remove-loader-main">
+                <div class="video">
                     <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
                     <a>
                         <div class="preview">
-                            <video poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                            <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
                             <span style="display:none;" class="today">DNES</span>
                             <div class="preview-text">
-                                <span Visible="{value: HD}" class="hd">HD</span>
-                                <span>{{value: Duration}}</span>
+                                <span Visible="{value: HD}" class="hd no-select">HD</span>
+                                <span class="no-select">{{value: Duration}}</span>
                             </div>
                         </div>
                     </a>
@@ -82,15 +81,18 @@
                     <source src="video/soustajici-berusky.mp4" type="video/mp4">
                     Tvůj prohlížeč nepodporuje HTML5 video.
                 </video>-->
-                        <div ID="iframe-wrap" class="iframe-container">
-                            <iframe ID="frame" src="{value: Url}" frameborder="0" width="1200" height="720" scrolling="no" allowfullscreen></iframe>
+                        <div class="iframe-c">
+                            <div ID="iframe-wrap" class="iframe-container">
+                                <iframe ID="frame" src="{value: Url}" frameborder="0" width="1200" height="720" scrolling="no" allowfullscreen></iframe>
+                            </div>
                         </div>
+                        <p ID="turn-phone">otoč telefon <i class="fas fa-redo"></i></p>
                         <h2>{{value: Title}}</h2>
                         <div class="tags">
                             <span>Kategorie:</span>
                             <dot:Repeater DataSource="{value: Categories}">
                                 <ItemTemplate>
-                                    <div class="click-link show-header" style="display: inline-block">
+                                    <div class="click-link show-header scroll-top" style="display: inline-block">
                                         <dot:RouteLink style="display:none" RouteName="category" Param-Id="{value: Id}" Param-Name="{value: Name}">{{value: Name}} </dot:RouteLink>
                                         <a>{{value: Name}}</a>
                                     </div>

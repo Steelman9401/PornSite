@@ -12,23 +12,24 @@
     <div class="cointainer-column">
         <h3 id="firefox-error">Upozornění pro uživatele Firefoxu. <br />Pro správné fungování záchranného tlačítka je třeba upravit nastavení prohlížece nebo použít jiný, např. Google Chrome</h3>
         <section class="safety-button">
-            <button id="safety-button" title="záchranné tlačítko">!</button>
-            <p ID="safety-info" style="margin-top:15px; float:right; text-decoration:underline; cursor:pointer">k čemu to kurva je?</p>
+            <button id="safety-button" title="záchranné tlačítko">POZOR MANŽELKA</button>
+            <p ID="safety-info" style="margin-top:8px; float:right; text-decoration:underline; cursor:pointer">k čemu to kurva je?</p>
         </section>
+        <p class="tip"><i style="margin-right:3px;" class="far fa-lightbulb"></i> podržením prstu na názvu nebo náhledu videa si můžeš přehrát ukázku (funkční pouze v prohlížeči <strong>Chrome</strong>)</p>
         <section class="section-title">
             <h2 Visible="{value: LoadRecommended}">Doporučená videa</h2>
         </section>
         <dot:Repeater Visible="{value: LoadRecommended}" DataSource="{value: RecommendedVideos}" class="videos">
             <ItemTemplate>
-                <div class="video click remove-loader-main">
+                <div class="video">
                     <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
                     <a id="video">
                         <div class="preview">
-                            <video poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
-                            <span style="display:none" class="today">DNES</span>
+                            <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                            <span style="display:none" class="today no-select">DNES</span>
                             <div class="preview-text">
-                                <span Visible="{value: HD}" class="hd">HD</span>
-                                <span>{{value: Duration}}</span>
+                                <span Visible="{value: HD}" class="hd no-select">HD</span>
+                                <span class="no-select">{{value: Duration}}</span>
                             </div>
                         </div>
                     </a>
@@ -43,15 +44,15 @@
         </section>
         <dot:Repeater class="videos" DataSource="{value: History}" Visible="{value: LoadRecommended}">
             <ItemTemplate>
-                <div class="video click remove-loader-main">
+                <div class="video">
                     <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
                     <a id="video">
                         <div class="preview">
-                            <video poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                            <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
                             <span style="display:none" class="today">DNES</span>
                             <div class="preview-text">
-                                <span Visible="{value: HD}" class="hd">HD</span>
-                                <span>{{value: Duration}}</span>
+                                <span Visible="{value: HD}" class="hd no-select">HD</span>
+                                <span class="no-select">{{value: Duration}}</span>
                             </div>
                         </div>
                     </a>
@@ -79,16 +80,16 @@
         </section>
         <dot:Repeater class="videos latest" DataSource="{value: Videos}">
             <ItemTemplate>
-                <div class="video click remove-loader-main">
+                <div class="video">
                     <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
                     <a>
                         <div class="preview">
-                            <video poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)">
+                            <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)">
                             </video>
-                            <span Visible="{value: _root.TimeStamp - TimeStamp < 50000}" class="today">DNES</span>
+                            <span Visible="{value: _root.TimeStamp - TimeStamp < 50000}" class="today no-select">DNES</span>
                             <div class="preview-text">
-                                <span Visible="{value: HD}" class="hd">HD</span>
-                                <span>{{value: Duration}}</span>
+                                <span Visible="{value: HD}" class="hd no-select">HD</span>
+                                <span class="no-select">{{value: Duration}}</span>
                             </div>
                         </div>
                     </a>

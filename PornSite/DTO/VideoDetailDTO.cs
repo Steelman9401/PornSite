@@ -28,7 +28,7 @@ namespace PornSite.DTO
         public async Task LoadSuggestedVideos()
         {
             PornRepository rep = new PornRepository();
-            SuggestedVideos = await rep.GetSuggestedVideos(Categories.Select(x => x.Id).ToList(),this.Id);
+            SuggestedVideos = await rep.GetSuggestedVideosAsync(Categories.Select(x => x.Id).ToList(),this.Id);
         }
     }
 }

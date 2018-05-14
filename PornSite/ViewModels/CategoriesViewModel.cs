@@ -15,7 +15,7 @@ namespace PornSite.ViewModels
         public async override Task PreRender()
         {
             PornRepository PornRep = new PornRepository();
-            Categories = await PornRep.GetAllCategories();
+            Categories = await PornRep.GetAllCategoriesAsync();
             await base.PreRender();
         }
     }

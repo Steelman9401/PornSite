@@ -25,7 +25,7 @@ namespace PornSite.ViewModels
         public bool ShowVideo { get; set; } = false;
         public VideoDetailDTO Video { get; set; } = new VideoDetailDTO();
         PornRepository PornRep = new PornRepository();
-        public List<VideoListDTO> RecommendedVideos { get; set; }
+        public IEnumerable<VideoListDTO> RecommendedVideos { get; set; }
         public List<VideoListDTO> History { get; set; } = new List<VideoListDTO>();
         public GridViewDataSet<VideoListDTO> Videos { get; set; } = new GridViewDataSet<VideoListDTO>()
         {
@@ -36,8 +36,8 @@ namespace PornSite.ViewModels
         {
             if (!Context.IsPostBack)
             {
-                History = await PornRep.GetVideoHistory();
-                RecommendedVideos = await PornRep.GetRecommendedVideos(LoadMobile);
+                History = await PornRep.GetVideoHistoryAsync();
+                RecommendedVideos = await PornRep.GetRecommendedVideosAsync(LoadMobile);
             }
             if(Videos.IsFirstPage)
             {
@@ -51,7 +51,7 @@ namespace PornSite.ViewModels
             {
                 if (Videos.IsRefreshRequired || !Context.IsPostBack)
                 {
-                    Videos.OnLoadingDataAsync = option => PornRep.GetAllVideos(option,LoadMobile,Switch);
+                    Videos.OnLoadingData = option => PornRep.GetAllVideos(option,LoadMobile,Switch);
                 }
             }
             await base.PreRender();
@@ -79,7 +79,7 @@ namespace PornSite.ViewModels
         {
             LoadRecommended = false;
             ShowVideo = true;
-            Video = await PornRep.GetVideoById(video.Id);
+            Video = await PornRep.GetVideoByIdAsync(video.Id);
             if (!History.Select(x=>x.Id).Contains(video.Id))
             {
                 History.Insert(0, video);
@@ -98,7 +98,7 @@ namespace PornSite.ViewModels
         {
             Videos.PageIndex = 0;
             LoadRecommended = false;
-            RecommendedVideos = await PornRep.GetRecommendedVideos(LoadMobile);
+            RecommendedVideos = await PornRep.GetRecommendedVideosAsync(LoadMobile);
             Videos.IsRefreshRequired = true;
         }
     }

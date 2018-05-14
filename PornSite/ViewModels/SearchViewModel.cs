@@ -31,7 +31,7 @@ namespace PornSite.ViewModels
                 {
                     SearchParameter = Context.Parameters["text"].ToString();
                 }               
-                    Videos.OnLoadingDataAsync = option => PornRep.GetSearchResult(option, SearchParameter, LoadMobile, VideoSwitch);
+                    Videos.OnLoadingData = option => PornRep.GetSearchResult(option, SearchParameter, LoadMobile, VideoSwitch);
                 if (Videos.IsFirstPage)
                 {
                     SearchCount = await PornRep.GetSearchResultCount(SearchParameter);
@@ -42,7 +42,7 @@ namespace PornSite.ViewModels
         public async Task LoadVideo(VideoListDTO video)
         {
             ShowVideo = true;
-            Video = await PornRep.GetVideoById(video.Id);
+            Video = await PornRep.GetVideoByIdAsync(video.Id);
         }
         public void LoadLatestVideos()
         {
