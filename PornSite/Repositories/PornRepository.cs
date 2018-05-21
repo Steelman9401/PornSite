@@ -95,7 +95,6 @@ namespace PornSite.Repositories
                         query = query.Where(p => p.Url.Contains("pornhub"));
                     }
                 }
-                DateTime currentDate = DateTime.Now;
                 var finalquery = query // finalni poskladana query
                         .Select(a => new VideoListDTO
                         {
@@ -303,46 +302,70 @@ namespace PornSite.Repositories
         public async Task<IEnumerable<VideoListDTO>> GetSuggestedVideosAsync(List<int> Categories, int Id)
         {
             List<string> CategoriesCounts = new List<string>();
-            var result = GetPermutations(Categories, 3);
-            using (var db = new myDb())
+            if (Categories.Count > 2)
             {
-                foreach (var perm in result)
+                var result = GetPermutations(Categories, 3);
+                using (var db = new myDb())
                 {
-                    List<int> Combination = new List<int>();
-                    foreach (var item in perm)
+                    foreach (var perm in result)
                     {
-                        Combination.Add(Convert.ToInt32(item));
-                    }
-                    int a = Combination[0];
-                    int b = Combination[1];
-                    int c = Combination[2];
-                    int count = db.Videos.Where(x => x.Categories.Any(p => p.Id == a) && x.Categories.Any(o => o.Id == b) && x.Categories.Any(k => k.Id == c) && x.Id != Id).Count();
-                    CategoriesCounts.Add(a + ";" + b + ";" + c + ":" + count);
-                }
-                List<int> finalResult = GetHighestCategoryCount(CategoriesCounts);
-                if (finalResult[3] > 0)
-                {
-                    int first = finalResult[0];
-                    int second = finalResult[1];
-                    int third = finalResult[2];
-                    return await db.Videos.Where(x => x.Categories.Any(p => p.Id == first) && x.Categories.Any(o => o.Id == second) && x.Categories.Any(k => k.Id == third) && x.Id != Id)
-                        .Select(p => new VideoListDTO
+                        List<int> Combination = new List<int>();
+                        foreach (var item in perm)
                         {
-                            Id = p.Id,
-                            Title = p.Title,
-                            Img = "Admin/Previews/" + p.Img,
-                            Preview = "Admin/Previews/" + p.Preview,
-                            Duration = p.Duration,
-                            HD = p.HD
-                        }).Take(6).ToListAsync();
+                            Combination.Add(Convert.ToInt32(item));
+                        }
+                        int a = Combination[0];
+                        int b = Combination[1];
+                        int c = Combination[2];
+                        int count = db.Videos.Where(x => x.Categories.Any(p => p.Id == a) && x.Categories.Any(o => o.Id == b) && x.Categories.Any(k => k.Id == c) && x.Id != Id).Count();
+                        CategoriesCounts.Add(a + ";" + b + ";" + c + ":" + count);
+                    }
+                    List<int> finalResult = GetHighestCategoryCount(CategoriesCounts);
+                    if (finalResult[3] > 0)
+                    {
+                        int first = finalResult[0];
+                        int second = finalResult[1];
+                        int third = finalResult[2];
+                        return await db.Videos.Where(x => x.Categories.Any(p => p.Id == first) && x.Categories.Any(o => o.Id == second) && x.Categories.Any(k => k.Id == third) && x.Id != Id)
+                            .Select(p => new VideoListDTO
+                            {
+                                Id = p.Id,
+                                Title = p.Title,
+                                Img = "Admin/Previews/" + p.Img,
+                                Preview = "Admin/Previews/" + p.Preview,
+                                Duration = p.Duration,
+                                HD = p.HD
+                            }).Take(6).ToListAsync();
+
+                    }
+                    else
+                    {
+                        List<VideoListDTO> videos = new List<VideoListDTO>();
+                        return videos;
+                    }
 
                 }
-                else
+            }
+            else
+            {
+                using (var db = new myDb())
                 {
-                    List<VideoListDTO> videos = new List<VideoListDTO>();
-                    return videos;
+                    IQueryable<Video> query = db.Videos;
+                    foreach(int item in Categories)
+                    {
+                        query = query.Where(x => x.Categories.Any(p => p.Id == item));
+                    }
+                    return await query.Where(x=>x.Id!=Id)
+                         .Select(p => new VideoListDTO
+                         {
+                             Id = p.Id,
+                             Title = p.Title,
+                             Img = "Admin/Previews/" + p.Img,
+                             Preview = "Admin/Previews/" + p.Preview,
+                             Duration = p.Duration,
+                             HD = p.HD
+                         }).Take(6).ToListAsync();
                 }
-
             }
         }
         public async Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync()

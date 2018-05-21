@@ -11,10 +11,15 @@ $(document).ready(function () {
         $("#cookies").css('display', 'flex');
     }
 
-    if (!iOS && isChrome && $(window).width() < 960) {
-        $(".tip").css("display", "block");
-    }
     if (!isChrome) {
         iOS = true;
     }
+    $(document).on("click", "#confirm", function () {
+        $('#modal-confirmation').css('display', 'none');
+        $('main').addClass('animated fadeInUp');
+        if (!iOS && isChrome && $(window).width() < 960) {
+            $(".tip").css("display", "block");
+        }
+        setTimeout(function () { $("main").removeClass("animated fadeInUp"); }, 501);
+    });
 });

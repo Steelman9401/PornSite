@@ -41,6 +41,10 @@ img, embed, iframe, audio, video {
     box-shadow: 0px 0px 15px 0px #66afec;
 }
 
+.video:hover .title {
+    text-shadow: 0 0 3px #fff;
+}
+
 iframe {
     border: 0
 }
@@ -328,7 +332,7 @@ main {
     padding-right: 0px;
     padding-left: 0px;
     padding-bottom: 20px;
-    font-family: 'Open Sans', sans-serif
+    font-family: 'Open Sans', sans-serif;
 }
 
     main .cointainer-column {
@@ -353,6 +357,7 @@ main {
         background-color: rgba(33, 33, 33, 0.74);
         margin-left: -1px;
         top: 0px;
+        display: none;
     }
 
 @media only screen and (max-width: 1149px) {
@@ -593,22 +598,21 @@ main .cointainer-column .videos .video a {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
 }
+
 .tip {
-    display: none;
     color: #dddddd;
+    display: none;
     font-size: 12px;
     text-decoration: underline;
 }
 
+
 main .cointainer-column .videos .video a .title {
     font-size: 16px;
     color: white;
-    padding-bottom:15px;
+    padding-bottom: 15px;
 }
 
-    main .cointainer-column .videos .video a .title:hover {
-        text-decoration: underline
-    }
 
 main .cointainer-column .videos .video:nth-child(4n) {
     margin-right: 0px
@@ -889,11 +893,44 @@ footer {
         font-family: 'Open Sans', sans-serif
     }
 
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
 .slideInDown {
     -webkit-animation-name: slideInDown;
     animation-name: slideInDown;
     -webkit-animation-duration: 0.2s;
     animation-duration: 0.2s;
+}
+
+@-webkit-keyframes slideInDown {
+    from {
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+    }
+
+    to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+    }
+
+    to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 .slideOutUp {
@@ -903,6 +940,33 @@ footer {
     animation-duration: 0.2s;
 }
 
+@-webkit-keyframes slideOutUp {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        visibility: hidden;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+@keyframes slideOutUp {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        visibility: hidden;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+
 .fadeInDown {
     webkit-animation-name: fadeInDown;
     animation-name: fadeInDown;
@@ -910,11 +974,98 @@ footer {
     animation-duration: 0.5s;
 }
 
+@-webkit-keyframes fadeInDown {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
 .fadeOutUp {
     webkit-animation-name: fadeOutUp;
     animation-name: fadeOutUp;
     -webkit-animation-duration: 0.5s;
     animation-duration: 0.5s;
+}
+
+@-webkit-keyframes fadeOutUp {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+@keyframes fadeOutUp {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+.fadeInUp {
+    webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 #background-modal {
@@ -1022,7 +1173,7 @@ body.modal-on {
 }
 
 #modal-confirmation {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -1381,6 +1532,14 @@ body.modal-on {
                     transition: transform .2s;
                 }
 
+                    #modal-video .cointainer-modal .modal-body .modal-container .related-videos-container .related-videos .related-video:hover video {
+                        box-shadow: 0px 0px 15px 0px #66afec;
+                    }
+
+                    #modal-video .cointainer-modal .modal-body .modal-container .related-videos-container .related-videos .related-video:hover .title {
+                        text-shadow: 0 0 3px #fff;
+                    }
+
                     #modal-video .cointainer-modal .modal-body .modal-container .related-videos-container .related-videos .related-video a {
                         text-decoration: none;
                         color: inherit;
@@ -1430,9 +1589,6 @@ body.modal-on {
                             color: white;
                         }
 
-                            #modal-video .cointainer-modal .modal-body .modal-container .related-videos-container .related-videos .related-video a .title:hover {
-                                text-decoration: underline
-                            }
 
 #modal-video .cointainer-modal .gradient {
     position: absolute;

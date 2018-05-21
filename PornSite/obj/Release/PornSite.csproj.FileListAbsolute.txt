@@ -106,14 +106,8 @@ C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.csproj.CoreCompile
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.dll
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.pdb
 C:\Users\domin\Desktop\PornSite\PornSite\obj\Release\PornSite.csprojResolveAssemblyReference.cache
-C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.csprojResolveAssemblyReference.cache
-C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Release\PornSite.Migrations.durHD.resources
 C:\Users\domin\Source\Repos\PornSite\PornSite\obj\Release\PornSite.csproj.CopyComplete
 C:\Users\domin\source\repos\PornSite\PornSite\bin\LinqKit.dll
 C:\Users\domin\source\repos\PornSite\PornSite\bin\LinqKit.xml
-C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.global.resources
-C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.userUpdate.resources
-C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.userCategory.resources
-C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.addedmain.resources
-C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.categoryImage.resources
-C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.added_timestamp.resources
+C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.csprojAssemblyReference.cache
+C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Migrations.init.resources

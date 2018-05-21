@@ -1,137 +1,126 @@
 ﻿@viewModel PornSite.ViewModels.DefaultViewModel, PornSite
 @masterPage Views/MasterPage.dotmaster
 <dot:Content ContentPlaceHolderID="MainContent" ID="main-content">
-    <%--<dot:InlineScript>
-        dotvvm.events.init.subscribe(function () {
-            $("main").css("display", "none");
-            $("main").fadeIn(400);
-        }
-        );
-    </dot:InlineScript>--%>
-    <div id="background-modal"></div>
+    <div ID="background-modal"></div>
     <div class="cointainer-column">
-        <h3 id="firefox-error">Upozornění pro uživatele Firefoxu. <br />Pro správné fungování záchranného tlačítka je třeba upravit nastavení prohlížece nebo použít jiný, např. Google Chrome</h3>
+        <h3 ID="firefox-error">Upozornění pro uživatele Firefoxu. <br />Pro správné fungování záchranného tlačítka je třeba upravit nastavení prohlížece nebo použít jiný, např. Google Chrome</h3>
         <section class="safety-button">
-            <button id="safety-button" title="záchranné tlačítko">POZOR MANŽELKA</button>
+            <button ID="safety-button" title="záchranné tlačítko">POZOR MANŽELKA</button>
             <p ID="safety-info" style="margin-top:8px; float:right; text-decoration:underline; cursor:pointer">k čemu to kurva je?</p>
         </section>
         <p class="tip"><i style="margin-right:3px;" class="far fa-lightbulb"></i> podržením prstu na názvu nebo náhledu videa si můžeš přehrát ukázku (funkční pouze v prohlížeči <strong>Chrome</strong>)</p>
-        <section class="section-title">
-            <h2 Visible="{value: LoadRecommended}">Doporučená videa</h2>
-        </section>
-        <dot:Repeater Visible="{value: LoadRecommended}" DataSource="{value: RecommendedVideos}" class="videos">
-            <ItemTemplate>
-                <div class="video">
-                    <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
-                    <a id="video">
-                        <div class="preview">
-                            <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
-                            <span style="display:none" class="today no-select">DNES</span>
-                            <div class="preview-text">
-                                <span Visible="{value: HD}" class="hd no-select">HD</span>
-                                <span class="no-select">{{value: Duration}}</span>
+        <div class="main-content">
+            <section class="section-title">
+                <h2 Visible="{value: LoadRecommended}">Doporučená videa</h2>
+            </section>
+            <dot:Repeater Visible="{value: LoadRecommended}" DataSource="{value: RecommendedVideos}" class="videos">
+                <ItemTemplate>
+                    <div class="video">
+                        <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
+                        <a ID="video">
+                            <div class="preview">
+                                <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                                <span style="display:none" class="today no-select">DNES</span>
+                                <div class="preview-text">
+                                    <span Visible="{value: HD}" class="hd no-select">HD</span>
+                                    <span class="no-select">{{value: Duration}}</span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    <a id="video-title">
-                        <span class="title">{{value: Title}}</span>
-                    </a>
+                        </a>
+                        <a ID="video-title">
+                            <span class="title">{{value: Title}}</span>
+                        </a>
+                    </div>
+                </ItemTemplate>
+            </dot:Repeater>
+            <section class="section-title" Visible="{value: LoadRecommended && History.Count>0}>
+                <h2>Naposledy zhlédnutá videa</h2>
+            </section>
+            <dot:Repeater class="videos" DataSource="{value: History}" Visible="{value: LoadRecommended}">
+                <ItemTemplate>
+                    <div class="video">
+                        <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
+                        <a ID="video">
+                            <div class="preview">
+                                <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                                <span style="display:none" class="today">DNES</span>
+                                <div class="preview-text">
+                                    <span Visible="{value: HD}" class="hd no-select">HD</span>
+                                    <span class="no-select">{{value: Duration}}</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a ID="video-title">
+                            <span class="title">{{value: Title}}</span>
+                        </a>
+                    </div>
+                </ItemTemplate>
+            </dot:Repeater>
+            <section class="section-title">
+                <h2 ID="videos-all">Všechna videa</h2>
+                <ul>
+                    <li ID="newest" class="active-li no-scroll click remove-loader-main">
+                        nejnovější
+                        <dot:Button ButtonTagName="button" Click="{command: LoadLatestVideos()}" style="display:none;" />
+                    </li>
+                    <li ID="most-viewed" class="click no-scroll remove-loader-main">
+                        nejsledovanější
+                        <dot:Button ButtonTagName="button" Click="{command: LoadMostViewedVideos()}" style="display:none;" />
+                    </li>
+                </ul>
+                <div class="mobile-only">
+                    <dot:CheckBox Checked="{value: LoadMobile}" Changed="{command: LoadMobileVideos()}" Text="zobrazit pouze videa pro telefony" />
                 </div>
-            </ItemTemplate>
-        </dot:Repeater>
-        <section class="section-title" Visible="{value: LoadRecommended && History.Count>0}>
-            <h2>Naposledy zhlédnutá videa</h2>
-        </section>
-        <dot:Repeater class="videos" DataSource="{value: History}" Visible="{value: LoadRecommended}">
-            <ItemTemplate>
-                <div class="video">
-                    <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
-                    <a id="video">
-                        <div class="preview">
-                            <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
-                            <span style="display:none" class="today">DNES</span>
-                            <div class="preview-text">
-                                <span Visible="{value: HD}" class="hd no-select">HD</span>
-                                <span class="no-select">{{value: Duration}}</span>
+            </section>
+            <dot:Repeater class="videos latest" DataSource="{value: Videos}">
+                <ItemTemplate>
+                    <div class="video">
+                        <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
+                        <a>
+                            <div class="preview">
+                                <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                                <span Visible="{value: _root.TimeStamp - TimeStamp < 50000}" class="today no-select">DNES</span>
+                                <div class="preview-text">
+                                    <span Visible="{value: HD}" class="hd no-select">HD</span>
+                                    <span class="no-select">{{value: Duration}}</span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    <a id="video-title">
-                        <span class="title">{{value: Title}}</span>
-                    </a>
-                </div>
-            </ItemTemplate>
-        </dot:Repeater>
-        <section class="section-title">
-            <h2 ID="videos-all">Všechna videa</h2>
-            <ul>
-                <li ID="newest" class="active-li no-scroll click remove-loader-main">
-                    nejnovější
-                    <dot:Button ButtonTagName="button" Click="{command: LoadLatestVideos()}" style="display:none;" />
-                </li>
-                <li ID="most-viewed" class="click no-scroll remove-loader-main">
-                    nejsledovanější
-                    <dot:Button ButtonTagName="button" Click="{command: LoadMostViewedVideos()}" style="display:none;" />
-                </li>
-            </ul>
-            <div class="mobile-only">
-                <dot:CheckBox Checked="{value: LoadMobile}" Changed="{command: LoadMobileVideos()}" Text="zobrazit pouze videa pro telefony" />
-            </div>
-        </section>
-        <dot:Repeater class="videos latest" DataSource="{value: Videos}">
-            <ItemTemplate>
-                <div class="video">
-                    <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
-                    <a>
-                        <div class="preview">
-                            <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)">
-                            </video>
-                            <span Visible="{value: _root.TimeStamp - TimeStamp < 50000}" class="today no-select">DNES</span>
-                            <div class="preview-text">
-                                <span Visible="{value: HD}" class="hd no-select">HD</span>
-                                <span class="no-select">{{value: Duration}}</span>
+                        </a>
+                        <a ID="video-title">
+                            <span class="title">{{value: Title}}</span>
+                        </a>
+                    </div>
+                </ItemTemplate>
+            </dot:Repeater>
+            <section class="pagination">
+                <dot:DataPager DataSet="{value: Videos}" />
+            </section>
+            <div ID="modal-video">
+                <div class="cointainer-modal" DataContext="{value: Video}">
+                    <div class="modal-header">
+                        <div ID="close"></div>
+                        <dot:Button ID="close-btn" ButtonTagName="button" style="display:none;" Click="{command: _parent.HideVideo()}" />
+                    </div>
+                    <div class="modal-body" ID="modal-video-body">
+                        <dot:UpdateProgress ID="loader-modal">
+                            <div class="loader">
+                                <div ID="floatingCirclesG">
+                                    <div class="f_circleG" ID="frotateG_01"></div>
+                                    <div class="f_circleG" ID="frotateG_02"></div>
+                                    <div class="f_circleG" ID="frotateG_03"></div>
+                                    <div class="f_circleG" ID="frotateG_04"></div>
+                                    <div class="f_circleG" ID="frotateG_05"></div>
+                                    <div class="f_circleG" ID="frotateG_06"></div>
+                                    <div class="f_circleG" ID="frotateG_07"></div>
+                                    <div class="f_circleG" ID="frotateG_08"></div>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    <a id="video-title">
-                        <span class="title">{{value: Title}}</span>
-                    </a>
-                </div>
-            </ItemTemplate>
-        </dot:Repeater>
-        <section class="pagination">
-            <dot:DataPager DataSet="{value: Videos}" />
-        </section>
-        <div id="modal-video">
-            <div class="cointainer-modal" DataContext="{value: Video}">
-                <div class="modal-header">
-                    <div id="close"></div>
-                    <dot:Button ID="close-btn" ButtonTagName="button" style="display:none;" Click="{command: _parent.HideVideo()}" />
-                </div>
-                <div class="modal-body" id="modal-video-body">
-                    <dot:UpdateProgress ID="loader-modal">
-                        <div class="loader">
-                            <div id="floatingCirclesG">
-                                <div class="f_circleG" id="frotateG_01"></div>
-                                <div class="f_circleG" id="frotateG_02"></div>
-                                <div class="f_circleG" id="frotateG_03"></div>
-                                <div class="f_circleG" id="frotateG_04"></div>
-                                <div class="f_circleG" id="frotateG_05"></div>
-                                <div class="f_circleG" id="frotateG_06"></div>
-                                <div class="f_circleG" id="frotateG_07"></div>
-                                <div class="f_circleG" id="frotateG_08"></div>
-                            </div>
-                        </div>
-                    </dot:UpdateProgress>
-                    <div class="modal-container">
-                        <!--<video width="960" controls>
-        <source src="video/soustajici-berusky.mp4" type="video/mp4">
-        Tvůj prohlížeč nepodporuje HTML5 video.
-    </video>-->
-                        <div class="iframe-c">
-                            <div ID="iframe-wrap" class="iframe-container">
-                                <iframe ID="frame" src="{value: Url}" frameborder="0" width="1200" height="720" scrolling="no" allowfullscreen></iframe>
-                            </div>
+                        </dot:UpdateProgress>
+                        <div class="modal-container">
+                            <div class="iframe-c">
+                                <div ID="iframe-wrap" class="iframe-container">
+                                    <iframe ID="frame" src="{value: Url}" frameborder="0" width="1200" height="720" scrolling="no" allowfullscreen></iframe>
+                                </div>
                             </div>
                             <p ID="turn-phone">otoč telefon <i class="fas fa-redo"></i></p>
                             <h2>{{value: Title}}</h2>
@@ -139,7 +128,7 @@
                                 <span>Kategorie:</span>
                                 <dot:Repeater DataSource="{value: Categories}">
                                     <ItemTemplate>
-                                        <div class="click-link show-header scroll-top" style="display: inline-block">
+                                        <div class="hide-modal click-link show-header scroll-top" style="display: inline-block">
                                             <dot:RouteLink style="display:none" RouteName="category" Param-Id="{value: Id}" Param-Name="{value: Name}">{{value: Name}} </dot:RouteLink>
                                             <a>{{value: Name}}</a>
                                         </div>
@@ -158,15 +147,15 @@
                                 <h3>Podobná videa</h3>
                                 <dot:UpdateProgress ID="loader-related">
                                     <div class="loader">
-                                        <div id="floatingCirclesG">
-                                            <div class="f_circleG" id="frotateG_01"></div>
-                                            <div class="f_circleG" id="frotateG_02"></div>
-                                            <div class="f_circleG" id="frotateG_03"></div>
-                                            <div class="f_circleG" id="frotateG_04"></div>
-                                            <div class="f_circleG" id="frotateG_05"></div>
-                                            <div class="f_circleG" id="frotateG_06"></div>
-                                            <div class="f_circleG" id="frotateG_07"></div>
-                                            <div class="f_circleG" id="frotateG_08"></div>
+                                        <div ID="floatingCirclesG">
+                                            <div class="f_circleG" ID="frotateG_01"></div>
+                                            <div class="f_circleG" ID="frotateG_02"></div>
+                                            <div class="f_circleG" ID="frotateG_03"></div>
+                                            <div class="f_circleG" ID="frotateG_04"></div>
+                                            <div class="f_circleG" ID="frotateG_05"></div>
+                                            <div class="f_circleG" ID="frotateG_06"></div>
+                                            <div class="f_circleG" ID="frotateG_07"></div>
+                                            <div class="f_circleG" ID="frotateG_08"></div>
                                         </div>
                                     </div>
                                 </dot:UpdateProgress>
@@ -174,7 +163,7 @@
                                     <ItemTemplate>
                                         <div class="related-video click remove-loader-main remove-loader-related remove-loader-modal">
                                             <dot:Button ButtonTagName="button" style="display:none;" Click="{command: _root.LoadVideo(_this)}" />
-                                            <a id="related-video">
+                                            <a ID="related-video">
                                                 <div class="preview">
                                                     <video poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
                                                     <span style="display:none;" class="today">DNES</span>
@@ -184,7 +173,7 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                            <a id="related-video-title">
+                                            <a ID="related-video-title">
                                                 <span class="title">{{value: Title}}</span>
                                             </a>
                                         </div>
@@ -192,26 +181,38 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="gradient"></div>
             </div>
-            <div class="gradient"></div>
         </div>
     </div>
     <dot:InlineScript>
-        dotvvm.events.init.subscribe(function () {
-            $("main").css("display", "none");
-            $("main").fadeIn(400);
+
+        dotvvm.events.afterPostback.subscribe(function () {
+            showLoader = false;
+            if ($("#main-loader").css("display") == "flex") {
+                $("#main-loader").css("display", "none");
+            }
+            if (!loaded) {
+                $(".latest").addClass('animated fadeInUp');
+                setTimeout(function () { $(".latest").removeClass("animated fadeInUp"); }, 501);
+            }
         }
         );
-    dotvvm.events.afterPostback.subscribe(function () {
-        if (!loaded) {
-            $(".latest").css("display", "none");
-            $(".latest").fadeIn(400);
+        dotvvm.events.beforePostback.subscribe(function () {
+            showLoader = true;
+            if (!disableLoader) {
+                setTimeout(function () {
+                    if (showLoader && !loaded) {
+                        $("#main-loader").css("display", "flex");
+                    }
+                }, 2000);
+            }
         }
-        }
-    );
+        );
         dotvvm.events.spaNavigated.subscribe(function () {
-            $("main").css("display", "none");
-            $("main").fadeIn(400);
+            $(".main-content").addClass('animated fadeInUp');
+            setTimeout(function () { $(".main-content").removeClass("animated fadeInUp"); }, 501);
         }
         );
     </dot:InlineScript>

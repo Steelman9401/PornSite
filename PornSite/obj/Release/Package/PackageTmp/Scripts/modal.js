@@ -11,9 +11,9 @@ $(document).ready(function () {
                 previewStarted = false;
             }
             else {
+                disableLoader = true;
                 $(".video-load").css("display", "none");
                 e.currentTarget.getElementsByTagName("button")[0].click();
-                $("#loader-main").css("display", "none");
                 loaded = true;
                 $("#modal-video").css('display', 'flex');
                 $("#modal-video").removeClass("animated fadeOutUp");
@@ -23,7 +23,6 @@ $(document).ready(function () {
                 setTimeout(function () { $("#modal-video").removeClass("animated fadeInDown"); }, 501);
                 $("#modal-video").addClass("animated fadeInDown");
                 $("#background-modal").fadeIn();
-                //$("body").addClass("modal-on");
                 $(".comments").hide();
                 $(".related-videos-container").hide();
             }
@@ -52,20 +51,19 @@ $(document).ready(function () {
                 }
             }, 1000);
         }
-    });
+        });
 
     //kliknuti na krizek
     $(document).on("click", "#close", function () {
         $("body").removeClass("modal-on");
-        //$("#background-modal").fadeOut();
         $("#close-btn").click();
         $("header").css('display', 'block');
-        $("#loader-main").css("display", "none");
         $("#loader-modal").css("display", "none");
         $("body").removeClass("modal-on");
         $("#modal-video").addClass("animated fadeOutUp");
         $("#background-modal").fadeOut();
         setTimeout(function () { loaded = false; }, 501);
+        disableLoader = false;
     });
 
     //kliknuti mimo modal
@@ -73,13 +71,13 @@ $(document).ready(function () {
         if (!$(e.target).parents("#modal-video").length) {
             e.stopPropagation();
             $("#close-btn").click();
-            $("#loader-main").css("display", "none");
             $("header").css('display', 'block');
             $("#loader-modal").css("display", "none");
             $("body").removeClass("modal-on");
             $("#modal-video").addClass("animated fadeOutUp");
             $("#background-modal").fadeOut();
             setTimeout(function () { loaded = false; }, 501);
+            disableLoader = false;
         }
     });
 });

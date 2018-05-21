@@ -7,13 +7,13 @@ namespace PornSite.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class categoryImage : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(categoryImage));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201804201811246_categoryImage"; }
+            get { return "201805141722306_init"; }
         }
         
         string IMigrationMetadata.Source

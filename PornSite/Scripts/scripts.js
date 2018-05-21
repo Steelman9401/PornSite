@@ -1,16 +1,21 @@
-﻿$(document).ready(function () {
+﻿var showLoader;
+var disableLoader;
+$(document).ready(function () {
     var url;
     var myVar = setInterval(myTimer, 800);
     function myTimer() {
-        if ($("#modal-login").css("display") == "flex") {
-            if ($("#blinking-text").css("display") == "none") {
-                $("#blinking-text").show();
+        if ($(window).width() > 1000) {
+            if ($("#modal-login").css("display") == "flex") {
+                if ($("#blinking-text").css("display") == "none") {
+                    $("#blinking-text").show();
+                }
+                else {
+                    $("#blinking-text").hide();
+                }
             }
-            else {
-                $("#blinking-text").hide();
-            }
+            if (loaded)
+                window.focus();
         }
-        window.focus();
 
     }
     $(document).on("click", ".click", function (e) {
@@ -39,9 +44,6 @@
         $("#form").hide();
         $("#menu").hide();
     });
-    $(document).on("click", ".remove-loader-main", function (e) {
-        $("#loader-main").css("display", "none");
-    });
     $(document).on("click", ".remove-loader-related", function (e) {
         $("#loader-related").css("display", "none");
     });
@@ -55,8 +57,6 @@
     });
 
     $(document).on("click", ".show-header", function (e) {
-        $("#modal-video").addClass("animated fadeOutUp");
-        $("#loader-modal").css("display", "none");
         $("header").css("display", "block");
         setTimeout(function () { loaded = false; }, 1000);
     });
@@ -67,6 +67,11 @@
 
     $(document).on("click", ".remove-loader-modal", function (e) {
         $("#loader-modal").css("display", "none");
+    });
+    $(document).on("click", ".hide-modal", function () {
+        $("#loader-modal").css("display", "none");
+        $("#modal-video").addClass("animated fadeOutUp");
+        $("#background-modal").fadeOut();
     });
     $(document).on("click", "#most-viewed", function (e) {
         $(e.currentTarget).addClass("active-li");
@@ -87,18 +92,15 @@
     $(document).on("click", "li", function (e) {
         if (!$(e.currentTarget).hasClass("no-scroll")) {
             e.currentTarget.getElementsByTagName("a")[0].click();
+            setTimeout(function () { page = false; }, 1000);
             $('header').removeClass('animated slideOutUp');
             $('header').addClass("animated slideInDown")
-            $('html, body').animate({
-                scrollTop: (0)
-            }, 500);
-            if ($(window).width() > 760) {
-                $("#loader-main").css("display", "none");
-            }
+            $('html, body').scrollTop(0);
         }
     });
 
     $(document).on("click", "#search", function (e) {
+        disableLoader = true;
         $('html,body').animate({ scrollTop: 0 }, 'fast');
         if ($(window).width() < 744) {
             $("#form").slideToggle()

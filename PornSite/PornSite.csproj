@@ -138,33 +138,9 @@
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="DTO\VideoDetailDTO.cs" />
     <Compile Include="DTO\VideoListDTO.cs" />
-    <Compile Include="Migrations\201803122356429_durHD.cs" />
-    <Compile Include="Migrations\201803122356429_durHD.Designer.cs">
-      <DependentUpon>201803122356429_durHD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804081437180_global.cs" />
-    <Compile Include="Migrations\201804081437180_global.Designer.cs">
-      <DependentUpon>201804081437180_global.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804151252487_userUpdate.cs" />
-    <Compile Include="Migrations\201804151252487_userUpdate.Designer.cs">
-      <DependentUpon>201804151252487_userUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804151414281_userCategory.cs" />
-    <Compile Include="Migrations\201804151414281_userCategory.Designer.cs">
-      <DependentUpon>201804151414281_userCategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804201243557_addedmain.cs" />
-    <Compile Include="Migrations\201804201243557_addedmain.Designer.cs">
-      <DependentUpon>201804201243557_addedmain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804201811246_categoryImage.cs" />
-    <Compile Include="Migrations\201804201811246_categoryImage.Designer.cs">
-      <DependentUpon>201804201811246_categoryImage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804231407566_added_timestamp.cs" />
-    <Compile Include="Migrations\201804231407566_added_timestamp.Designer.cs">
-      <DependentUpon>201804231407566_added_timestamp.cs</DependentUpon>
+    <Compile Include="Migrations\201805141722306_init.cs" />
+    <Compile Include="Migrations\201805141722306_init.Designer.cs">
+      <DependentUpon>201805141722306_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -202,10 +178,7 @@
     <Content Include="Content\img\safari-pinned-tab.svg" />
     <Content Include="Content\img\Screenshot-2016-02-02-16.15.26.png" />
     <Content Include="Content\img\stifler.jpg" />
-    <Content Include="Content\light-modal.min.css" />
-    <Content Include="Content\loading.gif" />
     <Content Include="Content\master.css" />
-    <Content Include="Content\oie_1633429tJ6oFeR2.gif" />
     <Content Include="Content\placeholder.jpg" />
     <Content Include="Scripts\scripts.js" />
     <Content Include="Content\style.css" />
@@ -235,7 +208,6 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <Content Include="Scripts\lazy-load.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\menu.js" />
     <Content Include="Scripts\modal-video.js" />
@@ -265,30 +237,12 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803122356429_durHD.resx">
-      <DependentUpon>201803122356429_durHD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804081437180_global.resx">
-      <DependentUpon>201804081437180_global.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804151252487_userUpdate.resx">
-      <DependentUpon>201804151252487_userUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804151414281_userCategory.resx">
-      <DependentUpon>201804151414281_userCategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804201243557_addedmain.resx">
-      <DependentUpon>201804201243557_addedmain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804201811246_categoryImage.resx">
-      <DependentUpon>201804201811246_categoryImage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804231407566_added_timestamp.resx">
-      <DependentUpon>201804231407566_added_timestamp.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="SupportClasses\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="SupportClasses\" />
+    <EmbeddedResource Include="Migrations\201805141722306_init.resx">
+      <DependentUpon>201805141722306_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
