@@ -19,7 +19,7 @@
                         <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
                         <a ID="video">
                             <div class="preview">
-                                <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                                <video class="video-preview" poster="../Content/img/video.jpg" data-img="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
                                 <span style="display:none" class="today no-select">DNES</span>
                                 <div class="preview-text">
                                     <span Visible="{value: HD}" class="hd no-select">HD</span>
@@ -42,7 +42,7 @@
                         <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
                         <a ID="video">
                             <div class="preview">
-                                <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                                <video class="video-preview video-history" poster="../Content/img/video.jpg" data-img="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
                                 <span style="display:none" class="today">DNES</span>
                                 <div class="preview-text">
                                     <span Visible="{value: HD}" class="hd no-select">HD</span>
@@ -78,7 +78,7 @@
                         <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
                         <a>
                             <div class="preview">
-                                <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                                <video class="video-preview main-videos" poster="../Content/img/video.jpg" data-img="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
                                 <span Visible="{value: _root.TimeStamp - TimeStamp < 50000}" class="today no-select">DNES</span>
                                 <div class="preview-text">
                                     <span Visible="{value: HD}" class="hd no-select">HD</span>
@@ -194,8 +194,23 @@
                 $("#main-loader").css("display", "none");
             }
             if (!loaded) {
+                $(".main-videos").attr("poster", "../Content/img/video.jpg");
+                lazyLoader();
                 $(".latest").addClass('animated fadeInUp');
-                setTimeout(function () { $(".latest").removeClass("animated fadeInUp"); }, 501);
+                setTimeout(function () {
+                    $(".latest").removeClass("animated fadeInUp");
+                }, 501);
+            }
+            else {
+                try {
+                    var vids = document.getElementsByClassName("video-history");
+                    for (var i = 0; i < vids.length; i++) {
+                        vids[i].setAttribute("poster", vids[i].getAttribute("data-img"));
+                    }
+                }
+                catch (err) {
+
+                }
             }
         }
         );
@@ -211,8 +226,22 @@
         }
         );
         dotvvm.events.spaNavigated.subscribe(function () {
+            showLoader = false;
+            if ($("#main-loader").css("display") == "flex") {
+                $("#main-loader").css("display", "none");
+            }
+            if (location.href.includes("categories")) {
+                $(document).ready(function () {
+                    setTimeout(function () {
+                        lazyLoadCats();
+                    }, 500);
+                });
+            }
             $(".main-content").addClass('animated fadeInUp');
-            setTimeout(function () { $(".main-content").removeClass("animated fadeInUp"); }, 501);
+            setTimeout(function () {
+                $(".main-content").removeClass("animated fadeInUp");
+                lazyLoader();
+            }, 501);
         }
         );
     </dot:InlineScript>

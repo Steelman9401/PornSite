@@ -223,10 +223,10 @@ namespace PornSite.Repositories
                         {
                             IQueryable<Video> query;
                             if (loadmobile)
-                                query = db.Videos.Where(x => x.Url.Contains("pornhub"));
+                                query = db.Videos.Where(x => x.Url.Contains("pornhub") && x.AllowMain);
                             else
                             {
-                                query = db.Videos;
+                                query = db.Videos.Where(x=>x.AllowMain);
                             }
                             return await GetRecommendedVideosDataAsync(query);
                         }
@@ -248,10 +248,10 @@ namespace PornSite.Repositories
                 {
                     IQueryable<Video> query;
                     if (loadmobile)
-                        query = db.Videos.Where(x => x.Url.Contains("pornhub"));
+                        query = db.Videos.Where(x => x.Url.Contains("pornhub") && x.AllowMain);
                     else
                     {
-                        query = db.Videos;
+                        query = db.Videos.Where(x=>x.AllowMain);
                     }
                     return await GetRecommendedVideosDataAsync(query);
                 }

@@ -31,8 +31,8 @@
                         <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
                         <a>
                             <div class="preview">
-                                <video class="video-preview" poster="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
-                                <span style="display:none;" class="today">DNES</span>
+                                <video class="video-preview main-videos" poster="../Content/img/video.jpg" data-img="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                                <span style="display:none;" class="today no-select">DNES</span>
                                 <div class="preview-text">
                                     <span Visible="{value: HD}" class="hd no-select">HD</span>
                                     <span class="no-select">{{value: Duration}}</span>

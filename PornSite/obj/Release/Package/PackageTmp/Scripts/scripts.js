@@ -29,7 +29,8 @@ $(document).ready(function () {
                     url = document.getElementById("frame").src;
                 document.getElementById("frame").src = "about:blank"
             }
-            document.getElementById("potter").src = "https://www.youtube.com/embed/mITHDj6-DSc?start=48";
+            $("body").addClass("modal-on");
+            goFullScreen($("#hide-page").get(0));
             document.getElementById("hide-page").style.display = "block";
         }
     });
@@ -51,9 +52,17 @@ $(document).ready(function () {
         $("#modal-login").css("display", "flex");
     });
     $(document).on("click", "#safe-button", function (e) {
+        $("body").removeClass("modal-on");
         $("#hide-page").css("display", "none");
-        document.getElementById("potter").src = "";
         document.getElementById("frame").src = url;
+        if (document.exitFullscreen)
+            document.exitFullscreen();
+        else if (document.mozCancelFullScreen)
+            document.mozCancelFullScreen();
+        else if (document.webkitExitFullscreen)
+            document.webkitExitFullscreen();
+        else if (document.msExitFullscreen)
+            document.msExitFullscreen();
     });
 
     $(document).on("click", ".show-header", function (e) {
@@ -83,10 +92,11 @@ $(document).ready(function () {
     });
     $(document).on("click", "#safety-button", function (e) {
         if ($('#frame').length) {
+            goFullScreen($("#hide-page").get(0));
             url = document.getElementById("frame").src;
             document.getElementById("frame").src = "";
         }
-        document.getElementById("potter").src = "https://www.youtube.com/embed/mITHDj6-DSc?start=48"
+        $("body").addClass("modal-on");
         document.getElementById("hide-page").style.display = "block";
     });
     $(document).on("click", "li", function (e) {
@@ -100,7 +110,6 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#search", function (e) {
-        disableLoader = true;
         $('html,body').animate({ scrollTop: 0 }, 'fast');
         if ($(window).width() < 744) {
             $("#form").slideToggle()
@@ -108,6 +117,17 @@ $(document).ready(function () {
         }
         $("#search-dotvvm").click();
     });
+
+    function goFullScreen(element) {
+          if (element.requestFullscreen)
+                element.requestFullscreen();
+            else if (element.mozRequestFullScreen)
+                element.mozRequestFullScreen();
+            else if (element.webkitRequestFullscreen)
+                element.webkitRequestFullscreen();
+            else if (element.msRequestFullscreen)
+                element.msRequestFullscreen();
+    }
 });
 
 

@@ -33,8 +33,8 @@
 </head>
 <body>
     <div ID="hide-page">
-        <button ID="safe-button">Nebezpečí zažehnáno</button>
-        <iframe ID="potter" width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <button ID="safe-button">ZPĚT NA STRÁNKU</button>
+        <img ID="excel" />
     </div>
     <header>
         <div class="cointainer-row">
@@ -138,6 +138,7 @@
         <p>Tento web využívá cookies. Jeho používáním s tím vyjadřuješ souhlas.</p>
         <button onclick="$('#cookies').css('display', 'none');" ID="agree">OK</button>
     </div>
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
     <script src="../Scripts/init.js"></script>
     <script src="../Scripts/login.js"></script>
     <script src="../Scripts/scripts.js"></script>
