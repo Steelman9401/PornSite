@@ -1,9 +1,28 @@
 ﻿{
-  "name": "Vymasti.si - porno v kapse",
-  "short_name": "Vymasti.si",
-  "theme_color": "#2196f3",
-  "background_color": "#2196f3",
-  "display": "browser",
+  "name": "Excel",
+  "short_name": "Excel",
+  "start_url": "/",
   "scope": "/",
-  "start_url": "/"
+  "icons": [
+    {
+      "src": "/Content/img/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Content/img/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/Content/img/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#007239",
+  "display": "standalone"
 }
+

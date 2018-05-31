@@ -1,27 +1,27 @@
 ﻿@viewModel PornSite.ViewModels.SearchViewModel, PornSite
 @masterPage Views/MasterPage.dotmaster
-
+@import PornSite.Properties
 <dot:Content ContentPlaceHolderID="MainContent">
     <div ID="background-modal"></div>
     <div class="cointainer-column">
         <section class="safety-button">
-            <button ID="safety-button" title="záchranné tlačítko">POZOR MANŽELKA</button>
-            <p ID="safety-info" style="margin-top:8px; float:right; text-decoration:underline; cursor:pointer">k čemu to kurva je?</p>
+            <button ID="safety-button" title="záchranné tlačítko">{{resource: Resources.Safety_button}}</button>
+            <p ID="safety-info" style="margin-top:8px; float:right; text-decoration:underline; cursor:pointer"> {{resource: Resources.Hint}}</p>
         </section>
         <section class="section-title">
-            <h2 style="color:white;">Hledaný výraz: <span class="category-name">{{value: SearchParameter}}</span> <span style="font-size: 21px;">({{value: SearchCount}})</span></h2>
+            <h2 style="color:white;">{{resource: Resources.SearchParam}} <span class="category-name">{{value: SearchParameter}}</span> <span style="font-size: 21px;">({{value: SearchCount}})</span></h2>
             <ul>
-                <li ID="newest" class="active-li click remove-loader-main no-scroll">
-                    nejnovější
+                <li ID="newest" class="active-li no-scroll click remove-loader-main">
+                    {{resource: Resources.Latest}}
                     <dot:Button ButtonTagName="button" Click="{command: LoadLatestVideos()}" style="display:none;" />
                 </li>
-                <li ID="most-viewed" class="click remove-loader-main no-scroll">
-                    nejsledovanější
+                <li ID="most-viewed" class="click no-scroll remove-loader-main">
+                    {{resource: Resources.Viewed}}
                     <dot:Button ButtonTagName="button" Click="{command: LoadMostViewedVideos()}" style="display:none;" />
                 </li>
             </ul>
             <div class="mobile-only">
-                <dot:CheckBox Checked="{value: LoadMobile}" Changed="{command: LoadMobileVideos()}" Text="zobrazit pouze videa pro telefony" />
+                <dot:CheckBox Checked="{value: LoadMobile}" Changed="{command: LoadMobileVideos()}" Text="{{resource: Resources.Mobile}}" />
             </div>
         </section>
         <div class="main-content">
@@ -78,7 +78,7 @@
                             <p ID="turn-phone">otoč telefon <i class="fas fa-redo"></i></p>
                             <h2>{{value: Title}}</h2>
                             <div class="tags">
-                                <span>Kategorie:</span>
+                                <span> {{resource: Resources.Categories_modal}}:</span>
                                 <dot:Repeater DataSource="{value: Categories}">
                                     <ItemTemplate>
                                         <div class="hide-modal click-link show-header scroll-top" style="display: inline-block">
@@ -91,13 +91,13 @@
                             <div class="menu">
                                 <ul>
                                     <li class="related no-scroll click remove-loader-main remove-loader-modal">
-                                        podobná videa
-                                        <dot:Button ButtonTagName="button" style="display:none;" Click="{command: LoadSuggestedVideos()}" />
+                                        {{resource: Resources.Similiar}}
+                                        <dot:Button ButtonTagName="button" style="display:none;" Click="{command: LoadSuggestedVideos(_root.currentCulture)}" />
                                     </li>
                                 </ul>
                             </div>
                             <div class="related-videos-container">
-                                <h3>Podobná videa</h3>
+                                <h3> {{resource: Resources.Similiar_header}}</h3>
                                 <dot:UpdateProgress ID="loader-related">
                                     <div class="loader">
                                         <div ID="floatingCirclesG">

@@ -1,7 +1,8 @@
 ﻿@viewModel PornSite.ViewModels.MasterPageViewModel, PornSite
+@import PornSite.Properties
 <!DOCTYPE html>
 
-<html lang="cs" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="{{resource: Resources.Lang}}" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118823697-1"></script>
@@ -12,28 +13,54 @@
 
         gtag('config', 'UA-118823697-1');
     </script>
+    <script>
+        if (navigator.userAgent.indexOf("Firefox") != -1) {
+            var head = document.getElementsByTagName("head")[0];
+            var link = document.createElement("link");
+            var link2 = document.createElement("link");
+            link.setAttribute("rel", "stylesheet");
+            link.setAttribute("href", "../Content/master.min.css");
+            link2.setAttribute("rel", "stylesheet");
+            link2.setAttribute("href", "https://use.fontawesome.com/releases/v5.0.11/css/all.css");
+            console.log(link);
+            head.appendChild(link);
+            head.appendChild(link2);
+        }
+    </script>
     <meta charset="utf-8" />
-    <title>Nejmodernější česká porno stránka - Vymasti.si</title>
+    <title>{{resource: Resources.Title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000" />
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
-    <link href="../Content/master.css" rel="stylesheet" />
-    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <link rel="alternate stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous" onload="this.rel='stylesheet'">
+    <link ID="master" rel="alternate stylesheet" href="../Content/master.min.css" onload="this.rel = 'stylesheet'; document.getElementById('page-load').style.display='none'">
     <link rel="apple-touch-icon" sizes="180x180" href="../Content/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Content/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Content/img/favicon-16x16.png">
-    <link rel="manifest" href="../Content/img/site.webmanifest">
+    <link rel="manifest" href="../manifest.json">
     <link rel="mask-icon" href="../Content/img/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="alternate" hreflang="cs" href="https://vymasti.si/" />
+    <link rel="alternate" hreflang="en" href="https://vymasti.si/" />
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <meta name="Description" content="Nejmodernější česká porno stránka!">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
-
+    <meta name="Description" content="{{resource: Resources.Desc}}">
 </head>
 <body>
+    <style>
+        #page-load {
+            display: inline-block;
+            background-color: #212121;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            left: 0
+        }
+    </style>
+    <div ID="page-load">
+    </div>
     <div ID="hide-page">
-        <button ID="safe-button">ZPĚT NA STRÁNKU</button>
+        <button ID="safe-button">{{resource: Resources.Back}}</button>
         <img ID="excel" />
     </div>
     <header>
@@ -42,44 +69,44 @@
             <div class="menu-icon" ID="menu-icon"></div>
             <form ID="form" onsubmit="return false;">
                 <dot:TextBox ID="search-textbox" Text="{value: Search}" class="search-text" placeholder="milf, pov, teen..." />
-                <dot:Button ButtonTagName="button" IsSubmitButton="true" ID="search" Text="hledat" class="search-button remove-loader-main" />
+                <dot:Button ButtonTagName="button" IsSubmitButton="true" ID="search" Text="{{resource: Resources.Search}}" class="search-button remove-loader-main" />
                 <dot:Button ID="search-dotvvm" ButtonTagName="button" style="display:none;" Click="{command: DoSearch()}" />
             </form>
             <ul ID="menu">
                 <li class="no-scroll">
                     <div class="click-link-mobile">
-                        KATEGORIE
+                        {{resource: Resources.Category_header}}
                         <dot:RouteLink RouteName="categories" style="display:none;"></dot:RouteLink>
                     </div>
                 </li>
-                <li onclick="location.href='https://www.facebook.com/vymasti.si/'" class="menu-login no-scroll"><i style="margin-right:8px;" class="fas fa-thumbs-up"></i>NÁS NA FACEBOOKU</li>
+                <li onclick="location.href='https://www.facebook.com/vymasti.si/'" class="menu-login no-scroll"><i style="margin-right:8px;" class="fas fa-thumbs-up"></i> {{resource: Resources.Fb}}</li>
             </ul>
-            <a class="categories" ID="category">KATEGORIE</a>
-            <a href="https://www.facebook.com/vymasti.si/" class="login"><i style="margin-right:8px;" class="fas fa-thumbs-up"></i>nás na facebooku</a>
+            <a class="categories" ID="category"> {{resource: Resources.Category_header}}</a>
+            <a href="https://www.facebook.com/vymasti.si/" class="login"><i style="margin-right:8px;" class="fas fa-thumbs-up"></i> {{resource: Resources.Fb}}</a>
         </div>
         <div ID="categories-preview">
             <div class="container">
                 <div class="click-link scroll-top">
                     <img data-src="../Content/img/anal.jpg" class="img-category">
-                    <span>Anál</span>
+                    <span> {{resource: Resources.Anal}}</span>
                     <dot:RouteLink style="display:none;" RouteName="category" Param-Id="422" Param-Name="Anál">
                     </dot:RouteLink>
                 </div>
                 <div class="click-link scroll-top">
                     <img data-src="../Content/img/czech.jpg" class="img-category">
-                    <span>Češké porno</span>
+                    <span> {{resource: Resources.Czech}}</span>
                     <dot:RouteLink style="display:none;" RouteName="category" Param-Id="424" Param-Name="Česke porno">
                     </dot:RouteLink>
                 </div>
                 <div class="click-link scroll-top">
                     <img data-src="../Content/img/stifler.jpg" class="img-category">
-                    <span>MILF</span>
+                    <span> {{resource: Resources.MILF}}</span>
                     <dot:RouteLink style="display:none;" RouteName="category" Param-Id="427" Param-Name="MILF">
                     </dot:RouteLink>
                 </div>
                 <div class="click-link scroll-top">
                     <img data-src="../Content/placeholder.jpg" class="img-category">
-                    <span>Další</span>
+                    <span> {{resource: Resources.Other}}</span>
                     <dot:RouteLink style="display:none;" RouteName="categories">
                     </dot:RouteLink>
                 </div>
@@ -118,35 +145,43 @@
             </div>
             <div class="modal-body">
                 <h4>
-                    Teď už se nemusíš bát, že tě někdo uvidí čumět na porno. Stačí kdekoliv na stránce stisknout červené tlačítko
-                    nebo jakoukoliv klávesu na klávesnici a stránka se přepne na něco vhodnějšího. Zkus to!
+                    {{resource: Resources.Explanation}}
                 </h4>
-                <h2 ID="blinking-text">STISKNI JAKOUKOLIV KLÁVESU!</h2>
+                <h2 ID="blinking-text">{{resource: Resources.Press}}</h2>
             </div>
         </div>
     </div>
     <div ID="modal-confirmation">
-        <div class="cointainer-modal">
+        <div ID="confirmation-body" class="cointainer-modal">
             <div class="modal-body">
                 <h4>Vymasti.<span class="si">si</span></h4>
-                <p>Přišels leštit bambus? Musíme tě upozornit, že tento web je pouze pro dospělé!</p>
-                <button ID="confirm">VSTOUPIT</button>
+                <p>{{resource: Resources.Alert}}</p>
+                <button ID="confirm">{{resource: Resources.Enter}}</button>
             </div>
         </div>
     </div>
     <div ID="cookies">
-        <p>Tento web využívá cookies. Jeho používáním s tím vyjadřuješ souhlas.</p>
+        <p>{{resource: Resources.Cookies}}</p>
         <button onclick="$('#cookies').css('display', 'none');" ID="agree">OK</button>
     </div>
-    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
-    <script src="../Scripts/init.js"></script>
-    <script src="../Scripts/login.js"></script>
-    <script src="../Scripts/scripts.js"></script>
-    <script src="../Scripts/scrolling.js"></script>
-    <script src="../Scripts/modal.js"></script>
-    <script src="../Scripts/modal-video.js"></script>
-    <script src="../Scripts/menu.js"></script>
-    <script src="../Scripts/categories.js"></script>
-    <script src="../Scripts/video-thumbnail.js"></script>
+    <div ID="pwa">
+        <p>
+            {{resource: Resources.App1}}<br />
+            {{resource: Resources.App2}}
+        </p>
+        <button ID="install">{{resource: Resources.Ok}}</button>
+        <button onclick="$('#pwa').css('display', 'none');">{{resource: Resources.Nope}}</button>
+    </div>
+    <script defer src="../Scripts/jquery-3.3.1.min.js"></script>
+    <script defer src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+    <script defer src="../Scripts/init.min.js"></script>
+    <script defer src="../Scripts/login.min.js"></script>
+    <script defer src="../Scripts/scripts.min.js"></script>
+    <script defer src="../Scripts/scrolling.min.js"></script>
+    <script defer src="../Scripts/modal.min.js"></script>
+    <script defer src="../Scripts/modal-video.min.js"></script>
+    <script defer src="../Scripts/menu.min.js"></script>
+    <script defer src="../Scripts/categories.min.js"></script>
+    <script defer src="../Scripts/video-thumbnail.min.js"></script>
 </body>
 </html>

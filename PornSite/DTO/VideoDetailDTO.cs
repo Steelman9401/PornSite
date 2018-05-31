@@ -25,10 +25,10 @@ namespace PornSite.DTO
             PagingOptions = { PageSize = 3 }
         };
 
-        public async Task LoadSuggestedVideos()
+        public async Task LoadSuggestedVideos(string currentCulture)
         {
             PornRepository rep = new PornRepository();
-            SuggestedVideos = await rep.GetSuggestedVideosAsync(Categories.Select(x => x.Id).ToList(),this.Id);
+            SuggestedVideos = await rep.GetSuggestedVideosAsync(Categories.Select(x => x.Id).ToList(),this.Id, currentCulture);
         }
     }
 }

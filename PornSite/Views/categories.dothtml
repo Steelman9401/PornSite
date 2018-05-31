@@ -1,9 +1,9 @@
 ﻿@viewModel PornSite.ViewModels.CategoriesViewModel, PornSite
 @masterPage Views/MasterPage.dotmaster
-
+@import PornSite.Properties
 <dot:Content ContentPlaceHolderID="MainContent">
     <div ID="categories">
-        <h2>Kategorie</h2>
+        <h2>{{resource: Resources.Category_header}}</h2>
         <div class="main-content">
             <dot:Repeater DataSource="{value: Categories}" class="container">
                 <ItemTemplate>

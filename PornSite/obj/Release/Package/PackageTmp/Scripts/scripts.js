@@ -21,13 +21,28 @@ $(document).ready(function () {
     $(document).on("click", ".click", function (e) {
         e.currentTarget.getElementsByTagName("button")[0].click();
     });
-
+    $(document).on("click", "#install", function (e) {
+        // hide our user interface that shows our A2HS button
+        $("#pwa").css("display", "none");
+        // Show the prompt
+        deferredPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice
+            .then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the A2HS prompt');
+                } else {
+                    console.log('User dismissed the A2HS prompt');
+                }
+                deferredPrompt = null;
+            });
+    });
     $(document).keypress(function (e) {
         if (!$("#search-textbox").is(':focus')) {
             if ($('#frame').length) {
                 if (document.getElementById("frame").src != "about:blank")
                     url = document.getElementById("frame").src;
-                document.getElementById("frame").src = "about:blank"
+                document.getElementById("frame").src = "https://vymasti.si/excelFull.html"
             }
             $("body").addClass("modal-on");
             goFullScreen($("#hide-page").get(0));
@@ -36,6 +51,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".click-link", function (e) {
+        $("body").removeClass("modal-on");
         e.currentTarget.getElementsByTagName("a")[0].click();
         $("#categories-preview").hide();
     });

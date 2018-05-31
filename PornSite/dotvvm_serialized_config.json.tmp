@@ -31,6 +31,51 @@
       "url": "category/{Id}/{Name}",
       "virtualPath": "Views/category.dothtml",
       "defaultValues": {}
+    },
+    "game": {
+      "url": "game",
+      "virtualPath": "game.html",
+      "defaultValues": {}
+    },
+    "admin": {
+      "url": "admin",
+      "virtualPath": "Views/admin/admin.dothtml",
+      "defaultValues": {}
+    },
+    "spider": {
+      "url": "spider",
+      "virtualPath": "Views/admin/spider.dothtml",
+      "defaultValues": {}
+    },
+    "Database": {
+      "url": "database",
+      "virtualPath": "Views/admin/database.dothtml",
+      "defaultValues": {}
+    },
+    "Categories_admin": {
+      "url": "categoriesa",
+      "virtualPath": "Views/admin/categories.dothtml",
+      "defaultValues": {}
+    },
+    "admin_admin": {
+      "url": "admin/admin",
+      "virtualPath": "Views/admin/admin.dothtml",
+      "defaultValues": {}
+    },
+    "admin_categories": {
+      "url": "admin/categories",
+      "virtualPath": "Views/admin/categories.dothtml",
+      "defaultValues": {}
+    },
+    "admin_database": {
+      "url": "admin/database",
+      "virtualPath": "Views/admin/database.dothtml",
+      "defaultValues": {}
+    },
+    "admin_spider": {
+      "url": "admin/spider",
+      "virtualPath": "Views/admin/spider.dothtml",
+      "defaultValues": {}
     }
   },
   "resources": {

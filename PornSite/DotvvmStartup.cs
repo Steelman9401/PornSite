@@ -1,6 +1,7 @@
 ﻿using DotVVM.Framework.Configuration;
 using DotVVM.Framework.ResourceManagement;
 using DotVVM.Framework.Routing;
+using System.Web;
 
 namespace PornSite
 {
@@ -19,7 +20,13 @@ namespace PornSite
             config.RouteTable.Add("Default", "", "Views/default.dothtml");
             config.RouteTable.Add("search", "search/{text}", "Views/search.dothtml");
             config.RouteTable.Add("categories", "categories", "Views/categories.dothtml");
-            config.RouteTable.Add("category", "category/{Id}/{Name}", "Views/category.dothtml");      
+            config.RouteTable.Add("category", "category/{Id}/{Name}", "Views/category.dothtml");
+            config.RouteTable.Add("game", "game", "game.html");
+            config.RouteTable.Add("admin", "admin", "Views/admin/admin.dothtml");
+            config.RouteTable.Add("spider", "spider", "Views/admin/spider.dothtml");
+            config.RouteTable.Add("Database", "database", "Views/admin/database.dothtml");
+            config.RouteTable.Add("Categories_admin", "categoriesa", "Views/admin/categories.dothtml");
+            config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));
         }
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
@@ -43,6 +50,7 @@ namespace PornSite
                 Location = new UrlResourceLocation("~/Scripts/bootstrap.min.js"),
                 Dependencies = new[] { "bootstrap-css", "jquery" }
             });
+            //config.DefaultCulture = "en-US";
             //config.Resources.Register("jquery", new ScriptResource
             //{
             //    Location = new UrlResourceLocation("~/Scripts/jquery-1.9.1.min.js")

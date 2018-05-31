@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
+using System.Web;
+using System.IO.Compression;
 
 [assembly: OwinStartup(typeof(PornSite.Startup))]
 namespace PornSite
@@ -20,6 +22,7 @@ namespace PornSite
         public void Configuration(IAppBuilder app)
         {
             var applicationPhysicalPath = HostingEnvironment.ApplicationPhysicalPath;
+            ConfigureAuth(app);
             // use DotVVM
             var dotvvmConfiguration = app.UseDotVVM<DotvvmStartup>(applicationPhysicalPath, debug: IsInDebugMode(), options: options =>
             {
@@ -33,14 +36,29 @@ namespace PornSite
             {
                 FileSystem = new PhysicalFileSystem(applicationPhysicalPath)
             });
-            app.Run(context =>
+            //app.Run(context =>
+            //{
+            //    context.Response.Redirect("/");
+            //    return Task.FromResult(0);
+            //});
+        }
+        public void ConfigureAuth(IAppBuilder app)
+        {
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
-                context.Response.Redirect("/");
-                return Task.FromResult(0);
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/Authentication/SignIn"),
+                Provider = new CookieAuthenticationProvider()
+                {
+                    OnApplyRedirect = context =>
+                    {
+                        DotvvmAuthenticationHelper.ApplyRedirectResponse(context.OwinContext, context.RedirectUri);
+                    }
+                }
             });
         }
 
-		private bool IsInDebugMode()
+        private bool IsInDebugMode()
         {
 #if !DEBUG
 			return false;

@@ -10,20 +10,32 @@ using System.Threading.Tasks;
 using LinqKit;
 using System.Text;
 using System.Globalization;
+using System.Threading;
 
 namespace PornSite.Repositories
 {
     public class PornRepository
     {
-        public async Task<int> GetSearchResultCount(string search)
+        public async Task<int> GetSearchResultCount(string search, string culture)
         {
             using (var db = new myDb())
             {
-                return await db.Videos
-                    .Where(x => x.Title
-                    .Contains(search) || x.Categories
-                    .Any(p => p.Name.Contains(search)) || x.Categories
-                    .Any(o => o.Name_en.Contains(search))).CountAsync();
+                if (culture == "cs-CZ")
+                {
+                    return await db.Videos
+                        .Where(x => x.Title
+                        .Contains(search) || x.Categories
+                        .Any(p => p.Name.Contains(search)) || x.Categories
+                        .Any(o => o.Name_en.Contains(search))).CountAsync();
+                }
+                else
+                {
+                    return await db.Videos
+                       .Where(x => x.Title_en
+                       .Contains(search) || x.Categories
+                       .Any(p => p.Name.Contains(search)) || x.Categories
+                       .Any(o => o.Name_en.Contains(search))).CountAsync();
+                }
             }
         }
         public async Task<int> GetCategoryVideosCount(int Id)
@@ -35,15 +47,11 @@ namespace PornSite.Repositories
                     .CountAsync();
             }
         }
-        public GridViewDataSetLoadedData<VideoListDTO> GetSearchResult(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, string search, bool loadmomobile, int specific)
+        public GridViewDataSetLoadedData<VideoListDTO> GetSearchResult(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, string search, bool loadmomobile, int specific, string culture)
         {
             using (var db = new myDb())
             {
-                IQueryable<Video> query = db.Videos
-                    .Where(x => x.Title
-                    .Contains(search) || x.Categories
-                    .Any(p => p.Name.Contains(search)) || x.Categories
-                    .Any(o => o.Name_en.Contains(search)));
+                IQueryable<Video> query = db.Videos;
                 if (specific == 0) // nejnovejsi
                 {
                     query = query.OrderByDescending(x => x.Id);
@@ -60,21 +68,47 @@ namespace PornSite.Repositories
                         query = query.Where(p => p.Url.Contains("pornhub"));
                     }
                 }
-                var finalquery = query // finalni poskladana query
-                        .Select(a => new VideoListDTO
-                        {
-                            Id = a.Id,
-                            Img = "Admin/Previews/" + a.Img,
-                            Title = a.Title,
-                            Duration = a.Duration,
-                            HD = a.HD,
-                            Preview = "Admin/Previews/" + a.Preview,
-                            Views = a.Views
-                        }).AsQueryable();
+                IQueryable<VideoListDTO> finalquery;
+                if (culture == "cs-CZ")
+                {
+                    query = query.Where(x => x.Title
+                    .Contains(search) || x.Categories
+                    .Any(p => p.Name.Contains(search)) || x.Categories
+                    .Any(o => o.Name_en.Contains(search)));
+                    finalquery = query // finalni poskladana query
+                            .Select(a => new VideoListDTO
+                            {
+                                Id = a.Id,
+                                Img = "Admin/Previews/" + a.Img,
+                                Title = a.Title,
+                                Duration = a.Duration,
+                                HD = a.HD,
+                                Preview = "Admin/Previews/" + a.Preview,
+                                Views = a.Views
+                            }).AsQueryable();
+                }
+                else
+                {
+                    query = query.Where(x => x.Title_en
+                    .Contains(search) || x.Categories
+                    .Any(p => p.Name.Contains(search)) || x.Categories
+                    .Any(o => o.Name_en.Contains(search)));
+                    finalquery = query // finalni poskladana query
+                            .Select(a => new VideoListDTO
+                            {
+                                Id = a.Id,
+                                Img = "Admin/Previews/" + a.Img,
+                                Title = a.Title_en,
+                                Duration = a.Duration,
+                                HD = a.HD,
+                                Preview = "Admin/Previews/" + a.Preview,
+                                Views = a.Views
+                            }).AsQueryable();
+                }
                 return finalquery.GetDataFromQueryable(gridViewDataSetLoadOptions);
             }
         }
-        public GridViewDataSetLoadedData<VideoListDTO> GetAllVideos(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, bool loadmobile, int specific)
+        public GridViewDataSetLoadedData<VideoListDTO> GetAllVideos(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, bool loadmobile, int specific, string culture)
         {
             using (var db = new myDb())
             {
@@ -95,22 +129,41 @@ namespace PornSite.Repositories
                         query = query.Where(p => p.Url.Contains("pornhub"));
                     }
                 }
-                var finalquery = query // finalni poskladana query
-                        .Select(a => new VideoListDTO
-                        {
-                            Id = a.Id,
-                            Img = "Admin/Previews/" + a.Img,
-                            Title = a.Title,
-                            Duration = a.Duration,
-                            HD = a.HD,
-                            Preview = "Admin/Previews/" + a.Preview,
-                            Views = a.Views,
-                            TimeStamp = a.TimeStamp
-                        }).AsQueryable();
+                IQueryable<VideoListDTO> finalquery;
+                if (culture == "cs-CZ")
+                {
+                    finalquery = query // finalni poskladana query
+                       .Select(a => new VideoListDTO
+                       {
+                           Id = a.Id,
+                           Img = "Admin/Previews/" + a.Img,
+                           Title = a.Title,
+                           Duration = a.Duration,
+                           HD = a.HD,
+                           Preview = "Admin/Previews/" + a.Preview,
+                           Views = a.Views,
+                           TimeStamp = a.TimeStamp
+                       }).AsQueryable();
+                }
+                 else
+                {
+                    finalquery = query // finalni poskladana query
+                      .Select(a => new VideoListDTO
+                      {
+                          Id = a.Id,
+                          Img = "Admin/Previews/" + a.Img,
+                          Title = a.Title_en,
+                          Duration = a.Duration,
+                          HD = a.HD,
+                          Preview = "Admin/Previews/" + a.Preview,
+                          Views = a.Views,
+                          TimeStamp = a.TimeStamp
+                      }).AsQueryable();
+                }
                 return finalquery.GetDataFromQueryable(gridViewDataSetLoadOptions);
             }
         }
-        public GridViewDataSetLoadedData<VideoListDTO> GetVideosByCategory(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, int Id, int specific, bool loadmobile)
+        public GridViewDataSetLoadedData<VideoListDTO> GetVideosByCategory(IGridViewDataSetLoadOptions gridViewDataSetLoadOptions, int Id, int specific, bool loadmobile, string culture)
         {
             using (var db = new myDb())
             {
@@ -131,19 +184,36 @@ namespace PornSite.Repositories
                         query = query.Where(p => p.Url.Contains("pornhub"));
                     }
                 }
-                var finalquery = query.Select(x => new VideoListDTO()
+                IQueryable<VideoListDTO> finalquery;
+                if (culture == "cs-CZ")
                 {
-                    Id = x.Id,
-                    Img = "Admin/Previews/" + x.Img,
-                    Title = x.Title,
-                    Duration = x.Duration,
-                    HD = x.HD,
-                    Preview = "Admin/Previews/" + x.Preview,
-                }).AsQueryable();
-                return finalquery.GetDataFromQueryable(gridViewDataSetLoadOptions);
+                    finalquery = query.Select(x => new VideoListDTO()
+                    {
+                        Id = x.Id,
+                        Img = "Admin/Previews/" + x.Img,
+                        Title = x.Title,
+                        Duration = x.Duration,
+                        HD = x.HD,
+                        Preview = "Admin/Previews/" + x.Preview,
+                    }).AsQueryable();
+                    return finalquery.GetDataFromQueryable(gridViewDataSetLoadOptions);
+                }
+                else
+                {
+                    finalquery = query.Select(x => new VideoListDTO()
+                    {
+                        Id = x.Id,
+                        Img = "Admin/Previews/" + x.Img,
+                        Title = x.Title_en,
+                        Duration = x.Duration,
+                        HD = x.HD,
+                        Preview = "Admin/Previews/" + x.Preview,
+                    }).AsQueryable();
+                    return finalquery.GetDataFromQueryable(gridViewDataSetLoadOptions);
+                }
             }
         }
-        public async Task<List<VideoListDTO>> GetVideoHistoryAsync()
+        public async Task<List<VideoListDTO>> GetVideoHistoryAsync(string culture)
         {
             if (HttpContext.Current.Request.Cookies["History"] != null)
             {
@@ -166,17 +236,34 @@ namespace PornSite.Repositories
                                 break;
                             }
                         }
-                        return await db.Videos.AsExpandable()
-                            .Where(predicate)
-                            .Select(a => new VideoListDTO()
-                            {
-                                Id = a.Id,
-                                Img = "Admin/Previews/" + a.Img,
-                                Title = a.Title,
-                                Duration = a.Duration,
-                                HD = a.HD,
-                                Preview = "Admin/Previews/" + a.Preview
-                            }).ToListAsync();
+                        if (culture == "cs-CZ")
+                        {
+                            return await db.Videos.AsExpandable()
+                                .Where(predicate)
+                                .Select(a => new VideoListDTO()
+                                {
+                                    Id = a.Id,
+                                    Img = "Admin/Previews/" + a.Img,
+                                    Title = a.Title,
+                                    Duration = a.Duration,
+                                    HD = a.HD,
+                                    Preview = "Admin/Previews/" + a.Preview
+                                }).ToListAsync();
+                        }
+                        else
+                        {
+                            return await db.Videos.AsExpandable()
+                               .Where(predicate)
+                               .Select(a => new VideoListDTO()
+                               {
+                                   Id = a.Id,
+                                   Img = "Admin/Previews/" + a.Img,
+                                   Title = a.Title_en,
+                                   Duration = a.Duration,
+                                   HD = a.HD,
+                                   Preview = "Admin/Previews/" + a.Preview
+                               }).ToListAsync();
+                        }
                     }
                 }
                 else
@@ -190,7 +277,7 @@ namespace PornSite.Repositories
                 return new List<VideoListDTO>();
             }
         }
-        public async Task<IEnumerable<VideoListDTO>> GetRecommendedVideosAsync(bool loadmobile)
+        public async Task<IEnumerable<VideoListDTO>> GetRecommendedVideosAsync(bool loadmobile, string culture)
         {
             if (HttpContext.Current.Request.Cookies["CategoryCount"] != null)
             {
@@ -217,7 +304,7 @@ namespace PornSite.Repositories
                         {
                             int skip = GetRandomNumber(count);
                             IQueryable<Video> query = db.Videos.AsExpandable().Where(predicate);
-                            return await GetRecommendedVideosDataAsync(query);
+                            return await GetRecommendedVideosDataAsync(query, culture);
                         }
                         else //random videa
                         {
@@ -228,7 +315,7 @@ namespace PornSite.Repositories
                             {
                                 query = db.Videos.Where(x=>x.AllowMain);
                             }
-                            return await GetRecommendedVideosDataAsync(query);
+                            return await GetRecommendedVideosDataAsync(query,culture);
                         }
                     }
                 }
@@ -238,7 +325,7 @@ namespace PornSite.Repositories
                     {
                         HttpContext.Current.Response.Cookies["CategoryCount"].Expires = DateTime.Now.AddDays(-1);
                         IQueryable<Video> query = db.Videos;
-                        return await GetRecommendedVideosDataAsync(query);
+                        return await GetRecommendedVideosDataAsync(query,culture);
                     }
                 }
             }
@@ -253,26 +340,42 @@ namespace PornSite.Repositories
                     {
                         query = db.Videos.Where(x=>x.AllowMain);
                     }
-                    return await GetRecommendedVideosDataAsync(query);
+                    return await GetRecommendedVideosDataAsync(query,culture);
                 }
             }
         }
-        private async Task<List<VideoListDTO>> GetRecommendedVideosDataAsync(IQueryable<Video> query)
+        private async Task<List<VideoListDTO>> GetRecommendedVideosDataAsync(IQueryable<Video> query, string culture)
         {
             int count = query.Count();
             int skip = GetRandomNumber(count);
-            return await query
-                .Select(a => new VideoListDTO()
-                {
-                    Id = a.Id,
-                    Img = "Admin/Previews/" + a.Img,
-                    Title = a.Title,
-                    Duration = a.Duration,
-                    HD = a.HD,
-                    Preview = "Admin/Previews/" + a.Preview
-                }).OrderBy(s => s.Id).Skip(skip).Take(4).ToListAsync();
+            if (culture == "cs-CZ")
+            {
+                return await query
+                    .Select(a => new VideoListDTO()
+                    {
+                        Id = a.Id,
+                        Img = "Admin/Previews/" + a.Img,
+                        Title = a.Title,
+                        Duration = a.Duration,
+                        HD = a.HD,
+                        Preview = "Admin/Previews/" + a.Preview
+                    }).OrderBy(s => s.Id).Skip(skip).Take(4).ToListAsync();
+            }
+            else
+            {
+                return await query
+                   .Select(a => new VideoListDTO()
+                   {
+                       Id = a.Id,
+                       Img = "Admin/Previews/" + a.Img,
+                       Title = a.Title_en,
+                       Duration = a.Duration,
+                       HD = a.HD,
+                       Preview = "Admin/Previews/" + a.Preview
+                   }).OrderBy(s => s.Id).Skip(skip).Take(4).ToListAsync();
+            }
         }
-        public async Task<VideoDetailDTO> GetVideoByIdAsync(int Id)
+        public async Task<VideoDetailDTO> GetVideoByIdAsync(int Id, string culture)
         {
 
             using (var db = new myDb())
@@ -284,22 +387,34 @@ namespace PornSite.Repositories
                 VideoDetailDTO vid = new VideoDetailDTO();
                 vid.Id = video.Id;
                 vid.Img = video.Img;
-                vid.Title = video.Title;
+                if (culture == "cs-CZ")
+                {
+                    vid.Title = video.Title;
+                    vid.Categories = video.Categories.Select(x => new CategoryDTO()
+                    {
+                        Id = x.Id,
+                        Name = x.Name
+                    }).ToList();
+                }
+                else
+                {
+                    vid.Title = video.Title_en;
+                    vid.Categories = video.Categories.Select(x => new CategoryDTO()
+                    {
+                        Id = x.Id,
+                        Name = x.Name_en
+                    }).ToList();
+                }
                 vid.Url = video.Url;
                 vid.Views = video.Views;
                 db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
-                vid.Categories = video.Categories.Select(x => new CategoryDTO()
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                }).ToList();
                 CookieRepository CookieRep = new CookieRepository();
                 CookieRep.UpdateCategoryCookie(vid.Categories);
                 CookieRep.UpdateHistoryCookie(video.Id.ToString());
                 return vid;
             }
         }
-        public async Task<IEnumerable<VideoListDTO>> GetSuggestedVideosAsync(List<int> Categories, int Id)
+        public async Task<IEnumerable<VideoListDTO>> GetSuggestedVideosAsync(List<int> Categories, int Id, string culture)
         {
             List<string> CategoriesCounts = new List<string>();
             if (Categories.Count > 2)
@@ -326,16 +441,32 @@ namespace PornSite.Repositories
                         int first = finalResult[0];
                         int second = finalResult[1];
                         int third = finalResult[2];
-                        return await db.Videos.Where(x => x.Categories.Any(p => p.Id == first) && x.Categories.Any(o => o.Id == second) && x.Categories.Any(k => k.Id == third) && x.Id != Id)
-                            .Select(p => new VideoListDTO
-                            {
-                                Id = p.Id,
-                                Title = p.Title,
-                                Img = "Admin/Previews/" + p.Img,
-                                Preview = "Admin/Previews/" + p.Preview,
-                                Duration = p.Duration,
-                                HD = p.HD
-                            }).Take(6).ToListAsync();
+                        if (culture == "cs-CZ")
+                        {
+                            return await db.Videos.Where(x => x.Categories.Any(p => p.Id == first) && x.Categories.Any(o => o.Id == second) && x.Categories.Any(k => k.Id == third) && x.Id != Id)
+                                .Select(p => new VideoListDTO
+                                {
+                                    Id = p.Id,
+                                    Title = p.Title,
+                                    Img = "Admin/Previews/" + p.Img,
+                                    Preview = "Admin/Previews/" + p.Preview,
+                                    Duration = p.Duration,
+                                    HD = p.HD
+                                }).Take(6).ToListAsync();
+                        }
+                        else
+                        {
+                            return await db.Videos.Where(x => x.Categories.Any(p => p.Id == first) && x.Categories.Any(o => o.Id == second) && x.Categories.Any(k => k.Id == third) && x.Id != Id)
+                                .Select(p => new VideoListDTO
+                                {
+                                    Id = p.Id,
+                                    Title = p.Title_en,
+                                    Img = "Admin/Previews/" + p.Img,
+                                    Preview = "Admin/Previews/" + p.Preview,
+                                    Duration = p.Duration,
+                                    HD = p.HD
+                                }).Take(6).ToListAsync();
+                        }
 
                     }
                     else
@@ -368,17 +499,30 @@ namespace PornSite.Repositories
                 }
             }
         }
-        public async Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync()
+        public async Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync(string culture)
         {
             using (var db = new myDb())
             {
-                return await db.Categories
-                    .Select(x => new CategoryDTO()
-                    {
-                        Id = x.Id,
-                        Name = x.Name,
-                        Img = "Admin/CategoryImg/" + x.Img
-                    }).OrderBy(p=>p.Name).ToListAsync();
+                if (culture == "cs-CZ")
+                {
+                    return await db.Categories
+                        .Select(x => new CategoryDTO()
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            Img = "Admin/CategoryImg/" + x.Img
+                        }).OrderBy(p => p.Name).ToListAsync();
+                }
+                else
+                {
+                    return await db.Categories
+                        .Select(x => new CategoryDTO()
+                        {
+                            Id = x.Id,
+                            Name = x.Name_en,
+                            Img = "Admin/CategoryImg/" + x.Img
+                        }).OrderBy(p => p.Name).ToListAsync();
+                }
             }
         }
         private int GetRandomNumber(int n)

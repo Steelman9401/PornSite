@@ -43,7 +43,7 @@ namespace PornSite.ViewModels
                     {
                         CategoryCount = await PornRep.GetCategoryVideosCount(Id);
                     }
-                    Videos.OnLoadingData = option => PornRep.GetVideosByCategory(option, Id, VideoSwitch, LoadMobile);
+                    Videos.OnLoadingData = option => PornRep.GetVideosByCategory(option, Id, VideoSwitch, LoadMobile, currentCulture);
                 }
             }
             await base.PreRender();
@@ -52,7 +52,7 @@ namespace PornSite.ViewModels
         {
             PornRepository PornRep = new PornRepository();
             ShowVideo = true;
-            Video = await PornRep.GetVideoByIdAsync(video.Id);
+            Video = await PornRep.GetVideoByIdAsync(video.Id, currentCulture);
         }
         public void LoadLatestVideos()
         {

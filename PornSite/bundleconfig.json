@@ -1,0 +1,62 @@
+[
+  {
+    "outputFileName": "Content/master.min.css",
+    "inputFiles": [
+      "Content/master.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/init.min.js",
+    "inputFiles": [
+      "Scripts/init.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/login.min.js",
+    "inputFiles": [
+      "Scripts/login.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/scripts.min.js",
+    "inputFiles": [
+      "Scripts/scripts.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/scrolling.min.js",
+    "inputFiles": [
+      "Scripts/scrolling.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/modal.min.js",
+    "inputFiles": [
+      "Scripts/modal.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/modal-video.min.js",
+    "inputFiles": [
+      "Scripts/modal-video.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/menu.min.js",
+    "inputFiles": [
+      "Scripts/menu.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/categories.min.js",
+    "inputFiles": [
+      "Scripts/categories.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/video-thumbnail.min.js",
+    "inputFiles": [
+      "Scripts/video-thumbnail.js"
+    ]
+  }
+]

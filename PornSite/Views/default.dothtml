@@ -1,17 +1,18 @@
 ﻿@viewModel PornSite.ViewModels.DefaultViewModel, PornSite
 @masterPage Views/MasterPage.dotmaster
+@import PornSite.Properties
 <dot:Content ContentPlaceHolderID="MainContent" ID="main-content">
     <div ID="background-modal"></div>
     <div class="cointainer-column">
-        <h3 ID="firefox-error">Upozornění pro uživatele Firefoxu. <br />Pro správné fungování záchranného tlačítka je třeba upravit nastavení prohlížece nebo použít jiný, např. Google Chrome</h3>
+        <h3 ID="firefox-error">{{resource: Resources.Firefox1}}<br />{{resource: Resources.Firefox2}}</h3>
         <section class="safety-button">
-            <button ID="safety-button" title="záchranné tlačítko">POZOR MANŽELKA</button>
-            <p ID="safety-info" style="margin-top:8px; float:right; text-decoration:underline; cursor:pointer">k čemu to kurva je?</p>
+            <button ID="safety-button" title="záchranné tlačítko"> {{resource: Resources.Safety_button}}</button>
+            <p ID="safety-info" style="margin-top:8px; float:right; text-decoration:underline; cursor:pointer"> {{resource: Resources.Hint}}</p>
         </section>
-        <p class="tip"><i style="margin-right:3px;" class="far fa-lightbulb"></i> podržením prstu na názvu nebo náhledu videa si můžeš přehrát ukázku (funkční pouze v prohlížeči <strong>Chrome</strong>)</p>
+        <p class="tip"><i style="margin-right:3px;" class="far fa-lightbulb"></i> {{resource: Resources.Chrome}}</p>
         <div class="main-content">
             <section class="section-title">
-                <h2 Visible="{value: LoadRecommended}">Doporučená videa</h2>
+                <h2 Visible="{value: LoadRecommended}">{{resource: Resources.Recommended}}</h2>
             </section>
             <dot:Repeater Visible="{value: LoadRecommended}" DataSource="{value: RecommendedVideos}" class="videos">
                 <ItemTemplate>
@@ -34,7 +35,7 @@
                 </ItemTemplate>
             </dot:Repeater>
             <section class="section-title" Visible="{value: LoadRecommended && History.Count>0}>
-                <h2>Naposledy zhlédnutá videa</h2>
+                <h2>{{resource: Resources.History}}</h2>
             </section>
             <dot:Repeater class="videos" DataSource="{value: History}" Visible="{value: LoadRecommended}">
                 <ItemTemplate>
@@ -57,19 +58,19 @@
                 </ItemTemplate>
             </dot:Repeater>
             <section class="section-title">
-                <h2 ID="videos-all">Všechna videa</h2>
+                <h2 ID="videos-all">{{resource: Resources.All}}</h2>
                 <ul>
                     <li ID="newest" class="active-li no-scroll click remove-loader-main">
-                        nejnovější
+                        {{resource: Resources.Latest}}
                         <dot:Button ButtonTagName="button" Click="{command: LoadLatestVideos()}" style="display:none;" />
                     </li>
                     <li ID="most-viewed" class="click no-scroll remove-loader-main">
-                        nejsledovanější
+                        {{resource: Resources.Viewed}}
                         <dot:Button ButtonTagName="button" Click="{command: LoadMostViewedVideos()}" style="display:none;" />
                     </li>
                 </ul>
                 <div class="mobile-only">
-                    <dot:CheckBox Checked="{value: LoadMobile}" Changed="{command: LoadMobileVideos()}" Text="zobrazit pouze videa pro telefony" />
+                    <dot:CheckBox Checked="{value: LoadMobile}" Changed="{command: LoadMobileVideos()}" Text="{{resource: Resources.Mobile}}" />
                 </div>
             </section>
             <dot:Repeater class="videos latest" DataSource="{value: Videos}">
@@ -79,7 +80,7 @@
                         <a>
                             <div class="preview">
                                 <video class="video-preview main-videos" poster="../Content/img/video.jpg" data-img="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
-                                <span Visible="{value: _root.TimeStamp - TimeStamp < 50000}" class="today no-select">DNES</span>
+                                <span Visible="{value: _root.TimeStamp - TimeStamp < 50000}" class="today no-select">{{resource: Resources.Today}}</span>
                                 <div class="preview-text">
                                     <span Visible="{value: HD}" class="hd no-select">HD</span>
                                     <span class="no-select">{{value: Duration}}</span>
@@ -125,7 +126,7 @@
                             <p ID="turn-phone">otoč telefon <i class="fas fa-redo"></i></p>
                             <h2>{{value: Title}}</h2>
                             <div class="tags">
-                                <span>Kategorie:</span>
+                                <span> {{resource: Resources.Categories_modal}}:</span>
                                 <dot:Repeater DataSource="{value: Categories}">
                                     <ItemTemplate>
                                         <div class="hide-modal click-link show-header scroll-top" style="display: inline-block">
@@ -138,13 +139,14 @@
                             <div class="menu">
                                 <ul>
                                     <li class="related no-scroll click remove-loader-main remove-loader-modal">
-                                        podobná videa
-                                        <dot:Button ButtonTagName="button" style="display:none;" Click="{command: LoadSuggestedVideos()}" />
+                                        {{resource: Resources.Similiar}}
+                                        <dot:Button ButtonTagName="button" style="display:none;" Click="{command: LoadSuggestedVideos(_root.currentCulture)}" />
                                     </li>
+                                    <br />
                                 </ul>
                             </div>
                             <div class="related-videos-container">
-                                <h3>Podobná videa</h3>
+                                <h3> {{resource: Resources.Similiar_header}}</h3>
                                 <dot:UpdateProgress ID="loader-related">
                                     <div class="loader">
                                         <div ID="floatingCirclesG">
@@ -187,7 +189,11 @@
         </div>
     </div>
     <dot:InlineScript>
-
+    dotvvm.events.init.subscribe(function () {
+        $("body").addClass("modal-on");
+            $("#confirmation-body")
+                .css("display", "flex").hide().fadeIn();
+        });
         dotvvm.events.afterPostback.subscribe(function () {
             showLoader = false;
             if ($("#main-loader").css("display") == "flex") {

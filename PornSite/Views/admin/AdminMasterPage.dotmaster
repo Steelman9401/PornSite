@@ -1,0 +1,87 @@
+﻿@viewModel PornSite.ViewModels.admin.AdminMasterPageViewModel, PornSite
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <dot:RequiredResource Name="bootstrap" />
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrace</title>
+    <script src="../../Scripts/jquery-3.3.1.min.js"></script>
+    <link href="../../Content/admin/admin.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta name="theme-color" content="#000" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Content/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../Content/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../Content/img/favicon-16x16.png">
+    <link rel="mask-icon" href="../../Content/img/safari-pinned-tab.svg" color="#5bbad5">
+</head>
+<body>
+    <dot:UpdateProgress ID="loader-main">
+        <div style="position:fixed; background-color:#0000009e; z-index:500; width:100%; top:0; height:100%;">
+        </div>
+        <div class="sk-circle" style="z-index:501;">
+            <div class="sk-circle1 sk-child"></div>
+            <div class="sk-circle2 sk-child"></div>
+            <div class="sk-circle3 sk-child"></div>
+            <div class="sk-circle4 sk-child"></div>
+            <div class="sk-circle5 sk-child"></div>
+            <div class="sk-circle6 sk-child"></div>
+            <div class="sk-circle7 sk-child"></div>
+            <div class="sk-circle8 sk-child"></div>
+            <div class="sk-circle9 sk-child"></div>
+            <div class="sk-circle10 sk-child"></div>
+            <div class="sk-circle11 sk-child"></div>
+            <div class="sk-circle12 sk-child"></div>
+        </div>
+    </dot:UpdateProgress>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark header-dark">
+            <a class="navbar-brand" href="#">Administrace</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active no-scroll">
+                        <dot:RouteLink RouteName="Spider" class="nav-link" ID="spider-page">Přidání videí<i style="margin-left: 7px; color:white;" class="fas fa-plus"></i></dot:RouteLink>
+                    </li>
+                    <li class="nav-item dropdown no-scroll">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Další
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <dot:RouteLink RouteName="Database" class="dropdown-item" ID="database-page">Správa videií<i class="fas fa-play" style="margin-left:7px;"></i></dot:RouteLink>
+                            <dot:RouteLink RouteName="Categories_admin" class="dropdown-item" ID="category-page">Správa kategorií<i class="fas fa-th-list" style="margin-left:7px;"></i></dot:RouteLink>
+                            <div class="dropdown-divider"></div>
+                            <div class="click">
+                                <dot:Button ButtonTagName="button" Validation.Enabled="false" style="display:none;" Click="{command: SignOut()}" />
+                                <a class="dropdown-item">Odhlasit se<i style="margin-left:7px;" class="fas fa-sign-out-alt"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li ID="signOut no-scroll">
+
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </header>
+    <dot:SpaContentPlaceHolder ID="MainContent" />
+    <script src="../../Scripts/admin/admin.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <footer>
+        2018 © vymasti.si
+    </footer>
+
+</body>
+</html>
+
+

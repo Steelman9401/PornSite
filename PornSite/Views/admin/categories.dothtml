@@ -1,0 +1,79 @@
+﻿@viewModel PornSite.ViewModels.admin.CategoriesViewModel, PornSite
+@masterPage Views/admin/AdminMasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+    <main>
+        <div class="container">
+            <div class="row" style="margin-bottom:20px;">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
+                    <p style="font-size:40px;">Vymasti.<span style="color: #66afec;">si</span></p>
+                    <h4>Tvoje kategorie: </h4>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="alert alert-success" style="text-align:center; font-weight:bold" Visible="{value:Success}">
+                        <span>Kategorie byla úspěšně upravena.</span>
+                    </div>
+                    <div class="alert alert-danger" style="text-align:center; font-weight:bold" Visible="{value:ErrorMessage!=null}">
+                        <span>{{value: ErrorMessage}}</span>
+                    </div>
+                    <dot:GridView DataSource="{value: Categories}" InlineEditing="true" class="table table-bordered">
+                        <Columns>
+                            <dot:GridViewTextColumn ValueBinding="{value: Name}"
+                                                    HeaderText="Název CZ" />
+                            <dot:GridViewTextColumn ValueBinding="{value: Name_en}"
+                                                    HeaderText="Název EN" />
+
+                            <dot:GridViewTemplateColumn AllowSorting="false">
+                                <ContentTemplate>
+                                    <div class="btn btn-primary click remove-loader-main">
+                                        Upravit
+                                        <dot:Button style="display:none" ButtonTagName="button" Click="{command: _parent.Edit(_this)}" />
+                                    </div>
+                                </ContentTemplate>
+                                <EditTemplate>
+                                    <div class="btn btn-primary click remove-loader-main">
+                                        Uložit
+                                        <dot:Button style="display:none" ButtonTagName="button" Click="{command: _parent.Update(_this)}" />
+                                    </div>
+                                    <div class="btn btn-danger click remove-loader-main" style="margin-top:10px;">
+                                        Zrušit
+                                        <dot:Button ButtonTagName="button" style="display:none;" Click="{command: _parent.CancelEdit()}" />
+                                    </div>
+                                </EditTemplate>
+                            </dot:GridViewTemplateColumn>
+                            <dot:GridViewTemplateColumn AllowSorting="false">
+                                <ContentTemplate>
+                                    <div class="btn btn-danger click remove-loader-main">
+                                        Smazat
+                                        <dot:Button style="display:none" ButtonTagName="button" Click="{command: RemoveCategory(_parent.Categories)}">
+                                            <PostBack.Handlers>
+                                                <dot:ConfirmPostBackHandler Message="Opravdu chces smazat tuto kategorii?" />
+                                            </PostBack.Handlers>
+                                        </dot:Button>
+                                </ContentTemplate>
+                                <EditTemplate>
+                                </EditTemplate>
+                            </dot:GridViewTemplateColumn>
+                        </Columns>
+                    </dot:GridView>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="row">
+                <section class="pagination">
+                    <dot:DataPager Validation.Enabled="false" DataSet="{value: Categories}" style="list-style-type:none;" />
+                </section>
+            </div>
+        </div>
+    </main>
+
+</dot:Content>
+
+

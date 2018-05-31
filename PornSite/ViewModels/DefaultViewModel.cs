@@ -12,6 +12,7 @@ using DotVVM.Framework.Controls;
 using PornSite.Data;
 using Microsoft.AspNet.Identity;
 using System.IO;
+using System.Web;
 
 namespace PornSite.ViewModels
 {
@@ -36,8 +37,8 @@ namespace PornSite.ViewModels
         {
             if (!Context.IsPostBack)
             {
-                History = await PornRep.GetVideoHistoryAsync();
-                RecommendedVideos = await PornRep.GetRecommendedVideosAsync(LoadMobile);
+                History = await PornRep.GetVideoHistoryAsync(currentCulture);
+                RecommendedVideos = await PornRep.GetRecommendedVideosAsync(LoadMobile, currentCulture);
             }
             if(Videos.IsFirstPage)
             {
@@ -51,7 +52,7 @@ namespace PornSite.ViewModels
             {
                 if (Videos.IsRefreshRequired || !Context.IsPostBack)
                 {
-                    Videos.OnLoadingData = option => PornRep.GetAllVideos(option,LoadMobile,Switch);
+                    Videos.OnLoadingData = option => PornRep.GetAllVideos(option,LoadMobile,Switch,currentCulture);
                 }
             }
             await base.PreRender();
@@ -73,13 +74,13 @@ namespace PornSite.ViewModels
         }
         public async Task GetSuggestions()
         {
-            await Video.LoadSuggestedVideos();
+            await Video.LoadSuggestedVideos(currentCulture);
         }
         public async Task LoadVideo(VideoListDTO video)
         {
             LoadRecommended = false;
             ShowVideo = true;
-            Video = await PornRep.GetVideoByIdAsync(video.Id);
+            Video = await PornRep.GetVideoByIdAsync(video.Id, currentCulture);
             if (!History.Select(x=>x.Id).Contains(video.Id))
             {
                 History.Insert(0, video);
@@ -98,7 +99,7 @@ namespace PornSite.ViewModels
         {
             Videos.PageIndex = 0;
             LoadRecommended = false;
-            RecommendedVideos = await PornRep.GetRecommendedVideosAsync(LoadMobile);
+            RecommendedVideos = await PornRep.GetRecommendedVideosAsync(LoadMobile, currentCulture);
             Videos.IsRefreshRequired = true;
         }
     }

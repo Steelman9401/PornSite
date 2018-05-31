@@ -3,6 +3,7 @@ $(document).ready(function () {
     var touchmoved;
     var lastValueScroll = 0;
     var previewStarted;
+    var usedTouchPrew;
     //kliknuti na nahled videa
     $(document).on("touchend click", ".video", function (e) {
         if (touchmoved != true) {
@@ -12,6 +13,14 @@ $(document).ready(function () {
             }
             else {
                 disableLoader = true;
+                var videos = $("video");
+                if (usedTouchPrew)
+                for (var i = 0; i < videos.length; i++) {
+                    if (videos[i].getAttribute("src") != "") {
+                        videos[i].setAttribute("src", "");
+                    }
+                    }
+                usedTouchPrew = false;
                 $(".video-load").css("display", "none");
                 e.currentTarget.getElementsByTagName("button")[0].click();
                 loaded = true;
@@ -19,6 +28,9 @@ $(document).ready(function () {
                 $("#modal-video").removeClass("animated fadeOutUp");
                 if ($(window).width() < 760) {
                     $("header").css('display', 'none');
+                }
+                if (width < 1024) {
+                    $("body").addClass("modal-on");
                 }
                 setTimeout(function () { $("#modal-video").removeClass("animated fadeInDown"); }, 501);
                 $("#modal-video").addClass("animated fadeInDown");
@@ -48,6 +60,7 @@ $(document).ready(function () {
                 if (!loaded && difference < 50) {
                     hoverVideo(e.currentTarget.getElementsByTagName("video")[0]);
                     previewStarted = true;
+                    usedTouchPrew = true;
                 }
             }, 1000);
         }
