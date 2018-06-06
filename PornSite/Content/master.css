@@ -885,6 +885,7 @@ main .cointainer-column .videos .video a {
         color: red;
         text-align: center;
         display: none;
+        font-size:18px;
     }
 
     #turn-phone {
@@ -899,21 +900,21 @@ main .cointainer-column .videos .video a {
         }
     }
 
-    #modal-login .cointainer-modal {
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        position: relative;
-        background: black;
-        padding: 10px 15px;
-        max-width: 95%;
-        width: 600px;
-        min-height: 300px;
-        border: solid 1px #fff;
-        border-radius: 5px
-    }
+#modal-login .cointainer-modal {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    background: black;
+    padding: 10px 15px;
+    max-width: 95%;
+    width: 600px;
+    min-height: 300px;
+    box-shadow: 0 0 15px 0 #66afec;
+    border-radius: 5px
+}
 
         #modal-login .cointainer-modal .modal-header {
             width: 100%;
@@ -1269,12 +1270,13 @@ main .cointainer-column .videos .video a {
                 
             }
 
-                #modal-confirmation .cointainer-modal .modal-body h4 {
+                #modal-confirmation .cointainer-modal .modal-body .conf-title {
                     font-size: 27px;
-                    font-weight: 400
+                    font-weight: 400;
+                    padding:0
                 }
 
-                    #modal-confirmation .cointainer-modal .modal-body h4 .si {
+                    #modal-confirmation .cointainer-modal .modal-body .conf-title .si {
                         font-size: 27px;
                         font-weight: 400;
                         color: #66afec
@@ -1721,7 +1723,7 @@ main .cointainer-column .videos .video a {
             }
         }
 
-        #floatingCirclesG {
+        .floatingCirclesG {
             position: relative;
             width: 176px;
             height: 176px;
@@ -1765,7 +1767,7 @@ main .cointainer-column .videos .video a {
             -moz-animation-direction: normal
         }
 
-        #frotateG_01 {
+        .frotateG_01 {
             left: 0;
             top: 72px;
             animation-delay: 0.3095s;
@@ -1775,7 +1777,7 @@ main .cointainer-column .videos .video a {
             -moz-animation-delay: 0.3095s
         }
 
-        #frotateG_02 {
+        .frotateG_02 {
             left: 21px;
             top: 21px;
             animation-delay: 0.416s;
@@ -1785,7 +1787,7 @@ main .cointainer-column .videos .video a {
             -moz-animation-delay: 0.416s
         }
 
-        #frotateG_03 {
+        .frotateG_03 {
             left: 72px;
             top: 0;
             animation-delay: 0.5225s;
@@ -1795,7 +1797,7 @@ main .cointainer-column .videos .video a {
             -moz-animation-delay: 0.5225s
         }
 
-        #frotateG_04 {
+        .frotateG_04 {
             right: 21px;
             top: 21px;
             animation-delay: 0.619s;
@@ -1805,7 +1807,7 @@ main .cointainer-column .videos .video a {
             -moz-animation-delay: 0.619s
         }
 
-        #frotateG_05 {
+        .frotateG_05 {
             right: 0;
             top: 72px;
             animation-delay: 0.7255s;
@@ -1815,7 +1817,7 @@ main .cointainer-column .videos .video a {
             -moz-animation-delay: 0.7255s
         }
 
-        #frotateG_06 {
+        .frotateG_06 {
             right: 21px;
             bottom: 21px;
             animation-delay: 0.832s;
@@ -1825,7 +1827,7 @@ main .cointainer-column .videos .video a {
             -moz-animation-delay: 0.832s
         }
 
-        #frotateG_07 {
+        .frotateG_07 {
             left: 72px;
             bottom: 0;
             animation-delay: 0.9385s;
@@ -1835,7 +1837,7 @@ main .cointainer-column .videos .video a {
             -moz-animation-delay: 0.9385s
         }
 
-        #frotateG_08 {
+        .frotateG_08 {
             left: 21px;
             bottom: 21px;
             animation-delay: 1.035s;

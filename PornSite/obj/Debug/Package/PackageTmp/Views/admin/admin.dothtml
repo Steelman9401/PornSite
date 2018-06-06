@@ -1,0 +1,55 @@
+﻿@viewModel PornSite.ViewModels.admin.AdminViewModel, PornSite
+
+<dot:Content ContentPlaceHolderID="MainContent">
+    <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Administrace</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <link href="../../Content/admin/login.css" rel="stylesheet" />
+        <script src="../Scripts/jquery-3.3.1.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <meta name="theme-color" content="#000" />
+        <link rel="apple-touch-icon" sizes="180x180" href="../../Content/img/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../Content/img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../Content/img/favicon-16x16.png">
+        <link rel="mask-icon" href="../../Content/img/safari-pinned-tab.svg" color="#5bbad5">
+    </head>
+    <body>
+
+        <main>
+            <div class="container">
+                <div id="login-box">
+                    <dot:UpdateProgress ID="loader-main">
+                        <div class="loader">Loading...</div>
+                    </dot:UpdateProgress>
+                    <div class="logo">
+                        <h1 class="logo-caption">Vymasti.<span style="color:#66afec">si</span></h1>
+                    </div><!-- /.logo -->
+                    <div class="controls">
+                        <form>
+                            <p Visible="{value:ErrorMessage!=null}" style="color:red;text-align:center; font-weight:bold">• Nespravné přihlašovací údaje!</p>
+                            <dot:ValidationSummary style="color:red; font-weight:bold" />
+                            <div Validator.InvalidCssClass="has-error" Validator.Value="{value: Username}">
+                                <dot:TextBox Type="Normal" Text="{value: Username}" placeholder="Uživatelské jméno" class="form-control" />
+                            </div>
+                            <div Validator.InvalidCssClass="has-error" Validator.Value="{value: Password}">
+                                <dot:TextBox Type="Password" placeholder="Heslo" Text="{value: Password}" class="form-control" />
+                            </div>
+                            <dot:Button ButtonTagName="button" IsSubmitButton="true" Class="btn btn-default btn-block btn-custom" Click="{command: SignIn()}">
+                                Přihlásit se <i class="fas fa-sign-in-alt"></i>
+                            </dot:Button>
+                        </form>
+                    </div><!-- /.controls -->
+                </div><!-- /#login-box -->
+            </div><!-- /.container -->
+            <div id="particles-js"></div>
+        </main>
+    </body>
+    <script src="../../Scripts/admin/login.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+</dot:Content>
+
+

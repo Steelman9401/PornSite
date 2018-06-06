@@ -213,6 +213,9 @@
   <data name="SearchParam" xml:space="preserve">
     <value>Searching:</value>
   </data>
+  <data name="Si" xml:space="preserve">
+    <value>guru</value>
+  </data>
   <data name="Similiar" xml:space="preserve">
     <value>recommended videos</value>
   </data>
@@ -220,12 +223,15 @@
     <value>Recommended videos</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Watch porn safely! - Vymasti.si</value>
+    <value>Watch porn safely! - fapping.guru</value>
   </data>
   <data name="Today" xml:space="preserve">
     <value>TODAY</value>
   </data>
   <data name="Viewed" xml:space="preserve">
     <value>most viewed</value>
+  </data>
+  <data name="Vymasti" xml:space="preserve">
+    <value>fapping.</value>
   </data>
 </root>

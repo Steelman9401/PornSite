@@ -349,6 +349,15 @@ namespace PornSite.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to guru.
+        /// </summary>
+        public static string Si {
+            get {
+                return ResourceManager.GetString("Si", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to recommended videos.
         /// </summary>
         public static string Similiar {
@@ -367,7 +376,7 @@ namespace PornSite.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Watch porn safely! - Vymasti.si.
+        ///   Looks up a localized string similar to Watch porn safely! - fapping.guru.
         /// </summary>
         public static string Title {
             get {
@@ -390,6 +399,15 @@ namespace PornSite.Properties {
         public static string Viewed {
             get {
                 return ResourceManager.GetString("Viewed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fapping..
+        /// </summary>
+        public static string Vymasti {
+            get {
+                return ResourceManager.GetString("Vymasti", resourceCulture);
             }
         }
     }

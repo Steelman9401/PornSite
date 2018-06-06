@@ -36,7 +36,16 @@ namespace PornSite.ViewModels.admin
             new WebCategory() { Name = "Teenky", Url = "teen"},
             new WebCategory() { Name = "Èešky", Url = "czech"},
             new WebCategory() { Name = "BDSM", Url = "bdsm"},
-            new WebCategory() { Name = "Hentai", Url = "hentai"},
+            new WebCategory() { Name = "Castingy", Url = "casting"},
+            new WebCategory() { Name = "Celebrity", Url = "celebrity"},
+            new WebCategory() { Name = "Dvojèata", Url = "twins"},
+            new WebCategory() { Name = "Gangbang", Url = "gangbang"},
+            new WebCategory() { Name = "Hraèky", Url = "toys"},
+            new WebCategory() { Name = "Interracial", Url = "interracial"},
+            new WebCategory() { Name = "Kompilace", Url = "compilation"},
+            new WebCategory() { Name = "Obleèky", Url = "costume"},
+            new WebCategory() { Name = "Latinská amerika", Url = "latina"},
+            new WebCategory() { Name = "Romantika", Url = "romantic"},
 
         };
         public string SelectedWebCategory { get; set; } = "";

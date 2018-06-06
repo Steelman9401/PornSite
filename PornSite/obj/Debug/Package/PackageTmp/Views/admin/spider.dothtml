@@ -1,0 +1,214 @@
+﻿@viewModel PornSite.ViewModels.admin.SpiderViewModel, PornSite
+@masterPage Views/admin/AdminMasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel-group" onclick="$('#collapse1').collapse('toggle');">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <span>Výběr zdroje</span>
+                                    <span>
+                                        <i class="fas fa-angle-double-down fa-lg arrow-down"></i>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse" Validation.Enabled="false">
+                                <ul class="list-group" style="border-top: 3px solid #ffffff4a !important;">
+                                    <div class="click websites-collapse">
+                                        <dot:Button Click="{command: SwitchToRedTube()}" ButtonTagName="button" style="display:none;" />
+                                        <li class="list-group-item no-scroll"><img src="../../Content/img/admin/redtube.png" class="img-fluid" /></li>
+                                    </div>
+                                    <div class="click websites-collapse">
+                                        <dot:Button Click="{command: SwitchToXhamster()}" ButtonTagName="button" style="display:none;" />
+                                        <li class="list-group-item no-scroll"><img src="../../Content/img/admin/xhamster.png" class="img-fluid" /></li>
+                                    </div>
+                                    <div class="click websites-collapse">
+                                        <dot:Button Click="{command: SwitchToPornHub()}" ButtonTagName="button" style="display:none;" />
+                                        <li class="list-group-item no-scroll"><img src="../../Content/img/admin/pornhub.png" class="img-fluid" /></li>
+                                    </div>
+                                </ul>
+                                <div class="panel-footer">Footer</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="category-selection" Validation.Enabled="false">
+                        <span>Výběr kategorie:</span>
+                        <dot:ComboBox style="margin-top:10px;" class="form-control" DataSource="{value: WebCategories}"
+                                      SelectedValue="{value: SelectedWebCategory}"
+                                      ValueMember="Url"
+                                      DisplayMember="Name"
+                                      SelectionChanged="{command: ChangeCategoryList()}">
+                        </dot:ComboBox>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <img src="{value: ImageName}" class="img-fluid website-logo" />
+                    <div class="btn btn-primary btn-custom-video click remove-loader-main remove-loader-modal open-modal" style="margin-bottom:20px;">
+                        <dot:Button Click="{command: CreateCustomVideo()}" Validation.Enabled="false" ButtonTagName="button" style="display:none;" />
+                        Přidat vlastní video
+                    </div>
+                </div>
+            </div>
+            <dot:Repeater DataSource="{value: Videos}" class="row">
+                <ItemTemplate>
+                    <div class="col-lg-3 col-md-4 click remove-loader-main video" style="margin-top:20px;">
+                        <dot:Button ButtonTagName="button" Validation.Enabled="false" Click="{command: _root.OpenModal(_this)}" style="display:none" />
+
+                        <video Visible="{value: _parent.SelectedWebCategory!='gay'}" poster="{value: Img}" preload="none" loop onmouseover="playVideo(this)" onmouseout="stopVideo(this)">
+                            <source src="{value: Preview}" type="video/mp4">
+                        </video>
+                        <p style="font-weight:bold;">{{value: Title_en}}</p>
+                    </div>
+                </ItemTemplate>
+            </dot:Repeater>
+        </div>
+    </main>
+    <div id="myModal" class="modal fade" role="dialog" style="color:black;">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content" DataContext="{value: Video}">
+                <dot:UpdateProgress ID="loader-modal">
+                    <div style="position:fixed; background-color:black; z-index:500; width:100%; height:100%;">
+                        <div class="btn btn-danger click remove-loader-main close-modal loader-modal-close">
+                            <i class="fas fa-times"></i>
+                            <dot:Button Click="{command: _root.CloseModal()}" ButtonTagName="button" style="display:none" Validation.Enabled="false" />
+                        </div>
+                        <div class="sk-circle modal-video-loader" style="z-index:501;">
+                            <div class="sk-circle1 sk-child"></div>
+                            <div class="sk-circle2 sk-child"></div>
+                            <div class="sk-circle3 sk-child"></div>
+                            <div class="sk-circle4 sk-child"></div>
+                            <div class="sk-circle5 sk-child"></div>
+                            <div class="sk-circle6 sk-child"></div>
+                            <div class="sk-circle7 sk-child"></div>
+                            <div class="sk-circle8 sk-child"></div>
+                            <div class="sk-circle9 sk-child"></div>
+                            <div class="sk-circle10 sk-child"></div>
+                            <div class="sk-circle11 sk-child"></div>
+                            <div class="sk-circle12 sk-child"></div>
+                        </div>
+
+                    </div>
+                </dot:UpdateProgress>
+                <div class="modal-header">
+                    <h4 class="modal-title">{{value: Title_en}}</h4>
+                    <div class="close-modal click remove-loader-main remove-loader-modal btn btn-danger">
+                        <i class="fas fa-times"></i>
+                        <dot:Button Validation.Enabled="false" ButtonTagName="button" Click="{command: _root.CloseModal()}" style="display:none;" />
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row" Visible="{value: !IsCustom}">
+                        <div class="col-md-12">
+                            <iframe Visible="{value: _parent.SelectedWebCategory!='gay'}" ID="adminFrame" allowfullscreen src="{value: Url}"></iframe>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" style="margin-bottom:20px;">
+                            <div Visible="{value: Success}" class="alert alert-success" style="border:none; padding:0 0 0 0">
+                                <p style="color:#3c763d; font-weight:bold;text-align:center; font-size:15px; padding-top:10px; padding-bottom:10px;">Video bylo úspěšně přidáno!</p>
+                            </div>
+                            <div class="alert alert-danger" style="border:none; padding:0 0 0 0">
+                                <dot:ValidationSummary class="validation" IncludeErrorsFromChildren="true" style="color:#a94442; font-size:15px; font-weight:bold" />
+                            </div>
+                            <p style="color:#a94442; font-size:15px;" Visible="{value: LoadError}">Kategorie se nenahrály. Zkus nahrát video znovu nebo přidej vlastní.</p>
+                            <form>
+                                <h3 style="color:white;">Přidání videa</h3>
+                                <hr style="margin-top:0px; border-top: 2px solid #eeeeee1c  !important;" />
+                                <div class="form-group">
+                                    <label for="title">Název CZ:</label>
+                                    <dot:TextBox Text="{value: Title}" class="form-control" Type="Normal" ID="title" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="title_en">Název EN:</label>
+                                    <dot:TextBox Text="{value: Title_en}" class="form-control" Type="Normal" ID="title_en" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="desc">Popis:</label>
+                                    <dot:TextBox Text="{value: Description}" class="form-control" Type="MultiLine" ID="desc" />
+                                </div>
+                                <div class="form-group" Visible="{value: IsCustom}">
+                                    <label for="img">Obrázek náhledu:</label>
+                                    <dot:TextBox Text="{value: Img}" class="form-control" Type="Normal" ID="img" />
+                                </div>
+                                <div class="form-group" Visible="{value: IsCustom}">
+                                    <label for="preview">Preview videa:</label>
+                                    <dot:TextBox Text="{value: Preview}" class="form-control" Type="Normal" ID="preview" />
+                                </div>
+                                <div class="form-group" Visible="{value: IsCustom}">
+                                    <label for="url">Url videa:</label>
+                                    <dot:TextBox Text="{value: Url}" class="form-control" Type="Normal" ID="url" />
+                                </div>
+                                <label>Kategorie:</label>
+                                <dot:Repeater DataSource="{value: Categories}">
+                                    <div style="margin-top:10px;">
+                                        <ItemTemplate>
+                                            <div>
+                                                <p style="margin-bottom:5px">{{value: _this.Name_en}}</p>
+                                                <div class="btn btn-danger btn-delete-cat click remove-loader-modal remove-loader-main">
+                                                    Smazat
+                                                    <dot:Button ButtonTagName="button" Click="{command: _parent.RemoveCategory(_this)}" style="display:none;" Validation.Enabled="false" />
+                                                </div>
+                                                <dot:ComboBox class="form-control txt-delete-cat" DataSource="{value: _parent.DatabaseCategories}"
+                                                              SelectedValue="{value: _this.Name}"
+                                                              EmptyItemText="" />
+                                            </div>
+                                        </ItemTemplate>
+
+                                    </div>
+                                </dot:Repeater>
+                                <dot:CheckBox Enabled="{value: CheckBoxEnabled}" style="margin-top:10px;" class="checkbox" Text=" Zobrazit video na hlavní stránce" Checked="{value: AllowMain}" />
+                                <br />
+                                <div class="modalButtons">
+                                    <div class="btn btn-info click remove-loader-modal remove-loader-main" style="float:left;">
+                                        Přidat kategorii
+                                        <dot:Button ButtonTagName="button" Validation.Enabled="false" Click="{command: AddCategory()}" style="display:none" />
+                                    </div>
+                                    <br />
+                                    <div class="btn btn-primary click remove-loader-main move-up-modal" style=" margin-top:10px; float:left">
+                                        Přidat video
+                                        <dot:Button Click="{command: _parent.AddVideo()}" style="display:none;" ButtonTagName="button" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div ID="category-form" class="col-md-6">
+                            <div class="alert alert-success" Visible="{value: CategoryAdded}" style="padding:0 0 0 0">
+                                <p style="font-size:15px; color:#3c763d; text-align:center; font-weight:bold; padding-top:10px;">Kategorie byla úspěšně přidána!</p>
+                            </div>
+                            <div Visible="{value: ErrorMessage != ''}" class="alert alert-danger" style="padding:0 0 0 0">
+                                <p style="font-size:15px; color:#a94442; text-align:center; font-weight:bold; padding-top:10px;">{{value: ErrorMessage}}</p>
+                            </div>
+                            <form>
+                                <h3 style="color:white;">Přidání kategorie do databáze</h3>
+                                <hr style="margin-top:0px; border-top: 2px solid #eeeeee1c;" />
+                                <div class="form-group">
+                                    <label for="catENname">Název EN:</label>
+                                    <dot:TextBox Text="{value: NewCategory.Name_en}" class="form-control" Type="Normal" ID="catENname" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="catCZname">Název CZ:</label>
+                                    <dot:TextBox Text="{value: NewCategory.Name}" class="form-control" Type="Normal" ID="catCZname" />
+                                </div>
+                                <div style="float:right;" class="btn btn-primary click remove-loader-main">
+                                    Přidat kategorii
+                                    <dot:Button ButtonTagName="button" Validation.Enabled="false" Click="{command: _root.AddCategory()}" style="display:none;">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</dot:Content>
+

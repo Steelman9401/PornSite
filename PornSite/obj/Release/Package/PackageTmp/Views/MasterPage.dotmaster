@@ -2,8 +2,9 @@
 @import PornSite.Properties
 <!DOCTYPE html>
 
-<html lang="{{resource: Resources.Lang}}" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="cs" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="utf-8" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118823697-1"></script>
     <script>
@@ -27,11 +28,10 @@
             head.appendChild(link2);
         }
     </script>
-    <meta charset="utf-8" />
-    <title>{{resource: Resources.Title}}</title>
+    <title>Nejmodernější česká porno stránka - Vymasti.si</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000" />
-    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="alternate stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous" onload="this.rel='stylesheet'">
     <link ID="master" rel="alternate stylesheet" href="../Content/master.min.css" onload="this.rel = 'stylesheet'; document.getElementById('page-load').style.display='none'">
     <link rel="apple-touch-icon" sizes="180x180" href="../Content/img/apple-touch-icon.png">
@@ -39,11 +39,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../Content/img/favicon-16x16.png">
     <link rel="manifest" href="../manifest.json">
     <link rel="mask-icon" href="../Content/img/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="alternate" hreflang="cs" href="https://vymasti.si/" />
-    <link rel="alternate" hreflang="en" href="https://vymasti.si/" />
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <meta name="Description" content="{{resource: Resources.Desc}}">
+    <meta name="Description" content="S náma už tě nikdy nikdo nenačapá, jak čumíš na porno! Minimálně teda nezjistí, na co čumíš.">
 </head>
 <body>
     <style>
@@ -61,11 +59,11 @@
     </div>
     <div ID="hide-page">
         <button ID="safe-button">{{resource: Resources.Back}}</button>
-        <img ID="excel" />
+        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" ID="excel" alt="excel" />
     </div>
     <header>
         <div class="cointainer-row">
-            <dot:RouteLink RouteName="Default"><h1 class="logo">Vymasti.<span class="si">si</span></h1></dot:RouteLink>
+            <dot:RouteLink RouteName="Default"><h1 class="logo">{{resource: Resources.Vymasti}}<span class="si">{{resource: Resources.Si}}</span></h1></dot:RouteLink>
             <div class="menu-icon" ID="menu-icon"></div>
             <form ID="form" onsubmit="return false;">
                 <dot:TextBox ID="search-textbox" Text="{value: Search}" class="search-text" placeholder="milf, pov, teen..." />
@@ -87,25 +85,25 @@
         <div ID="categories-preview">
             <div class="container">
                 <div class="click-link scroll-top">
-                    <img data-src="../Content/img/anal.jpg" class="img-category">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="anal" data-src="../Content/img/anal.jpg" class="img-category">
                     <span> {{resource: Resources.Anal}}</span>
                     <dot:RouteLink style="display:none;" RouteName="category" Param-Id="422" Param-Name="Anál">
                     </dot:RouteLink>
                 </div>
                 <div class="click-link scroll-top">
-                    <img data-src="../Content/img/czech.jpg" class="img-category">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="czech" data-src="../Content/img/czech.jpg" class="img-category">
                     <span> {{resource: Resources.Czech}}</span>
                     <dot:RouteLink style="display:none;" RouteName="category" Param-Id="424" Param-Name="Česke porno">
                     </dot:RouteLink>
                 </div>
                 <div class="click-link scroll-top">
-                    <img data-src="../Content/img/stifler.jpg" class="img-category">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="milf" data-src="../Content/img/stifler.jpg" class="img-category">
                     <span> {{resource: Resources.MILF}}</span>
                     <dot:RouteLink style="display:none;" RouteName="category" Param-Id="427" Param-Name="MILF">
                     </dot:RouteLink>
                 </div>
                 <div class="click-link scroll-top">
-                    <img data-src="../Content/placeholder.jpg" class="img-category">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="other" data-src="../Content/placeholder.jpg" class="img-category">
                     <span> {{resource: Resources.Other}}</span>
                     <dot:RouteLink style="display:none;" RouteName="categories">
                     </dot:RouteLink>
@@ -116,15 +114,15 @@
     <main>
 
         <div class="loader" ID="main-loader">
-            <div ID="floatingCirclesG">
-                <div class="f_circleG" ID="frotateG_01"></div>
-                <div class="f_circleG" ID="frotateG_02"></div>
-                <div class="f_circleG" ID="frotateG_03"></div>
-                <div class="f_circleG" ID="frotateG_04"></div>
-                <div class="f_circleG" ID="frotateG_05"></div>
-                <div class="f_circleG" ID="frotateG_06"></div>
-                <div class="f_circleG" ID="frotateG_07"></div>
-                <div class="f_circleG" ID="frotateG_08"></div>
+            <div class="floatingCirclesG">
+                <div class="f_circleG" class="frotateG_01"></div>
+                <div class="f_circleG" class="frotateG_02"></div>
+                <div class="f_circleG" class="frotateG_03"></div>
+                <div class="f_circleG" class="frotateG_04"></div>
+                <div class="f_circleG" class="frotateG_05"></div>
+                <div class="f_circleG" class="frotateG_06"></div>
+                <div class="f_circleG" class="frotateG_07"></div>
+                <div class="f_circleG" class="frotateG_08"></div>
             </div>
         </div>
         <dot:SpaContentPlaceHolder ID="MainContent" style="margin-top:50px;" />
@@ -132,7 +130,7 @@
     <footer>
         <div class="cointainer-row">
             <span>
-                2018 &copy; vymasti.si
+                2018 &copy; {{resource: Resources.Vymasti}}{{resource: Resources.Si}}
                 <br />
                 Made with ♥ in <a style="color:white;" href="https://www.dotvvm.com/">DotVVM.</a>
             </span>
@@ -144,9 +142,9 @@
                 <div ID="close-log"></div>
             </div>
             <div class="modal-body">
-                <h4>
+                <p style="font-size:18px">
                     {{resource: Resources.Explanation}}
-                </h4>
+                </p>
                 <h2 ID="blinking-text">{{resource: Resources.Press}}</h2>
             </div>
         </div>
@@ -154,7 +152,7 @@
     <div ID="modal-confirmation">
         <div ID="confirmation-body" class="cointainer-modal">
             <div class="modal-body">
-                <h4>Vymasti.<span class="si">si</span></h4>
+                <p class="conf-title">{{resource: Resources.Vymasti}}<span class="si">{{resource: Resources.Si}}</span></p>
                 <p>{{resource: Resources.Alert}}</p>
                 <button ID="confirm">{{resource: Resources.Enter}}</button>
             </div>

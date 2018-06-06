@@ -213,6 +213,9 @@
   <data name="SearchParam" xml:space="preserve">
     <value>Hledaný výraz:</value>
   </data>
+  <data name="Si" xml:space="preserve">
+    <value>si</value>
+  </data>
   <data name="Similiar" xml:space="preserve">
     <value>podobná videa</value>
   </data>
@@ -227,5 +230,8 @@
   </data>
   <data name="Viewed" xml:space="preserve">
     <value>nejsledovanější</value>
+  </data>
+  <data name="Vymasti" xml:space="preserve">
+    <value>Vymasti.</value>
   </data>
 </root>

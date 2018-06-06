@@ -55,7 +55,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <dot:RouteLink RouteName="Database" class="dropdown-item" ID="database-page">Správa videií<i class="fas fa-play" style="margin-left:7px;"></i></dot:RouteLink>
-                            <dot:RouteLink RouteName="Categories_admin" class="dropdown-item" ID="category-page">Správa kategorií<i class="fas fa-th-list" style="margin-left:7px;"></i></dot:RouteLink>
+                            <dot:RouteLink RouteName="Categories" class="dropdown-item" ID="category-page">Správa kategorií<i class="fas fa-th-list" style="margin-left:7px;"></i></dot:RouteLink>
                             <div class="dropdown-divider"></div>
                             <div class="click">
                                 <dot:Button ButtonTagName="button" Validation.Enabled="false" style="display:none;" Click="{command: SignOut()}" />

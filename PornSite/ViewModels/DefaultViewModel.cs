@@ -38,7 +38,7 @@ namespace PornSite.ViewModels
             if (!Context.IsPostBack)
             {
                 History = await PornRep.GetVideoHistoryAsync(currentCulture);
-                RecommendedVideos = await PornRep.GetRecommendedVideosAsync(LoadMobile, currentCulture);
+                RecommendedVideos = await PornRep.GetRecommendedVideosAsync(currentCulture);
             }
             if(Videos.IsFirstPage)
             {
@@ -99,7 +99,6 @@ namespace PornSite.ViewModels
         {
             Videos.PageIndex = 0;
             LoadRecommended = false;
-            RecommendedVideos = await PornRep.GetRecommendedVideosAsync(LoadMobile, currentCulture);
             Videos.IsRefreshRequired = true;
         }
     }

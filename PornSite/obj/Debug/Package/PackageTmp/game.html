@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>2048</title>
+    <link href="../Content/2048.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        #kara {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+
+            #kara img {
+                width: 100%;
+                height: 100%;
+            }
+
+        #pc {
+            color: white;
+        }
+
+        @media only screen and (max-width: 1000px) {
+            #pc {
+                display: none;
+            }
+        }
+
+        h1 {
+            color: white;
+            padding: 5px;
+        }
+    </style>
+    <audio id="prcarna" preload="auto">
+        <source src="Content/img/prcarna.mp3" type="audio/mpeg" />
+    </audio>
+    <h1>Do prdele, co se děje?!</h1>
+    <div id="kara">
+        <img src="Content/img/kara.jpg" />
+    </div>
+    <h1>
+        Jsi bez internetu! To je prcárna. <br /> Místo pelikána si aspoň můžeš prohnat mozkový závity!
+        <br />
+        ↓	↓	↓	↓
+    </h1>
+    <h2 id="pc">ovládání šipkami</h2>
+    <br />
+    <br />
+    <div class="wrapper">
+        <div class="game-area">
+            <div class="title">
+                <span class="title-tile-number">2048</span>
+            </div>
+            <div class="score">
+                <span class="score-title">SCORE</span>
+                <span class="score-value">0</span>
+            </div>
+            <table id="game-area" cellspacing="10" class="game-table">
+                <tr>
+                    <td class="cell 1 a"></td>
+                    <td class="cell 2 a"></td>
+                    <td class="cell 3 a"></td>
+                    <td class="cell 4 a"></td>
+                </tr>
+                <tr>
+                    <td class="cell 1 b"></td>
+                    <td class="cell 2 b"></td>
+                    <td class="cell 3 b"></td>
+                    <td class="cell 4 b"></td>
+                </tr>
+                <tr>
+                    <td class="cell 1 c"></td>
+                    <td class="cell 2 c"></td>
+                    <td class="cell 3 c"></td>
+                    <td class="cell 4 c"></td>
+                </tr>
+                <tr>
+                    <td class="cell 1 d"></td>
+                    <td class="cell 2 d"></td>
+                    <td class="cell 3 d"></td>
+                    <td class="cell 4 d"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="../Scripts/2048.js"></script>
+</body>
+</html>

@@ -1,6 +1,5 @@
 ﻿self.addEventListener('fetch', function (event) {
     if (event.request.url == 'https://vymasti.si/') {
-        console.info('responding to dragon-server fetch with Service Worker! 🤓');
         event.respondWith(fetch(event.request).catch(function (e) {
             return caches.match('game.html');
         }));

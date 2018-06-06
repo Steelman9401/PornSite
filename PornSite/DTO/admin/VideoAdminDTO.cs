@@ -8,7 +8,7 @@ using System.Web;
 
 namespace PornSite.DTO
 {
-    public class VideoAdminDTO
+    public class VideoAdminDTO:IValidatableObject
     {
         public int Id { get; set; }
         public string Title { get; set; }

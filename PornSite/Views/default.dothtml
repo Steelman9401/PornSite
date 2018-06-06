@@ -4,8 +4,10 @@
 <dot:Content ContentPlaceHolderID="MainContent" ID="main-content">
     <div ID="background-modal"></div>
     <div class="cointainer-column">
-        <h3 ID="firefox-error">{{resource: Resources.Firefox1}}<br />{{resource: Resources.Firefox2}}</h3>
+        <p ID="firefox-error">{{resource: Resources.Firefox1}}<br />{{resource: Resources.Firefox2}}</p>
         <section class="safety-button">
+            <p ID="quote" style="font-style:italic;float:left;">
+            </p>
             <button ID="safety-button" title="záchranné tlačítko"> {{resource: Resources.Safety_button}}</button>
             <p ID="safety-info" style="margin-top:8px; float:right; text-decoration:underline; cursor:pointer"> {{resource: Resources.Hint}}</p>
         </section>
@@ -105,22 +107,22 @@
                     <div class="modal-body" ID="modal-video-body">
                         <dot:UpdateProgress ID="loader-modal">
                             <div class="loader">
-                                <div ID="floatingCirclesG">
-                                    <div class="f_circleG" ID="frotateG_01"></div>
-                                    <div class="f_circleG" ID="frotateG_02"></div>
-                                    <div class="f_circleG" ID="frotateG_03"></div>
-                                    <div class="f_circleG" ID="frotateG_04"></div>
-                                    <div class="f_circleG" ID="frotateG_05"></div>
-                                    <div class="f_circleG" ID="frotateG_06"></div>
-                                    <div class="f_circleG" ID="frotateG_07"></div>
-                                    <div class="f_circleG" ID="frotateG_08"></div>
+                                <div class="floatingCirclesG">
+                                    <div class="f_circleG" class="frotateG_01"></div>
+                                    <div class="f_circleG" class="frotateG_02"></div>
+                                    <div class="f_circleG" class="frotateG_03"></div>
+                                    <div class="f_circleG" class="frotateG_04"></div>
+                                    <div class="f_circleG" class="frotateG_05"></div>
+                                    <div class="f_circleG" class="frotateG_06"></div>
+                                    <div class="f_circleG" class="frotateG_07"></div>
+                                    <div class="f_circleG" class="frotateG_08"></div>
                                 </div>
                             </div>
                         </dot:UpdateProgress>
                         <div class="modal-container">
                             <div class="iframe-c">
                                 <div ID="iframe-wrap" class="iframe-container">
-                                    <iframe ID="frame" src="{value: Url}" frameborder="0" width="1200" height="720" scrolling="no" allowfullscreen></iframe>
+                                    <iframe ID="frame" src="{value: Url}" width="1200" height="720" allowfullscreen></iframe>
                                 </div>
                             </div>
                             <p ID="turn-phone">otoč telefon <i class="fas fa-redo"></i></p>
@@ -142,22 +144,21 @@
                                         {{resource: Resources.Similiar}}
                                         <dot:Button ButtonTagName="button" style="display:none;" Click="{command: LoadSuggestedVideos(_root.currentCulture)}" />
                                     </li>
-                                    <br />
                                 </ul>
                             </div>
                             <div class="related-videos-container">
                                 <h3> {{resource: Resources.Similiar_header}}</h3>
                                 <dot:UpdateProgress ID="loader-related">
                                     <div class="loader">
-                                        <div ID="floatingCirclesG">
-                                            <div class="f_circleG" ID="frotateG_01"></div>
-                                            <div class="f_circleG" ID="frotateG_02"></div>
-                                            <div class="f_circleG" ID="frotateG_03"></div>
-                                            <div class="f_circleG" ID="frotateG_04"></div>
-                                            <div class="f_circleG" ID="frotateG_05"></div>
-                                            <div class="f_circleG" ID="frotateG_06"></div>
-                                            <div class="f_circleG" ID="frotateG_07"></div>
-                                            <div class="f_circleG" ID="frotateG_08"></div>
+                                        <div class="floatingCirclesG">
+                                            <div class="f_circleG" class="frotateG_01"></div>
+                                            <div class="f_circleG" class="frotateG_02"></div>
+                                            <div class="f_circleG" class="frotateG_03"></div>
+                                            <div class="f_circleG" class="frotateG_04"></div>
+                                            <div class="f_circleG" class="frotateG_05"></div>
+                                            <div class="f_circleG" class="frotateG_06"></div>
+                                            <div class="f_circleG" class="frotateG_07"></div>
+                                            <div class="f_circleG" class="frotateG_08"></div>
                                         </div>
                                     </div>
                                 </dot:UpdateProgress>
@@ -189,8 +190,8 @@
         </div>
     </div>
     <dot:InlineScript>
-    dotvvm.events.init.subscribe(function () {
-        $("body").addClass("modal-on");
+        dotvvm.events.init.subscribe(function () {
+            $("body").addClass("modal-on");
             $("#confirmation-body")
                 .css("display", "flex").hide().fadeIn();
         });

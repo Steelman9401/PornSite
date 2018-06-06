@@ -277,7 +277,7 @@ namespace PornSite.Repositories
                 return new List<VideoListDTO>();
             }
         }
-        public async Task<IEnumerable<VideoListDTO>> GetRecommendedVideosAsync(bool loadmobile, string culture)
+        public async Task<IEnumerable<VideoListDTO>> GetRecommendedVideosAsync(string culture)
         {
             if (HttpContext.Current.Request.Cookies["CategoryCount"] != null)
             {
@@ -293,10 +293,7 @@ namespace PornSite.Repositories
                         foreach (string item in categories)
                         {
                             int Id = Convert.ToInt32(item);
-                            if (loadmobile)
-                                predicate = predicate.Or(x => x.Categories.Any(p=>p.Id==Id) && x.Url.Contains("pornhub"));
-                            else
-                                predicate = predicate.Or(x => x.Categories.Any(p => p.Id == Id));
+                            predicate = predicate.Or(x => x.Categories.Any(p => p.Id == Id));
 
                         }
                         int count = db.Videos.AsExpandable().Where(predicate).Count();
@@ -309,12 +306,7 @@ namespace PornSite.Repositories
                         else //random videa
                         {
                             IQueryable<Video> query;
-                            if (loadmobile)
-                                query = db.Videos.Where(x => x.Url.Contains("pornhub") && x.AllowMain);
-                            else
-                            {
-                                query = db.Videos.Where(x=>x.AllowMain);
-                            }
+                            query = db.Videos.Where(x=>x.AllowMain);
                             return await GetRecommendedVideosDataAsync(query,culture);
                         }
                     }
@@ -334,12 +326,7 @@ namespace PornSite.Repositories
                 using (var db = new myDb())
                 {
                     IQueryable<Video> query;
-                    if (loadmobile)
-                        query = db.Videos.Where(x => x.Url.Contains("pornhub") && x.AllowMain);
-                    else
-                    {
-                        query = db.Videos.Where(x=>x.AllowMain);
-                    }
+                    query = db.Videos.Where(x=>x.AllowMain);
                     return await GetRecommendedVideosDataAsync(query,culture);
                 }
             }

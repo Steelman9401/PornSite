@@ -91,30 +91,8 @@ namespace PornSite.Repositories.admin
                     html = client.DownloadString("https://redtube.com");
                 }
                 else
-                {
-                    if (category == "czech")
-                    {
-                        html = client.DownloadString("https://www.redtube.com/new?search=czech");
-                    }
-                    else if (category == "teen")
-                    {
-                        html = client.DownloadString("https://www.redtube.com/redtube/teens");
-                    }
-                    else if (category == "bdsm")
-                    {
-                        html = client.DownloadString("https://www.redtube.com/new?search=bdsm");
-                    }
-                    else
-                    {
-                        try
-                        {
-                            html = client.DownloadString("https://redtube.com/redtube/" + category);
-                        }
-                        catch
-                        {
-                            html = client.DownloadString("https://redtube.com/redtube/" + category + "s");
-                        }
-                    }
+                {                     
+                  html = client.DownloadString(ConvertCategoryRedtube(category));
                 }
                 HtmlDocument document = new HtmlDocument();
                 document.LoadHtml(html);
@@ -440,6 +418,148 @@ namespace PornSite.Repositories.admin
             else if (category == "hentai")
             {
                 return "https://www.pornhub.com/categories/hentai";
+            }
+            else if (category == "casting")
+            {
+                return "https://www.pornhub.com/video?c=90";
+            }
+            else if (category == "celebrity")
+            {
+                return "https://www.pornhub.com/video?c=12";
+            }
+            else if (category == "twins")
+            {
+                return "https://www.pornhub.com/video/search?search=twins&o=mr";
+            }
+            else if (category == "gangbang")
+            {
+                return "https://www.pornhub.com/video?c=80";
+            }
+            else if (category == "toys")
+            {
+                return "https://www.pornhub.com/video?c=23";
+            }
+            else if (category == "interracial")
+            {
+                return "https://www.pornhub.com/video?c=25";
+            }
+            else if (category == "compilation")
+            {
+                return "https://www.pornhub.com/video?c=57";
+            }
+            else if (category == "latina")
+            {
+                return "https://www.pornhub.com/video?c=26";
+            }
+            else if (category == "romantic")
+            {
+                return "https://www.pornhub.com/video?c=522";
+            }
+            else if (category == "costume")
+            {
+                return "https://www.pornhub.com/video/search?search=costume";
+            }
+
+            return null;
+        }
+        private string ConvertCategoryRedtube(string category)
+        {
+            if (category == "czech")
+            {
+                return "https://www.redtube.com/new?search=czech";
+            }
+            else if (category == "teen")
+            {
+                return "https://redtube.com/redtube/teens"; 
+            }
+            else if (category == "bdsm")
+            {
+                return "https://www.redtube.com/new?search=bdsm";
+            }
+            if (category == "anal")
+            {
+                return "https://redtube.com/redtube/anal";
+            }
+            else if (category == "amateur")
+            {
+                return "https://redtube.com/redtube/amateur";
+            }
+            else if (category == "asian")
+            {
+                return "https://redtube.com/redtube/asian";
+            }
+            else if (category == "blonde")
+            {
+                return "https://redtube.com/redtube/blonde";
+            }
+            else if (category == "ebony")
+            {
+                return "https://redtube.com/redtube/ebony";
+            }
+            else if (category == "redhead")
+            {
+                return "https://redtube.com/redtube/redhead";
+            }
+            else if (category == "milf")
+            {
+                return "https://redtube.com/redtube/milf";
+            }
+            else if (category == "gay")
+            {
+                return "https://redtube.com/redtube/gay";
+            }
+            else if (category == "brunette")
+            {
+                return "https://redtube.com/redtube/brunette";
+            }
+            else if (category == "lesbian")
+            {
+                return "https://redtube.com/redtube/lesbian";
+            }
+            
+            else if (category == "hentai")
+            {
+                return "https://redtube.com/redtube/hentai";
+            }
+            else if (category == "casting")
+            {
+                return "https://redtube.com/redtube/casting";
+            }
+            else if (category == "celebrity")
+            {
+                return "https://redtube.com/redtube/celebrity";
+            }
+            else if (category == "twins")
+            {
+                return "https://www.redtube.com/new?search=twins";
+            }
+            else if (category == "gangbang")
+            {
+                return "https://www.redtube.com/redtube/gangbang";
+            }
+            else if (category == "toys")
+            {
+                return "https://www.redtube.com/new?search=toys";
+            }
+            else if (category == "interracial")
+            {
+                return "https://www.redtube.com/redtube/interracial";
+            }
+            else if (category == "compilation")
+            {
+                return "https://www.redtube.com/redtube/compilation";
+            }
+            else if (category == "costume")
+            {
+                return "https://www.redtube.com/?search=costume";
+            }
+            else if (category == "latina")
+            {
+                return "https://www.redtube.com/redtube/latina";
+            }
+            else if (category == "romantic")
+            {
+                return "https://www.redtube.com/redtube/romantic";
             }
             return null;
         }

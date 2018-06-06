@@ -1,6 +1,7 @@
 ﻿var didScroll;
 var lastScrollTop = 0;
 var delta = 5;
+var scrolled;
 var navbarHeight = $('header').outerHeight();
 
 $(window).scroll(function (event) {
@@ -38,3 +39,12 @@ function hasScrolled() {
 
     lastScrollTop = st;
 }
+
+$(document).ready(function () {
+    window.onscroll = function (ev) {
+        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) {
+            scrolled = true;
+            document.getElementById("more-videos").click();
+        }
+    };
+});
