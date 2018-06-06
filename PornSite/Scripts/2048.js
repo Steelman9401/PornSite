@@ -458,7 +458,6 @@ setInterval(function () {
                             }
                         }
                         if (check == 0) {
-                            document.getElementById("prcarna").play();
                             var x = confirm("Prohrál jsi! Dej si to pivo zkurvený na útěchu.");
                             if (x == true) {
                                 restart();
@@ -741,7 +740,6 @@ setInterval(function () {
                             }
                         }
                         if (check == 0) {
-                            document.getElementById("prcarna").play();
                             var x = confirm("Prohrál jsi! Dej si to pivo zkurvený na útěchu.");
                             if (x == true) {
                                 restart();
@@ -1027,7 +1025,6 @@ setInterval(function () {
                             }
                         }
                         if (check == 0) {
-                            document.getElementById("prcarna").play();
                             var x = confirm("Prohrál jsi! Dej si to pivo zkurvený na útěchu.");
                             if (x == true) {
                                 restart();
@@ -1312,7 +1309,6 @@ setInterval(function () {
                             }
                         }
                         if (check == 0) {
-                            document.getElementById("prcarna").play();
                             var x = confirm("Prohrál jsi! Dej si to pivo zkurvený na útěchu.");
                             if (x == true) {
                                 restart();
@@ -1615,7 +1611,6 @@ document.getElementById("game-area").addEventListener("touchend", function (e) {
                     }
                 }
                 if (check == 0) {
-                    document.getElementById("prcarna").play();
                     var x = confirm("Prohrál jsi! Dej si to pivo zkurvený na útěchu.");
                     if (x == true) {
                         restart();
@@ -1901,7 +1896,6 @@ document.getElementById("game-area").addEventListener("touchend", function (e) {
                     }
                 }
                 if (check == 0) {
-                    document.getElementById("prcarna").play();
                     var x = confirm("Prohrál jsi! Dej si to pivo zkurvený na útěchu.");
                     if (x == true) {
                         restart();
@@ -2187,7 +2181,6 @@ document.getElementById("game-area").addEventListener("touchend", function (e) {
                     }
                 }
                 if (check == 0) {
-                    document.getElementById("prcarna").play();
                     var x = confirm("Prohrál jsi! Dej si to pivo zkurvený na útěchu.");
                     if (x == true) {
                         restart();
@@ -2472,7 +2465,6 @@ document.getElementById("game-area").addEventListener("touchend", function (e) {
                     }
                 }
                 if (check == 0) {
-                    document.getElementById("prcarna").play();
                     var x = confirm("Prohrál jsi! Dej si to pivo zkurvený na útěchu.");
                     if (x == true) {
                         restart();
