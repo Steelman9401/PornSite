@@ -23,7 +23,6 @@
             link.setAttribute("href", "../Content/master.min.css");
             link2.setAttribute("rel", "stylesheet");
             link2.setAttribute("href", "https://use.fontawesome.com/releases/v5.0.11/css/all.css");
-            console.log(link);
             head.appendChild(link);
             head.appendChild(link2);
         }
@@ -172,10 +171,10 @@
     </div>
     <script defer src="../Scripts/jquery-3.3.1.min.js"></script>
     <script defer src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
-    <script defer src="../Scripts/init.js"></script>
+    <script defer src="../Scripts/init.min.js"></script>
     <script defer src="../Scripts/login.min.js"></script>
     <script defer src="../Scripts/scripts.min.js"></script>
-    <script defer src="../Scripts/scrolling.js"></script>
+    <script defer src="../Scripts/scrolling.min.js"></script>
     <script defer src="../Scripts/modal.min.js"></script>
     <script defer src="../Scripts/modal-video.min.js"></script>
     <script defer src="../Scripts/menu.min.js"></script>

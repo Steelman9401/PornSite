@@ -27,12 +27,7 @@ $(document).ready(function () {
             $("#loader-main").css("display", "none");
         }
     });
-
-
-    //$(document).on("click", ".panel-group", function (e) {
-    //    alert("das");
-    //    $('#collapse1').collapse("toggle")
-    //});
+   ;
 
     $(document).on("click", ".click", function (e) {
         e.currentTarget.getElementsByTagName("button")[0].click();

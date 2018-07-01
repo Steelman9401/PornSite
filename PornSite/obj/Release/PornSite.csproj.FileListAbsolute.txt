@@ -115,6 +115,3 @@ C:\Users\domin\source\repos\PornSite\PornSite\bin\cs-CZ\PornSite.resources.dll
 C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Properties.Resources.resources
 C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\PornSite.Properties.Resources.cs-CZ.resources
 C:\Users\domin\source\repos\PornSite\PornSite\obj\Release\cs-CZ\PornSite.resources.dll
-C:\Users\domin\source\Repos\PornSite\PornSite\bin\NReco.VideoConverter.dll
-C:\Users\domin\source\Repos\PornSite\PornSite\bin\NReco.VideoConverter.xml
-C:\Users\domin\source\Repos\PornSite\PornSite\bin\MediaToolkit.dll

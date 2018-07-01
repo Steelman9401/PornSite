@@ -11,16 +11,16 @@
         <section class="section-title">
             <h2 style="color:white;">{{resource: Resources.Categories_page}} <span class="category-name">{{value: Name}}</span><span class="count"> ({{value: CategoryCount}})</span></h2>
             <ul>
-                <li ID="newest" class="active-li no-scroll click remove-loader-main">
+                <li ID="newest" class="active-li no-scroll click remove-loader-main" onclick="loaded = false;">
                     {{resource: Resources.Latest}}
                     <dot:Button ButtonTagName="button" Click="{command: LoadLatestVideos()}" style="display:none;" />
                 </li>
-                <li ID="most-viewed" class="click no-scroll remove-loader-main">
+                <li ID="most-viewed" class="click no-scroll remove-loader-main" onclick="loaded = false;">
                     {{resource: Resources.Viewed}}
                     <dot:Button ButtonTagName="button" Click="{command: LoadMostViewedVideos()}" style="display:none;" />
                 </li>
             </ul>
-            <div class="mobile-only">
+            <div class="mobile-only" onclick="loaded = false;">
                 <dot:CheckBox Checked="{value: LoadMobile}" Changed="{command: LoadMobileVideos()}" Text="{{resource: Resources.Mobile}}" />
             </div>
         </section>
@@ -45,7 +45,7 @@
                     </div>
                 </ItemTemplate>
             </dot:Repeater>
-            <section class="pagination">
+            <section class="pagination" onclick="loaded = false;">
                 <dot:DataPager DataSet="{value: Videos}" class="remove-loader-main" />
             </section>
 

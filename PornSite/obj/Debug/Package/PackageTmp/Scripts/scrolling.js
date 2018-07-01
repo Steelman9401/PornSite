@@ -39,12 +39,3 @@ function hasScrolled() {
 
     lastScrollTop = st;
 }
-
-$(document).ready(function () {
-    window.onscroll = function (ev) {
-        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) {
-            scrolled = true;
-            document.getElementById("more-videos").click();
-        }
-    };
-});

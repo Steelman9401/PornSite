@@ -62,16 +62,16 @@
             <section class="section-title">
                 <h2 ID="videos-all">{{resource: Resources.All}}</h2>
                 <ul>
-                    <li ID="newest" class="active-li no-scroll click remove-loader-main">
+                    <li ID="newest" class="active-li no-scroll click remove-loader-main" onclick="loaded = false;">
                         {{resource: Resources.Latest}}
                         <dot:Button ButtonTagName="button" Click="{command: LoadLatestVideos()}" style="display:none;" />
                     </li>
-                    <li ID="most-viewed" class="click no-scroll remove-loader-main">
+                    <li ID="most-viewed" class="click no-scroll remove-loader-main" onclick="loaded = false;">
                         {{resource: Resources.Viewed}}
                         <dot:Button ButtonTagName="button" Click="{command: LoadMostViewedVideos()}" style="display:none;" />
                     </li>
                 </ul>
-                <div class="mobile-only">
+                <div class="mobile-only" onclick="loaded = false;">
                     <dot:CheckBox Checked="{value: LoadMobile}" Changed="{command: LoadMobileVideos()}" Text="{{resource: Resources.Mobile}}" />
                 </div>
             </section>
@@ -81,7 +81,7 @@
                         <dot:Button ButtonTagName="button" style="display:none" Click="{command: _parent.LoadVideo(_this)}" />
                         <a>
                             <div class="preview">
-                                <video class="video-preview main-videos" poster="{value: Img}" data-img="{value: Img2}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
+                                <video class="video-preview main-videos" poster="../Content/img/video.jpg" data-img="{value: Img}" data-src="{value: Preview}" loop preload="none" onmouseover="hoverVideo(this)" onmouseout="hideVideo(this)"></video>
                                 <span Visible="{value: _root.TimeStamp - TimeStamp < 50000}" class="today no-select">{{resource: Resources.Today}}</span>
                                 <div class="preview-text">
                                     <span Visible="{value: HD}" class="hd no-select">HD</span>
@@ -95,18 +95,8 @@
                     </div>
                 </ItemTemplate>
             </dot:Repeater>
-            <section class="pagination">
-                <%--<dot:DataPager DataSet="{value: Videos}" />--%>
-                <dot:UpdateProgress>
-                    <div class="spinner">
-                        <div class="rect1"></div>
-                        <div class="rect2"></div>
-                        <div class="rect3"></div>
-                        <div class="rect4"></div>
-                        <div class="rect5"></div>
-                    </div>
-                </dot:UpdateProgress>
-                <dot:Button ButtonTagName="button" ID="more-videos" style="display:none;" Text="load videos" Click="{command:  GetMoreVideos()}" />
+            <section class="pagination" onclick="loaded = false;">
+                <dot:DataPager DataSet="{value: Videos}" />
             </section>
             <div ID="modal-video">
                 <div class="cointainer-modal" DataContext="{value: Video}">
@@ -205,18 +195,19 @@
             $("#confirmation-body")
                 .css("display", "flex").hide().fadeIn();
         });
-    dotvvm.events.afterPostback.subscribe(function () {
-            if (scrolled) {
-                lazyLoader();
+        dotvvm.events.afterPostback.subscribe(function () {
+            showLoader = false;
+            if ($("#main-loader").css("display") == "flex") {
+                $("#main-loader").css("display", "none");
             }
-            //else if (!loaded) {
-            //    $(".main-videos").attr("poster", "../Content/img/video.jpg");
-            //    lazyLoader();
-            //    $(".latest").addClass('animated fadeInUp');
-            //    setTimeout(function () {
-            //        $(".latest").removeClass("animated fadeInUp");
-            //    }, 501);
-            //}
+            if (!loaded) {
+                $(".main-videos").attr("poster", "../Content/img/video.jpg");
+                lazyLoader();
+                $(".latest").addClass('animated fadeInUp');
+                setTimeout(function () {
+                    $(".latest").removeClass("animated fadeInUp");
+                }, 501);
+            }
             else {
                 try {
                     var vids = document.getElementsByClassName("video-history");
@@ -228,11 +219,6 @@
 
                 }
             }
-            showLoader = false;
-            if ($("#main-loader").css("display") == "flex") {
-                $("#main-loader").css("display", "none");
-            }
-            scrolled = false;
         }
         );
         dotvvm.events.beforePostback.subscribe(function () {

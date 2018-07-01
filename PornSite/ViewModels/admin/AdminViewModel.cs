@@ -27,7 +27,7 @@ namespace PornSite.ViewModels.admin
                 var identity = CreateIdentity();
                 Context.GetAuthentication().SignIn(identity);
                 string test = Context.GetOwinContext().Authentication.User.Identity.Name;
-                Context.RedirectToUrl("Spider");
+                Context.RedirectToRoute("spider");
             }
             else
             {

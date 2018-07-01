@@ -26,12 +26,9 @@ $(document).ready(function () {
                 loaded = true;
                 $("#modal-video").css('display', 'flex');
                 $("#modal-video").removeClass("animated fadeOutUp");
-                if ($(window).width() < 760) {
-                    $("header").css('display', 'none');
-                }
-                if (width < 1024) {
-                    $("body").addClass("modal-on");
-                }
+                //if ($(window).width() < 760) {
+                //    $("header").css('display', 'none');
+                //}
                 setTimeout(function () { $("#modal-video").removeClass("animated fadeInDown"); }, 501);
                 $("#modal-video").addClass("animated fadeInDown");
                 $("#background-modal").fadeIn();
@@ -52,6 +49,7 @@ $(document).ready(function () {
         }
     }).on('touchstart', ".video", function (e) {
         touchmoved = false;
+        loaded = false;
         if (!iOS) {
             var scrollFromTop = $(document).scrollTop();
             $(".video-load").css("display", "block");
@@ -68,14 +66,11 @@ $(document).ready(function () {
 
     //kliknuti na krizek
     $(document).on("click", "#close", function () {
-        $("body").removeClass("modal-on");
         $("#close-btn").click();
-        $("header").css('display', 'block');
+        //$("header").css('display', 'block');
         $("#loader-modal").css("display", "none");
-        $("body").removeClass("modal-on");
         $("#modal-video").addClass("animated fadeOutUp");
         $("#background-modal").fadeOut();
-        setTimeout(function () { loaded = false; }, 501);
         disableLoader = false;
     });
 
@@ -84,12 +79,10 @@ $(document).ready(function () {
         if (!$(e.target).parents("#modal-video").length) {
             e.stopPropagation();
             $("#close-btn").click();
-            $("header").css('display', 'block');
+            //$("header").css('display', 'block');
             $("#loader-modal").css("display", "none");
-            $("body").removeClass("modal-on");
             $("#modal-video").addClass("animated fadeOutUp");
             $("#background-modal").fadeOut();
-            setTimeout(function () { loaded = false; }, 501);
             disableLoader = false;
         }
     });

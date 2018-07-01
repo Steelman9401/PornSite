@@ -56,19 +56,48 @@
                     </div>
                 </div>
             </div>
-            <dot:Repeater DataSource="{value: Videos}" class="row">
-                <ItemTemplate>
-                    <div class="col-lg-3 col-md-4 click remove-loader-main video" style="margin-top:20px;">
-                        <dot:Button ButtonTagName="button" Validation.Enabled="false" Click="{command: _root.OpenModal(_this)}" style="display:none" />
-
-                        <video Visible="{value: _parent.SelectedWebCategory!='gay'}" poster="{value: Img}" preload="none" loop onmouseover="playVideo(this)" onmouseout="stopVideo(this)">
-                            <source src="{value: Preview}" type="video/mp4">
-                        </video>
-                        <p style="font-weight:bold;">{{value: Title_en}}</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel-group" onclick="$('#collapse2').collapse('collapse');">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <span>Vyhledat vlastní video</span>
+                                    <span>
+                                        <i class="fas fa-angle-double-down fa-lg arrow-down"></i>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse" Validation.Enabled="false">
+                                <form>
+                                <label style="color:white;" for="search">Název:</label>
+                                <dot:TextBox ID="search" class="form-control" Text="{value: Search}" />
+                                <label style="color:white;" for="page-select">Vyhledat na stránce:</label>
+                                <dot:ComboBox ID="page-select" class="form-control" DataSource="{value: Hubs}"
+                                              SelectedValue="{value: SelectedPage}" />
+                                <dot:Button IsSubmitButton="true" style="margin-top:10px;" class="btn btn-primary" Text="Vyhledat" ButtonTagName="button" Click="{command: SearchVideos()}" />
+                                <div class="panel-footer">Footer</div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </ItemTemplate>
-            </dot:Repeater>
-        </div>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+            </div>
+                <dot:Repeater DataSource="{value: Videos}" class="row">
+                    <ItemTemplate>
+                        <div class="col-lg-3 col-md-4 click remove-loader-main video" style="margin-top:20px;">
+                            <dot:Button ButtonTagName="button" Validation.Enabled="false" Click="{command: _root.OpenModal(_this)}" style="display:none" />
+
+                            <video Visible="{value: _parent.SelectedWebCategory!='gay'}" poster="{value: Img}" preload="none" loop onmouseover="playVideo(this)" onmouseout="stopVideo(this)">
+                                <source src="{value: Preview}" type="video/mp4">
+                            </video>
+                            <p>{{value: Title_en}}</p>
+                        </div>
+                    </ItemTemplate>
+                </dot:Repeater>
+            </div>
     </main>
     <div id="myModal" class="modal fade" role="dialog" style="color:black;">
         <div class="modal-dialog modal-lg">

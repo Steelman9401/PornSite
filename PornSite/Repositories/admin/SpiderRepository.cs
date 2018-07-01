@@ -91,8 +91,15 @@ namespace PornSite.Repositories.admin
                     html = client.DownloadString("https://redtube.com");
                 }
                 else
-                {                     
-                  html = client.DownloadString(ConvertCategoryRedtube(category));
+                {
+                    try
+                    {
+                        html = client.DownloadString(ConvertCategoryRedtube(category));
+                    }
+                    catch
+                    {
+                        html = client.DownloadString("https://redtube.com");
+                    }
                 }
                 HtmlDocument document = new HtmlDocument();
                 document.LoadHtml(html);
@@ -460,7 +467,7 @@ namespace PornSite.Repositories.admin
                 return "https://www.pornhub.com/video/search?search=costume";
             }
 
-            return null;
+            return "https://www.pornhub.com/video/search?search=" + category;
         }
         private string ConvertCategoryRedtube(string category)
         {
@@ -561,7 +568,8 @@ namespace PornSite.Repositories.admin
             {
                 return "https://www.redtube.com/redtube/romantic";
             }
-            return null;
+            return "https://www.redtube.com/?search=" + category;
+
         }
     }
 }

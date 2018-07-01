@@ -23,7 +23,6 @@
             link.setAttribute("href", "../Content/master.min.css");
             link2.setAttribute("rel", "stylesheet");
             link2.setAttribute("href", "https://use.fontawesome.com/releases/v5.0.11/css/all.css");
-            console.log(link);
             head.appendChild(link);
             head.appendChild(link2);
         }
@@ -112,7 +111,6 @@
         </div>
     </header>
     <main>
-
         <div class="loader" ID="main-loader">
             <div class="floatingCirclesG">
                 <div class="f_circleG" class="frotateG_01"></div>

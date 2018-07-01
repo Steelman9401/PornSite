@@ -65,7 +65,6 @@ var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator
 $(document).ready(function () {
         var match = document.cookie.match(new RegExp('(^| )' + 'Language' + '=([^;]+)'));
     if (match) {
-        console.log(match[2]);
         if (match[2] != "cs-CZ") {
             document.getElementsByTagName("title")[0].innerHTML = "Watch porn safely! - fapping.guru";
         }
@@ -77,8 +76,8 @@ $(document).ready(function () {
         firstVisit = true;
     }
     if (!window.navigator.userAgent.indexOf("Edge") > -1) {
-        //navigator.serviceWorker && navigator.serviceWorker.register('./sw.js').then(function (registration) {
-        //});
+        navigator.serviceWorker && navigator.serviceWorker.register('./sw.js').then(function (registration) {
+        });
     }
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();

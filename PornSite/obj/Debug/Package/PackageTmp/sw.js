@@ -19,7 +19,6 @@ self.addEventListener('install', function (e) {
                 '/Scripts/2048.js',
                 '/Content/2048.css',
                 '/Content/img/kara.jpg',
-                '/Content/img/prcarna.mp3',
                 '/game.html'
             ]);
         })

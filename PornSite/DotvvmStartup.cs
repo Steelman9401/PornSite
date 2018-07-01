@@ -23,9 +23,9 @@ namespace PornSite
             config.RouteTable.Add("category", "category/{Id}/{Name}", "Views/category.dothtml");
             config.RouteTable.Add("game", "game", "game.html");
             config.RouteTable.Add("admin", "admin", "Views/admin/admin.dothtml");
-            config.RouteTable.Add("spider", "spider", "Views/admin/spider.dothtml");
-            config.RouteTable.Add("Database", "database", "Views/admin/database.dothtml");
-            config.RouteTable.Add("Categories_admin", "categoriesa", "Views/admin/categories.dothtml");
+            config.RouteTable.Add("spider", "admin/add_videos", "Views/admin/spider.dothtml");
+            config.RouteTable.Add("Database", "admin/database", "Views/admin/database.dothtml");
+            config.RouteTable.Add("Categories_admin", "admin/categories", "Views/admin/categories.dothtml");
             config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));
         }
 

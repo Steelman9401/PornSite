@@ -52,6 +52,7 @@ $(document).ready(function () {
         }
     }).on('touchstart', ".video", function (e) {
         touchmoved = false;
+        loaded = false;
         if (!iOS) {
             var scrollFromTop = $(document).scrollTop();
             $(".video-load").css("display", "block");
@@ -68,14 +69,12 @@ $(document).ready(function () {
 
     //kliknuti na krizek
     $(document).on("click", "#close", function () {
-        $("body").removeClass("modal-on");
         $("#close-btn").click();
         $("header").css('display', 'block');
         $("#loader-modal").css("display", "none");
         $("body").removeClass("modal-on");
         $("#modal-video").addClass("animated fadeOutUp");
         $("#background-modal").fadeOut();
-        setTimeout(function () { loaded = false; }, 501);
         disableLoader = false;
     });
 
@@ -89,7 +88,6 @@ $(document).ready(function () {
             $("body").removeClass("modal-on");
             $("#modal-video").addClass("animated fadeOutUp");
             $("#background-modal").fadeOut();
-            setTimeout(function () { loaded = false; }, 501);
             disableLoader = false;
         }
     });

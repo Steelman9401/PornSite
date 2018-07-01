@@ -48,8 +48,13 @@ namespace PornSite.ViewModels.admin
             new WebCategory() { Name = "Romantika", Url = "romantic"},
 
         };
+        public List<string> Hubs { get; set; } = new List<string>
+        {
+            "Pornhub","Redtube"
+        };
         public string SelectedWebCategory { get; set; } = "";
-
+        public string SelectedPage { get; set; }
+        public string Search { get; set; }
         public async override Task PreRender()
         {
             if (!Context.IsPostBack)
@@ -107,6 +112,24 @@ namespace PornSite.ViewModels.admin
                 SpiderRep.GetDrTuberVideos(Videos, SelectedWebCategory);
             else if (SwitchWebsite == 3)
                 SpiderRep.GetPornHubVideos(Videos, SelectedWebCategory);
+        }
+        public void SearchVideos()
+        {
+            if(!string.IsNullOrWhiteSpace("Search"))
+            {
+                if(SelectedPage == "Redtube")
+                {
+                    SwitchWebsite = 0;
+                    Videos = new List<VideoListAdminDTO>();
+                    SpiderRep.GetRedTubeVideos(Videos, Search);
+                }
+                else if (SelectedPage == "Pornhub")
+                {
+                    SwitchWebsite = 3;
+                    Videos = new List<VideoListAdminDTO>();
+                    SpiderRep.GetPornHubVideos(Videos, Search);
+                }
+            }
         }
         public void SwitchToRedTube()
         {

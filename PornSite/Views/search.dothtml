@@ -11,16 +11,16 @@
         <section class="section-title">
             <h2 style="color:white;">{{resource: Resources.SearchParam}} <span class="category-name">{{value: SearchParameter}}</span> <span style="font-size: 21px;">({{value: SearchCount}})</span></h2>
             <ul>
-                <li ID="newest" class="active-li no-scroll click remove-loader-main">
+                <li ID="newest" class="active-li no-scroll click remove-loader-main" onclick="loaded = false;">
                     {{resource: Resources.Latest}}
                     <dot:Button ButtonTagName="button" Click="{command: LoadLatestVideos()}" style="display:none;" />
                 </li>
-                <li ID="most-viewed" class="click no-scroll remove-loader-main">
+                <li ID="most-viewed" class="click no-scroll remove-loader-main" onclick="loaded = false;">
                     {{resource: Resources.Viewed}}
                     <dot:Button ButtonTagName="button" Click="{command: LoadMostViewedVideos()}" style="display:none;" />
                 </li>
             </ul>
-            <div class="mobile-only">
+            <div class="mobile-only" onclick="loaded = false;">
                 <dot:CheckBox Checked="{value: LoadMobile}" Changed="{command: LoadMobileVideos()}" Text="{{resource: Resources.Mobile}}" />
             </div>
         </section>
@@ -46,7 +46,7 @@
                 </ItemTemplate>
             </dot:Repeater>
             <section class="pagination">
-                <dot:DataPager DataSet="{value: Videos}" class="remove-loader-main" />
+                <dot:DataPager DataSet="{value: Videos}" class="remove-loader-main" onclick="loaded = false;" />
             </section>
             <div ID="modal-video">
                 <div class="cointainer-modal" DataContext="{value: Video}">
